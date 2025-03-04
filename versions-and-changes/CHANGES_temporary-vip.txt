@@ -1,1 +1,1 @@
-• Release
+• Fix: Default Fallback Time didn't work for seconds, weeks and months
