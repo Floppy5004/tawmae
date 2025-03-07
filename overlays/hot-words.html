@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>HOT WORDS - v.1.0.0 - tawmae.xyz</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOT WORDS - v.1.0.1 - tawmae.xyz</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/@streamerbot/client/dist/streamerbot-client.js"></script>
     <style>
         :root {
             --fontSize: 24px;
@@ -177,15 +180,11 @@
 <body>
     <h1>HOT WORDS</h1>
     <div class="leaderboard" id="leaderboard">
-
         <div class="connection-status disconnected" id="connectionStatus">
-            <span class="dot"></span>
-            Disconnected
+            <span class="dot"></span>Disconnected
         </div>
-
         <div class="connection-status connected" id="connectedStatus">
-            <span class="dot"></span>
-            Connected
+            <span class="dot"></span>Connected
         </div>
     </div>
     <script>
@@ -196,34 +195,22 @@
         const chosenFont = (urlParams.get('font') || 'Poppins').toLowerCase();
         const chosenFontSize = parseInt(urlParams.get('fontsize')) || 24;
         const topCount = parseInt(urlParams.get('top')) || 5;
-        const wsHost = urlParams.get("ws_host") || "localhost"; 
-        const wsPort = urlParams.get("ws_port") || "8080";
-        const link = document.createElement('link');
-        link.rel = 'stylesheet';
-        link.href = `https://fonts.googleapis.com/css2?family=${encodeURIComponent(chosenFont)}:wght@300;400;600&display=swap`;
-        document.head.appendChild(link);
-
-        document.documentElement.style.setProperty('--fontSize', chosenFontSize + 'px');
-        document.documentElement.style.setProperty('--fontFamily', chosenFont);
-        const excludedUsersSet = new Set([
-            ...excludeAccountsParam.split(/[,+\s]+/),
-            ...excludedUsersParam.split(/[,+\s]+/)
-        ].map(a => a.toLowerCase().trim()).filter(a => a !== ""));
+        const wsHost = urlParams.get("address") || "localhost";
+        const wsPort = urlParams.get("port") || "8080";
+        const excludedUsersSet = new Set([...excludeAccountsParam.split(/[,+\s]+/), ...excludedUsersParam.split(/[,+\s]+/)].map(a => a.trim()).filter(a => a !== ""));
         const wordCounts = new Map();
         const leaderboardEl = document.getElementById('leaderboard');
         const connectionStatusEl = document.getElementById('connectionStatus');
         const connectedStatusEl = document.getElementById('connectedStatus');
         const usersVoted = singleUserVote ? new Set() : null;
-
+        const emoteLookup = {};
         for (let i = 1; i <= topCount; i++) {
             const entryEl = document.createElement('div');
             entryEl.className = 'word-entry';
             entryEl.dataset.rank = i.toString();
-
             const labelEl = document.createElement('div');
             labelEl.className = 'word-label';
             labelEl.textContent = '-';
-
             const imgEl = document.createElement('img');
             imgEl.className = 'image-icon';
             imgEl.src = 'https://github.com/tawmae/tawmae.github.io/blob/main/overlays/LogosFirebase.png?raw=true';
@@ -231,107 +218,35 @@
             imgEl.loading = 'lazy';
             labelEl.appendChild(imgEl);
             entryEl.appendChild(labelEl);
-
             const barContainer = document.createElement('div');
             barContainer.className = 'progress-bar-container';
             const barEl = document.createElement('div');
             barEl.className = 'progress-bar';
             barContainer.appendChild(barEl);
             entryEl.appendChild(barContainer);
-
             const countEl = document.createElement('div');
             countEl.className = 'count-percentage';
             countEl.textContent = '0x';
             entryEl.appendChild(countEl);
-
             leaderboardEl.appendChild(entryEl);
         }
-
-        function connectws() {
-            if ("WebSocket" in window) {
-                const wsUrl = `ws://${wsHost}:${wsPort}/`;
-                const ws = new WebSocket(wsUrl);
-                bindEvents(ws);
-            }
-        }
-
-        function bindEvents(ws) {
-            ws.onopen = function () {
-                ws.send(JSON.stringify({
-                    request: "Subscribe",
-                    events: { Twitch: ["ChatMessage"] },
-                    id: "TwitchHotWords"
-                }));
-                if (connectionStatusEl) {
-                    connectionStatusEl.style.display = 'none';
-                }
-                if (connectedStatusEl) {
-                    connectedStatusEl.style.display = 'flex';
-                    setTimeout(() => {
-                        connectedStatusEl.style.display = 'none';
-                    }, 1000);
-                }
-            };
-            ws.onmessage = function (evt) {
-                const data = JSON.parse(evt.data);
-                if (data.event && data.event.type === "ChatMessage") {
-                    handleChatMessage(data.data);
-                }
-            };
-            ws.onclose = function () {
-                if (connectionStatusEl) {
-                    connectionStatusEl.style.display = 'flex';
-                }
-                setTimeout(connectws, 5000);
-            };
-            ws.onerror = function () {
-                if (connectionStatusEl) {
-                    connectionStatusEl.style.display = 'flex';
-                }
-                ws.close();
-            };
-        }
-
-        function handleChatMessage(messageData) {
-            const userName = messageData.message.username.toLowerCase();
-            if (excludedUsersSet.has(userName)) return;
-            if (singleUserVote && usersVoted.has(userName)) return;
-            if (singleUserVote) usersVoted.add(userName);
-            const text = messageData.message.message || "";
-            const words = text
-                .toLowerCase()
-                .replace(/[^\p{L}0-9]/gu, ' ')
-                .split(/\s+/)
-                .filter(w => w.length > 0);
-
-            const uniqueWords = new Set(words);
-            for (const w of uniqueWords) {
-                wordCounts.set(w, (wordCounts.get(w) || 0) + 1);
-            }
-            updateLeaderboard();
-        }
-
         function updateLeaderboard() {
             const sorted = Array.from(wordCounts.entries()).sort((a, b) => b[1] - a[1]);
             const topWords = sorted.slice(0, topCount);
             renderLeaderboard(topWords);
         }
-
         function renderLeaderboard(topWords) {
             const total = topWords.reduce((sum, [_, count]) => sum + count, 0);
             const entries = Array.from(leaderboardEl.querySelectorAll('.word-entry')).slice(0, topCount);
-
             let allEqual = false;
             if (topWords.length > 1 && topWords[0]) {
                 const firstCount = topWords[0][1];
                 allEqual = topWords.every(([_, c]) => c === firstCount);
             }
-
             let tieForFirst = false;
             if (topWords.length > 1 && topWords[0] && topWords[1] && topWords[0][1] === topWords[1][1]) {
                 tieForFirst = true;
             }
-
             for (let i = 0; i < topCount; i++) {
                 const entryEl = entries[i];
                 const wordData = topWords[i];
@@ -342,25 +257,64 @@
                 let count = 0;
                 let percentage = 0;
                 if (wordData) {
-                    word = wordData[0].toUpperCase();
+                    word = wordData[0];
                     count = wordData[1];
                     percentage = total > 0 ? Math.round((count / total) * 100) : 0;
                 }
-                labelEl.childNodes[0].nodeValue = word;
+                if (emoteLookup[word.toLowerCase()]) {
+                    labelEl.innerHTML = "<img src='" + emoteLookup[word.toLowerCase()] + "' alt='" + word + "' style='max-height: 40px;'>";
+                } else {
+                    labelEl.textContent = word.toUpperCase();
+                }
                 countEl.textContent = `${count}x`;
                 barEl.style.width = percentage + '%';
                 entryEl.classList.remove('top1');
-
                 if (i === 0 && wordData && !allEqual && !tieForFirst) {
                     entryEl.classList.add('top1');
                 }
             }
-
             const totalHeight = 80 + (topCount * 50) + ((topCount - 1) * 10);
             leaderboardEl.style.height = totalHeight + 'px';
         }
-
-        connectws();
+        function handleChatMessage(messageData) {
+            const userName = messageData.username.toLowerCase();
+            if (excludedUsersSet.has(userName)) return;
+            if (singleUserVote && usersVoted.has(userName)) return;
+            if (singleUserVote) usersVoted.add(userName);
+            const text = messageData.message || "";
+            const words = text.toLowerCase().replace(/[^\p{L}0-9]/gu, ' ').split(/\s+/).filter(w => w.length > 0);
+            const uniqueWords = new Set(words);
+            for (const w of uniqueWords) {
+                wordCounts.set(w, (wordCounts.get(w) || 0) + 1);
+            }
+            updateLeaderboard();
+        }
+        const client = new StreamerbotClient({
+            host: wsHost,
+            port: parseInt(wsPort, 10),
+            subscribe: { Twitch: ["ChatMessage"] },
+            onConnect: function (data) {
+                connectionStatusEl.style.display = 'none';
+                connectedStatusEl.style.display = 'flex';
+                setTimeout(() => { connectedStatusEl.style.display = 'none'; }, 1000);
+                client.getEmotes('twitch').then(function (response) {
+                    if (response.status === "ok") {
+                        response.emotes.userEmotes.forEach(emote => { emoteLookup[emote.name.toLowerCase()] = emote.imageUrl; });
+                        response.emotes.bttvEmotes.forEach(emote => { emoteLookup[emote.name.toLowerCase()] = emote.imageUrl; });
+                        response.emotes.ffzEmotes.forEach(emote => { emoteLookup[emote.name.toLowerCase()] = emote.imageUrl; });
+                        response.emotes.sevenTvEmotes.forEach(emote => { emoteLookup[emote.name.toLowerCase()] = emote.imageUrl; });
+                    }
+                });
+            },
+            onDisconnect: function () {
+                connectionStatusEl.style.display = 'block';
+            }
+        });
+        client.on("Twitch.ChatMessage", function (data) {
+            if (data.data && data.data.message) {
+                handleChatMessage(data.data.message);
+            }
+        });
     </script>
 </body>
 
