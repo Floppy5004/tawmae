@@ -433,7 +433,7 @@ og_image: "/assets/page-design/page-cards/movie-and-tv-show-quiz.webp"
   <div class="accordion-item">
     <div class="accordion-header" id="faq" onclick="toggleAccordion('faq-acc')">
       <span class="iconify title-icon" data-icon="line-md:question-square"></span>
-      <span>FAQ</span>
+      <span>FAQ & EXAMPLES</span>
       <span class="iconify accordion-icon" data-icon="ic:baseline-keyboard-arrow-right"></span>
     </div>
     <div class="accordion-content" id="faq-acc">
@@ -515,6 +515,12 @@ og_image: "/assets/page-design/page-cards/movie-and-tv-show-quiz.webp"
         <h3> <span style="font-weight: bold; color: #fff">Can I change the scene name?</span>
         </h3>
         <p>No.</p>
+      </div>
+      <!--------------------------------->
+      <div class="extension-title-text-box-long">
+        <h3> <span style="font-weight: bold; color: #fff">How can I award points for correct answers?</span>
+        </h3>
+        <p>You can do that by utilizing the custom triggers. You then get the target info <span style="font-weight: bold; color: #ffd95e;">Twitch -> User -> Get Info For Target</span>, choose <span style="font-weight: bold; color: #ffd95e;">Variable</span> in the dropdown menu and type <span style="font-weight: bold; color: #ffd95e;">_userName</span> in there.<br><br>You then add a <span style="font-weight: bold; color: #ffd95e;">Core -> Global -> Global (Set)</span> subaction, choose <span style="font-weight: bold; color: #ffd95e;">User (target)</span> and type in the name of the variable you want to increment.<br><br><img src="{{ site.baseurl }}/assets/faq/movie-and-tv-show-quiz/movie-and-tv-show-quiz-points-example.webp" class="extension-image"></p>
       </div>
       <!--------------------------------->
 
