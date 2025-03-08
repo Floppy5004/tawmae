@@ -189,21 +189,30 @@
     </div>
     <script>
         const urlParams = new URLSearchParams(window.location.search);
-        const excludeAccountsParam = (urlParams.get("excludedaccounts") || "").toLowerCase();
-        const excludedUsersParam = (urlParams.get("excludedusers") || "").toLowerCase();
-        const singleUserVote = urlParams.get("singleuservote") === "true";
-        const chosenFont = (urlParams.get('font') || 'Poppins').toLowerCase();
-        const chosenFontSize = parseInt(urlParams.get('fontsize')) || 24;
-        const topCount = parseInt(urlParams.get('top')) || 5;
-        const wsHost = urlParams.get("address") || "localhost";
-        const wsPort = urlParams.get("port") || "8080";
-        const excludedUsersSet = new Set([...excludeAccountsParam.split(/[,+\s]+/), ...excludedUsersParam.split(/[,+\s]+/)].map(a => a.trim()).filter(a => a !== ""));
+        const params = {};
+        for (const [key, value] of urlParams.entries()) {
+            params[key.toLowerCase()] = value;
+        }
+        const excludeAccountsParam = (params["excludedaccounts"] || "").toLowerCase();
+        const excludedUsersParam = (params["excludedusers"] || "").toLowerCase();
+        const singleUserVote = (params["singleuservote"] || "false") === "true";
+        const chosenFont = (params["font"] || "Poppins").toLowerCase();
+        const chosenFontSize = parseInt(params["fontsize"]) || 24;
+        const topCount = parseInt(params["top"]) || 5;
+        const wsHost = params["address"] || "localhost";
+        const wsPort = params["port"] || "8080";
+        const excludedUsersSet = new Set(
+            [...excludeAccountsParam.split(/[,+\s]+/), ...excludedUsersParam.split(/[,+\s]+/)]
+                .map(a => a.trim())
+                .filter(a => a !== "")
+        );
         const wordCounts = new Map();
-        const leaderboardEl = document.getElementById('leaderboard');
-        const connectionStatusEl = document.getElementById('connectionStatus');
-        const connectedStatusEl = document.getElementById('connectedStatus');
+        const leaderboardEl = document.getElementById("leaderboard");
+        const connectionStatusEl = document.getElementById("connectionStatus");
+        const connectedStatusEl = document.getElementById("connectedStatus");
         const usersVoted = singleUserVote ? new Set() : null;
         const emoteLookup = {};
+
         for (let i = 1; i <= topCount; i++) {
             const entryEl = document.createElement('div');
             entryEl.className = 'word-entry';
