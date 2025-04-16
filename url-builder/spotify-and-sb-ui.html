@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SPOTIFY & SB WIDGET URL BUILDER – 9:16</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <script src="https://code.iconify.design/3/3.0.0/iconify.min.js"></script>
+  <style>
+    /* ---- GENERAL ---- */
+    body {
+      background: #27262b;
+      color: white;
+      margin: 0;
+      padding: 20px;
+      position: relative;
+      font-family: 'Poppins', sans-serif;
+    }
+    h1 {
+      margin: 0;
+      font-size: 1.5rem;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .copied-popup {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: white;
+      color: black;
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-size: 0.9rem;
+      display: none;
+      z-index: 9999;
+    }
+    /* ---- URL SECTION ---- */
+    .url-section {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 30px;
+      max-width: 1160px;
+      margin: 0 auto 30px auto;
+    }
+    #generatedUrl {
+      flex: 1 1 400px;
+      background: #131315;
+      border: 1px solid #555;
+      color: white;
+      padding: 10px;
+      font-size: 18px;
+    }
+    #generatedUrl:focus { outline: 2px solid #466090; }
+    .copy-button {
+      display: inline-flex;
+      align-items: center;
+      background: #466090;
+      color: white;
+      border: none;
+      cursor: pointer;
+      padding: 10px 20px;
+      font-size: 1rem;
+      transition: background 0.2s;
+      gap: 8px;
+    }
+    .copy-button:hover { background: #5a79b5; }
+    /* ---- PREVIEW ---- */
+    #previewContainer {
+      max-width: 540px;           /* 9:16 reference width */
+      margin: 0 auto 40px auto;  /* preview now above builder */
+      background: #111;
+      border-radius: 5px;
+      padding: 20px;
+    }
+    #previewContainer * { font-family: inherit; }
+    #songOverlay {
+      position: relative;
+      margin: 0 auto;
+      border-radius: 20px;
+      overflow: hidden;
+      transition: opacity 1s;
+      opacity: 1;
+      visibility: visible;
+      width: 100%;               /* fills preview container */
+      aspect-ratio: 9/16;        /* forces 9:16 aspect */
+      display: flex;
+      flex-direction: column;
+    }
+    #songOverlayBackground {
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 100%;
+      border-radius: 20px;
+      pointer-events: none;
+    }
+    #songOverlayContent {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;    /* vertical layout */
+      width: 100%;
+      color: #fff;
+      height: 100%;
+    }
+    #songContent {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      gap: 20px;
+      flex: 1 1 auto;
+      color: #fff;
+    }
+    #coverImageContainer {
+      position: relative;
+      width: 100%;               /* full width */
+      flex: 0 0 auto;
+      aspect-ratio: 1 / 1;       /* square cover */
+      overflow: hidden;          /* ensures rounded corners */
+    }
+    #coverImage {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 0;          /* container already rounded */
+    }
+    #remainingTime {
+      position: absolute;
+      background: rgba(0,0,0,0.7);
+      border-radius: 10px;
+      color: #fff;
+      font-weight: 600;
+      bottom: 10px;
+      right: 10px;
+      text-align: center;
+      padding: 3px 6px;
+    }
+    #songDetails {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      text-align: center;
+      width: 100%;
+    }
+    #artists { font-weight: 500; }
+    #trackName { font-weight: 700; }
+    #requestedByContainer {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 10px;
+      justify-content: center;
+    }
+    #requestedByText { font-size: 22px; }
+    #userProfileImage {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    #progressBarContainer {
+      position: relative;        /* inside column layout */
+      width: 100%;
+      background: rgba(255, 255, 255, 0.3);
+      height: 10px;
+      overflow: hidden;
+      border-radius: 0 0 20px 20px;
+    }
+    #progressBar {
+      background: #fff;
+      opacity: 0.7;
+      height: 100%;
+      width: 50%;
+      transition: width 1s;
+    }
+    /* ---- BUILDER ---- */
+    .builder-wrapper {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      max-width: 1200px;
+      margin: 0 auto 40px auto;
+    }
+    .builder-section {
+      background: rgba(17,17,17,0.95);
+      padding: 20px;
+      border-radius: 5px;
+    }
+    .builder-section h2 {
+      margin-top: 0;
+      margin-bottom: 20px;
+      font-size: 1.2rem;
+    }
+    .setting {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 10px;
+      border-bottom: 1px solid #444;
+      padding-bottom: 10px;
+    }
+    .setting:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .setting > div { display: flex; align-items: center; gap: 10px; }
+    .setting label { flex: 1; font-weight: 600; margin: 0; }
+    .setting input[type="text"],
+    .setting input[type="number"],
+    .setting select {
+      width: 120px; background: #131315; border: 1px solid #444; color: white; padding: 5px; font-family: 'Poppins', sans-serif; }
+    .setting input[type="checkbox"] { transform: scale(1.2); margin-right: 5px; cursor: pointer; }
+    .setting input[type="color"] { width: 60px; height: 40px; border: none; cursor: pointer; background: #131315; }
+    .description { color: #aaa; font-size: 0.8rem; margin-left: 1px; margin-top: 2px; }
+  </style>
+</head>
+<body>
+  <h1>SPOTIFY & SB WIDGET URL BUILDER – 9:16</h1>
+  <div class="copied-popup" id="copyMessage"></div>
+
+  <!-- URL FIELD TOP -->
+  <div class="url-section">
+    <input id="generatedUrl" readonly>
+    <button class="copy-button" id="copyBtn">
+      <span class="iconify" data-icon="material-symbols:content-copy-outline"></span> Copy
+    </button>
+  </div>
+
+  <!-- PREVIEW NOW FIRST -->
+  <div id="previewContainer">
+    <h2 style="text-align:center;margin-top:0;">Live Preview – 9:16 (approx.)</h2>
+    <div id="songOverlay">
+      <div id="songOverlayBackground"></div>
+      <div id="songOverlayContent">
+        <div id="songContent">
+          <div id="coverImageContainer">
+            <img id="coverImage" src="https://i.scdn.co/image/ab67616d0000b27353f6fa0d2589c6a7174f4b81" alt="">
+            <div id="remainingTime">3:45</div>
+          </div>
+          <div id="songDetails">
+            <div id="artists">Joji, BENEE</div>
+            <div id="trackName">Afterthought</div>
+            <div id="requestedByContainer">
+              <span id="requestedByText"></span>
+              <img id="userProfileImage" src="" style="display:none;">
+            </div>
+          </div>
+        </div>
+        <div id="progressBarContainer">
+          <div id="progressBar"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BUILDER BELOW -->
+  <div class="builder-wrapper">
+    <!-- ===== GENERAL SETTINGS ===== -->
+    <div class="builder-section">
+      <h2>General Settings</h2>
+      <div class="setting"><div><label>Always On</label><input type="checkbox" id="alwayson" checked></div><div class="description">Toggle overlay visibility.</div></div>
+      <div class="setting"><div><label>Progressbar</label><input type="checkbox" id="progressbar" checked></div><div class="description">Show or hide the progress bar.</div></div>
+      <div class="setting"><div><label>Strip Track Name</label><input type="checkbox" id="striptrackname" checked></div><div class="description">Remove unnecessary parts from track names.</div></div>
+      <div class="setting"><div><label>Opacity (0-100)</label><input type="number" id="opacity" min="0" max="100"></div><div class="description">Set background opacity.</div></div>
+      <div class="setting"><div><label>Font Size</label><input type="number" id="fontsize" value="48" min="1" max="500"></div><div class="description">Adjust the text size.</div></div>
+      <div class="setting"><div><label>Width</label><input type="number" id="width" value="540"></div><div class="description">Set the width of the container. Default is 540 for 9:16.</div></div>
+    </div>
+
+    <!-- ===== APPEARANCE SETTINGS ===== -->
+    <div class="builder-section">
+      <h2>Appearance</h2>
+      <div class="setting"><div><label>Background Color</label><input type="color" id="backgroundcolor" value="#2a2a2a"></div><div class="description">Choose the overlay background color.</div></div>
+      <div class="setting"><div><label>Font</label><input type="text" id="font" placeholder="Poppins"></div><div class="description">Specify the font (e.g. Comic Sans MS).</div></div>
+      <div class="setting"><div><label>Font Color</label><input type="color" id="fontcolor" value="#ffffff"></div><div class="description">Set the text color.</div></div>
+      <div class="setting"><div><label>Progressbar Color</label><input type="color" id="progressbarcolor" value="#ffffff"></div><div class="description">Choose the progress bar color.</div></div>
+      <div class="setting"><div><label><span class="iconify" data-icon="tabler:inner-shadow-right" data-inline="false"></span> Dropshadow</label><input type="checkbox" id="dropshadow" checked></div><div class="description">Enable or disable text dropshadow.</div></div>
+      <div class="setting"><div><label><span class="iconify" data-icon="material-symbols:stroke-full" data-inline="false"></span> Stroke</label><input type="number" id="stroke" min="0" value="0"></div><div class="description">Apply a stroke to the text.</div></div>
+      <div class="setting"><div><label><span class="iconify" data-icon="ic:baseline-color-lens" data-inline="false"></span> Stroke Color</label><input type="color" id="strokecolor" value="#000000"></div><div class="description">Set the stroke color.</div></div>
+    </div>
+  </div>
+
+  <script>
+    // === Grab frequently used elements ===
+    const copyBtn = document.getElementById("copyBtn");
+    const defaultCopyBtnHTML = '<span class="iconify" data-icon="material-symbols:content-copy-outline"></span> Copy';
+    const copiedCopyBtnHTML  = '<span class="iconify" data-icon="fluent:checkmark-12-regular"></span> Copied';
+
+    const bg = document.getElementById("songOverlayBackground");
+    const songOverlay = document.getElementById("songOverlay");
+    const artistsEl = document.getElementById("artists");
+    const trackNameEl = document.getElementById("trackName");
+    const requestedByText = document.getElementById("requestedByText");
+    const userProfileImage = document.getElementById("userProfileImage");
+    const remainingTime = document.getElementById("remainingTime");
+    const progressBarContainer = document.getElementById("progressBarContainer");
+    const progressBar = document.getElementById("progressBar");
+    const songContent = document.getElementById("songContent");
+    const coverImageContainer = document.getElementById("coverImageContainer");
+    const previewContainer = document.getElementById("previewContainer");
+
+    function buildURL() {
+      const params = [];
+      const bc = document.getElementById("backgroundcolor").value.replace("#","%23");
+      if(bc && bc!=="%232a2a2a") params.push("backgroundcolor="+bc);
+      const fc = document.getElementById("fontcolor").value.replace("#","%23");
+      if(fc && fc!=="%23ffffff") params.push("fontcolor="+fc);
+      const f = document.getElementById("font").value.trim();
+      if(f) params.push("font="+f.replaceAll(" ","+"));
+      const pbc = document.getElementById("progressbarcolor").value.replace("#","%23");
+      if(pbc && pbc!=="%23ffffff") params.push("progressbarcolor="+pbc);
+      if(!document.getElementById("alwayson").checked) params.push("alwayson=false");
+      if(!document.getElementById("progressbar").checked) params.push("progressbar=false");
+      const op = document.getElementById("opacity").value.trim(); if(op) params.push("opacity="+op);
+      const fs = document.getElementById("fontsize").value.trim(); if(fs) params.push("fontsize="+fs);
+      const w  = document.getElementById("width").value.trim(); if(w && w!=="540") params.push("width="+w);
+      if(!document.getElementById("dropshadow").checked) params.push("dropshadow=false");
+      const st = document.getElementById("stroke").value.trim(); if(st && parseInt(st)>0) params.push("stroke="+st);
+      const stc = document.getElementById("strokecolor").value.replace("#","%23"); if(stc && stc!=="%23000000") params.push("strokecolor="+stc);
+      if(!document.getElementById("striptrackname").checked) params.push("striptrackname=false");
+
+      const queryString = params.length>0 ? "?"+params.join("&") : "";
+      const finalUrl = "https://tawmae.xyz/overlays/spotify-and-sb.html"+queryString;
+      document.getElementById("generatedUrl").value = finalUrl;
+      updatePreview();
+    }
+
+    // === Update Preview for 9:16 ===
+    function updatePreview() {
+      // Load chosen font dynamically
+      const existingLink = document.getElementById("dynamicFontLink");
+      if(existingLink) existingLink.remove();
+      const fVal = document.getElementById("font").value.trim();
+      if(fVal) {
+        const link = document.createElement("link");
+        link.id = "dynamicFontLink";
+        link.rel = "stylesheet";
+        link.href = "https://fonts.googleapis.com/css2?family="+fVal.replaceAll(" ","+")+"&display=swap";
+        document.head.appendChild(link);
+        previewContainer.style.fontFamily = fVal+", sans-serif";
+      } else {
+        previewContainer.style.fontFamily = "Poppins, sans-serif";
+      }
+
+      /* Values */
+      const bcRaw  = document.getElementById("backgroundcolor").value;
+      const fcRaw  = document.getElementById("fontcolor").value;
+      const pbcRaw = document.getElementById("progressbarcolor").value;
+      const op     = parseInt(document.getElementById("opacity").value.trim() || "100");
+      const fs     = parseInt(document.getElementById("fontsize").value.trim() || "48");
+      const dsOn   = document.getElementById("dropshadow").checked;
+      const st     = parseInt(document.getElementById("stroke").value.trim() || "0");
+      const stcRaw = document.getElementById("strokecolor").value;
+      const widthInput = document.getElementById("width").value.trim();
+      const newWidth = widthInput ? parseInt(widthInput) : 540;
+
+      /* Apply container width */
+      previewContainer.style.maxWidth = newWidth+"px";
+      songOverlay.style.width = "100%"; // fills container
+
+      /* Background & opacity */
+      bg.style.background = bcRaw;
+      bg.style.opacity    = (op/100).toString();
+      songOverlay.style.boxShadow = op===100 ? "0 8px 16px rgba(0,0,0,0.3)" : "none";
+
+      /* Progressbar */
+      progressBarContainer.style.display = document.getElementById("progressbar").checked ? "block" : "none";
+
+      /* Font sizes adjusted relative to base 48 */
+      const scale = fs/56;
+      trackNameEl.style.fontSize = fs+"px";
+      artistsEl.style.fontSize = Math.round(fs*40/56)+"px";
+      requestedByText.style.fontSize = Math.round(fs*22/56)+"px";
+      remainingTime.style.fontSize = Math.round(fs*28/56)+"px";
+
+      /* Cover image squares based on container width */
+      coverImageContainer.style.width  = "100%";
+      coverImageContainer.style.aspectRatio = "1 / 1";
+      // Padding and gap via CSS already scales; we just adjust dynamically
+      const pad = Math.round(20*scale);
+      songContent.style.padding = pad+"px";
+      remainingTime.style.bottom = Math.round(10*scale)+"px";
+      remainingTime.style.right  = Math.round(10*scale)+"px";
+      remainingTime.style.padding = Math.round(3*scale)+"px "+Math.round(6*scale)+"px";
+
+      /* Colors */
+      songContent.style.color = fcRaw;
+      progressBar.style.background = pbcRaw;
+
+      // Dropshadow & stroke util
+      const clearShadows = () => {
+        artistsEl.style.textShadow = trackNameEl.style.textShadow = requestedByText.style.textShadow = "none";
+      };
+      const applyStroke = (el,w,c) => {
+        if(w<=0) return;
+        const shadows = [];
+        for(let i=0;i<360;i+=6){ const rad=i*Math.PI/180; const x=Math.round(w*Math.cos(rad)); const y=Math.round(w*Math.sin(rad)); shadows.push(`${x}px ${y}px 1px ${c}`); }
+        el.style.textShadow = shadows.join(",");
+      };
+      clearShadows();
+      if(st>0) {
+        applyStroke(artistsEl, st, stcRaw);
+        applyStroke(trackNameEl, st, stcRaw);
+        applyStroke(requestedByText, Math.floor(st*0.5), stcRaw);
+      } else if(dsOn) {
+        const baseShadow = "2px 1px 1.5px rgba(1,1,1,1)";
+        artistsEl.style.textShadow = trackNameEl.style.textShadow = requestedByText.style.textShadow = baseShadow;
+      }
+
+      /* Dummy content */
+      artistsEl.textContent = "Joji, BENEE";
+      trackNameEl.textContent = "Afterthought";
+      requestedByText.textContent = "requested by tawmae";
+      userProfileImage.src = "https://static-cdn.jtvnw.net/jtv_user_pictures/3f79e60e-0200-454f-8886-87831db8f29f-profile_image-300x300.png";
+      userProfileImage.style.display = "inline";
+    }
+
+    // === Initialise ===
+    function init() {
+      document.querySelectorAll("input, select").forEach(el=>{
+        el.addEventListener("input",  buildURL);
+        el.addEventListener("change", buildURL);
+      });
+      buildURL();
+      copyBtn.onclick = () => {
+        const urlField = document.getElementById("generatedUrl");
+        urlField.select(); urlField.setSelectionRange(0,99999);
+        document.execCommand("copy");
+        copyBtn.innerHTML = copiedCopyBtnHTML;
+        setTimeout(()=>{ copyBtn.innerHTML = defaultCopyBtnHTML; }, 2000);
+      };
+    }
+    init();
+  </script>
+</body>
+</html>
