@@ -10,12 +10,12 @@
 body{background:#27262b;color:#fff;margin:0;padding:20px;font-family:'Poppins',sans-serif}
 h1{margin:0;font-size:1.5rem;text-align:center;margin-bottom:20px}
 .copied-popup{position:fixed;top:20px;right:20px;background:#fff;color:#000;padding:10px 20px;border-radius:5px;font-size:.9rem;display:none;z-index:9999}
-.url-section{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:10px;margin-bottom:30px;max-width:540px;margin:0 auto}
+.url-section{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:10px;margin-bottom:30px;max-width:1160px;margin:0 auto}
 #generatedUrl{width:100%;background:#131315;border:1px solid #555;color:#fff;padding:10px;font-size:18px}
 #generatedUrl:focus{outline:2px solid #466090}
 .copy-button{display:inline-flex;align-items:center;background:#466090;color:#fff;border:none;cursor:pointer;padding:10px 20px;font-size:1rem;transition:background .2s;gap:8px;margin-bottom:20px}
 .copy-button:hover{background:#5a79b5}
-.builder-wrapper{display:flex;flex-direction:column;gap:20px;max-width:540px;margin:0 auto 40px}
+.builder-wrapper{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:1200px;margin:0 auto 40px auto}
 .builder-section{background:rgba(17,17,17,.95);padding:20px;border-radius:5px}
 .builder-section h2{margin:0 0 20px;font-size:1.2rem}
 .setting{display:flex;flex-direction:column;margin-bottom:10px;border-bottom:1px solid #444;padding-bottom:10px}
@@ -26,7 +26,7 @@ h1{margin:0;font-size:1.5rem;text-align:center;margin-bottom:20px}
 .setting input[type=checkbox]{transform:scale(1.2);margin-right:5px;vertical-align:middle;cursor:pointer}
 .setting input[type=color]{width:60px;height:40px;border:none;cursor:pointer;background:#131315}
 .description{color:#aaa;font-size:.8rem;margin-left:1px;margin-top:2px}
-#previewContainer{max-width:540px;margin:0 auto 40px;background:#111;border-radius:5px;padding:20px}
+#previewContainer{max-width:1200px;margin:0 auto 40px;background:#111;border-radius:5px;padding:20px}
 #previewContainer *{font-family:inherit}
 #songOverlay{position:relative;margin:0 auto;border-radius:20px;overflow:hidden;transition:opacity 1s;opacity:1;visibility:visible;width:100%}
 #songOverlayBackground{position:absolute;top:0;left:0;width:100%;height:100%;border-radius:20px;pointer-events:none}
@@ -43,7 +43,7 @@ h1{margin:0;font-size:1.5rem;text-align:center;margin-bottom:20px}
 #userProfileImage{width:45px;height:45px;border-radius:50%;object-fit:cover}
 #progressBarContainer{position:absolute;bottom:0;left:0;width:100%;background:rgba(255,255,255,.3);border-radius:0 0 20px 20px;height:10px;overflow:hidden}
 #progressBar{background:#fff;opacity:.7;height:100%;width:50%;transition:width 1s}
-@media (min-width:900px){body{padding:40px}.url-section{max-width:1160px}.builder-wrapper{flex-direction:row;flex-wrap:wrap;max-width:1200px}.builder-section{flex:1}}
+@media (max-width:900px){.builder-wrapper{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -67,9 +67,7 @@ h1{margin:0;font-size:1.5rem;text-align:center;margin-bottom:20px}
 </div>
 </div>
 </div>
-<div id="progressBarContainer">
-<div id="progressBar"></div>
-</div>
+<div id="progressBarContainer"><div id="progressBar"></div></div>
 </div>
 </div>
 </div>
@@ -93,9 +91,9 @@ h1{margin:0;font-size:1.5rem;text-align:center;margin-bottom:20px}
 <div class="setting"><div><label>Font</label><input type="text" id="font" placeholder="Poppins"></div><div class="description">Specify the font (e.g. Comic Sans MS).</div></div>
 <div class="setting"><div><label>Font Color</label><input type="color" id="fontcolor" value="#ffffff"></div><div class="description">Set the text color.</div></div>
 <div class="setting"><div><label>Progressbar Color</label><input type="color" id="progressbarcolor" value="#ffffff"></div><div class="description">Choose the progress bar color.</div></div>
-<div class="setting"><div><label><span class="iconify" data-icon="tabler:inner-shadow-right" data-inline="false"></span> Dropshadow</label><input type="checkbox" id="dropshadow" checked></div><div class="description">Enable or disable text dropshadow.</div></div>
-<div class="setting"><div><label><span class="iconify" data-icon="material-symbols:stroke-full" data-inline="false"></span> Stroke</label><input type="number" id="stroke" min="0" value="0"></div><div class="description">Apply a stroke to the text.</div></div>
-<div class="setting"><div><label><span class="iconify" data-icon="ic:baseline-color-lens" data-inline="false"></span> Stroke Color</label><input type="color" id="strokecolor" value="#000000"></div><div class="description">Set the stroke color.</div></div>
+<div class="setting"><div><label><span class="iconify" data-icon="tabler:inner-shadow-right"></span> Dropshadow</label><input type="checkbox" id="dropshadow" checked></div><div class="description">Enable or disable text dropshadow.</div></div>
+<div class="setting"><div><label><span class="iconify" data-icon="material-symbols:stroke-full"></span> Stroke</label><input type="number" id="stroke" min="0" value="0"></div><div class="description">Apply a stroke to the text.</div></div>
+<div class="setting"><div><label><span class="iconify" data-icon="ic:baseline-color-lens"></span> Stroke Color</label><input type="color" id="strokecolor" value="#000000"></div><div class="description">Set the stroke color.</div></div>
 </div>
 </div>
 <script>
@@ -122,7 +120,7 @@ if(bc&&bc!=="%232a2a2a")params.push("backgroundcolor="+bc)
 let fc=document.getElementById("fontcolor").value.replace("#","%23")
 if(fc&&fc!=="%23ffffff")params.push("fontcolor="+fc)
 let f=document.getElementById("font").value.trim()
-if(f){let replacedFont=f.replaceAll(" ","+");params.push("font="+replacedFont)}
+if(f){params.push("font="+f.replaceAll(" ","+"))}
 let pbc=document.getElementById("progressbarcolor").value.replace("#","%23")
 if(pbc&&pbc!=="%23ffffff")params.push("progressbarcolor="+pbc)
 if(!document.getElementById("alwayson").checked)params.push("alwayson=false")
@@ -139,9 +137,8 @@ if(st&&parseInt(st)>0)params.push("stroke="+st)
 let stc=document.getElementById("strokecolor").value.replace("#","%23")
 if(stc&&stc!=="%23000000")params.push("strokecolor="+stc)
 if(!document.getElementById("striptrackname").checked)params.push("striptrackname=false")
-let queryString=params.length>0?"?"+params.join("&"):""
-let finalUrl="https://tawmae.xyz/overlays/spotify-and-sb.html"+queryString
-document.getElementById("generatedUrl").value=finalUrl
+let queryString=params.length?("?"+params.join("&")):""
+document.getElementById("generatedUrl").value="https://tawmae.xyz/overlays/spotify-and-sb.html"+queryString
 updatePreview()
 }
 function updatePreview(){
@@ -150,14 +147,11 @@ if(existingLink)existingLink.remove()
 let fVal=document.getElementById("font").value.trim()
 if(fVal){
 let link=document.createElement("link")
-link.id="dynamicFontLink"
-link.rel="stylesheet"
+link.id="dynamicFontLink";link.rel="stylesheet"
 link.href="https://fonts.googleapis.com/css2?family="+fVal.replaceAll(" ","+")+"&display=swap"
 document.head.appendChild(link)
 previewContainer.style.fontFamily=fVal+", sans-serif"
-}else{
-previewContainer.style.fontFamily="Poppins, sans-serif"
-}
+}else{previewContainer.style.fontFamily="Poppins, sans-serif"}
 let bcRaw=document.getElementById("backgroundcolor").value
 let fcRaw=document.getElementById("fontcolor").value
 let pbcRaw=document.getElementById("progressbarcolor").value
@@ -172,8 +166,8 @@ previewContainer.style.width=newWidth+"px"
 songOverlay.style.width=newWidth+"px"
 bg.style.background=bcRaw
 bg.style.opacity=(op/100).toString()
-if(op===100){songOverlay.style.boxShadow="0 8px 16px rgba(0,0,0,.3)"}else{songOverlay.style.boxShadow="none"}
-if(!document.getElementById("progressbar").checked){progressBarContainer.style.display="none"}else{progressBarContainer.style.display="block"}
+songOverlay.style.boxShadow=op===100?"0 8px 16px rgba(0,0,0,.3)":"none"
+progressBarContainer.style.display=document.getElementById("progressbar").checked?"block":"none"
 let scaled=fs/56
 trackNameEl.style.fontSize=fs+"px"
 artistsEl.style.fontSize=Math.round(fs*40/56)+"px"
@@ -196,51 +190,36 @@ artistsEl.style.textShadow="none"
 trackNameEl.style.textShadow="none"
 requestedByText.style.textShadow="none"
 if(dsOn&&st<1){
-let txtShadowBase="2px 1px 1.5px rgba(1,1,1,1)"
-artistsEl.style.textShadow=txtShadowBase
-trackNameEl.style.textShadow=txtShadowBase
-requestedByText.style.textShadow=txtShadowBase
-}
+let sh="2px 1px 1.5px rgba(1,1,1,1)"
+artistsEl.style.textShadow=sh;trackNameEl.style.textShadow=sh;requestedByText.style.textShadow=sh}
 function applyStroke(el,w,c){
 if(w<=0)return
-let shadows=[]
+let s=[]
 for(let i=0;i<360;i+=6){
 let rad=i*Math.PI/180
 let x=Math.round(w*Math.cos(rad))
 let y=Math.round(w*Math.sin(rad))
-shadows.push(x+"px "+y+"px 1px "+c)
-}
-el.style.textShadow=shadows.join(",")
-}
+s.push(x+"px "+y+"px 1px "+c)}
+el.style.textShadow=s.join(",")}
 if(st>0){
 applyStroke(artistsEl,st,stcRaw)
 applyStroke(trackNameEl,st,stcRaw)
-applyStroke(requestedByText,Math.floor(st*.5),stcRaw)
-}else if(dsOn){
-let txtShadowBase="2px 1px 1.5px rgba(1,1,1,1)"
-artistsEl.style.textShadow=txtShadowBase
-trackNameEl.style.textShadow=txtShadowBase
-requestedByText.style.textShadow=txtShadowBase
-}
+applyStroke(requestedByText,Math.floor(st*.5),stcRaw)}
+else if(dsOn){
+let sh="2px 1px 1.5px rgba(1,1,1,1)"
+artistsEl.style.textShadow=sh;trackNameEl.style.textShadow=sh;requestedByText.style.textShadow=sh}
 artistsEl.textContent="Joji, BENEE"
 trackNameEl.textContent="Afterthought"
 requestedByText.textContent="requested by tawmae"
 userProfileImage.src="https://static-cdn.jtvnw.net/jtv_user_pictures/3f79e60e-0200-454f-8886-87831db8f29f-profile_image-300x300.png"
-userProfileImage.style.display="inline"
-}
+userProfileImage.style.display="inline"}
 function init(){
-let inputs=document.querySelectorAll("input, select")
-inputs.forEach(el=>{el.addEventListener("input",buildURL);el.addEventListener("change",buildURL)})
+document.querySelectorAll("input, select").forEach(el=>{el.addEventListener("input",buildURL);el.addEventListener("change",buildURL)})
 buildURL()
 copyBtn.onclick=()=>{
 let urlField=document.getElementById("generatedUrl")
-urlField.select()
-urlField.setSelectionRange(0,99999)
-document.execCommand("copy")
-copyBtn.innerHTML=copiedCopyBtnHTML
-setTimeout(()=>{copyBtn.innerHTML=defaultCopyBtnHTML},2000)
-}
-}
+urlField.select();urlField.setSelectionRange(0,99999);document.execCommand("copy")
+copyBtn.innerHTML=copiedCopyBtnHTML;setTimeout(()=>{copyBtn.innerHTML=defaultCopyBtnHTML},2000)}}
 init()
 </script>
 </body>
