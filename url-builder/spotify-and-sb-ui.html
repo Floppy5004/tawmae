@@ -15,7 +15,7 @@ h1{margin:0;font-size:1.5rem;text-align:center;margin-bottom:20px}
 #generatedUrl:focus{outline:2px solid #466090}
 .copy-button{display:inline-flex;align-items:center;background:#466090;color:#fff;border:none;cursor:pointer;padding:10px 20px;font-size:1rem;transition:background .2s;gap:8px;margin-bottom:20px}
 .copy-button:hover{background:#5a79b5}
-.builder-wrapper{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:1200px;margin:0 auto 40px auto}
+.builder-wrapper{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:1200px;margin:0 auto 40px}
 .builder-section{background:rgba(17,17,17,.95);padding:20px;border-radius:5px}
 .builder-section h2{margin:0 0 20px;font-size:1.2rem}
 .setting{display:flex;flex-direction:column;margin-bottom:10px;border-bottom:1px solid #444;padding-bottom:10px}
@@ -28,7 +28,8 @@ h1{margin:0;font-size:1.5rem;text-align:center;margin-bottom:20px}
 .description{color:#aaa;font-size:.8rem;margin-left:1px;margin-top:2px}
 #previewContainer{max-width:1200px;margin:0 auto 40px;background:#111;border-radius:5px;padding:20px}
 #previewContainer *{font-family:inherit}
-#songOverlay{position:relative;margin:0 auto;border-radius:20px;overflow:hidden;transition:opacity 1s;opacity:1;visibility:visible;width:100%}
+#songOverlayScaler{width:100%;overflow:hidden;position:relative}
+#songOverlay{position:relative;margin:0;border-radius:20px;overflow:hidden;transition:opacity 1s;opacity:1;visibility:visible}
 #songOverlayBackground{position:absolute;top:0;left:0;width:100%;height:100%;border-radius:20px;pointer-events:none}
 #songOverlayContent{position:relative;z-index:1;display:flex;width:100%;color:#fff}
 #songContent{display:flex;flex-wrap:nowrap;padding:20px;opacity:1;transition:opacity 1s;color:#fff}
@@ -50,6 +51,7 @@ h1{margin:0;font-size:1.5rem;text-align:center;margin-bottom:20px}
 <h1>SPOTIFY & SB WIDGET URL BUILDER</h1>
 <div id="previewContainer">
 <h2 style="text-align:center;margin-top:0">Live Preview (not 100% accurate)</h2>
+<div id="songOverlayScaler">
 <div id="songOverlay">
 <div id="songOverlayBackground"></div>
 <div id="songOverlayContent">
@@ -71,6 +73,7 @@ h1{margin:0;font-size:1.5rem;text-align:center;margin-bottom:20px}
 </div>
 </div>
 </div>
+</div>
 <div class="url-section">
 <input id="generatedUrl" readonly>
 <button class="copy-button" id="copyBtn"><span class="iconify" data-icon="material-symbols:content-copy-outline"></span> Copy</button>
@@ -78,22 +81,22 @@ h1{margin:0;font-size:1.5rem;text-align:center;margin-bottom:20px}
 <div class="builder-wrapper">
 <div class="builder-section">
 <h2>General Settings</h2>
-<div class="setting"><div><label>Always On</label><input type="checkbox" id="alwayson" checked></div><div class="description">Toggle overlay visibility.</div></div>
-<div class="setting"><div><label>Progressbar</label><input type="checkbox" id="progressbar" checked></div><div class="description">Show or hide the progress bar.</div></div>
-<div class="setting"><div><label>Strip Track Name</label><input type="checkbox" id="striptrackname" checked></div><div class="description">Remove unnecessary parts from track names.</div></div>
-<div class="setting"><div><label>Opacity (0-100)</label><input type="number" id="opacity" min="0" max="100"></div><div class="description">Set background opacity.</div></div>
-<div class="setting"><div><label>Font Size</label><input type="number" id="fontsize" value="48" min="1" max="500"></div><div class="description">Adjust the text size.</div></div>
-<div class="setting"><div><label>Width</label><input type="number" id="width" value="850"></div><div class="description">Set the width of the container. Default is 850.</div></div>
+<div class="setting"><div><label>Always On</label><input type="checkbox" id="alwayson" checked></div></div>
+<div class="setting"><div><label>Progressbar</label><input type="checkbox" id="progressbar" checked></div></div>
+<div class="setting"><div><label>Strip Track Name</label><input type="checkbox" id="striptrackname" checked></div></div>
+<div class="setting"><div><label>Opacity (0-100)</label><input type="number" id="opacity" min="0" max="100"></div></div>
+<div class="setting"><div><label>Font Size</label><input type="number" id="fontsize" value="48" min="1" max="500"></div></div>
+<div class="setting"><div><label>Width</label><input type="number" id="width" value="850"></div></div>
 </div>
 <div class="builder-section">
 <h2>Appearance</h2>
-<div class="setting"><div><label>Background Color</label><input type="color" id="backgroundcolor" value="#2a2a2a"></div><div class="description">Choose the overlay background color.</div></div>
-<div class="setting"><div><label>Font</label><input type="text" id="font" placeholder="Poppins"></div><div class="description">Specify the font (e.g. Comic Sans MS).</div></div>
-<div class="setting"><div><label>Font Color</label><input type="color" id="fontcolor" value="#ffffff"></div><div class="description">Set the text color.</div></div>
-<div class="setting"><div><label>Progressbar Color</label><input type="color" id="progressbarcolor" value="#ffffff"></div><div class="description">Choose the progress bar color.</div></div>
-<div class="setting"><div><label><span class="iconify" data-icon="tabler:inner-shadow-right"></span> Dropshadow</label><input type="checkbox" id="dropshadow" checked></div><div class="description">Enable or disable text dropshadow.</div></div>
-<div class="setting"><div><label><span class="iconify" data-icon="material-symbols:stroke-full"></span> Stroke</label><input type="number" id="stroke" min="0" value="0"></div><div class="description">Apply a stroke to the text.</div></div>
-<div class="setting"><div><label><span class="iconify" data-icon="ic:baseline-color-lens"></span> Stroke Color</label><input type="color" id="strokecolor" value="#000000"></div><div class="description">Set the stroke color.</div></div>
+<div class="setting"><div><label>Background Color</label><input type="color" id="backgroundcolor" value="#2a2a2a"></div></div>
+<div class="setting"><div><label>Font</label><input type="text" id="font" placeholder="Poppins"></div></div>
+<div class="setting"><div><label>Font Color</label><input type="color" id="fontcolor" value="#ffffff"></div></div>
+<div class="setting"><div><label>Progressbar Color</label><input type="color" id="progressbarcolor" value="#ffffff"></div></div>
+<div class="setting"><div><label>Dropshadow</label><input type="checkbox" id="dropshadow" checked></div></div>
+<div class="setting"><div><label>Stroke</label><input type="number" id="stroke" min="0" value="0"></div></div>
+<div class="setting"><div><label>Stroke Color</label><input type="color" id="strokecolor" value="#000000"></div></div>
 </div>
 </div>
 <script>
@@ -101,8 +104,6 @@ let copyBtn=document.getElementById("copyBtn")
 let defaultCopyBtnHTML='<span class="iconify" data-icon="material-symbols:content-copy-outline"></span> Copy'
 let copiedCopyBtnHTML='<span class="iconify" data-icon="fluent:checkmark-12-regular"></span> Copied'
 let bg=document.getElementById("songOverlayBackground")
-let coverImage=document.getElementById("coverImage")
-let songOverlay=document.getElementById("songOverlay")
 let artistsEl=document.getElementById("artists")
 let trackNameEl=document.getElementById("trackName")
 let requestedByText=document.getElementById("requestedByText")
@@ -113,113 +114,88 @@ let progressBar=document.getElementById("progressBar")
 let songContent=document.getElementById("songContent")
 let coverImageContainer=document.getElementById("coverImageContainer")
 let previewContainer=document.getElementById("previewContainer")
+let scaler=document.getElementById("songOverlayScaler")
+let songOverlay=document.getElementById("songOverlay")
 function buildURL(){
-let params=[]
-let bc=document.getElementById("backgroundcolor").value.replace("#","%23")
-if(bc&&bc!=="%232a2a2a")params.push("backgroundcolor="+bc)
-let fc=document.getElementById("fontcolor").value.replace("#","%23")
-if(fc&&fc!=="%23ffffff")params.push("fontcolor="+fc)
-let f=document.getElementById("font").value.trim()
-if(f){params.push("font="+f.replaceAll(" ","+"))}
-let pbc=document.getElementById("progressbarcolor").value.replace("#","%23")
-if(pbc&&pbc!=="%23ffffff")params.push("progressbarcolor="+pbc)
-if(!document.getElementById("alwayson").checked)params.push("alwayson=false")
-if(!document.getElementById("progressbar").checked)params.push("progressbar=false")
-let op=document.getElementById("opacity").value.trim()
-if(op)params.push("opacity="+op)
-let fs=document.getElementById("fontsize").value.trim()
-if(fs)params.push("fontsize="+fs)
-let w=document.getElementById("width").value.trim()
-if(w&&w!=="850")params.push("width="+w)
-if(!document.getElementById("dropshadow").checked)params.push("dropshadow=false")
-let st=document.getElementById("stroke").value.trim()
-if(st&&parseInt(st)>0)params.push("stroke="+st)
-let stc=document.getElementById("strokecolor").value.replace("#","%23")
-if(stc&&stc!=="%23000000")params.push("strokecolor="+stc)
-if(!document.getElementById("striptrackname").checked)params.push("striptrackname=false")
-let queryString=params.length?("?"+params.join("&")):""
-document.getElementById("generatedUrl").value="https://tawmae.xyz/overlays/spotify-and-sb.html"+queryString
+let p=[]
+let bc=document.getElementById("backgroundcolor").value.replace("#","%23");if(bc!=="%232a2a2a")p.push("backgroundcolor="+bc)
+let fc=document.getElementById("fontcolor").value.replace("#","%23");if(fc!=="%23ffffff")p.push("fontcolor="+fc)
+let f=document.getElementById("font").value.trim();if(f)p.push("font="+f.replaceAll(" ","+"))
+let pbc=document.getElementById("progressbarcolor").value.replace("#","%23");if(pbc!=="%23ffffff")p.push("progressbarcolor="+pbc)
+if(!document.getElementById("alwayson").checked)p.push("alwayson=false")
+if(!document.getElementById("progressbar").checked)p.push("progressbar=false")
+let op=document.getElementById("opacity").value.trim();if(op)p.push("opacity="+op)
+let fs=document.getElementById("fontsize").value.trim();if(fs)p.push("fontsize="+fs)
+let w=document.getElementById("width").value.trim();if(w&&w!=="850")p.push("width="+w)
+if(!document.getElementById("dropshadow").checked)p.push("dropshadow=false")
+let st=document.getElementById("stroke").value.trim();if(st&&parseInt(st)>0)p.push("stroke="+st)
+let stc=document.getElementById("strokecolor").value.replace("#","%23");if(stc!=="%23000000")p.push("strokecolor="+stc)
+if(!document.getElementById("striptrackname").checked)p.push("striptrackname=false")
+document.getElementById("generatedUrl").value="https://tawmae.xyz/overlays/spotify-and-sb.html"+(p.length?"?"+p.join("&"):"")
 updatePreview()
 }
+function applyStroke(el,w,c){
+if(w<=0)return
+let s=[]
+for(let i=0;i<360;i+=6){let r=i*Math.PI/180;let x=Math.round(w*Math.cos(r));let y=Math.round(w*Math.sin(r));s.push(x+"px "+y+"px 1px "+c)}
+el.style.textShadow=s.join(",")
+}
 function updatePreview(){
-let existingLink=document.getElementById("dynamicFontLink")
-if(existingLink)existingLink.remove()
-let fVal=document.getElementById("font").value.trim()
-if(fVal){
-let link=document.createElement("link")
-link.id="dynamicFontLink";link.rel="stylesheet"
-link.href="https://fonts.googleapis.com/css2?family="+fVal.replaceAll(" ","+")+"&display=swap"
-document.head.appendChild(link)
-previewContainer.style.fontFamily=fVal+", sans-serif"
-}else{previewContainer.style.fontFamily="Poppins, sans-serif"}
-let bcRaw=document.getElementById("backgroundcolor").value
-let fcRaw=document.getElementById("fontcolor").value
-let pbcRaw=document.getElementById("progressbarcolor").value
+let existing=document.getElementById("dynamicFontLink");if(existing)existing.remove()
+let f=document.getElementById("font").value.trim()
+if(f){let link=document.createElement("link");link.id="dynamicFontLink";link.rel="stylesheet";link.href="https://fonts.googleapis.com/css2?family="+f.replaceAll(" ","+")+"&display=swap";document.head.appendChild(link);previewContainer.style.fontFamily=f+", sans-serif"}else{previewContainer.style.fontFamily="Poppins, sans-serif"}
+let bc=document.getElementById("backgroundcolor").value
+let fc=document.getElementById("fontcolor").value
+let pbc=document.getElementById("progressbarcolor").value
 let op=parseInt(document.getElementById("opacity").value.trim()||"100")
 let fs=parseInt(document.getElementById("fontsize").value.trim()||"48")
-let dsOn=document.getElementById("dropshadow").checked
+let ds=document.getElementById("dropshadow").checked
 let st=parseInt(document.getElementById("stroke").value.trim()||"0")
-let stcRaw=document.getElementById("strokecolor").value
-let widthInput=document.getElementById("width").value.trim()
-let newWidth=widthInput?parseInt(widthInput):850
-previewContainer.style.width=newWidth+"px"
-songOverlay.style.width=newWidth+"px"
-bg.style.background=bcRaw
-bg.style.opacity=(op/100).toString()
+let stc=document.getElementById("strokecolor").value
+let w=parseInt(document.getElementById("width").value.trim()||"850")
+songOverlay.style.width=w+"px"
+bg.style.background=bc;bg.style.opacity=(op/100).toString()
 songOverlay.style.boxShadow=op===100?"0 8px 16px rgba(0,0,0,.3)":"none"
 progressBarContainer.style.display=document.getElementById("progressbar").checked?"block":"none"
-let scaled=fs/56
+let sc=fs/56
 trackNameEl.style.fontSize=fs+"px"
 artistsEl.style.fontSize=Math.round(fs*40/56)+"px"
 requestedByText.style.fontSize=Math.round(fs*22/56)+"px"
 remainingTime.style.fontSize=Math.round(fs*28/56)+"px"
-let pad=Math.round(20*scaled)
+let pad=Math.round(20*sc)
 songContent.style.padding=pad+"px"
-coverImageContainer.style.width=Math.round(200*scaled)+"px"
-coverImageContainer.style.height=Math.round(200*scaled)+"px"
-coverImageContainer.style.marginRight=Math.round(20*scaled)+"px"
-remainingTime.style.bottom=Math.round(10*scaled)+"px"
-remainingTime.style.right=Math.round(10*scaled)+"px"
-remainingTime.style.padding=Math.round(3*scaled)+"px "+Math.round(5*scaled)+"px"
-remainingTime.style.width=Math.round(68*scaled)+"px"
-userProfileImage.style.width=Math.round(45*scaled)+"px"
-userProfileImage.style.height=Math.round(45*scaled)+"px"
-songContent.style.color=fcRaw
-progressBar.style.background=pbcRaw
-artistsEl.style.textShadow="none"
-trackNameEl.style.textShadow="none"
-requestedByText.style.textShadow="none"
-if(dsOn&&st<1){
-let sh="2px 1px 1.5px rgba(1,1,1,1)"
-artistsEl.style.textShadow=sh;trackNameEl.style.textShadow=sh;requestedByText.style.textShadow=sh}
-function applyStroke(el,w,c){
-if(w<=0)return
-let s=[]
-for(let i=0;i<360;i+=6){
-let rad=i*Math.PI/180
-let x=Math.round(w*Math.cos(rad))
-let y=Math.round(w*Math.sin(rad))
-s.push(x+"px "+y+"px 1px "+c)}
-el.style.textShadow=s.join(",")}
-if(st>0){
-applyStroke(artistsEl,st,stcRaw)
-applyStroke(trackNameEl,st,stcRaw)
-applyStroke(requestedByText,Math.floor(st*.5),stcRaw)}
-else if(dsOn){
-let sh="2px 1px 1.5px rgba(1,1,1,1)"
-artistsEl.style.textShadow=sh;trackNameEl.style.textShadow=sh;requestedByText.style.textShadow=sh}
+coverImageContainer.style.width=Math.round(200*sc)+"px"
+coverImageContainer.style.height=Math.round(200*sc)+"px"
+coverImageContainer.style.marginRight=Math.round(20*sc)+"px"
+remainingTime.style.bottom=Math.round(10*sc)+"px"
+remainingTime.style.right=Math.round(10*sc)+"px"
+remainingTime.style.padding=Math.round(3*sc)+"px "+Math.round(5*sc)+"px"
+remainingTime.style.width=Math.round(68*sc)+"px"
+userProfileImage.style.width=Math.round(45*sc)+"px"
+userProfileImage.style.height=Math.round(45*sc)+"px"
+songContent.style.color=fc
+progressBar.style.background=pbc
+artistsEl.style.textShadow="none";trackNameEl.style.textShadow="none";requestedByText.style.textShadow="none"
+if(ds&&st<1){let sh="2px 1px 1.5px rgba(1,1,1,1)";artistsEl.style.textShadow=sh;trackNameEl.style.textShadow=sh;requestedByText.style.textShadow=sh}
+if(st>0){applyStroke(artistsEl,st,stc);applyStroke(trackNameEl,st,stc);applyStroke(requestedByText,Math.floor(st*.5),stc)}else if(ds){let sh="2px 1px 1.5px rgba(1,1,1,1)";artistsEl.style.textShadow=sh;trackNameEl.style.textShadow=sh;requestedByText.style.textShadow=sh}
 artistsEl.textContent="Joji, BENEE"
 trackNameEl.textContent="Afterthought"
 requestedByText.textContent="requested by tawmae"
 userProfileImage.src="https://static-cdn.jtvnw.net/jtv_user_pictures/3f79e60e-0200-454f-8886-87831db8f29f-profile_image-300x300.png"
-userProfileImage.style.display="inline"}
+userProfileImage.style.display="inline"
+scalePreview()
+}
+function scalePreview(){
+let scale=Math.min(1,scaler.clientWidth/songOverlay.offsetWidth)
+songOverlay.style.transform="scale("+scale+")"
+scaler.style.height=(songOverlay.offsetHeight*scale)+"px"
+}
 function init(){
-document.querySelectorAll("input, select").forEach(el=>{el.addEventListener("input",buildURL);el.addEventListener("change",buildURL)})
+document.querySelectorAll("input,select").forEach(e=>{e.addEventListener("input",buildURL);e.addEventListener("change",buildURL)})
 buildURL()
-copyBtn.onclick=()=>{
-let urlField=document.getElementById("generatedUrl")
-urlField.select();urlField.setSelectionRange(0,99999);document.execCommand("copy")
-copyBtn.innerHTML=copiedCopyBtnHTML;setTimeout(()=>{copyBtn.innerHTML=defaultCopyBtnHTML},2000)}}
+window.addEventListener("resize",scalePreview)
+copyBtn.onclick=()=>{let u=document.getElementById("generatedUrl");u.select();u.setSelectionRange(0,99999);document.execCommand("copy");copyBtn.innerHTML=copiedCopyBtnHTML;setTimeout(()=>{copyBtn.innerHTML=defaultCopyBtnHTML},2000)}
+}
 init()
 </script>
 </body>
