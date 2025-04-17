@@ -7,196 +7,471 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <script src="https://code.iconify.design/3/3.0.0/iconify.min.js"></script>
 <style>
-body{margin:0;padding:20px;font-family:'Poppins',sans-serif}
-h1{margin:0;font-size:1.5rem;text-align:center;margin-bottom:20px}
-.copied-popup{position:fixed;top:20px;right:20px;background:#fff;color:#000;padding:10px 20px;border-radius:5px;font-size:.9rem;display:none;z-index:9999}
-.url-section{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:10px;margin-bottom:30px;max-width:1160px;margin:0 auto}
-#generatedUrl{width:100%;background:#131315;border:1px solid #555;color:#fff;padding:10px;font-size:18px}
-#generatedUrl:focus{outline:2px solid #466090}
-.copy-button{display:inline-flex;align-items:center;background:#466090;color:#fff;border:none;cursor:pointer;padding:10px 20px;font-size:1rem;transition:background .2s;gap:8px;margin-bottom:20px}
-.copy-button:hover{background:#5a79b5}
-.builder-wrapper{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:1200px;margin:0 auto 40px}
-.builder-section{background:rgba(17,17,17,.95);padding:20px;border-radius:5px}
-.builder-section h2{margin:0 0 20px;font-size:1.2rem}
-.setting{display:flex;flex-direction:column;margin-bottom:10px;border-bottom:1px solid #444;padding-bottom:10px}
-.setting:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
-.setting>div{display:flex;align-items:center;gap:10px}
-.setting label{flex:1;font-weight:600;margin:0}
-.setting input[type=text],.setting input[type=number],.setting select{width:120px;background:#131315;border:1px solid #444;color:#fff;padding:5px;font-family:'Poppins',sans-serif}
-.setting input[type=checkbox]{transform:scale(1.2);margin-right:5px;vertical-align:middle;cursor:pointer}
-.setting input[type=color]{width:60px;height:40px;border:none;cursor:pointer;background:#131315}
-.description{color:#aaa;font-size:.8rem;margin-left:1px;margin-top:2px}
-#previewContainer{max-width:1200px;margin:0 auto 40px;background:#111;border-radius:5px;padding:20px}
-#previewContainer *{font-family:inherit}
-#songOverlayScaler{width:100%;overflow:hidden;position:relative}
-#songOverlay{position:relative;margin:0;border-radius:20px;overflow:hidden;transition:opacity 1s;opacity:1;visibility:visible;transform-origin:top left}
-#songOverlayBackground{position:absolute;top:0;left:0;width:100%;height:100%;border-radius:20px;pointer-events:none}
-#songOverlayContent{position:relative;z-index:1;display:flex;width:100%;color:#fff}
-#songContent{display:flex;flex-wrap:nowrap;padding:20px;opacity:1;transition:opacity 1s;color:#fff}
-#coverImageContainer{position:relative;width:200px;height:200px;margin-right:20px;display:flex;align-items:center;justify-content:center}
-#coverImage{display:block;max-width:100%;max-height:100%;border-radius:20px;object-fit:cover}
-#remainingTime{position:absolute;background:rgba(0,0,0,.7);border-radius:10px;color:#fff;font-weight:600;bottom:10px;right:10px;text-align:center;padding:3px 5px;width:68px}
-#songDetails{display:flex;flex-direction:column;justify-content:center;max-width:calc(100% - 220px)}
-#artists{font-weight:500}
-#trackName{font-weight:700}
-#requestedByContainer{display:flex;align-items:center;margin-top:10px}
-#requestedByText{margin-right:10px;font-size:22px}
-#userProfileImage{width:45px;height:45px;border-radius:50%;object-fit:cover}
-#progressBarContainer{position:absolute;bottom:0;left:0;width:100%;background:rgba(255,255,255,.3);border-radius:0 0 20px 20px;height:10px;overflow:hidden}
-#progressBar{background:#fff;opacity:.7;height:100%;width:50%;transition:width 1s}
-@media (max-width:900px){.builder-wrapper{grid-template-columns:1fr}}
+  body {
+    background: #181818;
+    color: #FFFFFF;
+    margin: 0;
+    padding: 20px;
+    font-family: 'Poppins', sans-serif;
+  }
+  h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .copied-popup {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #FFFFFF;
+    color: #000000;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: .9rem;
+    display: none;
+    z-index: 9999;
+  }
+  .url-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 30px;
+    max-width: 1160px;
+    margin: 0 auto;
+  }
+  #generatedUrl {
+    width: 100%;
+    background: #101010;
+    border: 1px solid #333333;
+    color: #FFFFFF;
+    padding: 10px;
+    font-size: 18px;
+  }
+  #generatedUrl:focus {
+    outline: 2px solid #476393;
+  }
+  .copy-button {
+    display: inline-flex;
+    align-items: center;
+    background: #476393;
+    color: #FFFFFF;
+    border: none;
+    cursor: pointer;
+    padding: 10px 20px;
+    font-size: 1rem;
+    transition: background .2s;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+  .copy-button:hover {
+    background: #355270;
+  }
+  .builder-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto 40px;
+  }
+  .builder-section {
+    background: #202020;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+  }
+  .builder-section h2 {
+    margin: 0 0 20px;
+    font-size: 1.2rem;
+    color: #71a079;
+  }
+  .setting {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #333333;
+    padding-bottom: 10px;
+  }
+  .setting:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+  .setting > div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .setting label {
+    flex: 1;
+    font-weight: 600;
+    margin: 0;
+  }
+  .setting input[type=text],
+  .setting input[type=number],
+  .setting select {
+    width: 120px;
+    background: #101010;
+    border: 1px solid #333333;
+    color: #FFFFFF;
+    padding: 5px;
+    font-family: 'Poppins', sans-serif;
+  }
+  .setting input[type=checkbox] {
+    transform: scale(1.2);
+    margin-right: 5px;
+    vertical-align: middle;
+    cursor: pointer;
+  }
+  .setting input[type=color] {
+    width: 60px;
+    height: 40px;
+    border: none;
+    cursor: pointer;
+    background: #101010;
+  }
+  .description {
+    color: #AAAAAA;
+    font-size: .8rem;
+    margin-left: 1px;
+    margin-top: 2px;
+  }
+  #previewContainer {
+    max-width: 1200px;
+    margin: 0 auto 40px;
+    background: #101010;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.6);
+  }
+  #previewContainer * {
+    font-family: inherit;
+  }
+  #songOverlayScaler {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+  }
+  #songOverlay {
+    position: relative;
+    margin: 0;
+    border-radius: 20px;
+    overflow: hidden;
+    transition: opacity 1s;
+    opacity: 1;
+    visibility: visible;
+    transform-origin: top left;
+    border: 1px solid #333333;
+  }
+  #songOverlayBackground {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    pointer-events: none;
+  }
+  #songOverlayContent {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    width: 100%;
+    color: #FFFFFF;
+  }
+  #songContent {
+    display: flex;
+    flex-wrap: nowrap;
+    padding: 20px;
+    opacity: 1;
+    transition: opacity 1s;
+    color: #FFFFFF;
+  }
+  #coverImageContainer {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    margin-right: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  #coverImage {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 20px;
+    object-fit: cover;
+  }
+  #remainingTime {
+    position: absolute;
+    background: rgba(0,0,0,.7);
+    border-radius: 10px;
+    color: #FFFFFF;
+    font-weight: 600;
+    bottom: 10px;
+    right: 10px;
+    text-align: center;
+    padding: 3px 5px;
+    width: 68px;
+  }
+  #songDetails {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: calc(100% - 220px);
+  }
+  #artists {
+    font-weight: 500;
+  }
+  #trackName {
+    font-weight: 700;
+  }
+  #requestedByContainer {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+  }
+  #requestedByText {
+    margin-right: 10px;
+    font-size: 22px;
+  }
+  #userProfileImage {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  #progressBarContainer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(255,255,255,.3);
+    border-radius: 0 0 20px 20px;
+    height: 10px;
+    overflow: hidden;
+  }
+  #progressBar {
+    background: #71a079;
+    opacity: .9;
+    height: 100%;
+    width: 50%;
+    transition: width 1s;
+  }
+  @media (max-width: 900px) {
+    .builder-wrapper {
+      grid-template-columns: 1fr;
+    }
+  }
 </style>
 </head>
 <body>
 <h1>SPOTIFY & SB WIDGET URL BUILDER</h1>
 <div id="previewContainer">
-<h2 style="text-align:center;margin-top:0">Live Preview (not 100% accurate)</h2>
-<div id="songOverlayScaler">
-<div id="songOverlay">
-<div id="songOverlayBackground"></div>
-<div id="songOverlayContent">
-<div id="songContent">
-<div id="coverImageContainer">
-<img id="coverImage" src="https://i.scdn.co/image/ab67616d0000b27353f6fa0d2589c6a7174f4b81" alt="">
-<div id="remainingTime">3:45</div>
-</div>
-<div id="songDetails">
-<div id="artists">Joji, BENEE</div>
-<div id="trackName">Afterthought</div>
-<div id="requestedByContainer">
-<span id="requestedByText"></span>
-<img id="userProfileImage" src="" style="display:none">
-</div>
-</div>
-</div>
-<div id="progressBarContainer"><div id="progressBar"></div></div>
-</div>
-</div>
-</div>
+  <h2 style="text-align:center;margin-top:0">Live Preview (not 100% accurate)</h2>
+  <div id="songOverlayScaler">
+    <div id="songOverlay">
+      <div id="songOverlayBackground"></div>
+      <div id="songOverlayContent">
+        <div id="songContent">
+          <div id="coverImageContainer">
+            <img id="coverImage" src="https://i.scdn.co/image/ab67616d0000b27353f6fa0d2589c6a7174f4b81" alt="">
+            <div id="remainingTime">3:45</div>
+          </div>
+          <div id="songDetails">
+            <div id="artists">Joji, BENEE</div>
+            <div id="trackName">Afterthought</div>
+            <div id="requestedByContainer">
+              <span id="requestedByText"></span>
+              <img id="userProfileImage" src="" style="display:none">
+            </div>
+          </div>
+        </div>
+        <div id="progressBarContainer"><div id="progressBar"></div></div>
+      </div>
+    </div>
+  </div>
 </div>
 <div class="url-section">
-<input id="generatedUrl" readonly>
-<button class="copy-button" id="copyBtn"><span class="iconify" data-icon="material-symbols:content-copy-outline"></span> Copy</button>
+  <input id="generatedUrl" readonly>
+  <button class="copy-button" id="copyBtn"><span class="iconify" data-icon="material-symbols:content-copy-outline"></span> Copy</button>
 </div>
 <div class="builder-wrapper">
-<div class="builder-section">
-<h2>General Settings</h2>
-<div class="setting"><div><label>Always On</label><input type="checkbox" id="alwayson" checked></div></div>
-<div class="setting"><div><label>Progressbar</label><input type="checkbox" id="progressbar" checked></div></div>
-<div class="setting"><div><label>Strip Track Name</label><input type="checkbox" id="striptrackname" checked></div></div>
-<div class="setting"><div><label>Opacity (0-100)</label><input type="number" id="opacity" min="0" max="100"></div></div>
-<div class="setting"><div><label>Font Size</label><input type="number" id="fontsize" value="48" min="1" max="500"></div></div>
-<div class="setting"><div><label>Width</label><input type="number" id="width" value="850"></div></div>
-</div>
-<div class="builder-section">
-<h2>Appearance</h2>
-<div class="setting"><div><label>Background Color</label><input type="color" id="backgroundcolor" value="#2a2a2a"></div></div>
-<div class="setting"><div><label>Font</label><input type="text" id="font" placeholder="Poppins"></div></div>
-<div class="setting"><div><label>Font Color</label><input type="color" id="fontcolor" value="#ffffff"></div></div>
-<div class="setting"><div><label>Progressbar Color</label><input type="color" id="progressbarcolor" value="#ffffff"></div></div>
-<div class="setting"><div><label>Dropshadow</label><input type="checkbox" id="dropshadow" checked></div></div>
-<div class="setting"><div><label>Stroke</label><input type="number" id="stroke" min="0" value="0"></div></div>
-<div class="setting"><div><label>Stroke Color</label><input type="color" id="strokecolor" value="#000000"></div></div>
-</div>
+  <div class="builder-section">
+    <h2>General Settings</h2>
+    <div class="setting"><div><label>Always On</label><input type="checkbox" id="alwayson" checked></div></div>
+    <div class="setting"><div><label>Progressbar</label><input type="checkbox" id="progressbar" checked></div></div>
+    <div class="setting"><div><label>Strip Track Name</label><input type="checkbox" id="striptrackname" checked></div></div>
+    <div class="setting"><div><label>Opacity (0-100)</label><input type="number" id="opacity" min="0" max="100"></div></div>
+    <div class="setting"><div><label>Font Size</label><input type="number" id="fontsize" value="48" min="1" max="500"></div></div>
+    <div class="setting"><div><label>Width</label><input type="number" id="width" value="850"></div></div>
+  </div>
+  <div class="builder-section">
+    <h2>Appearance</h2>
+    <div class="setting"><div><label>Background Color</label><input type="color" id="backgroundcolor" value="#2a2a2a"></div></div>
+    <div class="setting"><div><label>Font</label><input type="text" id="font" placeholder="Poppins"></div></div>
+    <div class="setting"><div><label>Font Color</label><input type="color" id="fontcolor" value="#ffffff"></div></div>
+    <div class="setting"><div><label>Progressbar Color</label><input type="color" id="progressbarcolor" value="#ffffff"></div></div>
+    <div class="setting"><div><label>Dropshadow</label><input type="checkbox" id="dropshadow" checked></div></div>
+    <div class="setting"><div><label>Stroke</label><input type="number" id="stroke" min="0" value="0"></div></div>
+    <div class="setting"><div><label>Stroke Color</label><input type="color" id="strokecolor" value="#000000"></div></div>
+  </div>
 </div>
 <script>
-let copyBtn=document.getElementById("copyBtn")
-let defaultCopyBtnHTML='<span class="iconify" data-icon="material-symbols:content-copy-outline"></span> Copy'
-let copiedCopyBtnHTML='<span class="iconify" data-icon="fluent:checkmark-12-regular"></span> Copied'
-let bg=document.getElementById("songOverlayBackground")
-let artistsEl=document.getElementById("artists")
-let trackNameEl=document.getElementById("trackName")
-let requestedByText=document.getElementById("requestedByText")
-let userProfileImage=document.getElementById("userProfileImage")
-let remainingTime=document.getElementById("remainingTime")
-let progressBarContainer=document.getElementById("progressBarContainer")
-let progressBar=document.getElementById("progressBar")
-let songContent=document.getElementById("songContent")
-let coverImageContainer=document.getElementById("coverImageContainer")
-let previewContainer=document.getElementById("previewContainer")
-let scaler=document.getElementById("songOverlayScaler")
-let songOverlay=document.getElementById("songOverlay")
-function buildURL(){
-let p=[]
-let bc=document.getElementById("backgroundcolor").value.replace("#","%23");if(bc!=="%232a2a2a")p.push("backgroundcolor="+bc)
-let fc=document.getElementById("fontcolor").value.replace("#","%23");if(fc!=="%23ffffff")p.push("fontcolor="+fc)
-let f=document.getElementById("font").value.trim();if(f)p.push("font="+f.replaceAll(" ","+"))
-let pbc=document.getElementById("progressbarcolor").value.replace("#","%23");if(pbc!=="%23ffffff")p.push("progressbarcolor="+pbc)
-if(!document.getElementById("alwayson").checked)p.push("alwayson=false")
-if(!document.getElementById("progressbar").checked)p.push("progressbar=false")
-let op=document.getElementById("opacity").value.trim();if(op)p.push("opacity="+op)
-let fs=document.getElementById("fontsize").value.trim();if(fs)p.push("fontsize="+fs)
-let w=document.getElementById("width").value.trim();if(w&&w!=="850")p.push("width="+w)
-if(!document.getElementById("dropshadow").checked)p.push("dropshadow=false")
-let st=document.getElementById("stroke").value.trim();if(st&&parseInt(st)>0)p.push("stroke="+st)
-let stc=document.getElementById("strokecolor").value.replace("#","%23");if(stc!=="%23000000")p.push("strokecolor="+stc)
-if(!document.getElementById("striptrackname").checked)p.push("striptrackname=false")
-document.getElementById("generatedUrl").value="https://tawmae.xyz/overlays/spotify-and-sb.html"+(p.length?"?"+p.join("&"):"")
-updatePreview()
-}
-function applyStroke(el,w,c){
-if(w<=0)return
-let s=[]
-for(let i=0;i<360;i+=6){let r=i*Math.PI/180;let x=Math.round(w*Math.cos(r));let y=Math.round(w*Math.sin(r));s.push(x+"px "+y+"px 1px "+c)}
-el.style.textShadow=s.join(",")
-}
-function updatePreview(){
-let existing=document.getElementById("dynamicFontLink");if(existing)existing.remove()
-let f=document.getElementById("font").value.trim()
-if(f){let link=document.createElement("link");link.id="dynamicFontLink";link.rel="stylesheet";link.href="https://fonts.googleapis.com/css2?family="+f.replaceAll(" ","+")+"&display=swap";document.head.appendChild(link);previewContainer.style.fontFamily=f+", sans-serif"}else{previewContainer.style.fontFamily="Poppins, sans-serif"}
-let bc=document.getElementById("backgroundcolor").value
-let fc=document.getElementById("fontcolor").value
-let pbc=document.getElementById("progressbarcolor").value
-let op=parseInt(document.getElementById("opacity").value.trim()||"100")
-let fs=parseInt(document.getElementById("fontsize").value.trim()||"48")
-let ds=document.getElementById("dropshadow").checked
-let st=parseInt(document.getElementById("stroke").value.trim()||"0")
-let stc=document.getElementById("strokecolor").value
-let w=parseInt(document.getElementById("width").value.trim()||"850")
-songOverlay.style.width=w+"px"
-bg.style.background=bc;bg.style.opacity=(op/100).toString()
-songOverlay.style.boxShadow=op===100?"0 8px 16px rgba(0,0,0,.3)":"none"
-progressBarContainer.style.display=document.getElementById("progressbar").checked?"block":"none"
-let sc=fs/56
-trackNameEl.style.fontSize=fs+"px"
-artistsEl.style.fontSize=Math.round(fs*40/56)+"px"
-requestedByText.style.fontSize=Math.round(fs*22/56)+"px"
-remainingTime.style.fontSize=Math.round(fs*28/56)+"px"
-let pad=Math.round(20*sc)
-songContent.style.padding=pad+"px"
-coverImageContainer.style.width=Math.round(200*sc)+"px"
-coverImageContainer.style.height=Math.round(200*sc)+"px"
-coverImageContainer.style.marginRight=Math.round(20*sc)+"px"
-remainingTime.style.bottom=Math.round(10*sc)+"px"
-remainingTime.style.right=Math.round(10*sc)+"px"
-remainingTime.style.padding=Math.round(3*sc)+"px "+Math.round(5*sc)+"px"
-remainingTime.style.width=Math.round(68*sc)+"px"
-userProfileImage.style.width=Math.round(45*sc)+"px"
-userProfileImage.style.height=Math.round(45*sc)+"px"
-songContent.style.color=fc
-progressBar.style.background=pbc
-artistsEl.style.textShadow="none";trackNameEl.style.textShadow="none";requestedByText.style.textShadow="none"
-if(ds&&st<1){let sh="2px 1px 1.5px rgba(1,1,1,1)";artistsEl.style.textShadow=sh;trackNameEl.style.textShadow=sh;requestedByText.style.textShadow=sh}
-if(st>0){applyStroke(artistsEl,st,stc);applyStroke(trackNameEl,st,stc);applyStroke(requestedByText,Math.floor(st*.5),stc)}else if(ds){let sh="2px 1px 1.5px rgba(1,1,1,1)";artistsEl.style.textShadow=sh;trackNameEl.style.textShadow=sh;requestedByText.style.textShadow=sh}
-artistsEl.textContent="Joji, BENEE"
-trackNameEl.textContent="Afterthought"
-requestedByText.textContent="requested by tawmae"
-userProfileImage.src="https://static-cdn.jtvnw.net/jtv_user_pictures/3f79e60e-0200-454f-8886-87831db8f29f-profile_image-300x300.png"
-userProfileImage.style.display="inline"
-scalePreview()
-}
-function scalePreview(){
-let scale=Math.min(1,scaler.clientWidth/songOverlay.offsetWidth)
-songOverlay.style.transform="scale("+scale+")"
-scaler.style.height=(songOverlay.offsetHeight*scale)+"px"
-}
-function init(){
-document.querySelectorAll("input,select").forEach(e=>{e.addEventListener("input",buildURL);e.addEventListener("change",buildURL)})
-buildURL()
-window.addEventListener("resize",scalePreview)
-copyBtn.onclick=()=>{let u=document.getElementById("generatedUrl");u.select();u.setSelectionRange(0,99999);document.execCommand("copy");copyBtn.innerHTML=copiedCopyBtnHTML;setTimeout(()=>{copyBtn.innerHTML=defaultCopyBtnHTML},2000)}
-}
-init()
+
+  let copyBtn = document.getElementById("copyBtn"),
+      defaultCopyBtnHTML = '<span class="iconify" data-icon="material-symbols:content-copy-outline"></span> Copy',
+      copiedCopyBtnHTML = '<span class="iconify" data-icon="fluent:checkmark-12-regular"></span> Copied',
+      bg = document.getElementById("songOverlayBackground"),
+      artistsEl = document.getElementById("artists"),
+      trackNameEl = document.getElementById("trackName"),
+      requestedByText = document.getElementById("requestedByText"),
+      userProfileImage = document.getElementById("userProfileImage"),
+      remainingTime = document.getElementById("remainingTime"),
+      progressBarContainer = document.getElementById("progressBarContainer"),
+      progressBar = document.getElementById("progressBar"),
+      songContent = document.getElementById("songContent"),
+      coverImageContainer = document.getElementById("coverImageContainer"),
+      previewContainer = document.getElementById("previewContainer"),
+      scaler = document.getElementById("songOverlayScaler"),
+      songOverlay = document.getElementById("songOverlay");
+  function buildURL(){
+    let p = [],
+        bc = document.getElementById("backgroundcolor").value.replace("#","%23");
+    if(bc!=="%232a2a2a") p.push("backgroundcolor="+bc);
+    let fc = document.getElementById("fontcolor").value.replace("#","%23");
+    if(fc!=="%23ffffff") p.push("fontcolor="+fc);
+    let f = document.getElementById("font").value.trim();
+    if(f) p.push("font="+f.replaceAll(" ","+"));
+    let pbc = document.getElementById("progressbarcolor").value.replace("#","%23");
+    if(pbc!=="%23ffffff") p.push("progressbarcolor="+pbc);
+    if(!document.getElementById("alwayson").checked) p.push("alwayson=false");
+    if(!document.getElementById("progressbar").checked) p.push("progressbar=false");
+    let op = document.getElementById("opacity").value.trim();
+    if(op) p.push("opacity="+op);
+    let fs = document.getElementById("fontsize").value.trim();
+    if(fs) p.push("fontsize="+fs);
+    let w = document.getElementById("width").value.trim();
+    if(w&&w!=="850") p.push("width="+w);
+    if(!document.getElementById("dropshadow").checked) p.push("dropshadow=false");
+    let st = document.getElementById("stroke").value.trim();
+    if(st&&parseInt(st)>0) p.push("stroke="+st);
+    let stc = document.getElementById("strokecolor").value.replace("#","%23");
+    if(stc!=="%23000000") p.push("strokecolor="+stc);
+    if(!document.getElementById("striptrackname").checked) p.push("striptrackname=false");
+    document.getElementById("generatedUrl").value =
+      "https://tawmae.xyz/overlays/spotify-and-sb.html" +
+      (p.length ? "?" + p.join("&") : "");
+    updatePreview();
+  }
+  function applyStroke(el,w,c){
+    if(w<=0) return;
+    let s=[];
+    for(let i=0;i<360;i+=6){
+      let r = i*Math.PI/180,
+          x = Math.round(w*Math.cos(r)),
+          y = Math.round(w*Math.sin(r));
+      s.push(x+"px "+y+"px 1px "+c);
+    }
+    el.style.textShadow = s.join(",");
+  }
+  function updatePreview(){
+    let ex = document.getElementById("dynamicFontLink");
+    if(ex) ex.remove();
+    let f = document.getElementById("font").value.trim();
+    if(f){
+      let link = document.createElement("link");
+      link.id="dynamicFontLink";
+      link.rel="stylesheet";
+      link.href="https://fonts.googleapis.com/css2?family="+f.replaceAll(" ","+")+"&display=swap";
+      document.head.appendChild(link);
+      previewContainer.style.fontFamily = f+", sans-serif";
+    } else {
+      previewContainer.style.fontFamily = "Poppins, sans-serif";
+    }
+    let bc = document.getElementById("backgroundcolor").value,
+        fc = document.getElementById("fontcolor").value,
+        pbc = document.getElementById("progressbarcolor").value,
+        op = parseInt(document.getElementById("opacity").value.trim()||"100"),
+        fs = parseInt(document.getElementById("fontsize").value.trim()||"48"),
+        ds = document.getElementById("dropshadow").checked,
+        st = parseInt(document.getElementById("stroke").value.trim()||"0"),
+        stc = document.getElementById("strokecolor").value,
+        w = parseInt(document.getElementById("width").value.trim()||"850");
+    songOverlay.style.width = w+"px";
+    bg.style.background = bc;
+    bg.style.opacity = (op/100).toString();
+    songOverlay.style.boxShadow = op===100 ? "0 8px 16px rgba(0,0,0,.3)" : "none";
+    progressBarContainer.style.display = document.getElementById("progressbar").checked ? "block":"none";
+    let sc = fs/56;
+    trackNameEl.style.fontSize = fs+"px";
+    artistsEl.style.fontSize = Math.round(fs*40/56)+"px";
+    requestedByText.style.fontSize = Math.round(fs*22/56)+"px";
+    remainingTime.style.fontSize = Math.round(fs*28/56)+"px";
+    let pad = Math.round(20*sc);
+    songContent.style.padding = pad+"px";
+    coverImageContainer.style.width = Math.round(200*sc)+"px";
+    coverImageContainer.style.height = Math.round(200*sc)+"px";
+    coverImageContainer.style.marginRight = Math.round(20*sc)+"px";
+    remainingTime.style.bottom = Math.round(10*sc)+"px";
+    remainingTime.style.right = Math.round(10*sc)+"px";
+    remainingTime.style.padding = Math.round(3*sc)+"px "+Math.round(5*sc)+"px";
+    remainingTime.style.width = Math.round(68*sc)+"px";
+    userProfileImage.style.width = Math.round(45*sc)+"px";
+    userProfileImage.style.height = Math.round(45*sc)+"px";
+    songContent.style.color = fc;
+    progressBar.style.background = pbc;
+    artistsEl.style.textShadow = "none";
+    trackNameEl.style.textShadow = "none";
+    requestedByText.style.textShadow = "none";
+    if(ds && st<1){
+      let sh = "2px 1px 1.5px rgba(0,0,0,1)";
+      artistsEl.style.textShadow = sh;
+      trackNameEl.style.textShadow = sh;
+      requestedByText.style.textShadow = sh;
+    }
+    if(st>0){
+      applyStroke(artistsEl,st,stc);
+      applyStroke(trackNameEl,st,stc);
+      applyStroke(requestedByText,Math.floor(st*.5),stc);
+    } else if(ds){
+      let sh = "2px 1px 1.5px rgba(0,0,0,1)";
+      artistsEl.style.textShadow = sh;
+      trackNameEl.style.textShadow = sh;
+      requestedByText.style.textShadow = sh;
+    }
+    artistsEl.textContent = "Joji, BENEE";
+    trackNameEl.textContent = "Afterthought";
+    requestedByText.textContent = "requested by tawmae";
+    userProfileImage.src = "https://static-cdn.jtvnw.net/jtv_user_pictures/3f79e60e-0200-454f-8886-87831db8f29f-profile_image-300x300.png";
+    userProfileImage.style.display = "inline";
+    scalePreview();
+  }
+  function scalePreview(){
+    let scale = Math.min(1, scaler.clientWidth / songOverlay.offsetWidth);
+    songOverlay.style.transform = "scale("+scale+")";
+    scaler.style.height = (songOverlay.offsetHeight*scale) + "px";
+  }
+  function init(){
+    document.querySelectorAll("input,select").forEach(e=>{
+      e.addEventListener("input",buildURL);
+      e.addEventListener("change",buildURL);
+    });
+    buildURL();
+    window.addEventListener("resize",scalePreview);
+    copyBtn.onclick = ()=>{
+      let u = document.getElementById("generatedUrl");
+      u.select();
+      u.setSelectionRange(0,99999);
+      document.execCommand("copy");
+      copyBtn.innerHTML = copiedCopyBtnHTML;
+      setTimeout(()=>{ copyBtn.innerHTML = defaultCopyBtnHTML },2000);
+    };
+  }
+  init();
 </script>
 </body>
 </html>
