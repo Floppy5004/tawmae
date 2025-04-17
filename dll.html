@@ -1,19 +1,14 @@
 ---
 layout: default
 title: "DLL | tawmae"
-description: "The dll that enabled the settings UI"
+description: "Die DLL zur Steuerung zeitbasierter Aktionen"
 ---
 <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/extension-page.css">
-
-<!-- Inline-CSS für neue Klassen -->
 <style>
-  /* Container- und Variablen aus dem globalen CSS vorausgesetzt */
   :root {
     --transition-time: 0.4s;
     --border-glass: rgba(255, 255, 255, 0.2);
   }
-
-  /* Neue Bild-Klasse für feste 800×400-Größe, aber responsive */
   .description-image {
     width: 800px;
     height: 400px;
@@ -25,11 +20,15 @@ description: "The dll that enabled the settings UI"
   .description-image:hover {
     transform: scale(1.03);
   }
-
-  /* Download-Button-Styling */
+  .download-box {
+    background: var(--bg-glass);
+    border: 1px solid var(--border-glass);
+    padding: 20px;
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    font-size: 1.1rem;
+  }
   .download-button {
-    display: inline-block;
-    margin: 20px auto;
     padding: 12px 24px;
     background-color: #ffd95e;
     color: #333;
@@ -43,16 +42,10 @@ description: "The dll that enabled the settings UI"
     background-color: #e6c14c;
   }
 </style>
-
-<!----    TITLE   ------------------------------------------------------------------------------------------------------------------------------>
 <div class="extension-title">
   <div class="extension-title-text-box">
     <h1>TAWMAEUI DLL</h1>
-    <p>A custom trigger that allows you to fire actions at specific times.
-      <br><br>
-      Every day at 6 PM? Every Thursday at 9 PM? Or just at midnight on January 1 2026? The choice is yours.
-      <br><span style="font-size: 3rem">clockUwu</span>
-    </p>
+    <p>Mit der TAWMAEUI DLL kannst du in Streamer.bot Aktionen automatisch zu festen Zeiten ausführen lassen.&nbsp;Ob täglich um 18&nbsp;Uhr, donnerstags um 21&nbsp;Uhr oder einmalig an Neujahr 2026 um Mitternacht&nbsp;– die Möglichkeiten sind grenzenlos.</p>
   </div>
   <div class="carousel-2">
     <div><img src="{{ site.baseurl }}/assets/dll-images/rotator-dll-1.webp" class="carousel-image"></div>
@@ -60,45 +53,29 @@ description: "The dll that enabled the settings UI"
     <div><img src="{{ site.baseurl }}/assets/dll-images/rotator-dll-3.webp" class="carousel-image"></div>
   </div>
 </div>
-
 <div class="section-divider"></div>
-
-<!----    DLL DOWNLOAD    ------------------------------------------------------------------------------------------------------------------------------>
-<div class="description-container">
-  <div class="extension-title-text-box">
-    <!-- Download-Button -->
-    <a href="https://github.com/tawmae/tawmae/raw/refs/heads/main/dll/TawmaeUI.dll" class="download-button">Download DLL</a>
-  </div>
+<div class="description-container" style="justify-content:center; margin-bottom:50px;">
+  <div class="download-box">Download der DLL hier:</div>
+  <a href="https://github.com/tawmae/tawmae/raw/refs/heads/main/dll/TawmaeUI.dll" class="download-button">Jetzt herunterladen</a>
 </div>
-
 <div class="section-divider"></div>
-
-<!----    SETUP    ------------------------------------------------------------------------------------------------------------------------------>
 <div class="description-container">
   <div class="extension-title-text-box">
-    <p><span style="font-weight: bold; color: #fff;">1.</span> Download the <span
-         style="font-weight: bold; color: #ffd95e;">dll-file</span> from above. Browser often block dll-files for security reasons, so you'll need to allow the download. If you are unsure whether it's safe, you can always throw the file into an analyzer like VirusTotal or let your AV software scan it.</p>
+    <p><span style="font-weight:bold; color:#fff;">1.</span> Lade die DLL-Datei über den Button oben herunter. Erlaubt dein Browser keine .dll-Downloads, aktiviere die Erlaubnis oder überprüfe die Datei via VirusTotal bzw. mit deiner Antivirus-Software.</p>
   </div>
   <img src="{{ site.baseurl }}/assets/dll-images/image-dll-1.webp" class="description-image">
 </div>
-
 <div class="section-divider"></div>
-
 <div class="description-container">
   <img src="{{ site.baseurl }}/assets/dll-images/image-dll-2.webp" class="description-image">
   <div class="extension-title-text-box">
-    <p><span style="font-weight: bold; color: #fff;">2.</span> Open your <span
-         style="font-weight: bold; color: #ffd95e;">Streamer.bot directory</span> and look for the <span
-         style="font-weight: bold; color: #ffd95e;">dlls</span> folder. Open it.</p>
+    <p><span style="font-weight:bold; color:#fff;">2.</span> Öffne dein Streamer.bot-Verzeichnis und wechsle in den Ordner „dlls“.</p>
   </div>
 </div>
-
 <div class="section-divider"></div>
-
 <div class="description-container">
   <img src="{{ site.baseurl }}/assets/dll-images/image-dll-1.webp" class="description-image">
   <div class="extension-title-text-box">
-    <p><span style="font-weight: bold; color: #fff;">3.</span> Place the <span
-         style="font-weight: bold; color: #ffd95e;">dll-file</span> into the dlls folder, and then you're done!</p>
+    <p><span style="font-weight:bold; color:#fff;">3.</span> Kopiere die heruntergeladene DLL-Datei in den Ordner „dlls“ und starte Streamer.bot neu.</p>
   </div>
 </div>
