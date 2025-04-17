@@ -8,6 +8,7 @@ description: "The DLL that enables the settings UI"
   :root {
     --transition-time: 0.4s;
     --border-glass: rgba(255, 255, 255, 0.2);
+    --accent-glow: rgba(255, 217, 94, 0.8);
   }
   .description-image {
     width: 800px;
@@ -23,16 +24,12 @@ description: "The DLL that enables the settings UI"
   .download-container {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 12px;
     margin-top: 20px;
   }
-  .download-box {
-    background: var(--bg-glass);
-    border: 1px solid var(--border-glass);
-    padding: 20px;
-    border-radius: 12px;
-    backdrop-filter: blur(10px);
+  .download-text {
     font-size: 1.1rem;
+    color: #fff;
   }
   .download-button {
     padding: 12px 24px;
@@ -42,18 +39,20 @@ description: "The DLL that enables the settings UI"
     text-decoration: none;
     border-radius: 8px;
     border: 1px solid var(--border-glass);
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 0 8px var(--accent-glow);
   }
   .download-button:hover {
     background-color: #e6c14c;
+    box-shadow: 0 0 12px var(--accent-glow);
   }
 </style>
 <div class="extension-title">
   <div class="extension-title-text-box">
     <h1>TAWMAEUI DLL</h1>
-    <p>This DLL enables a full-featured settings UI in Streamer.bot, allowing you to configure triggers and options through a clean, graphical interface without manual scripting.</p>
+    <p>This DLL provides a polished settings UI in Streamer.bot, letting you tweak triggers and parameters via a user-friendly panel—no scripting required.</p>
     <div class="download-container">
-      <div class="download-box">Download the DLL here:</div>
+      <span class="download-text">Download the DLL here:</span>
       <a href="https://github.com/tawmae/tawmae/raw/refs/heads/main/dll/TawmaeUI.dll" class="download-button">Download DLL</a>
     </div>
   </div>
@@ -66,7 +65,7 @@ description: "The DLL that enables the settings UI"
 <div class="section-divider"></div>
 <div class="description-container">
   <div class="extension-title-text-box">
-    <p><span style="font-weight:bold; color:#fff;">1.</span> Click the download button above to retrieve the DLL file. If your browser blocks .dll downloads, enable them or scan the file with VirusTotal or your antivirus software.</p>
+    <p><span style="font-weight:bold; color:#fff;">1.</span> Click the download button above to fetch the DLL. If your browser blocks .dll files, allow downloads or verify the file with VirusTotal or your antivirus.</p>
   </div>
   <img src="{{ site.baseurl }}/assets/dll-images/image-dll-1.webp" class="description-image">
 </div>
@@ -74,13 +73,13 @@ description: "The DLL that enables the settings UI"
 <div class="description-container">
   <img src="{{ site.baseurl }}/assets/dll-images/image-dll-2.webp" class="description-image">
   <div class="extension-title-text-box">
-    <p><span style="font-weight:bold; color:#fff;">2.</span> Open your Streamer.bot installation directory and navigate to the <code>dlls</code> folder.</p>
+    <p><span style="font-weight:bold; color:#fff;">2.</span> Open your Streamer.bot directory and navigate to the <code>dlls</code> folder.</p>
   </div>
 </div>
 <div class="section-divider"></div>
 <div class="description-container">
   <img src="{{ site.baseurl }}/assets/dll-images/image-dll-3.webp" class="description-image">
   <div class="extension-title-text-box">
-    <p><span style="font-weight:bold; color:#fff;">3.</span> Copy the DLL into the <code>dlls</code> folder, then restart Streamer.bot to load the new settings UI.</p>
+    <p><span style="font-weight:bold; color:#fff;">3.</span> Move the DLL into the <code>dlls</code> folder and restart Streamer.bot to load the new settings interface.</p>
   </div>
 </div>
