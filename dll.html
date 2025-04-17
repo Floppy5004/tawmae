@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "DLL | tawmae"
-description: "The DLL for controlling time-based actions"
+description: "The DLL that enables the settings UI"
 ---
 <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/extension-page.css">
 <style>
@@ -27,8 +27,10 @@ description: "The DLL for controlling time-based actions"
     border-radius: 12px;
     backdrop-filter: blur(10px);
     font-size: 1.1rem;
+    margin-top: 20px;
   }
   .download-button {
+    margin-left: 20px;
     padding: 12px 24px;
     background-color: #ffd95e;
     color: #333;
@@ -45,7 +47,9 @@ description: "The DLL for controlling time-based actions"
 <div class="extension-title">
   <div class="extension-title-text-box">
     <h1>TAWMAEUI DLL</h1>
-    <p>With the TAWMAEUI DLL, you can schedule actions in Streamer.bot to run at specific times. Whether it’s every day at 6 PM, every Thursday at 9 PM, or a one-time trigger at midnight on January 1, 2026—the choice is yours.</p>
+    <p>The TAWMAEUI DLL adds a fully featured settings UI to Streamer.bot, letting you customize triggers and parameters through an intuitive panel. Easily adjust options, save profiles, and manage your automation without editing code.</p>
+    <div class="download-box">Download the DLL here:</div>
+    <a href="https://github.com/tawmae/tawmae/raw/refs/heads/main/dll/TawmaeUI.dll" class="download-button">Download DLL</a>
   </div>
   <div class="carousel-2">
     <div><img src="{{ site.baseurl }}/assets/dll-images/rotator-dll-1.webp" class="carousel-image"></div>
@@ -54,14 +58,9 @@ description: "The DLL for controlling time-based actions"
   </div>
 </div>
 <div class="section-divider"></div>
-<div class="description-container" style="justify-content:center; margin-bottom:50px;">
-  <div class="download-box">Download the DLL here:</div>
-  <a href="https://github.com/tawmae/tawmae/raw/refs/heads/main/dll/TawmaeUI.dll" class="download-button">Download DLL</a>
-</div>
-<div class="section-divider"></div>
 <div class="description-container">
   <div class="extension-title-text-box">
-    <p><span style="font-weight:bold; color:#fff;">1.</span> Download the DLL using the button above. If your browser blocks .dll downloads, allow them or scan the file with VirusTotal or your antivirus software.</p>
+    <p><span style="font-weight:bold; color:#fff;">1.</span> Click the download button above to get the DLL file. If your browser blocks .dll downloads, enable downloads or scan the file using VirusTotal or your antivirus.</p>
   </div>
   <img src="{{ site.baseurl }}/assets/dll-images/image-dll-1.webp" class="description-image">
 </div>
@@ -69,13 +68,14 @@ description: "The DLL for controlling time-based actions"
 <div class="description-container">
   <img src="{{ site.baseurl }}/assets/dll-images/image-dll-2.webp" class="description-image">
   <div class="extension-title-text-box">
-    <p><span style="font-weight:bold; color:#fff;">2.</span> Open your Streamer.bot directory and navigate to the <code>dlls</code> folder.</p>
+    <p><span style="font-weight:bold; color:#fff;">2.</span> Open your Streamer.bot installation folder and locate the <code>dlls</code> directory.</p>
   </div>
 </div>
 <div class="section-divider"></div>
 <div class="description-container">
-  <img src="{{ site.baseurl }}/assets/dll-images/image-dll-1.webp" class="description-image">
+  
   <div class="extension-title-text-box">
-    <p><span style="font-weight:bold; color:#fff;">3.</span> Copy the downloaded DLL into the <code>dlls</code> folder and restart Streamer.bot.</p>
+    <p><span style="font-weight:bold; color:#fff;">3.</span> Copy the downloaded DLL into the <code>dlls</code> folder, then restart Streamer.bot to activate the settings UI.</p>
   </div>
+  <img src="{{ site.baseurl }}/assets/dll-images/image-dll-3.webp" class="description-image">
 </div>
