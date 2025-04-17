@@ -4,30 +4,98 @@ title: "DLL | tawmae"
 description: "The dll that enabled the settings UI"
 ---
 <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/extension-page.css">
+<!----    TITLE   ------------------------------------------------------------------------------------------------------------------------------>
+<div class="extension-title">
+    <div class="extension-title-text-box">
+        <h1>TAWMAEUI DLL</h1>
+        <p>A custom trigger that allows you to fire actions at specific times.
+            <br><br>
+            Every day at 6 PM? Every thursday at 9 PM? Or just at midnight on January 1 2026? The choice is yours.
+            <br><span style="font-size: 3rem">clockUwu</span>
+        </p>
+    </div>
+    <div class="carousel-2">
+  <div>
+      <img src="{{ site.baseurl }}/assets/dll-images/rotator-dll-1.webp" class="carousel-image">
+  </div>
+  <div>
+      <img src="{{ site.baseurl }}/assets/dll-images/rotator-dll-2.webp" class="carousel-image">   
+  </div>
+      <div>
+      <img src="{{ site.baseurl }}/assets/dll-images/rotator-dll-3.webp" class="carousel-image">   
+  </div>
+</div>
+</div>
 
+<!----    ENTIRE ACCORDION THINGY WHATEVER IT'S CALLED    ------------------------------------------------------------------------------------------------------------------------------>
 
-<div class="description-container">
+    <!----    DLL DOWNLOAD    ------------------------------------------------------------------------------------------------------------------------------>
+    
+  
+
+    <!----    SETUP    ------------------------------------------------------------------------------------------------------------------------------>
+
+        <div class="accordion-header" id="setup" onclick="toggleAccordion('setup-acc')">
+            <span class="iconify title-icon" data-icon="line-md:cog-filled"></span> <span>SETUP</span>
+            <span class="iconify accordion-icon" data-icon="ic:baseline-keyboard-arrow-right"></span>
+        </div>
+        <div class="accordion-content" id="setup-acc">
+            <!---------------------------------------------->
+            <div class="description-container">
+                <div class="extension-title-text-box">
+                    <p><span style="font-weight: bold; color: #fff;">1.</span> Copy the <span
+                             style="font-weight: bold; color: #ffd95e;">Action Import</span> text from above into your
+                        clipboard.</p>
+                </div>
+                <img src="{{ site.baseurl }}/assets/setup/copy-string.webp" class="extension-image">
+
+            </div>
+            <!---------------------------------------------->
+            <div class="section-divider"></div>
+            <!--------------------------------------------->
+            <div class="description-container">
+                <img src="{{ site.baseurl }}/assets/setup/import-actions.webp" class="extension-image">
+                <div class="extension-title-text-box">
+                    <p><span style="font-weight: bold; color: #fff;">2.</span> In <span
+                             style="font-weight: bold; color: #ffd95e;">Streamer.bot</span>, click the <span
+                             style="font-weight: bold; color: #ffd95e;">Import</span> button at the top of the window.
+                        Paste the text into the <span  style="font-weight: bold; color: #ffd95e;">Import String</span>
+                        section and press <span  style="font-weight: bold; color: #ffd95e;">Import</span> at the bottom.
+                    </p>
+                </div>
+
+            </div>
+            <!---------------------------------------------->
+            <div class="section-divider"></div>
+            <!--------------------------------------------->
+            <div class="description-container">
 
                 <div class="extension-title-text-box">
-                    <h1>DLL</h1>
-        <p>All of my extensions benefit from a user friendly UI. So in order to use my extensions, all you need to do is to download my TawmaeUI.dll and place it into the dlls folder of your Streamer.bot directory.<br><br></p>
-
-                  
-            </p>
+                    <p>
+                    You can now start setting your times in the <span  style="font-weight: bold; color: #ffd95e;">1 - Settings</span> action. You will see a couple premade <span  style="font-weight: bold; color: #ffd95e;">Set temp global</span> subactions, some called <span  style="font-weight: bold; color: #ffd95e;">time_x</span> and some <span  style="font-weight: bold; color: #ffd95e;">date_x</span>. You will need those to specify your times.
+                    <br><br>
+                    If you want the trigger to fire on just a time on every day, then you just need a <span  style="font-weight: bold; color: #ffd95e;">time_x</span> variable in a <span  style="font-weight: bold; color: #ffd95e;">hh:mm:ss</span> format without a corresponding <span  style="font-weight: bold; color: #ffd95e;">date_x</span> variable. In the example below we have a <span  style="font-weight: bold; color: #ffd95e;">time_3</span> variable, but no <span  style="font-weight: bold; color: #ffd95e;">date_3</span>. This means the trigger will fire at 6 PM every day.
+                    <br><br>
+                    However if you want to fire the trigger on a very specific date, you need a corresponding <span  style="font-weight: bold; color: #ffd95e;">date_x</span> variable in a <span  style="font-weight: bold; color: #ffd95e;">MM/dd/yyyy</span> format. In the example below <span  style="font-weight: bold; color: #ffd95e;">time_2</span> has a corresponding variable <span  style="font-weight: bold; color: #ffd95e;">date_2</span> which means that the trigger will fire at 8 PM on December 24, 2025.
+                    <br><br>
+                    Firing the trigger on a specific day of the week works similar, but you type the day of the week instead of the date (in english), like Monday. In the example, time_1 and date_1 will make the trigger fire at midnight every Wednesday.
+                    <br><br>
+                    You can add as many times as you want, you can then just duplicate those variables and change the <span  style="font-weight: bold; color: #ffd95e;">_x</span> to the next higher number. <span  style="font-weight: bold; color: #ffd95e;">time_4</span>, <span  style="font-weight: bold; color: #ffd95e;">time_5</span>, <span  style="font-weight: bold; color: #ffd95e;">time_6</span> etc... To see how to use the trigger, check the <a href="https://tawmae.xyz/utility/time-trigger#custom-triggers" style="color: #ffd95e; font-weight: bold; text-decoration: none;"> CUSTOM TRIGGERS </a> tab. 
+                    <br>  
+                    <span  style="font-size: 0.8rem"><span  style="font-weight: bold; color: red;">Note:</span> After changing the times in the variables, you need to rightclick the <span  style="font-weight: bold; color: #ffd95e;">Test</span> trigger and hit <span  style="font-weight: bold; color: #ffd95e;">Test trigger</span>. Then it will apply.</span>
+                    <br>
+                    Then you're done!
+                    <span style="font-size: 1.5rem">Pog Clap</span>
+                    </p>
                 </div>
-                <img src="{{ site.baseurl }}/assets/page-design/settings_ui_dll_example.png" class="extension-image">
+                <img src="{{ site.baseurl }}/assets/setup/time-trigger/time-trigger-1.webp" class="extension-image">
             </div>
 
-<div class="description-container">
-                <img src="{{ site.baseurl }}/assets/page-design/settings_ui_dll_1.png" class="extension-image">
-                <div class="extension-title-text-box">
-                    
-        <p>Download the DLL from above and place it in the /dlls folder of your Streamer.bot directory.<br><br></p>
+            <!---------------------------------------------->
 
-                  
-            </p>
-                </div>
-                
-            </div>
+        </div>
+   
+
+    
 
 
