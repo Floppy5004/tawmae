@@ -11,7 +11,7 @@ og_image: "/assets/page-design/page-cards/time-trigger.webp"
     <div class="extension-title-text-box">
         <h1>TIME TRIGGER</h1>
         <p>
-            <span style="font-size: 1.5rem; font-color: red">++ THIS EXTENSION REQUIRES THE STREAMER.BOT ALPHA (1.0.0) ++</span>
+            <span style="font-size: 1.5rem; color: red"; font-weight: bold>++ THIS EXTENSION REQUIRES THE STREAMER.BOT ALPHA (1.0.0) ++</span>
             <br><br>
             A custom trigger that allows you to fire actions at specific times.
             <br><br>
@@ -71,7 +71,7 @@ og_image: "/assets/page-design/page-cards/time-trigger.webp"
                              style="font-weight: bold; color: #ffd95e;">/dlls</span> folder of your <span
                              style="font-weight: bold; color: #ffd95e;">Streamer.bot directory</span>. If you already have it from another extension of mine, you can skip this step.
                         <br><br>Download and detailed instructions <span
-                             style="font-weight: bold; color: #2281e9; font-size: 2rem;">here</span>.
+                             style="font-weight: bold; color: #2281e9; font-size: 1.2rem;">here</span>.
                     </p>
                 </div>
 
@@ -110,126 +110,23 @@ og_image: "/assets/page-design/page-cards/time-trigger.webp"
 
                 <div class="extension-title-text-box">
                     <p>
-                    You can now start setting your times in the <span  style="font-weight: bold; color: #ffd95e;">1 - Settings</span> action. You will see a couple premade <span  style="font-weight: bold; color: #ffd95e;">Set temp global</span> subactions, some called <span  style="font-weight: bold; color: #ffd95e;">time_x</span> and some <span  style="font-weight: bold; color: #ffd95e;">date_x</span>. You will need those to specify your times.
-                    <br><br>
-                    If you want the trigger to fire on just a time on every day, then you just need a <span  style="font-weight: bold; color: #ffd95e;">time_x</span> variable in a <span  style="font-weight: bold; color: #ffd95e;">hh:mm:ss</span> format without a corresponding <span  style="font-weight: bold; color: #ffd95e;">date_x</span> variable. In the example below we have a <span  style="font-weight: bold; color: #ffd95e;">time_3</span> variable, but no <span  style="font-weight: bold; color: #ffd95e;">date_3</span>. This means the trigger will fire at 6 PM every day.
-                    <br><br>
-                    However if you want to fire the trigger on a very specific date, you need a corresponding <span  style="font-weight: bold; color: #ffd95e;">date_x</span> variable in a <span  style="font-weight: bold; color: #ffd95e;">MM/dd/yyyy</span> format. In the example below <span  style="font-weight: bold; color: #ffd95e;">time_2</span> has a corresponding variable <span  style="font-weight: bold; color: #ffd95e;">date_2</span> which means that the trigger will fire at 8 PM on December 24, 2025.
-                    <br><br>
-                    Firing the trigger on a specific day of the week works similar, but you type the day of the week instead of the date (in english), like Monday. In the example, time_1 and date_1 will make the trigger fire at midnight every Wednesday.
-                    <br><br>
-                    You can add as many times as you want, you can then just duplicate those variables and change the <span  style="font-weight: bold; color: #ffd95e;">_x</span> to the next higher number. <span  style="font-weight: bold; color: #ffd95e;">time_4</span>, <span  style="font-weight: bold; color: #ffd95e;">time_5</span>, <span  style="font-weight: bold; color: #ffd95e;">time_6</span> etc... To see how to use the trigger, check the <a href="https://tawmae.xyz/utility/time-trigger#custom-triggers" style="color: #ffd95e; font-weight: bold; text-decoration: none;"> CUSTOM TRIGGERS </a> tab. 
-                    <br>  
-                    <span  style="font-size: 0.8rem"><span  style="font-weight: bold; color: red;">Note:</span> After changing the times in the variables, you need to rightclick the <span  style="font-weight: bold; color: #ffd95e;">Test</span> trigger and hit <span  style="font-weight: bold; color: #ffd95e;">Test trigger</span>. Then it will apply.</span>
+                    <span style="font-weight: bold; color: #fff;">5.</span> In the action <span
+                             style="font-weight: bold; color: #ffd95e;">[TIME TRIGGER] 1 - Settings</span>, rightclick the <span style="font-weight: bold; color: #ffd95e;">Test</span> trigger and hit <span style="font-weight: bold; color: #ffd95e;">Test Trigger</span> to open the Settings UI.
+                        <br><br>
+                        You can add your times and optionally dates in there and choose an action that should run when the time comes. The date conditions are optional, but you can choose to run an action every day of the time (then just leave all unchecked) or you can run the action at this day on a specific date, day of the week or xth day of the month.
                     <br>
                     Then you're done!
                     <span style="font-size: 1.5rem">Pog Clap</span>
                     </p>
                 </div>
-                <img src="{{ site.baseurl }}/assets/setup/time-trigger/time-trigger-1.webp" class="extension-image">
+                <img src="{{ site.baseurl }}/assets/setup/time-trigger/time-trigger-3.png" class="extension-image">
             </div>
 
             <!---------------------------------------------->
 
         </div>
     </div>
-
-    <!---------------------------------------------------------------------------------------------------------------------------------->
-
-    <div class="accordion-divider"></div>
-     <!----    CUSTOM TRIGGERS    ------------------------------------------------------------------------------------------------------------------------------>
-    <div class="accordion-item">
-        <div class="accordion-header" id="custom-triggers" onclick="toggleAccordion('custom-triggers-acc')">
-            <span class="iconify title-icon" data-icon="line-md:bell-alert"></span>
-            <span>CUSTOM TRIGGERS</span>
-            <span class="iconify accordion-icon" data-icon="ic:baseline-keyboard-arrow-right"></span>
-        </div>
-        <div class="accordion-content" id="custom-triggers-acc">
-            <div class="extension-title-text-box-long">
-            <p>Under <span style="font-weight: bold; color: #ffd95e;">Custom -> TIME TRIGGER</span> you will be able
-                to find a trigger that fires for every specified time.</p>
-            </div>
-            <!--------------------------------->
-
-            <img src="{{ site.baseurl }}/assets/custom-triggers/time-trigger-0.webp" class="extension-image">
-            <!--------------------------------->
-            <p><br></p>
-            <!--------------------------------->
-            <div class="extension-title-text-box-long">
-                <p style="font-weight: bold; font-size: 1.6rem; color: #4b6aa1;">TIME TRIGGER</p>
-                <p>Fires on all of your specified times.</p>
-                <p style="font-weight: bold;">Available variables:</p>
-                <ul style="list-style-position: inside; padding-left: 0; text-align: left;">
-                    <li>
-                        <span style="font-weight: bold; color: #ffd95e;">timeOnly</span>
-                        <span
-                            style="background-color: #fff; color: black; padding: 0 5px; opacity: 0.4; font-size: 0.7rem;">(bool)</span>
-                        - An indicator whether it's a time-only trigger (that triggers on that time every day) or not. <span style="font-weight: bold; color: #ffd95e;">True</span> if yes, <span style="font-weight: bold; color: #ffd95e;">False</span> if no.
-                      
-                    </li>
-                    <li>
-                        <span style="font-weight: bold; color: #ffd95e;">timeTrigger</span>
-                        <span
-                            style="background-color: #fff; color: black; padding: 0 5px; opacity: 0.4; font-size: 0.7rem;">(string)</span>
-                        - The actual time that has been set. It has different formats, depending what time you have specified.
-                        <br><br>
-                        If it was just a time, so an every-day trigger, then it will just have the timestamp in a <span style="font-weight: bold; color: #ffd95e;">hh:mm:ss</span> format, for example <span style="font-weight: bold; color: #ffd95e;">18:30:00</span>.
-                        <img src="{{ site.baseurl }}/assets/custom-triggers/time-trigger-1.webp" class="extension-image style="align-self: start">
-                      <br><br>
-                      If it was a time and a specific date, it will be in a <span style="font-weight: bold; color: #ffd95e;">MM/dd/yyyy hh:mm:ss</span>.
-                      <img src="{{ site.baseurl }}/assets/custom-triggers/time-trigger-2.webp" class="extension-image style="align-self: start">
-                      <br><br>
-                      If it was a time and a day of the week, it will have the format <span style="font-weight: bold; color: #ffd95e;">Weekday hh:mm:ss</span>, for example <span style="font-weight: bold; color: #ffd95e;">Wednesday 00:00:00</span>. The day of the week will always be in english.<br>
-                      <img src="{{ site.baseurl }}/assets/custom-triggers/time-trigger-3.webp" class="extension-image style="align-self: start">
-                    </li>
-                  
-                </ul>
-            </div>
-
-            <!---------------------------------------------->
-
-        </div>
-    </div>
-    <!---------------------------------------------------------------------------------------------------------------------------------->
-   
-    <div class="accordion-divider"></div>
-     <!----    FAQ    ------------------------------------------------------------------------------------------------------------------------------>
-    <div class="accordion-item">
-        <div class="accordion-header" id="faq" onclick="toggleAccordion('faq-acc')">
-            <span class="iconify title-icon" data-icon="line-md:question-square"></span>
-            <span>FAQ & EXAMPLES</span>
-            <span class="iconify accordion-icon" data-icon="ic:baseline-keyboard-arrow-right"></span>
-        </div>
-        <div class="accordion-content" id="faq-acc">
-            <!--------------------------------->
-            <div class="extension-title-text-box-long">
-                <h3> <span style="font-weight: bold; color: #fff">Example:</span></h3>
-                <p> Here are some examples on how to send a Twitch message for specific times. But as mentioned in Custom Triggers above, if you use dates, make sure to try it out with today's date first and check the action history on what date format your system is using.</p>
-                <br><br>
-                <h3>Main action</h3>
-                <p>This is how my main action looks like. So we have one time set up for midnight every Wednesday, one for 8 PM on christmas eve 2025 and one for 6 PM every day.</p>
-                <br>
-                <img src="{{ site.baseurl }}/assets/custom-triggers/time-trigger-5.webp" class="extension-image">
-                <br><br>
-                <h3>Triggering for <span style="font-weight: bold; color: #ffd95e;">Wednesday 00:00:00</span></h3>
-                <br>
-                <img src="{{ site.baseurl }}/assets/custom-triggers/time-trigger-4.webp" class="extension-image">
-                <br><br>
-                <h3>Triggering for <span style="font-weight: bold; color: #ffd95e;">12/24/2025 20:00:00</span></h3>
-                <br>
-                <img src="{{ site.baseurl }}/assets/custom-triggers/time-trigger-6.webp" class="extension-image">
-                <br><br>
-                <h3>Triggering for <span style="font-weight: bold; color: #ffd95e;">18:00:00</span></h3>
-                <br>
-                <img src="{{ site.baseurl }}/assets/custom-triggers/time-trigger-7.webp" class="extension-image">
-                <br><br>
-                
-
-            </div>
-            <!--------------------------------->
-
-        </div>
-    </div>
+     
     <!---------------------------------------------------------------------------------------------------------------------------------->
     <div class="accordion-divider"></div>
     <!----    CHANGELOG    ------------------------------------------------------------------------------------------------------------------------------>
@@ -249,6 +146,12 @@ og_image: "/assets/page-design/page-cards/time-trigger.webp"
                     </tr>
                 </thead>
                 <tbody>
+                    <!---------------------------------------------->
+                    <tr>
+                        <td>April 21, 2025</td>
+                        <td>Overhaul for Streamer.bot 1.0.0</td>
+                        <td>1.1.0</td>
+                    </tr>
                     <!---------------------------------------------->
                     <tr>
                         <td>February 10, 2025</td>
