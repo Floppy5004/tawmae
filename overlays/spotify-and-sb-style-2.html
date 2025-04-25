@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SPOTIFY &amp; SB v2 Style 2 - 1.0.0</title>
+    <script src="https://unpkg.com/@streamerbot/client/dist/streamerbot-client.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons&amp;display=swap" rel="stylesheet" />
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            background: transparent;
+            overflow: hidden;
+            height: 100%;
+            width: 100%;
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            position: relative;
+            width: 300px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        .cover-blur,
+        .overlay-dark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .cover-blur {
+            background-size: cover;
+            background-position: center;
+            filter: brightness(0.6) blur(8px);
+            transform: scale(1.1);
+            z-index: 1;
+        }
+
+        .overlay-dark {
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2;
+        }
+
+        .content {
+            position: relative;
+            z-index: 3;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            color: #fff;
+            font-family: "Segoe UI", Roboto, Arial, sans-serif;
+        }
+
+        .cover-square {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            background-size: cover;
+            background-position: center;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .title {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin: 0;
+            text-align: center;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
+        }
+
+        .artist {
+            font-size: 1em;
+            opacity: 0.8;
+            margin: 6px 0 12px;
+            text-align: center;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
+        }
+
+        .progress-container {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .time {
+            font-size: 0.8em;
+            opacity: 0.8;
+            white-space: nowrap;
+        }
+
+        .progress-bar {
+            position: relative;
+            flex: 1;
+            height: 8px;
+            margin: 0 8px;
+        }
+
+        .track-line {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            transform: translateY(-50%);
+            display: none;
+            z-index: 2;
+        }
+
+        .track-fill {
+            display: none;
+        }
+
+        .visualizer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .visualizer .bar {
+            width: 2px;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 1px;
+            transform-origin: center center;
+            transform: scaleY(0);
+            transition: transform 0.5s ease-in-out, background 0.2s ease-in-out;
+        }
+
+        .knob {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 12px;
+            height: 12px;
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+            transform: translate(-50%, -50%);
+            transition: left 0.1s linear;
+            z-index: 3;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 12px;
+        }
+
+        .controls .material-icons {
+            font-size: 24px;
+            opacity: 0.8;
+        }
+
+        #shuffleIcon,
+        #repeatIcon {
+            opacity: 0.3;
+            transition: opacity 0.2s ease;
+        }
+
+        .active {
+            opacity: 1 !important;
+        }
+
+        .footer {
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+
+        .requester {
+            display: flex;
+            align-items: center;
+            font-size: 0.75em;
+            opacity: 0.7;
+        }
+
+        .requester img {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin-right: 6px;
+        }
+
+        .volume {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+        }
+
+        .volume .material-icons {
+            font-size: 20px;
+            opacity: 0.8;
+            margin-right: 4px;
+        }
+
+        .volume-bar {
+            width: 70px;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .volume-fill {
+            width: 0%;
+            height: 100%;
+            background: #fff;
+            transition: width 0.5s ease;
+        }
+
+        body.hide .container {
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        .dcbanner {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            background: rgba(255, 0, 0, 0.7);
+            color: #fff;
+            padding: 6px 0;
+            font-family: "Segoe UI", Roboto, Arial, sans-serif;
+            font-size: 0.9em;
+            z-index: 100;
+            display: none;
+        }
+
+        .dcbanner.show {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div id="dcbanner" class="dcbanner">Streamer.bot WebSocket Server not connected.</div>
+        <div class="cover-blur" id="coverBg"></div>
+        <div class="overlay-dark"></div>
+        <div class="content">
+            <div class="cover-square" id="coverSquare"></div>
+            <h2 class="title" id="songTitle">Song Title</h2>
+            <p class="artist" id="songArtist">Artist Name</p>
+            <div class="progress-container">
+                <span class="time current-time" id="currentTime">0:00</span>
+                <div class="progress-bar">
+                    <div class="track-line" id="trackLine"></div>
+                    <div class="visualizer"></div>
+                    <div class="track-fill" id="trackFill"></div>
+                    <div class="knob" id="knob"></div>
+                </div>
+                <span class="time total-time" id="totalTime">0:00</span>
+            </div>
+            <div class="controls">
+                <span class="material-icons" id="shuffleIcon">shuffle</span>
+                <span class="material-icons">skip_previous</span>
+                <span class="material-icons" id="playPauseIcon">pause</span>
+                <span class="material-icons">skip_next</span>
+                <span class="material-icons" id="repeatIcon">repeat</span>
+            </div>
+            <div class="footer">
+                <div class="requester" id="requesterInfo" style="display: none;">
+                    <img id="requesterAvatar" src="" alt="Avatar" />
+                    <span id="requesterName"></span>
+                </div>
+                <div class="volume" id="volumeContainer">
+                    <span class="material-icons">volume_up</span>
+                    <div class="volume-bar">
+                        <div class="volume-fill"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function formatTime(ms) {
+            const t = Math.floor(ms / 1000);
+            const m = Math.floor(t / 60);
+            const s = t % 60;
+            return m + ":" + (s < 10 ? "0" : "") + s;
+        }
+
+        function sanitizeText(str) {
+            let t = str.replace(/\s*\([^)]*\)/g, "")
+                       .replace(/\s*-.*$/, "")
+                       .trim();
+            return t.length <= 25
+                ? t
+                : t.slice(0, 25).replace(/\s+\S*$/, "") + " (...)";
+        }
+
+        function sanitizeArtists(str) {
+            const list = str.split(",").map(s => s.trim());
+            return list.length <= 3
+                ? list.join(", ")
+                : list.slice(0, 3).join(", ") + " (...)";
+        }
+
+        const params = new URLSearchParams(location.search);
+        const address = params.get("address") || "127.0.0.1";
+        const port = parseInt(params.get("port") || "8080", 10);
+        const password = params.get("password") || "";
+        const dcbanner = document.getElementById("dcbanner");
+        const coverBg = document.getElementById("coverBg");
+        const coverSquare = document.getElementById("coverSquare");
+        const titleEl = document.getElementById("songTitle");
+        const artistEl = document.getElementById("songArtist");
+        const curEl = document.getElementById("currentTime");
+        const totEl = document.getElementById("totalTime");
+        const trackFill = document.getElementById("trackFill");
+        const knob = document.getElementById("knob");
+        const volFill = document.querySelector(".volume-fill");
+        const playIcon = document.getElementById("playPauseIcon");
+        const shuffleIcon = document.getElementById("shuffleIcon");
+        const repeatIcon = document.getElementById("repeatIcon");
+        const reqInfo = document.getElementById("requesterInfo");
+        const reqName = document.getElementById("requesterName");
+        const reqAv = document.getElementById("requesterAvatar");
+        const trackLine = document.getElementById("trackLine");
+
+        let lastProgress = 0;
+        let duration = 0;
+        let lastUpdate = 0;
+        let animReq = null;
+        let vizInterval = null;
+
+        const visualizer = document.querySelector(".visualizer");
+        for (let i = 0; i < 30; i++) {
+            const bar = document.createElement("div");
+            bar.className = "bar";
+            visualizer.appendChild(bar);
+        }
+
+        function updateBars() {
+            const bars = document.querySelectorAll(".visualizer .bar");
+            const knobLeft = parseFloat(knob.style.left) || 0;
+            const total = bars.length;
+            bars.forEach((bar, i) => {
+                const v = Math.random() * 1.5 + 0.2;
+                bar.style.transform = `scaleY(${v})`;
+                const pct = (i / (total - 1)) * 100;
+                bar.style.background = pct <= knobLeft
+                    ? "rgba(255,255,255,0.8)"
+                    : "rgba(255,255,255,0.3)";
+            });
+        }
+
+        function startVisualizer() {
+            if (vizInterval) return;
+            updateBars();
+            vizInterval = setInterval(updateBars, 200);
+        }
+
+        function stopVisualizer() {
+            clearInterval(vizInterval);
+            vizInterval = null;
+            document.querySelectorAll(".visualizer .bar").forEach(bar => {
+                bar.style.transform = "scaleY(0)";
+            });
+        }
+
+        function showOverlay() {
+            document.body.classList.remove("hide");
+        }
+
+        function hideOverlay() {
+            document.body.classList.add("hide");
+        }
+
+        function showDisconnectBanner() {
+            dcbanner.classList.add("show");
+            cancelAnimationFrame(animReq);
+            playIcon.textContent = "play_arrow";
+        }
+
+        function hideDisconnectBanner() {
+            dcbanner.classList.remove("show");
+        }
+
+        function animate(isPlaying) {
+            if (!isPlaying) return;
+
+            const now = performance.now();
+            const elapsed = now - lastUpdate;
+            const current = Math.min(lastProgress + elapsed, duration);
+
+            curEl.textContent = formatTime(Math.round(current));
+
+            const pct = duration > 0
+                ? (current / duration) * 100
+                : 0;
+
+            knob.style.left = pct + "%";
+            animReq = requestAnimationFrame(() => animate(true));
+        }
+
+        function datenDings(data) {
+            const s = data.songInfo;
+
+            hideDisconnectBanner();
+            showOverlay();
+
+            coverBg.style.backgroundImage = `url('${s.coverImageUrl}')`;
+            coverSquare.style.backgroundImage = `url('${s.coverImageUrl}')`;
+
+            titleEl.textContent = sanitizeText(s.trackName);
+            artistEl.textContent = sanitizeArtists(s.artists);
+            playIcon.textContent = s.isPlaying ? "pause" : "play_arrow";
+            volFill.style.width = `${Math.max(0, Math.min(s.volume_percent || 0, 100))}%`;
+
+            shuffleIcon.classList.toggle("active", !!s.shuffle_state);
+
+            repeatIcon.textContent = s.repeat_state === "track"
+                ? "repeat_one"
+                : "repeat";
+            repeatIcon.classList.toggle("active", s.repeat_state !== "off");
+
+            if (s.isRequested && s.user) {
+                reqName.textContent = "requested by " + s.user;
+                reqAv.src = s.userProfileImageUrl || "";
+                reqAv.style.display = s.userProfileImageUrl ? "block" : "none";
+                reqInfo.style.display = "flex";
+            } else {
+                reqInfo.style.display = "none";
+            }
+
+            cancelAnimationFrame(animReq);
+
+            lastProgress = s.progressMs || 0;
+            duration = s.durationMs || 0;
+            lastUpdate = performance.now();
+
+            knob.style.transition = "left 0.1s linear";
+            totEl.textContent = formatTime(s.durationMs);
+
+            if (s.isPlaying) {
+                startVisualizer();
+                trackLine.style.display = "none";
+            } else {
+                stopVisualizer();
+                const pctStopped = duration > 0
+                    ? (lastProgress / duration) * 100
+                    : 0;
+                trackLine.style.display = "block";
+                trackLine.style.background = `linear-gradient(to right, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.8) ${pctStopped}%, rgba(255,255,255,0.3) ${pctStopped}%, rgba(255,255,255,0.3) 100%)`;
+            }
+
+            animate(s.isPlaying);
+        }
+
+        const client = new StreamerbotClient({
+            address,
+            port,
+            password,
+            endpoint: "/",
+            autoReconnect: true,
+            immediate: true,
+            onConnect: () => {
+                hideDisconnectBanner();
+                showOverlay();
+            },
+            onDisconnect: () => {
+                showDisconnectBanner();
+            },
+            onError: () => {
+                showDisconnectBanner();
+            }
+        });
+
+        client.on("Misc.GlobalVariableUpdated", ({ data }) => {
+            if (data.name === "tawmae_SPOTIFY_AND_SB_INFO") {
+                try {
+                    const v = typeof data.newValue === "string"
+                        ? JSON.parse(data.newValue)
+                        : data.newValue;
+                    datenDings(v);
+                } catch (error) {}
+            }
+        });
+    </script>
+</body>
+
+</html>
