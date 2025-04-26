@@ -126,7 +126,10 @@ document.addEventListener("DOMContentLoaded", function () {
         loadImportString("/action-imports/quick-maths.txt");
     } else if (currentPage.includes("stardew-valley")) {
         loadImportString("/action-imports/stardew-valley.txt");
+    } else if (currentPage.includes("spotify-and-sb-legacy")) {
+        loadImportString("/action-imports/spotify-and-sb-legacy.txt");
     }
+    
 });
 
 // ====================================================================================================================
