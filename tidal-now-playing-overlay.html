@@ -2,12 +2,13 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <title>TIDAL Now Playing Overlay</title>
+  <title>TIDAL Now-Playing Overlay</title>
   <style>
-    body { background:#1a1a1a; color:#eee; font-family:sans-serif; text-align:center; }
-    #song   { font-size:1.6rem; margin-top:20px; }
-    #artist { font-size:1.2rem; color:#bdbdbd; }
-    #progress{ font-size:1rem; color:#9a9a9a; }
+    body      { margin:0; background:#1a1a1a; color:#eee;
+                font-family:sans-serif; text-align:center; }
+    #song     { font-size:1.6rem; margin-top:1.2rem; }
+    #artist   { font-size:1.25rem; color:#bdbdbd; }
+    #progress { font-size:1rem;  color:#9a9a9a; }
   </style>
 </head>
 <body>
@@ -16,95 +17,111 @@
   <div id="artist">–</div>
   <div id="progress">–</div>
 
-  <script>
-  (async () => {
-    const qs = new URLSearchParams(location.search);
-    const clientId     = qs.get('client_id')     || '';
-    const clientSecret = qs.get('client_secret') || '';
-    const code         = qs.get('code');
-    const scopeMissing = !clientId || !clientSecret;
+<script>
+(async () => {
+  /* ─────────────────────────────────────────────
+     1. Essentials aus URL + sessionStorage holen
+  ───────────────────────────────────────────────*/
+  const qs           = new URLSearchParams(location.search);
+  const code         = qs.get('code');                // ?code=...
+  const clientId     = sessionStorage.getItem('tidal_cid');
+  const codeVerifier = sessionStorage.getItem('tidal_cv');
 
-    const info = (msg) => { document.getElementById('song').innerText = msg; };
+  const info = (txt) => (document.getElementById('song').innerText = txt);
 
-    if (scopeMissing) {
-      info('Client-ID / Secret fehlen in der URL!');
-      return;
-    }
-    if (!code) {               // ruft jemand das Overlay ohne Auth-Code auf?
-      info('Kein Auth-Code – bitte erst über den Generator anmelden.');
-      return;
-    }
+  if (!clientId || !codeVerifier) {
+    info('Generator nicht vorher ausgeführt – keine PKCE-Daten gefunden!');
+    console.warn('clientId oder codeVerifier fehlen in sessionStorage');
+    return;
+  }
+  if (!code) {
+    info('Kein Auth-Code – starte das Overlay über den Generator-Flow.');
+    return;
+  }
 
-    // Redirect-URI = eigene Seite ohne Query/Hash
-    const redirectUri = location.origin + location.pathname;
+  /* ─────────────────────────────────────────────
+     2. Access- & Refresh-Token holen
+  ───────────────────────────────────────────────*/
+  const redirectUri = location.origin + location.pathname;
 
-    // Token-Fetch-Helper
-    async function tokenRequest(bodyObj) {
-      const res = await fetch('https://auth.tidal.com/v1/oauth2/token', {
-        method:'POST',
-        headers:{'Content-Type':'application/x-www-form-urlencoded'},
-        body: new URLSearchParams(bodyObj)
-      });
-      if (!res.ok) throw new Error(`Token-Request-Fehler: ${res.status}`);
-      return await res.json();
-    }
+  async function tokenReq(body) {
+    const resp = await fetch('https://auth.tidal.com/v1/oauth2/token', {
+      method : 'POST',
+      headers: { 'Content-Type':'application/x-www-form-urlencoded' },
+      body   : new URLSearchParams(body)
+    });
+    if (!resp.ok) throw new Error(`Token-Fehler ${resp.status}`);
+    return resp.json();
+  }
 
-    let accessToken, refreshToken, expiresAt;
+  let accessToken, refreshToken, expiresAt;
 
+  try {
+    const t = await tokenReq({
+      grant_type   : 'authorization_code',
+      code,
+      code_verifier: codeVerifier,
+      redirect_uri : redirectUri,
+      client_id    : clientId
+    });
+    accessToken  = t.access_token;
+    refreshToken = t.refresh_token;
+    expiresAt    = Date.now() + t.expires_in * 1000;
+  } catch (e) {
+    console.error(e);
+    info('Token-Tausch fehlgeschlagen.');
+    return;
+  }
+
+  /* ─────────────────────────────────────────────
+     3. Helfer: Token refreshen, Track abrufen
+  ───────────────────────────────────────────────*/
+  async function refreshIfNeeded() {
+    if (Date.now() < expiresAt - 60000) return;   // > 60 s übrig
     try {
-      const tok = await tokenRequest({
-        grant_type:'authorization_code',
-        code,
-        redirect_uri:redirectUri,
-        client_id:clientId,
-        client_secret:clientSecret
+      const t = await tokenReq({
+        grant_type   : 'refresh_token',
+        refresh_token: refreshToken,
+        client_id    : clientId
       });
-      accessToken = tok.access_token;
-      refreshToken= tok.refresh_token;
-      expiresAt   = Date.now() + tok.expires_in*1000;
-    } catch(e) { console.error(e); info('Token-Tausch fehlgeschlagen.'); return; }
-
-    async function refreshIfNeeded() {
-      if (Date.now() < expiresAt - 60000) return;  // >60 s übrig
-      try {
-        const tok = await tokenRequest({
-          grant_type:'refresh_token',
-          refresh_token:refreshToken,
-          client_id:clientId,
-          client_secret:clientSecret
-        });
-        accessToken = tok.access_token;
-        if (tok.refresh_token) refreshToken = tok.refresh_token;
-        expiresAt = Date.now() + tok.expires_in*1000;
-      } catch(e){ console.error('Refresh-Fehler',e); }
+      accessToken  = t.access_token;
+      if (t.refresh_token) refreshToken = t.refresh_token;
+      expiresAt    = Date.now() + t.expires_in * 1000;
+    } catch (e) {
+      console.error('Refresh-Fehler', e);
     }
+  }
 
-    async function fetchNowPlaying() {
-      await refreshIfNeeded();
-      try {
-        const r = await fetch('https://api.tidalhifi.com/v1/me/player/currently-playing', {
-          headers:{Authorization:'Bearer '+accessToken}
-        });
-        if (r.status === 401){ await refreshIfNeeded(); return; }
-        if (!r.ok) return;
+  async function updateNowPlaying() {
+    await refreshIfNeeded();
+    try {
+      const r = await fetch(
+        'https://api.tidalhifi.com/v1/me/player/currently-playing',
+        { headers:{ Authorization:`Bearer ${accessToken}` } }
+      );
+      if (r.status === 401) { await refreshIfNeeded(); return; }
+      if (!r.ok) { console.warn('API-Status', r.status); return; }
 
-        const d = await r.json();
-        const title  = d.item?.title  || d.item?.name   || '–';
-        const artist = d.item?.artist?.name || d.item?.artists?.[0]?.name || '–';
-        const progMs = d.progress_ms || d.position || 0;
-        const s = Math.floor(progMs/1000);
-        const m = Math.floor(s/60);
+      const d = await r.json();
+      const title  = d.item?.title  || d.item?.name   || '–';
+      const artist = d.item?.artist?.name
+                  || d.item?.artists?.[0]?.name       || '–';
+      const posMs  = d.progress_ms || d.position      || 0;
+      const mm = Math.floor(posMs/60000);
+      const ss = String(Math.floor(posMs/1000)%60).padStart(2,'0');
 
-        document.getElementById('song').innerText   = title;
-        document.getElementById('artist').innerText = artist;
-        document.getElementById('progress').innerText =
-          `${m}:${String(s%60).padStart(2,'0')}`;
-      } catch(e){ console.error(e); }
-    }
+      document.getElementById('song'    ).textContent = title;
+      document.getElementById('artist'  ).textContent = artist;
+      document.getElementById('progress').textContent = `${mm}:${ss}`;
+    } catch (e) { console.error(e); }
+  }
 
-    fetchNowPlaying();
-    setInterval(fetchNowPlaying, 5000);
-  })();
-  </script>
+  /* ─────────────────────────────────────────────
+     4. Start!
+  ───────────────────────────────────────────────*/
+  updateNowPlaying();
+  setInterval(updateNowPlaying, 5000);
+})();
+</script>
 </body>
 </html>
