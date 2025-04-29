@@ -27,18 +27,18 @@ og_image: "/assets/page-design/page-cards/spotify-and-sb.webp"
     </div>
     <div class="carousel-2">
   <div>
-      <img src="{{ site.baseurl }}/assets/covers/spotify-and-sb.webp" class="carousel-image">
+      <img src="{{ site.baseurl }}/assets/covers/spotify-and-sb-1.gif" class="carousel-image">
   </div>
   <div>
-      <img src="{{ site.baseurl }}/assets/covers/spotify-and-sb-2.webp" class="carousel-image">
+      <img src="{{ site.baseurl }}/assets/covers/spotify-and-sb-2.gif" class="carousel-image">
     
   </div>
   <div>
-      <img src="{{ site.baseurl }}/assets/covers/spotify-and-sb-3.webp" class="carousel-image">
+      <img src="{{ site.baseurl }}/assets/covers/spotify-and-sb-3.gif" class="carousel-image">
     
   </div>
   <div>
-      <img src="{{ site.baseurl }}/assets/covers/spotify-and-sb-4.webp" class="carousel-image">
+      <img src="{{ site.baseurl }}/assets/covers/spotify-and-sb-4.png" class="carousel-image">
     
   </div>
 </div>
@@ -487,188 +487,35 @@ og_image: "/assets/page-design/page-cards/spotify-and-sb.webp"
     <div class="accordion-divider"></div>
 
 
-    <!----    OBS WIDGET    ------------------------------------------------------------------------------------------------------------------------------>
+   <!----    OBS WIDGET    ------------------------------------------------------------------------------------------------------------------------------>
     <div class="accordion-item">
         <div class="accordion-header" id="obs-widget" onclick="toggleAccordion('obs-widget-acc')">
-            <span class="iconify title-icon" data-icon="line-md:text-box"></span> <span>OBS WIDGET</span>
+            <span class="iconify title-icon" data-icon="line-md:text-box"></span> <span>OBS OVERLAY</span>
             <span class="iconify accordion-icon" data-icon="ic:baseline-keyboard-arrow-right"></span>
         </div>
         <div class="accordion-content" id="obs-widget-acc">
 
             <!---------------------------------------------->
 
-            <img src="{{ site.baseurl }}/assets/setup/spotify-and-sb/spotify-and-sb-obs-widget.gif" class="extension-image">
+            <img src="{{ site.baseurl }}/assets/setup/spotify-and-sb/spotify-and-sb-overlay.png" class="extension-image">
             <!---------------------------------------------->
             <p><br><br></p>
             <!---------------------------------------------->
-            <div id="browser-source-url-acc">
-                <div class="copy-box">
-                    <span class="copy-text" id="base64-string"
-                        data-copy-text="https://tawmae.xyz/overlays/spotify-and-sb.html">
-                        https://tawmae.xyz/overlays/spotify-and-sb.html
-                    </span>
-                    <button class="copy-btn"
-                        onclick="copyURLToClipboard('https://tawmae.xyz/overlays/spotify-and-sb.html')">
-                        <span class="iconify" data-icon="material-symbols:content-copy-outline-sharp"></span> Copy
-                    </button>
-                </div>
-            </div>
-
-            <!---------------------------------------------->
-
-            <p><br></p>
-
-            <!---------------------------------------------->
-
             <div class="extension-title-text-box-long">
-                <h3> <span style="font-weight: bold; color: #fff">How can I use the widget?</span></h3>
-                <p>Copy the URL from above and add it as a <span style="font-weight: bold; color: #ffd95e;">Browser Source</span> into your OBS. Make sure your <span style="font-weight: bold; color: #ffd95e;">Websocket Server</span>
-                    in the <span style="font-weight: bold; color: #ffd95e;">Servers/Clients -> WebSocket Server</span> tab is enabled and set to <span style="font-weight: bold; color: #ffd95e;">127.0.0.1</span> and <span style="font-weight: bold; color: #ffd95e;">8080</span>. <br><br>Here you can check in real-time if your Websocket server is up and running:<br> <iframe class="ws-iframe" src="{{ site.baseurl }}/assets/setup/websocket-connection-check.html" title="Streamer.bot Websocket Server Connection Check" scrolling="no"> </iframe><br><br>If you want to customize it, you can use the URL builder below.</span>
-                
-                    <br><br>
-                </p>
-                <h3> <span style="font-weight: bold; color: #fff">URL Builder:<span style="font-weight: bold; color: #ffd95e;"></h3>
-                    <p><a href="https://tawmae.xyz/url-builder/spotify-and-sb"
-                        class="link-preview" target="_blank">https://tawmae.xyz/url-builder/spotify-and-sb <span class="iconify title-icon" data-icon="rivet-icons:link-external" style="vertical-align: middle; margin-bottom: 3px"></span></a></span></span></p>
-                
-
+                <h3> <span style="font-weight: bold; color: #fff">How can I use the overlay?</span></h3>
+                <p>Enable the websocket server in Streamer.bot under <span style="font-weight: bold; color: #ffd95e;">Servers/Clients -> WebSocket Server</span> leave the <span style="font-weight: bold; color: #ffd95e;">Address</span> at  <span style="font-weight: bold; color: #ffd95e;">127.0.0.1</span>, the <span style="font-weight: bold; color: #ffd95e;">Port</span> at <span style="font-weight: bold; color: #ffd95e;">8080</span> and leave <span style="font-weight: bold; color: #ffd95e;">Enforce All Requests unchecked</span>. Otherwise use the URL params ?address, ?port or ?password to adjust to your needs.
                 <br><br>
-                <p>If you want to add them manually, the <span style="font-weight: bold; color: #ffd95e;">URL
-                        Parameters</span> are placed at the end of
-                    the
-                    URL. The first parameter is getting added with a <span
-                        style="background-color: #fff; color: black; padding: 0 5px; opacity: 0.45;">?</span>, every
-                    additional one with a <span
-                        style="background-color: #fff; color: black; padding: 0 5px; opacity: 0.45;">&</span>.<br><br>
+                After that, simply add one of the URLs, depending what style you want, as a browser source:
+                <br>
+                **Style 1:** <span style="font-weight: bold; color: #ffd95e;">www.tawmae.xyz/overlays/spotify-and-sb-style-1</span>
+                **Style 2:** <span style="font-weight: bold; color: #ffd95e;">www.tawmae.xyz/overlays/spotify-and-sb-style-2</span>
+                
                 </p>
 
+
             </div>
 
-            <!--------------------------------->
-            <p><br><br></p>
-
-
-            <!---------------------------------------------->
-            <div class="customization-text-container">
-                <div class="extension-title-text-box">
-                    <p>
-                        <span class="iconify title-icon" data-icon="ion:color-palette"></span>
-                        <span style="font-size: 1.1rem; color: #fff; font-weight: bold;">Background Color</span>
-                    </p>
-                    <p>
-                        Changes the background color of the background box. Supports hex colors, but then you need to
-                        replace the
-                        <span style="background-color: #fff; color: black; padding: 0 5px; opacity: 0.4;">#</span> with
-                        <span style="background-color: #fff; color: black; padding: 0 5px; opacity: 0.4;">%23</span>
-                    </p>
-                </div>
-                <div class="extension-title-text-box">
-                    <p><span style="color: #ffd95e; font-weight: bold;">backgroundcolor=pink</span></p>
-                    <p><br></p>
-                    <p><span style="color: #ffd95e; font-weight: bold;">backgroundcolor=%23ffc0cb</span></p>
-                </div>
-            </div>
-            <!---------------------------------------------->
-            <div class="customization-text-container">
-                <div class="extension-title-text-box">
-                    <p>
-                        <span class="iconify title-icon" data-icon="mdi:format-font"></span>
-                        <span style="font-size: 1.1rem; color: #fff; font-weight: bold;">Font</span>
-                    </p>
-                    <p>
-                        Changes the font used for the text. Supports standard and google fonts.
-                    </p>
-                </div>
-                <div class="extension-title-text-box">
-                    <p><span style="color: #ffd95e; font-weight: bold;">font=Arial</span></p>
-                    <p><br></p>
-                    <p><span style="color: #ffd95e; font-weight: bold;">font=Poppins</span></p>
-                </div>
-            </div>
-            <!---------------------------------------------->
-            <div class="customization-text-container">
-                <div class="extension-title-text-box">
-                    <p>
-                        <span class="iconify title-icon" data-icon="mdi:account"></span>
-                        <span style="font-size: 1.1rem; color: #fff; font-weight: bold;">Font Color</span>
-                    </p>
-                    <p>
-                        Changes the color of the font. Supports hex colors, but then you need to replace the
-                        <span style="background-color: #fff; color: black; padding: 0 5px; opacity: 0.4;">#</span> with
-                        <span style="background-color: #fff; color: black; padding: 0 5px; opacity: 0.4;">%23</span>
-                    </p>
-                </div>
-                <div class="extension-title-text-box">
-                    <p><span style="color: #ffd95e; font-weight: bold;">fontcolor=black</span></p>
-                    <p><br></p>
-                    <p><span style="color: #ffd95e; font-weight: bold;">fontcolor=%23000000</span></p>
-                </div>
-            </div>
-            <!---------------------------------------------->
-            <div class="customization-text-container">
-                <div class="extension-title-text-box">
-                    <p>
-                        <span class="iconify title-icon" data-icon="mdi:format-color-text"></span>
-                        <span style="font-size: 1.1rem; color: #fff; font-weight: bold;">Progress Bar Color</span>
-                    </p>
-                    <p>
-                        Changes the color of the progress bar. Supports hex colors, but then you need to replace the
-                        <span style="background-color: #fff; color: black; padding: 0 5px; opacity: 0.4;">#</span> with
-                        <span style="background-color: #fff; color: black; padding: 0 5px; opacity: 0.4;">%23</span>
-                    </p>
-                </div>
-                <div class="extension-title-text-box">
-                    <p><span style="color: #ffd95e; font-weight: bold;">progressbarcolor=pink</span></p>
-                    <p><br></p>
-                    <p><span style="color: #ffd95e; font-weight: bold;">progressbarcolor=%23ffc0cb</span></p>
-                </div>
-            </div>
-            <!---------------------------------------------->
-            <div class="customization-text-container">
-                <div class="extension-title-text-box">
-                    <p>
-                        <span class="iconify title-icon" data-icon="nrk:fullscreen-active"></span>
-                        <span style="font-size: 1.1rem; color: #fff; font-weight: bold;">Always On</span>
-                    </p>
-                    <p>
-                        You can make the overlay only show whenever a new song begins.
-                    </p>
-                </div>
-                <div class="extension-title-text-box">
-                    <p><span style="color: #ffd95e; font-weight: bold;">alwayson=false</span></p>
-                </div>
-            </div>
-            <!---------------------------------------------->
-            <div class="customization-text-container">
-                <div class="extension-title-text-box">
-                    <p>
-                        <span class="iconify title-icon" data-icon="material-symbols:progress-activity"></span>
-                        <span style="font-size: 1.1rem; color: #fff; font-weight: bold;">Progessbar Toggle</span>
-                    </p>
-                    <p>
-                        Removes the progress bar.
-                    </p>
-                </div>
-                <div class="extension-title-text-box">
-                    <p><span style="color: #ffd95e; font-weight: bold;">progressbar=false</span></p>
-                </div>
-            </div>
-            <!---------------------------------------------->
-            <div class="customization-text-container">
-                <div class="extension-title-text-box">
-                    <p>
-                        <span class="iconify title-icon" data-icon="mdi:circle-opacity"></span>
-                        <span style="font-size: 1.1rem; color: #fff; font-weight: bold;">Opacity</span>
-                    </p>
-                    <p>
-                        Changes the opacity of the background.
-                    </p>
-                </div>
-                <div class="extension-title-text-box">
-                    <p><span style="color: #ffd95e; font-weight: bold;">opacity=69</span></p>
-                </div>
-            </div>
-            <!---------------------------------------------->
+        
 
         </div>
     </div>
@@ -1057,6 +904,12 @@ og_image: "/assets/page-design/page-cards/spotify-and-sb.webp"
                     </tr>
                 </thead>
                 <tbody>
+                  <!---------------------------------------------->
+                     <tr>
+                        <td>April 29, 2025</td>
+                        <td>Added a new OBS overlay, so new parameters were required. Also added a couple extra variables for adding songrequests, like the %queuePosition% or %waitTimeString%. There is a version for Streamer.bot 1.0.0 already, so if you run that, go check it out.</td>
+                        <td>1.0.3</td>
+                    </tr>
                     <!---------------------------------------------->
                      <tr>
                         <td>February 09, 2025</td>
