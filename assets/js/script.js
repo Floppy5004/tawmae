@@ -31,7 +31,8 @@ const wordToEmojiMap = {
     "catBlush": "/assets/emotes/cat-blush.webp",
     "clockUwu": "/assets/emotes/clock-uwu.webp",
     "peepoLive": "/assets/emotes/peepo-live.webp",
-    "RIGGED": "/assets/emotes/rigged.webp"
+    "RIGGED": "/assets/emotes/rigged.webp",
+    "NarutoRun": "/assets/emotes/NarutoRun.webp"
 };
 
 function replacePlaceholdersWithEmojis(text) {
