@@ -130,6 +130,9 @@ document.addEventListener("DOMContentLoaded", function () {
         loadImportString("/action-imports/quick-maths.txt");
     } else if (currentPage.includes("stardew-valley")) {
         loadImportString("/action-imports/stardew-valley.txt");
+    }
+    else if (currentPage.includes("random-source-position")) {
+        loadImportString("/action-imports/random-source-position.txt");
     } 
     
 });
