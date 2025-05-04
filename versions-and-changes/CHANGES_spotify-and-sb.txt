@@ -1,2 +1,2 @@
 • Added a new OBS overlay, which is so much prettier! Go check it out :)
-• Added vars for wait time and queue position
+• Added requests via Soundcloud links
