@@ -178,7 +178,7 @@ document.addEventListener("DOMContentLoaded", function() {
         delay: [100, 50], 
     });
 
-    tippy('.kofi-button', {
+    tippy('.kofi-link', {
         content: 'Buy me an Iced Pumpkin Spice Latte',
         placement: 'bottom',
         animation: 'scale-subtle',
