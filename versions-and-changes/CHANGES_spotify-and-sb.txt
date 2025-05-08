@@ -1,2 +1,2 @@
 • Added a new OBS overlay, which is so much prettier! Go check it out :)
-• Added requests via Soundcloud links
+• Added options to remove/skip own requests
