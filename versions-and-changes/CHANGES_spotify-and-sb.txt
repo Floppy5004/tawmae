@@ -1,2 +1,3 @@
-• Added a new OBS overlay, which is so much prettier! Go check it out :)
+• New OBS overlay
 • Added options to remove/skip own requests
+• Queue Pos. bug fix
