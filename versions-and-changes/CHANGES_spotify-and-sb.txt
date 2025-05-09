@@ -1,3 +1,2 @@
-• New OBS overlay
-• Added options to remove/skip own requests
-• Queue Pos. bug fix
+• Added channel reward variables to the 'New Song' trigger
+• Auto-Refund channel points for skipping own songs
