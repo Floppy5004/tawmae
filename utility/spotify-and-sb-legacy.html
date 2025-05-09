@@ -685,6 +685,27 @@ og_image: "/assets/page-design/page-cards/spotify-and-sb.webp"
                             not
                             requested )</span>
                     </li>
+                  <li>
+                        <span style="font-weight: bold; color: #ffd95e;">isChannelReward</span>
+                        <span
+                            style="background-color: #fff; color: black; padding: 0 5px; opacity: 0.45;">(bool)</span>
+                        - indicator whether the request has been redeemed via channel point reward
+                    </li>
+                  <li>
+                        <span style="font-weight: bold; color: #ffd95e;">rewardId</span>
+                        <span
+                            style="background-color: #fff; color: black; padding: 0 5px; opacity: 0.45;">(string)</span>
+                        - the reward ID of the request<span
+                            style="background-color: #fff; color: black; padding: 0 5px; opacity: 0.45;">(null/empty not a channel point reward request )</span>
+                    </li>
+
+                  <li>
+                        <span style="font-weight: bold; color: #ffd95e;">redemptionId</span>
+                        <span
+                            style="background-color: #fff; color: black; padding: 0 5px; opacity: 0.45;">(string)</span>
+                        - the redemption ID of the request<span
+                            style="background-color: #fff; color: black; padding: 0 5px; opacity: 0.45;">(null/empty not a channel point reward request )</span>
+                    </li>
                 </ul>
             </div>
 
@@ -907,6 +928,12 @@ og_image: "/assets/page-design/page-cards/spotify-and-sb.webp"
                     </tr>
                 </thead>
                 <tbody>
+                  <!---------------------------------------------->
+                     <tr>
+                        <td>May 10, 2025</td>
+                        <td>Added channel reward variables to custom triggers, added auto-refund for channel point rewards if skipping own song.</td>
+                        <td>1.0.7</td>
+                    </tr>
                   <!---------------------------------------------->
                      <tr>
                         <td>May 08, 2025</td>
