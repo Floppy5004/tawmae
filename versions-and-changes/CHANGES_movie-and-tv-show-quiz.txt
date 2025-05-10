@@ -1,1 +1,2 @@
-• Release
+• Fixed a bug with titles that had two-digit numbers ending in 0
+• Additional debugging
