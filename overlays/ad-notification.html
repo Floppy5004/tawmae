@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AD NOTIFICATION - v.1.0.0 - tawmae.xyz</title>
+    <title>AD NOTIFICATION - v.1.0.1 - tawmae.xyz</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&display=swap" rel="stylesheet">
     <style>
         body {
@@ -30,6 +30,7 @@
             gap: 15px;
             overflow: hidden;
             animation: slideIn 0.6s ease-out forwards;
+            zoom: 150%;
         }
 
         .notification-title {
@@ -143,6 +144,8 @@
         const soundEnabled = urlParams.get("sound") === "true";
         const rawColor = urlParams.get("color") || "ffd700";
         const font = urlParams.get("font") || "Inter";
+        const address = urlParams.get("address") || "localhost";
+        const port = urlParams.get("port") || "8080";
         const audioCache = new Map();
         const notificationQueue = [];
         let isNotificationActive = false;
@@ -159,26 +162,18 @@
         document.body.style.fontFamily = font;
 
         function connectWebSocket() {
-            const ws = new WebSocket("ws://localhost:8080/");
+            const ws = new WebSocket(`ws://${address}:${port}/`);
             ws.onopen = () => {
                 ws.send(JSON.stringify({
                     request: "Subscribe",
-                    events: { Twitch: ["AdMidRoll", "AdRun"] },
+                    events: { Twitch: ["AdRun"] },
                     id: "adSubscription"
                 }));
             };
 
             ws.onmessage = (event) => {
                 const message = JSON.parse(event.data);
-                if (message.event?.type === "AdMidRoll") {
-                    enqueueNotification(
-                        "Ads Starting Soon",
-                        "Prepare for upcoming ads",
-                        message.data.warmupTime / 1000,
-                        "https://tawmae.github.io/overlays/ads_1.mp3",
-                        "https://raw.githubusercontent.com/tawmae/tawmae.github.io/refs/heads/main/overlays/ads_1.webp"
-                    );
-                } else if (message.event?.type === "AdRun") {
+                if (message.event?.type === "AdRun") {
                     enqueueNotification(
                         "Ads Running",
                         "Ads are currently in progress",
@@ -188,6 +183,7 @@
                     );
                 }
             };
+
 
             ws.onclose = () => setTimeout(connectWebSocket, 10000);
         }
