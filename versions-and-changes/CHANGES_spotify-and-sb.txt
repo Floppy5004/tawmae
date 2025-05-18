@@ -1,2 +1,1 @@
-• Added channel reward variables to the 'New Song' trigger
-• Auto-Refund channel points for skipping own songs
+• Fixed a bug with displaying the wrong waiting time duration for requests
