@@ -1,1 +1,2 @@
-• Fixed a bug with displaying the wrong waiting time duration for requests
+• Bugfix: wrong duration for requests
+• Added buttons to settings menu to create the OBS overlay
