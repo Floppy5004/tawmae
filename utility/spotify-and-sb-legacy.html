@@ -496,29 +496,19 @@ og_image: "/assets/page-design/page-cards/spotify-and-sb.webp"
         <div class="accordion-content" id="obs-widget-acc">
 
             <!---------------------------------------------->
-                        <img src="{{ site.baseurl }}/assets/setup/spotify-and-sb/spotify-and-sb-overlay.png" class="extension-image">
-            
+
+            <img src="{{ site.baseurl }}/assets/setup/spotify-and-sb/spotify-and-sb-overlay.png" class="extension-image">
             <!---------------------------------------------->
             <p><br><br></p>
             <!---------------------------------------------->
             <div class="extension-title-text-box-long">
                 <h3> <span style="font-weight: bold; color: #fff">How can I use the overlay?</span></h3>
-                <p>Enable the websocket server in Streamer.bot under <span style="font-weight: bold; color: #ffd95e;">Servers/Clients -> WebSocket Server</span> leave the <span style="font-weight: bold; color: #ffd95e;">Address</span> at  <span style="font-weight: bold; color: #ffd95e;">127.0.0.1</span>, the <span style="font-weight: bold; color: #ffd95e;">Port</span> at <span style="font-weight: bold; color: #ffd95e;">8080</span> and leave <span style="font-weight: bold; color: #ffd95e;">Enforce All Requests unchecked</span>. Otherwise use the URL params ?address, ?port or ?password to adjust to your needs.
-                <br><br>
-                After that, simply add one of the URLs, depending what style you want, as a browser source:
-                <br>
-                Style 1: <span style="font-weight: bold; color: #ffd95e;">www.tawmae.xyz/overlays/spotify-and-sb-style-1</span>
-                <br>
-                Style 2: <span style="font-weight: bold; color: #ffd95e;">www.tawmae.xyz/overlays/spotify-and-sb-style-2</span>
-                
+                <p>Open the Settings UI from the <span style="font-weight: bold; color: #ffd95e;">[SPOTIFY & SB] # 0 - Settings</span> action, scroll down to the  <span style="font-weight: bold; color: #ffd95e;">OBS Overlay</span> section and add the style you prefer. Make sure your OBS is connected.
                 </p>
-
 
             </div>
 
-                      <img src="{{ site.baseurl }}/assets/settings/spotify-and-sb/spotify-and-sb-overlay-styles.png" class="extension-image">
-
-        
+        <img src="{{ site.baseurl }}/assets/settings/spotify-and-sb/spotify-and-sb-4-legacy.png" class="settings-ui-image">
 
         </div>
     </div>
@@ -931,7 +921,7 @@ og_image: "/assets/page-design/page-cards/spotify-and-sb.webp"
                   <!---------------------------------------------->
                      <tr>
                         <td>May 18, 2025</td>
-                        <td>Fixed a bug that displayed the wrong waiting duration when multiple users requested songs.</td>
+                        <td>Fixed a bug that displayed the wrong waiting duration when multiple users requested songs; added buttons to the settings menu to automatically add the OBS overlays to your current scene.</td>
                         <td>1.0.8</td>
                     </tr>
                   <!---------------------------------------------->
