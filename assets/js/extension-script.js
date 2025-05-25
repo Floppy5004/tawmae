@@ -133,7 +133,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     else if (currentPage.includes("random-source-position")) {
         loadImportString("/action-imports/random-source-position.txt");
-    } 
+    }
+    else if (currentPage.includes("giphy-and-sb")) {
+        loadImportString("/action-imports/giphy-and-sb.txt");
+    }
     
 });
 
