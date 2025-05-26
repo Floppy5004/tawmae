@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>VERTICAL CHAT - v.1.0.2 - tawmae</title>
+    <title>VERTICAL CHAT - v.1.0.3 - tawmae</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap"
         rel="stylesheet">
     <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
@@ -389,20 +389,23 @@
                     el.style.transition = 'opacity 1s';
                     el.style.opacity = '0';
                     setTimeout(() => {
-                        let msgId = el.dataset.msgId;
-                        if (!msgId) {
-                            for (let [key, element] of messagesMap.entries()) {
-                                if (element === el) {
-                                    msgId = key;
-                                    break;
-                                }
-                            }
-                        }
+                        const msgId = el.dataset.msgId;
                         if (msgId && messagesMap.has(msgId)) {
                             removeMessageById(msgId);
                         } else if (el.parentNode) {
                             el.parentNode.removeChild(el);
                         }
+                        messageList.style.transition = 'none';
+                        const containerHeight = messagesContainer.clientHeight;
+                        const contentHeight = messageList.scrollHeight;
+                        const newOffset = Math.max(0, contentHeight - containerHeight);
+                        if (invert) {
+                            messageList.style.transform = `translateY(${newOffset}px)`;
+                        } else {
+                            messageList.style.transform = `translateY(-${newOffset}px)`;
+                        }
+                        offset = newOffset;
+                        messageList.style.transition = '';
                     }, 1000);
                 }, hideAfterSec * 1000);
             }
