@@ -403,6 +403,7 @@
                         } else if (el.parentNode) {
                             el.parentNode.removeChild(el);
                         }
+                        adjustOffset();
                     }, 1000);
                 }, hideAfterSec * 1000);
             }
