@@ -137,6 +137,9 @@ document.addEventListener("DOMContentLoaded", function () {
     else if (currentPage.includes("giphy-and-sb")) {
         loadImportString("/action-imports/giphy-and-sb.txt");
     }
+    else if (currentPage.includes("lurks-and-sb")) {
+        loadImportString("/action-imports/lurks-and-sb.txt");
+    }
     
 });
 
