@@ -108,8 +108,8 @@ document.addEventListener("DOMContentLoaded", function () {
         loadImportString("/action-imports/hugs.txt");
     } else if (currentPage.includes("live-trigger")) {
         loadImportString("/action-imports/live-trigger.txt");
-    } else if (currentPage.includes("lurks")) {
-        loadImportString("/action-imports/lurks.txt");
+    } else if (currentPage.includes("lurks-and-sb")) {
+        loadImportString("/action-imports/lurks-and-sb.txt");
     } else if (currentPage.includes("mod-tools")) {
         loadImportString("/action-imports/mod-tools.txt");
     } else if (currentPage.includes("raffle")) {
@@ -137,9 +137,7 @@ document.addEventListener("DOMContentLoaded", function () {
     else if (currentPage.includes("giphy-and-sb")) {
         loadImportString("/action-imports/giphy-and-sb.txt");
     }
-    else if (currentPage.includes("lurks-and-sb")) {
-        loadImportString("/action-imports/lurks-and-sb.txt");
-    }
+    
     
 });
 
