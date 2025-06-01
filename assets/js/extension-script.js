@@ -140,6 +140,9 @@ document.addEventListener("DOMContentLoaded", function () {
     else if (currentPage.includes("twitch-points")) {
         loadImportString("/action-imports/twitch-points.txt");
     }
+    else if (currentPage.includes("twitch-watchtime")) {
+        loadImportString("/action-imports/twitch-watchtime.txt");
+    }
     
     
 });
