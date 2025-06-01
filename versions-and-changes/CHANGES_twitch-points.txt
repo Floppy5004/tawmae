@@ -1,1 +1,1 @@
-• Fixed an issue with default values from message lists
+• Added extra Present Viewers checks on startup to avoid discrepancies
