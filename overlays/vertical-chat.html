@@ -563,28 +563,35 @@
                 unameSpan.style.color = displayColor;
                 header.appendChild(unameSpan);
                 if (showPronouns || showTimestamp) {
-                    if (showPronouns) {
-                        getPronouns(actualUsername).then(pronouns => {
-                            if (pronouns) {
-                                const pronounSpan = document.createElement('span');
-                                pronounSpan.classList.add('pronouns-box');
-                                pronounSpan.textContent = pronouns;
-                                header.appendChild(pronounSpan);
-                            }
-                            if (showTimestamp) {
-                                const ts = document.createElement('span');
-                                ts.classList.add('pronouns-box');
-                                ts.textContent = new Date().toLocaleTimeString('de-DE', { hour12: false });
-                                header.appendChild(ts);
-                            }
-                        });
-                    } else if (showTimestamp) {
-                        const ts = document.createElement('span');
-                        ts.classList.add('pronouns-box');
-                        ts.textContent = new Date().toLocaleTimeString('de-DE', { hour12: false });
-                        header.appendChild(ts);
-                    }
-                }
+    if (showPronouns) {
+        getPronouns(actualUsername).then(pronouns => {
+            if (pronouns) {
+                const pronounSpan = document.createElement('span');
+                pronounSpan.classList.add('pronouns-box');
+                pronounSpan.textContent = pronouns;
+                header.appendChild(pronounSpan);
+            }
+            if (showTimestamp) {
+                const ts = document.createElement('span');
+                ts.classList.add('pronouns-box');
+                ts.textContent = new Date().toLocaleTimeString(navigator.language, {
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+                header.appendChild(ts);
+            }
+        });
+    } else if (showTimestamp) {
+        const ts = document.createElement('span');
+        ts.classList.add('pronouns-box');
+        ts.textContent = new Date().toLocaleTimeString(navigator.language, {
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+        header.appendChild(ts);
+    }
+}
+
                 if (!hideBadges && isShared && sharedData && sharedData.primarySource === false) {
                     const sL = (sharedData.sourceRoom && sharedData.sourceRoom.login) ? sharedData.sourceRoom.login.toLowerCase() : null;
                     if (sL && showAvatars) {
