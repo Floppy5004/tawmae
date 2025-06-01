@@ -1,1 +1,1 @@
-• Added extra Present Viewers checks on startup to avoid discrepancies
+• Added a new game: Scratch Cards
