@@ -1,1 +1,1 @@
-• Added a persisted history to avoid duplicates accross sessions
+• Fixed an issue when guessing titles like '9-1-1: Lone Star'
