@@ -1,1 +1,1 @@
-• Added a new game: Scratch Cards
+• Fixed the progressbar for importing Firebot points not updating in realtime
