@@ -1,1 +1,1 @@
-• Fixed the progressbar for importing Firebot points not updating in realtime
+• Added 'Transfer Points' to the Advanced settings tab
