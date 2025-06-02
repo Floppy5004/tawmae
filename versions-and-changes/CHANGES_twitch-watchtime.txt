@@ -1,1 +1,1 @@
-• Fixed an issue when importing StreamElements points
+• Fixed an issue when importing StreamElements watchtime data
