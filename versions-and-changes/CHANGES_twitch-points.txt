@@ -1,1 +1,1 @@
-• Added 'Transfer Points' to the Advanced settings tab
+• Fixed an issue when targeting users with an @ upfront
