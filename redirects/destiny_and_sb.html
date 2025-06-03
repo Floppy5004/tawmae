@@ -5,7 +5,27 @@ description: "Redirect Page for the Streamer.bot Destiny integration"
 ---
 
 <div class="extension-title-text-box">
-                    <h1>CONNECTION SUCCESSFUL</h1>
-        <p>Your Destiny account has been connected to Streamer.bot :) You can close this page now.
-            </p>
-                </div>
+  <h1>CONNECTION SUCCESSFUL</h1>
+  <p>
+    Your Destiny account has been connected to Streamer.bot :) You can close this page now.
+  </p>
+  <p>
+    Copy the code:
+  </p>
+  <pre id="code" style="background: #f4f4f4; padding: 10px; border-radius: 4px; overflow-x: auto;"></pre>
+</div>
+
+<script>
+  (function() {
+    const params = new URLSearchParams(window.location.search);
+    const codeElem = document.getElementById('code');
+
+    if (params.has('code')) {
+      codeElem.textContent = params.get('code');
+    } else if (params.has('error')) {
+      codeElem.textContent = 'Fehler: ' + params.get('error');
+    } else {
+      codeElem.textContent = 'Kein Code gefunden.';
+    }
+  })();
+</script>
