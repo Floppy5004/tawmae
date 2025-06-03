@@ -312,7 +312,7 @@ og_image: "/assets/page-design/page-cards/spotify-and-sb.webp"
                                 style="color: #ffd95e;">[Playlist]</span></span></p>
                 </div>
                 <div class="extension-title-text-box">
-                    <p>Adds the current song to a specified playlist. Can be the playlist's name or its index number.
+                    <p>Adds the current song to a specified playlist. Can be the playlist's name or its index number. If nothing has been specified, it will add the song to the selected default playlist.
                     </p>
                 </div>
             </div>
@@ -991,6 +991,12 @@ og_image: "/assets/page-design/page-cards/spotify-and-sb.webp"
                     </tr>
                 </thead>
                 <tbody>
+                  <!---------------------------------------------->
+                     <tr>
+                        <td>June 03, 2025</td>
+                        <td>Added a 'default playlist' to the settings menu. Adding the current song via '!addSong' will now add to default playlist if nothing's been specified; Added a check if the added song is already in the playlist to avoid duplicates; allowing to enter Client ID and Secret without clicking 'Save' now</td>
+                        <td>1.2.5</td>
+                    </tr>
                   <!---------------------------------------------->
                      <tr>
                         <td>June 03, 2025</td>
