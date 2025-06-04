@@ -1,1 +1,1 @@
-• Fixed an issue when targeting users with an @ upfront
+• Added 'Validate Points' to the Settings UI's Advanced tab
