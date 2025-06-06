@@ -9,23 +9,13 @@ description: "Redirect Page for the Streamer.bot Destiny integration"
   <p>
     Your Destiny account has been connected to Streamer.bot :) You can close this page now.
   </p>
-  <p>
-    Copy the code:
-  </p>
-  <pre id="code" style="background: #f4f4f4; padding: 10px; border-radius: 4px; overflow-x: auto;"></pre>
 </div>
 
 <script>
-  (function() {
-    const params = new URLSearchParams(window.location.search);
-    const codeElem = document.getElementById('code');
-
-    if (params.has('code')) {
-      codeElem.textContent = params.get('code');
-    } else if (params.has('error')) {
-      codeElem.textContent = 'Fehler: ' + params.get('error');
-    } else {
-      codeElem.textContent = 'Kein Code gefunden.';
-    }
-  })();
+  const params = new URLSearchParams(window.location.search);
+  const code = params.get("code");
+  const state = params.get("state");
+  if (code && state) {
+    window.location.href = `http://127.0.0.1:55423/?code=${encodeURIComponent(code)}&state=${encodeURIComponent(state)}`;
+  }
 </script>
