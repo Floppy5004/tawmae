@@ -1,0 +1,648 @@
+---
+layout: default
+title: "MOD TOOLS | tawmae"
+description: "The all in one method to manage your channel and keep bots away."
+keywords: "Twitch, OBS, Streamer.bot, Streamerbot, Mod, Bot, Follow Attack"
+og_image: "/assets/page-design/page-cards/mod-tools.webp"
+---
+<link rel="stylesheet" href="{{ site.baseurl }}/assets/css/extension-page.css">
+
+<div class="warning-banner" style="background-color: #ffb347; color: #0d1117; border: 1px solid #ffeeba; padding: 10px; text-align: center; margin-bottom: 1rem;">
+  This extension requires <strong>Streamer.bot version 1.0.0</strong>.  
+  If you are running 0.2.8 or below, <a href="https://tawmae.xyz/utility/spotify-and-sb-legacy" style="text-decoration: underline; color: inherit;">click here</a>.
+</div>
+
+
+<!----    TITLE   ------------------------------------------------------------------------------------------------------------------------------>
+<div class="extension-title">
+    <div class="extension-title-text-box">
+        <h1>MOD TOOLS</h1>
+        <p>Site under construction, this is just to see the mod commands.
+        </p>
+    </div>
+</div>
+
+<!----    ENTIRE ACCORDION THINGY WHATEVER IT'S CALLED    ------------------------------------------------------------------------------------------------------------------------------>
+
+<div class="accordion">
+    <div class="accordion-divider"></div>
+  
+
+    <!----    COMMANDS    ------------------------------------------------------------------------------------------------------------------------------>
+   <div class="accordion-item">
+    <div class="accordion-header" id="commands" onclick="toggleAccordion('commands-acc')">
+        <span class="iconify title-icon" data-icon="line-md:alert-circle"></span>
+        <span>COMMANDS</span>
+        <span class="iconify accordion-icon" data-icon="ic:baseline-keyboard-arrow-right"></span>
+    </div>
+    <div class="accordion-content" id="commands-acc">
+
+        <!-- URL Filter -->
+        <div class="extension-title-text-box">
+            <p><span style="font-weight: bold; color: #fff;">URL Filter</span></p>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p><span style="font-weight: bold; color: #fff;">!permit [User]</span></p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Permit a specified user to post links to chat for a given amount of time.</p>
+            </div>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p><span style="font-weight: bold; color: #fff;">!whitelistURL [URL]</span></p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Add a link to the whitelist.</p>
+            </div>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p><span style="font-weight: bold; color: #fff;">!removeWhitelistURL [URL]</span></p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Removes a link from the whitelist.</p>
+            </div>
+        </div>
+
+        <!—- Follow Bot Attacks —->
+        <div class="extension-title-text-box">
+            <p><span style="font-weight: bold; color: #fff;">Follow Bot Attacks</span></p>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p><span style="font-weight: bold; color: #fff;">!followShield [on/off]</span></p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Toggles the Follow Bot Attack shield mode.</p>
+            </div>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p><span style="font-weight: bold; color: #fff;">!followAttackUndoAll</span></p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Unblocks and unbans every user that got caught during an active Follow Attack Shield. This is just a safety measure.</p>
+            </div>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p><span style="font-weight: bold; color: #fff;">!removeAllFollowers [Minutes]</span></p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Removes all followers that have followed within the last X minutes. Also works if Streamer.bot was not active during the follows.</p>
+            </div>
+        </div>
+
+        <!—- Hate Raid —->
+        <div class="extension-title-text-box">
+            <p><span style="font-weight: bold; color: #fff;">Hate Raid</span></p>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p><span style="font-weight: bold; color: #fff;">!hateShield [on/off] or !hateRaid [on/off]</span></p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Toggles the hate raid shield.</p>
+            </div>
+        </div>
+
+        <!—- Channel Management —->
+        <div class="extension-title-text-box">
+            <p><span style="font-weight: bold; color: #fff;">Channel Management</span></p>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p><span style="font-weight: bold; color: #fff;">!addCommand [!command] [Command Text]</span></p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Adds a custom command with a simple text output. Can contain %user% and %userName% variables.</p>
+            </div>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p><span style="font-weight: bold; color: #fff;">!editCommand [!command] [Command Text]</span></p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Edits a custom command.</p>
+            </div>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p><span style="font-weight: bold; color: #fff;">!removeCommand [!command]</span></p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Removes a custom command.</p>
+            </div>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p><span style="font-weight: bold; color: #fff;">!customCommands</span></p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Shows all custom commands.</p>
+            </div>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p><span style="font-weight: bold; color: #fff;">!addCounter [!command] [Command Text]</span></p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Adds a custom counter with a simple text output. Can contain %count%, %user%, and %userName% variables. Use “+” to increment or “–” to decrement. E.g., !command +1 or !command -1. You can also set it directly: !command 50.</p>
+            </div>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p><span style="font-weight: bold; color: #fff;">!editCounter [!command] [Command Text]</span></p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Edits a custom counter.</p>
+            </div>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p><span style="font-weight: bold; color: #fff;">!removeCounter [!command]</span></p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Removes a custom counter.</p>
+            </div>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p><span style="font-weight: bold; color: #fff;">!customCounters</span></p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Shows all custom counters and their current values.</p>
+            </div>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p><span style="font-weight: bold; color: #fff;">!channelTitle [Title]</span></p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Set a channel title.</p>
+            </div>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p><span style="font-weight: bold; color: #fff;">!channelGame [Game] or !channelCategory [Category]</span></p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Set the channel game/category.</p>
+            </div>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p><span style="font-weight: bold; color: #fff;">!channelSetTags [Tag1] | [Tag2] | [Tag3] ...</span></p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Set up to 10 channel tags, separated by a | symbol.</p>
+            </div>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p><span style="font-weight: bold; color: #fff;">!channelAddTag [Tag]</span></p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Add a channel tag.</p>
+            </div>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p><span style="font-weight: bold; color: #fff;">!channelRemoveTag [Tag]</span></p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Remove a channel tag.</p>
+            </div>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p><span style="font-weight: bold; color: #fff;">!channelClearTags</span></p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Clear all channel tags (Note: Twitch API requires at least one tag, so “No Tags” placeholder will be added).</p>
+            </div>
+        </div>
+
+        <!—- OBS Management —->
+        <div class="extension-title-text-box">
+            <p><span style="font-weight: bold; color: #fff;">OBS Management</span></p>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p><span style="font-weight: bold; color: #fff;">!scenes</span></p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Lists all OBS scene names in chat.</p>
+            </div>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p><span style="font-weight: bold; color: #fff;">!setScene [Scene Name] or !changeScene [Scene Name]</span></p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Set a specific active OBS scene.</p>
+            </div>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p><span style="font-weight: bold; color: #fff;">!endStream</span></p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Ends the stream (double-confirmation required if enabled).</p>
+            </div>
+        </div>
+
+        <!—- Raids and Shoutouts —->
+        <div class="extension-title-text-box">
+            <p><span style="font-weight: bold; color: #fff;">Raids and Shoutouts</span></p>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p><span style="font-weight: bold; color: #fff;">!raid [User]</span></p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Raid a channel.</p>
+            </div>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p><span style="font-weight: bold; color: #fff;">!raidCancel or !cancelRaid</span></p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Cancel an ongoing raid.</p>
+            </div>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p><span style="font-weight: bold; color: #fff;">!raidMessage</span></p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Posts a custom raid message into chat (for users to copy when you’re about to start a raid).</p>
+            </div>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p><span style="font-weight: bold; color: #fff;">!modShoutout [User]</span></p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Posts a shoutout into chat and also does the Twitch integrated shoutout.</p>
+            </div>
+        </div>
+
+        <!—- Chat Management —->
+        <div class="extension-title-text-box">
+            <p><span style="font-weight: bold; color: #fff;">Chat Management</span></p>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p><span style="font-weight: bold; color: #fff;">!modTranslate [Text]</span></p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Translates a given text into a chosen language (also works with just !modTranslate when used in a reply).</p>
+            </div>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p><span style="font-weight: bold; color: #fff;">!clearChat</span></p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Clear chat.</p>
+            </div>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p><span style="font-weight: bold; color: #fff;">!warn [User] [Reason]</span></p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Warn a specified user. The reason is optional.</p>
+            </div>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p><span style="font-weight: bold; color: #fff;">!timeout [User] [Duration] [Reason]</span></p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Timeout a specified user. Duration (seconds) and reason are optional.</p>
+            </div>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p><span style="font-weight: bold; color: #fff;">!ban [User] [Reason]</span></p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Ban a specified user. The reason is optional.</p>
+            </div>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p><span style="font-weight: bold; color: #fff;">!unban [User]</span></p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Unban a specified user.</p>
+            </div>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p><span style="font-weight: bold; color: #fff;">!purge [User]</span></p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Deletes all messages of a specified user.</p>
+            </div>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p><span style="font-weight: bold; color: #fff;">!addBlockedTerm [Term]</span></p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Adds a blocked term to the Twitch internal block list.</p>
+            </div>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p><span style="font-weight: bold; color: #fff;">!removeBlockedTerm [Term]</span></p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Removes a blocked term from the Twitch internal block list.</p>
+            </div>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p><span style="font-weight: bold; color: #fff;">!modRunAd [Duration]</span></p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Runs a commercial for the specified duration (max. 180 seconds, defaults to 180 if exceeded).</p>
+            </div>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p><span style="font-weight: bold; color: #fff;">!slowMode [Delay (seconds)]</span></p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Toggles chat slow mode with the specified delay in seconds.</p>
+            </div>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p><span style="font-weight: bold; color: #fff;">!followerMode [Delay] or !followersOnly [Duration]</span></p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Toggles followers-only chat with the specified minimum follow duration. If [Duration] is a number, it defaults to hours. You can specify “min”, “h”, or “d”, e.g., !followerMode 1d.</p>
+            </div>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p><span style="font-weight: bold; color: #fff;">!emoteOnly [on/off]</span></p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Toggles emote-only chat.</p>
+            </div>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p><span style="font-weight: bold; color: #fff;">!subMode or !subOnly</span></p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Toggles subscribers-only chat.</p>
+            </div>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p><span style="font-weight: bold; color: #fff;">!ttsStop or !stopTts</span></p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Stops the current TTS queue.</p>
+            </div>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p><span style="font-weight: bold; color: #fff;">!ttsResume or !resumeTts</span></p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Resumes the TTS queue.</p>
+            </div>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p><span style="font-weight: bold; color: #fff;">!ttsClear or !clearTts</span></p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Clears the TTS queue.</p>
+            </div>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p><span style="font-weight: bold; color: #fff;">!ttsPause or !pauseTts</span></p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Pauses the TTS queue.</p>
+            </div>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p><span style="font-weight: bold; color: #fff;">!autoMod [Level]</span></p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Enables AutoMod from level 0 to 4.</p>
+            </div>
+        </div>
+
+        <!—- Channel Point Rewards —->
+        <div class="extension-title-text-box">
+            <p><span style="font-weight: bold; color: #fff;">Channel Point Rewards</span></p>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p><span style="font-weight: bold; color: #fff;">!rewardEnable [Reward Name]</span></p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Enables a specified channel point reward.</p>
+            </div>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p><span style="font-weight: bold; color: #fff;">!rewardDisable [Reward Name]</span></p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Disables a specified channel point reward.</p>
+            </div>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p><span style="font-weight: bold; color: #fff;">!rewardPause [Reward Name]</span></p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Pauses a specified channel point reward.</p>
+            </div>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p><span style="font-weight: bold; color: #fff;">!rewardUnpause [Reward Name]</span></p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Unpauses a specified channel point reward.</p>
+            </div>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p><span style="font-weight: bold; color: #fff;">!rewardTitle [Reward Name] | [Title]</span></p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Sets the title of a specified channel point reward, separated by a | symbol.</p>
+            </div>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p><span style="font-weight: bold; color: #fff;">!rewardPrompt [Reward Name] | [Prompt] or !rewardDescription [Reward Name] | [Cost]</span></p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Sets the prompt/description of a specified channel point reward, separated by a | symbol.</p>
+            </div>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p><span style="font-weight: bold; color: #fff;">!rewardCost [Reward Name] | [Cost]</span></p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Sets the cost of a specified channel point reward, separated by a | symbol.</p>
+            </div>
+        </div>
+
+        <!—- Predictions —->
+        <div class="extension-title-text-box">
+            <p><span style="font-weight: bold; color: #fff;">Predictions</span></p>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p><span style="font-weight: bold; color: #fff;">!predictionCreate [Title] | [Duration] | [Outcome1] | [Outcome2] ...</span></p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Creates a channel point prediction with up to 10 outcomes. Requires a title and at least two outcomes. Duration is optional. Separated by a | symbol.</p>
+            </div>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p><span style="font-weight: bold; color: #fff;">!predictionLock</span></p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Locks the currently active prediction.</p>
+            </div>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p><span style="font-weight: bold; color: #fff;">!predictionCancel</span></p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Cancels the currently active prediction.</p>
+            </div>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p><span style="font-weight: bold; color: #fff;">!predictionResolve [Outcome Number] or !predictionResolve [Outcome Title]</span></p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Resolves a prediction after it’s been locked. Can use an outcome number or the actual outcome title.</p>
+            </div>
+        </div>
+
+        <!—- Polls —->
+        <div class="extension-title-text-box">
+            <p><span style="font-weight: bold; color: #fff;">Polls</span></p>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p><span style="font-weight: bold; color: #fff;">!pollCreate [Title] | [Duration] | [Option1] | [Option2] ...</span></p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Creates a poll with up to 5 options. Requires a title and at least two options. Duration is optional. Separated by a | symbol.</p>
+            </div>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p><span style="font-weight: bold; color: #fff;">!pollEnd</span></p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Ends the current poll.</p>
+            </div>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p><span style="font-weight: bold; color: #fff;">!pollArchive</span></p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Archives the current poll.</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+    <!---------------------------------------------------------------------------------------------------------------------------------->
+
+    
+    <!---------------------------------------------------------------------------------------------------------------------------------->
+    <div class="accordion-divider"></div>
+    <!---------------------------------------------->
+</div>
