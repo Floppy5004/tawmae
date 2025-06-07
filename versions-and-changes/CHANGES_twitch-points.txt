@@ -1,1 +1,1 @@
-• Added 'Validate Points' to the Settings UI's Advanced tab
+• Gambling now works with percentages: !gamble 50%
