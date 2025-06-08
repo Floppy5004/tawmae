@@ -102,8 +102,8 @@ document.addEventListener("DOMContentLoaded", function () {
         loadImportString("/action-imports/temporary-vip.txt");
     } else if (currentPage.includes("channel-point-auction")) {
         loadImportString("/action-imports/channel-point-auction.txt");
-    } else if (currentPage.includes("command-checker")) {
-        loadImportString("/action-imports/command-checker.txt");
+    } else if (currentPage.includes("command-check")) {
+        loadImportString("/action-imports/command-check.txt");
     } else if (currentPage.includes("hugs-and-sb")) {
         loadImportString("/action-imports/hugs-and-sb.txt");
     } else if (currentPage.includes("live-trigger")) {
