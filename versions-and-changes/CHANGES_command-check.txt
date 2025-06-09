@@ -1,1 +1,1 @@
-• Fixed an issue with entering input after a command
+• Fixed an issue when entering input after a command
