@@ -1,1 +1,1 @@
-• Gambling now works with percentages: !gamble 50%
+• Added points import for Wizebot
