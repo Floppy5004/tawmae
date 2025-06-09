@@ -1,1 +1,1 @@
-• Overhaul for Streamer.bot 1.0.0
+• Fixed an issue with entering input after a command
