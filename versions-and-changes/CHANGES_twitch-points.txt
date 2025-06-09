@@ -1,1 +1,1 @@
-• Added points import for Wizebot
+• Added an option to award points for chat messages
