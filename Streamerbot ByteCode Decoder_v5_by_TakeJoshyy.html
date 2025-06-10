@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Streamer.bot String Decoder</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pako/2.1.0/pako.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/csharp.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    body {
+      background-color: #121212;
+      color: #eee;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+    .container {
+      background: #1e1e1e;
+      border-radius: 16px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+      padding: 30px;
+      width: 100%;
+      max-width: 800px;
+    }
+    h2 {
+      color: #00ffff;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
+    }
+    h2 img {
+      height: 1.6em;
+      vertical-align: middle;
+    }
+    p {
+      color: #bbb;
+    }
+    textarea {
+      width: 100%;
+      height: 150px;
+      background: #2c2c2c;
+      color: #fff;
+      border: 1px solid #444;
+      border-radius: 8px;
+      padding: 10px;
+      font-family: monospace;
+      transition: border-color 0.3s ease;
+    }
+    button {
+      margin-top: 15px;
+      padding: 10px 15px;
+      background: #00ffff;
+      color: #000;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    pre {
+      background: #1a1a1a;
+      padding: 20px;
+      margin-top: 20px;
+      border-radius: 8px;
+      overflow: auto;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      max-height: 600px;
+      position: relative;
+    }
+    code {
+      font-size: 14px;
+    }
+    .error {
+      color: #ff4444;
+    }
+    .bytecode-header {
+      color: #ffea00;
+      font-size: 18px;
+      margin-top: 30px;
+    }
+    .subaction {
+      color: #eee;
+    }
+    .htmlHeader {
+      margin-left: 2em;
+    }
+    .bytecode-name {
+      font-style: italic;
+      color: #999;
+      margin-bottom: 8px;
+    }
+    .header-info {
+      background: #1a1a1a;
+      border: 1px solid #444;
+      padding: 15px;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+    }
+    /* Style for the copy button */
+    .copy-container {
+      position: relative;
+    }
+    .copy-button {
+      position: absolute;
+      top: -60px;
+      right: 25px;
+      z-index: 10; /* Ensures the button appears above */
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-size: 15px;
+      color: #00ffff;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>
+      <img src="https://streamer.bot/logo-text.svg" alt="Streamer.bot Logo" />
+      Action Import Decoder
+    </h2>
+    <p>Paste an import string or drag and drop an exported file below. All C# methods will be decoded and displayed under "Decoded C# Bytecode" headings.</p>
+    <textarea id="input" placeholder="Paste a Base64 export string here… or drag and drop an exported file"></textarea>
+    <button onclick="processInput()">Decode</button>
+    <div id="output"></div>
+  </div>
+
+  <script >
+// Decode a Base64 string to a Uint8Array
+function decodeBase64ToUint8Array(base64) {
+    const binaryString = atob(base64);
+    const bytes = new Uint8Array(binaryString.length);
+    for (let i = 0; i < binaryString.length; i++) {
+        bytes[i] = binaryString.charCodeAt(i);
+    }
+    return bytes;
+}
+
+// Decode and format the first 4 bytes header
+function decodeFirst4Bytes(base64) {
+    const binary = atob(base64);
+    const headerBytes = binary.slice(0, 4).split('').map(c => c.charCodeAt(0));
+    const asHex = headerBytes.map(b => b.toString(16).padStart(2, '0')).join(' ');
+    const asASCII = headerBytes.map(b => (b >= 32 && b < 127) ? String.fromCharCode(b) : '.').join('');
+    const asUInt32LE = new DataView(new Uint8Array(headerBytes).buffer).getUint32(0, true);
+    return {
+        hex: asHex,
+        ascii: asASCII,
+        uint32LE: asUInt32LE
+    };
+}
+
+// Decompress the top layer (skipping first 4 bytes)
+function decodeTopLayer(base64Input) {
+    const bytes = decodeBase64ToUint8Array(base64Input);
+    const sliced = bytes.slice(4); // Skip first 4 bytes
+    return pako.ungzip(sliced, { to: 'string' });
+}
+
+const byteCodes = [];
+const subactions = [];
+const triggers = [];
+
+// Extract C# byteCode from JSON objects
+function traverseActions(obj, path) {
+    if (Array.isArray(obj)) {
+        obj.forEach((obj, index) => traverseActions(obj, path + `[${index}]` ));
+    } else if (typeof obj === 'object' && obj !== null) {
+        for (const key in obj) {
+            if (!obj.hasOwnProperty(key)) continue;
+            if (key === 'byteCode' && typeof obj[key] === 'string') {
+                try {
+                    const decoded = atob(obj[key]);
+                    const name = typeof obj['name'] === 'string' ? obj['name'] : '<< unnamed >>';
+                    byteCodes.push({ path, name, code: decoded });
+                    obj[key] = "<< C# byteCode extracted >>";
+                } catch (e) {
+                    obj[key] = `<< Failed to decode byteCode: ${e.message} >>`;
+                }
+            } else if (typeof obj[key] === 'object') {
+                traverseActions(obj[key], path + `.${key}`);
+            }
+            if (key === 'type' && typeof obj[key] === 'number' && path.match(/actions.*actions/)) {
+                subactions.push({path, subaction: obj});
+            }
+            if (key === 'type' && typeof obj[key] === 'number' && path.match(/actions.*triggers/)) {
+                triggers.push({path, trigger: obj});
+            }
+        }
+    }
+}
+
+// Highlight JSON data with formatting
+function syntaxHighlightJSON(json) {
+    return `<pre>${JSON.stringify(json, null, 2)}</pre>`;
+}
+
+function htmlEncodeText(text) {
+    return text.replace(/[<>&"']/g, tag => ({
+        '<': '&lt;',
+        '>': '&gt;',
+        '&': '&amp;',
+        '"': '&quot;',
+        "'": '&#39;'
+    })[tag]);
+}
+
+// Highlight C# code and add copy button with Material Icon
+function syntaxHighlightCSharp(entry) {
+    const nameHTML = `<div class="bytecode-name">🔖 Name: ${entry.name}</div>`;
+    const highlightedCode = htmlEncodeText(entry.code);
+
+    // Wrap code block in container with copy button (icon only)
+    return `
+        <div class="bytecode-header">🧠 Decoded C# byteCode</div>
+        ${nameHTML}
+        <div class="copy-container">
+          <button class="copy-button" onclick="copyCode(this)" title="Copy">
+            <span class="material-icons">content_copy</span>
+          </button>
+          <pre><code class="language-csharp">${highlightedCode}</code></pre>
+        </div>
+      `;
+}
+
+const subactionFormatters = {
+    1006 : ["Read Lines from File", formatSubactionFileIOArgs],
+    5 : ["Read Random Line from File", formatSubactionFileIOArgs],
+    1021 : ["Read Line from File", formatSubactionFileIOArgs],
+    3 : ["Write File", formatSubactionFileIOArgs],
+    1007 : ["Fetch URL", formatSubactionFetchURL],
+};
+
+function formatSubactionFileIOArgs(subaction)
+{
+    return htmlEncodeText(subaction.file ? `"${subaction.file}"` : '');
+}
+
+function formatSubactionFetchURL(subaction)
+{
+    let content = htmlEncodeText(subaction.url ? `"${subaction.url}"` : '');
+    if (subaction.headers) {
+        Object.entries(subaction.headers).forEach(([key, value]) => {
+            content += `<div class="htmlHeader">${htmlEncodeText(key)}: ${htmlEncodeText(value)}</div>`;
+        });
+    }
+    return content;
+}
+
+function formatSubactionDefault(subaction)
+{
+    return '';
+}
+
+function displaySubaction({path, subaction}) {
+    let formatter = subactionFormatters[subaction.type];
+    if (!formatter) return '';
+    let actionName = formatter ? formatter[0] : `Subaction (${subaction.type})`;
+    let args = formatter ? (formatter[1])(subaction) : formatSubactionDefault(subaction);
+    return `
+          <div class="subaction">${path} : ${actionName} ${args}</div>
+      `;
+    
+}
+
+function displaySubactions() {
+    resultHTML = '<div class="bytecode-header">🧠 Subactions';
+    subactions.forEach(entry => {
+        resultHTML += displaySubaction(entry);
+    });
+    resultHTML += '</div>';
+    return resultHTML;
+}
+
+// Display header information
+function displayHeaderInfo(headerInfo) {
+    return `
+        <div class="header-info">
+          <strong>Header Signature (4 bytes):</strong><br/>
+          Hex: <code>${headerInfo.hex}</code><br/>
+          ASCII: <code>${headerInfo.ascii}</code><br/>
+          UInt32 (LE): <code>${headerInfo.uint32LE}</code>
+        </div>
+      `;
+}
+
+// Process input and extract C# byteCode
+function processInput() {
+    const input = document.getElementById('input').value.trim();
+    const outputDiv = document.getElementById('output');
+    outputDiv.classList.remove('error');
+    outputDiv.innerHTML = '';
+    byteCodes.length = 0;
+    try {
+        const headerInfo = decodeFirst4Bytes(input);
+        const uncompressed = decodeTopLayer(input);
+        const parsed = JSON.parse(uncompressed);
+        traverseActions(parsed, "");
+        let resultHTML = displayHeaderInfo(headerInfo);
+        resultHTML += syntaxHighlightJSON(parsed);
+        resultHTML += displaySubactions();
+        byteCodes.forEach(entry => {
+            resultHTML += syntaxHighlightCSharp(entry);
+        });
+        outputDiv.innerHTML = resultHTML;
+        hljs.highlightAll();
+    } catch (err) {
+        outputDiv.classList.add('error');
+        outputDiv.innerHTML = `<pre>Error: ${err.message}</pre>`;
+    }
+}
+
+// Copy code to clipboard
+function copyCode(button) {
+    const codeElement = button.parentElement.querySelector('pre code');
+    if (!codeElement) return;
+    const codeText = codeElement.innerText;
+    navigator.clipboard.writeText(codeText)
+        .then(() => {
+            // Brief feedback: change icon color momentarily
+            button.style.color = '#ffea00';
+            setTimeout(() => {
+                button.style.color = '#00ffff';
+            }, 1500);
+        })
+        .catch(err => {
+            console.error('Error copying text:', err);
+        });
+}
+
+// Drag & Drop support for the textarea
+const inputArea = document.getElementById('input');
+inputArea.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    inputArea.style.borderColor = '#00ffff';
+});
+inputArea.addEventListener('dragleave', () => {
+    inputArea.style.borderColor = '#444';
+});
+inputArea.addEventListener('drop', (e) => {
+    e.preventDefault();
+    inputArea.style.borderColor = '#444';
+    const file = e.dataTransfer.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(evt) {
+        inputArea.value = evt.target.result;
+    };
+    reader.readAsText(file);
+});
+    
+  </script>
+</body>
+</html>
