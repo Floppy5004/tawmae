@@ -1,1 +1,1 @@
-• Improved debugging
+• Added a prompt to confirm the dll download if not already present
