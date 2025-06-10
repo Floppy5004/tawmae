@@ -360,6 +360,7 @@ header {
 
 .nav-icon-regular {
   vertical-align: middle;
+  margin-bottom: 3px;
 }
 
 .extension-code-block pre {
