@@ -358,6 +358,10 @@ header {
   color: black;
 }
 
+.nav-icon-regular {
+  vertical-align: middle;
+}
+
 .extension-code-block pre {
   background-color: #2d2d2d;
   border-radius: 5px;
