@@ -1,1 +1,1 @@
-• Fixed an issue when importing StreamElements watchtime data
+• Added a prompt to confirm the dll download if not already present
