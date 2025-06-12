@@ -1,1 +1,1 @@
-• Added an option to not allow explicit song requests
+• Fixed an issue with voteskips not working when own-skips were enabled
