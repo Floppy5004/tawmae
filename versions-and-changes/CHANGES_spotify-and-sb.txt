@@ -1,1 +1,2 @@
-• Fixed an issue with voteskips not working when own-skips were enabled
+Streamer.bot 1.0.0 ONLY:
+• New commands (!broadcasterTopSongs)
