@@ -1,1 +1,1 @@
-• Added a prompt to confirm the dll download if not already present
+• Fixed an issue when posting an alias command with permission check enabled
