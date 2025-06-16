@@ -1,2 +1,2 @@
 Streamer.bot 1.0.0 ONLY:
-• New commands (!broadcasterTopSongs)
+• Added song variables for 'Skip Song' and 'Voteskip'
