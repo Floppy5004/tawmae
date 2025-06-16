@@ -1,2 +1,3 @@
 Streamer.bot 1.0.0 ONLY:
-• Added song variables for 'Skip Song' and 'Voteskip'
+• Added song vars for 'Skip Song' and 'Voteskip'
+• Added option to snooze update notifs
