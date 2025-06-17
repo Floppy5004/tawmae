@@ -1,0 +1,575 @@
+---
+layout: default
+title: "USER INVENTORY | tawmae"
+description: "A custom inventory for Twitch viewers. Manage, get, use, sell, loot or trade items!"
+keywords: "Twitch, OBS, Streamer.bot, Inventory, Items"
+og_image: "/assets/page-design/page-cards/user-inventory.webp"
+---
+<link rel="stylesheet" href="{{ site.baseurl }}/assets/css/extension-page.css">
+
+
+<div class="warning-banner" style="background-color: #ffb347; color: #0d1117; border: 1px solid #ffeeba; padding: 10px; text-align: center; margin-bottom: 1rem;">
+  This extension requires <strong>Streamer.bot version 1.0.0</strong>.
+</div>
+<!----    TITLE   ------------------------------------------------------------------------------------------------------------------------------>
+<div class="extension-title">
+    <div class="extension-title-text-box">
+        <h1>USER INVENTORY</h1>
+        <p>Satisfy the desire to COLLECT and LOOT!
+            <br><br>
+            • Create custom items with custom item effects
+          <br>
+            • Create loot pools and allow for random drops with different rarities
+          <br>
+            • Add and remove items from user's inventories
+            <br>
+          • Have users trade items between one another
+          <br>
+          • Sell items in combination with a currency system
+          <br>
+          • AND MORE! Check it out already!
+            <br><span style="font-size: 3rem">Pog Clap</span>
+        </p>
+    </div>
+    <div class="carousel-2">
+  <div>
+      <img src="{{ site.baseurl }}/assets/covers/user-inventory-1.webp" class="carousel-image">
+  </div>
+      <div>
+      <img src="{{ site.baseurl }}/assets/covers/user-inventory-2.webp" class="carousel-image">
+    
+  </div>
+  <div>
+      <img src="{{ site.baseurl }}/assets/covers/user-inventory-3.webp" class="carousel-image">
+    
+  </div>
+      <div>
+      <img src="{{ site.baseurl }}/assets/covers/user-inventory-4.webp" class="carousel-image">
+    
+  </div>
+  <div>
+      <img src="{{ site.baseurl }}/assets/covers/user-inventory-5.webp" class="carousel-image">
+    
+  </div>
+      
+</div>
+</div>
+
+<!----    ENTIRE ACCORDION THINGY WHATEVER IT'S CALLED    ------------------------------------------------------------------------------------------------------------------------------>
+
+<div class="accordion">
+  <div class="accordion-divider"></div>
+<div class="warning-banner" style="background-color: #4a699f; color: #ffffff; border: 1px solid #000000; padding: 10px; text-align: center; margin-bottom: 1rem;">
+  This extension requires a <strong>.dll file (TawmaeUI.dll)</strong> to run. You will be asked to have it automatically downloaded from my <a href="https://github.com/tawmae/tawmae/tree/main/dll" style="text-decoration: underline; color: inherit;">Github Repository</a> to your Streamer.bot directory when you open the Settings UI, but you can also manually download it <a href="https://tawmae.xyz/dll" style="text-decoration: underline; color: inherit;">here</a>. You can use tools like <a href="https://www.jetbrains.com/decompiler/" style="text-decoration: underline; color: inherit;">JetBrain dotPeek</a> to check the .dll file's content.
+</div>
+    <div class="accordion-divider"></div>
+    <!----    ACTION IMPORT    ------------------------------------------------------------------------------------------------------------------------------>
+    <div class="accordion-item">
+    <div class="accordion-header" id="action-import" onclick="toggleAccordion('action-import-acc')">
+        <span class="iconify title-icon" data-icon="line-md:download"></span> <span>ACTION IMPORT</span>
+        <span class="iconify accordion-icon" data-icon="ic:baseline-keyboard-arrow-right"></span>
+    </div>
+    <div class="accordion-content" id="action-import-acc">
+        <div class="copy-box">
+            <span class="copy-text" id="import-string" data-copy-text="">Loading...</span>
+            <button class="copy-btn" onclick="copyToClipboard('import-string')">
+                <span class="iconify" data-icon="material-symbols:content-copy-outline-sharp"></span> Copy
+            </button>
+        </div>
+        <div style="margin-top: 10px; font-size: 0.8em; color: #aaa;">
+            <span class="iconify nav-icon-regular" data-icon="rivet-icons:exclamation-mark-circle-solid"></span> Never import actions from untrusted sources.
+            Want to know what you are importing?
+            Paste the import code in <a href="https://tawmae.xyz/Streamerbot%20ByteCode%20Decoder_v5_by_TakeJoshyy.html" target="_blank" style="color: #6fa8dc; text-decoration: underline;">here</a> (Decoder made by TakeJoshyy).
+        </div>
+    </div>
+</div>
+    <!---------------------------------------------->
+
+    <div class="accordion-divider"></div>
+
+
+
+    <!----    SETUP    ------------------------------------------------------------------------------------------------------------------------------>
+    <div class="accordion-item">
+        <div class="accordion-header" id="setup" onclick="toggleAccordion('setup-acc')">
+            <span class="iconify title-icon" data-icon="line-md:cog-filled"></span> <span>SETUP</span>
+            <span class="iconify accordion-icon" data-icon="ic:baseline-keyboard-arrow-right"></span>
+        </div>
+        <div class="accordion-content" id="setup-acc">
+            <!---------------------------------------------->
+            <div class="description-container">
+                <div class="extension-title-text-box">
+                    <p><span style="font-weight: bold; color: #fff;">1.</span> Copy the <span
+                             style="font-weight: bold; color: #ffd95e;">Action Import</span> text from above into your
+                        clipboard.</p>
+                </div>
+                <img src="{{ site.baseurl }}/assets/setup/copy-string.webp" class="extension-image">
+
+            </div>
+            <!---------------------------------------------->
+            <div class="section-divider"></div>
+            <!--------------------------------------------->
+            <div class="description-container">
+                <img src="{{ site.baseurl }}/assets/setup/import-actions-1.0.0.png" class="extension-image">
+                <div class="extension-title-text-box">
+                    <p><span style="font-weight: bold; color: #fff;">2.</span> In <span
+                             style="font-weight: bold; color: #ffd95e;">Streamer.bot</span>, click the <span
+                             style="font-weight: bold; color: #ffd95e;">Import</span> button at the top of the window.
+                        Paste the text into the <span  style="font-weight: bold; color: #ffd95e;">Import String</span>
+                        section and press <span  style="font-weight: bold; color: #ffd95e;">Import</span> at the bottom.
+                    </p>
+                </div>
+
+            </div>
+            <!---------------------------------------------->
+            <div class="section-divider"></div>
+            <!--------------------------------------------->
+            <div class="description-container">
+
+                <div class="extension-title-text-box">
+                    <p><span style="font-weight: bold; color: #fff;">3.</span> Now head to the <span
+                             style="font-weight: bold; color: #ffd95e;">Commands</span> tab and look for the imported
+                        commands. Then <span  style="font-weight: bold; color: #ffd95e;">rightclick</span> the group and
+                        select <span  style="font-weight: bold; color: #ffd95e;">Group -> Enable All</span>.
+
+                    </p>
+                </div>
+                <img src="{{ site.baseurl }}/assets/setup/enable-commands-1.0.0.png" class="extension-image">
+            </div>
+    <div class="section-divider"></div>
+         
+          <!--------------------------------------------->
+          <div class="description-container">
+                <img src="{{ site.baseurl }}/assets/setup/run-settings-ui.webp" class="extension-image">
+                <div class="extension-title-text-box">
+                    <p><span style="font-weight: bold; color: #fff;">4.</span>
+                        In the <span  style="font-weight: bold; color: #ffd95e;">[USER INVENTORY] [#] Settings</span> action, rightclick the <span  style="font-weight: bold; color: #ffd95e;">Test</span> trigger and hit <span  style="font-weight: bold; color: #ffd95e;">Test Trigger</span> to open the Settings UI once. This makes sure that the .dll file has been downloaded and is up to date.
+                      <br><br>If you <strong>don't</strong> have my .dll in your Streamer.bot directory already, it will ask you to <strong>automatically download</strong> it. If you wish to manually place it there, you can to that <a href="https://tawmae.xyz/dll" style="text-decoration: underline; color: inherit;">here</a>.<br><br> 
+
+                    </p>
+                </div>
+            
+                
+            </div>
+
+            <!---------------------------------------------->
+
+          <div class="description-container">
+                
+                <div class="extension-title-text-box">
+                    <p><span style="font-weight: bold; color: #fff;">5.</span>
+                        In the <span  style="font-weight: bold; color: #ffd95e;">Items</span> tab, you can theoretically start to add your first items, assign their value (if wanted) and an action they trigger upon usage.<br><br> 
+                        But other than that, you're essentially done!
+                    </p>
+                </div>
+            <img src="{{ site.baseurl }}/assets/setup/user-inventory/user-inventory-setup.webp" class="extension-image">
+            
+                
+            </div>
+
+            <!---------------------------------------------->
+
+        </div>
+    </div>
+
+    <!---------------------------------------------------------------------------------------------------------------------------------->
+
+    <div class="accordion-divider"></div>
+
+     <!----    COMMANDS    ------------------------------------------------------------------------------------------------------------------------------>
+    <div class="accordion-item">
+        <div class="accordion-header" id="commands" onclick="toggleAccordion('commands-acc')">
+            <span class="iconify title-icon" data-icon="line-md:alert-circle"></span>
+            <span>COMMANDS</span>
+            <span class="iconify accordion-icon" data-icon="ic:baseline-keyboard-arrow-right"></span>
+        </div>
+        <div class="accordion-content" id="commands-acc">
+
+            <!----------------------------------------------->
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p>
+                    <span style="font-weight: bold; color: #fff;">!addItem <span style="color: #ffd95e;">[User] [Item] &lt;Amount (optional)&gt;</span>
+                    </span>
+                </p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Add an item to a user's inventory. The amount needs to be in angled brackets and is optional.</p>
+            </div>
+        </div>
+
+        <!----------------------------------------------->
+
+          <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p>
+                    <span style="font-weight: bold; color: #fff;">!removeItem <span style="color: #ffd95e;">[User] [Item] &lt;Amount (optional)&gt;</span>
+                    </span>
+                </p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Remove an item from a user's inventory. The amount needs to be in angled brackets and is optional.</p>
+            </div>
+        </div>
+
+        <!----------------------------------------------->
+
+          <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p>
+                    <span style="font-weight: bold; color: #fff;">!inventory</span> or <span style="font-weight: bold; color: #fff;">!items</span>
+                    </span>
+                </p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Post the content of your inventory to chat.</p>
+            </div>
+        </div>
+
+        <!----------------------------------------------->
+
+          <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p>
+                    <span style="font-weight: bold; color: #fff;">!useItem <span style="color: #ffd95e;">[Item] &lt;Amount (optional)&gt; @[targetUser (optional)]</span>
+                    </span>
+                </p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Use an item in your inventory. The amount needs to be in angled brackets and is optional. If a user is targetted, it needs an @-symbol upfront, a target is optional. This will populate a variable %hasTarget% that is either 'True' or 'False'. And if 'True' also target user variables (%targerUser%, %targerUserName%, %targetUserId%). If the amount is greater than 1, the according action will be triggered as many times as the amount is.</p>
+            </div>
+        </div>
+
+        <!----------------------------------------------->
+
+          <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p>
+                    <span style="font-weight: bold; color: #fff;">!tradeItem <span style="color: #ffd95e;">[User] [Offered Item] &lt;Offered Amount (optional)&gt; | [Wanted Item] &lt;Wanted Amount (optional)&gt;</span>
+                    </span>
+                </p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Offer an item trade to a user. Offered and wanted items are separated by a pipe symbol.</p>
+            </div>
+        </div>
+
+        <!----------------------------------------------->
+
+           <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p>
+                    <span style="font-weight: bold; color: #fff;">!checkOffers</span>
+                    </span>
+                </p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Post a list of offers for you into chat.</p>
+            </div>
+        </div>
+
+        <!----------------------------------------------->
+
+           <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p>
+                    <span style="font-weight: bold; color: #fff;">!acceptTrade <span style="color: #ffd95e;">[User]</span>
+                    </span>
+                </p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Accept a user's offer.</p>
+            </div>
+        </div>
+
+        <!----------------------------------------------->
+
+          <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p>
+                    <span style="font-weight: bold; color: #fff;">!rejectTrade <span style="color: #ffd95e;">[User]</span>
+                    </span>
+                </p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Reject a user's offer.</p>
+            </div>
+        </div>
+
+        <!----------------------------------------------->
+
+          <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p>
+                    <span style="font-weight: bold; color: #fff;">!itemValue <span style="color: #ffd95e;">[Item]</span>
+                    </span>
+                </p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Check the (currency) value of an item.</p>
+            </div>
+        </div>
+
+        <!----------------------------------------------->
+
+          <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p>
+                    <span style="font-weight: bold; color: #fff;">!sellItem <span style="color: #ffd95e;">[Item] &lt;Amount (optional)&gt;</span>
+                    </span>
+                </p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Sell an item for currency points. The amount is optional and will multiply with its value.</p>
+            </div>
+        </div>
+
+        <!----------------------------------------------->
+
+          
+
+      
+
+
+
+        </div>
+    </div>
+    <!---------------------------------------------------------------------------------------------------------------------------------->
+
+    <div class="accordion-divider"></div>
+    <!----    SETTINGS UI    ------------------------------------------------------------------------------------------------------------------------------>
+    <div class="accordion-item">
+        <div class="accordion-header" id="settings" onclick="toggleAccordion('settings-acc')">
+            <span class="iconify title-icon" data-icon="line-md:check-list-3"></span> <span>SETTINGS UI</span>
+            <span class="iconify accordion-icon" data-icon="ic:baseline-keyboard-arrow-right"></span>
+        </div>
+        <div class="accordion-content" id="settings-acc">
+            <div class="extension-title-text-box">
+            <p>The <span  style="font-weight: bold; color: #ffd95e;">Settings UI</span> allows for some customization.
+            </p>
+            </div>
+            <p><br><br></p>
+            <!---------------------------------------------->
+            <div class="settings-ui-container">
+                <div class="extension-title-text-box">
+                    <p><span style="font-weight: bold; color: #fff;">General</span><br>In here, you can allow selling, trading, multiple item usage or response types.
+                    </p>
+                </div>
+                <img src="{{ site.baseurl }}/assets/settings/user-inventory/user-inventory-1.webp" class="settings-ui-image">
+            </div>
+            <!---------------------------------------------->
+            <div class="settings-ui-container">
+                <div class="extension-title-text-box">
+                    <p><span style="font-weight: bold; color: #fff;">Items</span> <br>This tab allows you to define your items. Create items, name them, give them a currency value for selling (if wanted) and assign the action they're supposed to trigger when used.
+                    </p>
+                </div>
+                <img src="{{ site.baseurl }}/assets/settings/user-inventory/user-inventory-2.webp" class="settings-ui-image">
+            </div>
+            <!---------------------------------------------->
+          <div class="settings-ui-container">
+                <div class="extension-title-text-box">
+                    <p><span style="font-weight: bold; color: #fff;">Loot Tables</span> <br>This tab allows you to create different loot tables. Give them a name and assign items you have created in the 'Items' tab. Give them an amount and a probability to get looted. Make sure the probability adds up to 100% for all items in a loot table. You can then use the <code>[USER INVENTORY] [L] 1 - Loot Random Item</code> action for people to be able to loot something off a loot pool.
+                    </p>
+                </div>
+                <img src="{{ site.baseurl }}/assets/settings/user-inventory/user-inventory-3.webp" class="settings-ui-image">
+            </div>
+            <!---------------------------------------------->
+          <div class="settings-ui-container">
+                <div class="extension-title-text-box">
+                    <p><span style="font-weight: bold; color: #fff;">Advanced</span> <br>The advanced tab allows to rename your currency global variable name and chat name. Also if you used my old inventory extension, you can convert your old items to the new system. Also a reset button in case you want to reset all items.
+                    </p>
+                </div>
+                <img src="{{ site.baseurl }}/assets/settings/user-inventory/user-inventory-4.webp" class="settings-ui-image">
+            </div>
+            <!---------------------------------------------->
+          <div class="settings-ui-container">
+                <div class="extension-title-text-box">
+                    <p><span style="font-weight: bold; color: #fff;">Chat Responses</span> <br>Chat Responses to customize. You can make use of all available variables listed below each message. If you don't want a message to appear, just enter a single hyphen (-) as the message.
+                    </p>
+                </div>
+                <img src="{{ site.baseurl }}/assets/settings/user-inventory/user-inventory-5.webp" class="settings-ui-image">
+            </div>
+            <!---------------------------------------------->
+
+        </div>
+    </div>
+    <!---------------------------------------------------------------------------------------------------------------------------------->
+    <div class="accordion-divider"></div>
+  <!----    FAQ    ------------------------------------------------------------------------------------------------------------------------------>
+    <div class="accordion-item">
+        <div class="accordion-header" id="faq" onclick="toggleAccordion('faq-acc')">
+            <span class="iconify title-icon" data-icon="line-md:question-square"></span>
+            <span>FAQ & EXAMPLES</span>
+            <span class="iconify accordion-icon" data-icon="ic:baseline-keyboard-arrow-right"></span>
+        </div>
+        <div class="accordion-content" id="faq-acc">
+            <!--------------------------------->
+            <div class="extension-title-text-box-long">
+                <h3> <span style="font-weight: bold; color: #fff">How do I add a specific item with other triggers than the '!addItem' command?</span></h3>
+                <p>
+                  1. Create a new action.
+                  <br>
+                  2. Create three new subactions: <span style="color: #ffd95e; font-weight: bold;">Core → Arguments → Set Argument</span>. Check the <span style="color: #ffd95e; font-weight: bold;">[USER INVENTORY] [M] 1 - Add Item</span> action what those arguments are called: <span style="color: #ffd95e; font-weight: bold;">targetUserName</span>, <span style="color: #ffd95e; font-weight: bold;">itemName</span> and <span style="color: #ffd95e; font-weight: bold;">itemAmount</span>.
+                  <br>
+                  3. In our example, we still use a command, but one any user can trigger: <span style="color: #ffd95e; font-weight: bold;">'!potion'</span>. That command should give them <span style="color: #ffd95e; font-weight: bold;">5 Health Potions</span>. This can be any trigger you want though.
+                  <br>
+                  4. So the <span style="color: #ffd95e; font-weight: bold;">Value</span> for <span style="color: #ffd95e; font-weight: bold;">targetUserName</span> will just be <span style="color: #ffd95e; font-weight: bold;">%userName%</span>, because the redeemer is also our receiving target. Our <span style="color: #ffd95e; font-weight: bold;">itemName</span> is <span style="color: #ffd95e; font-weight: bold;">Health Potion</span> and our <span style="color: #ffd95e; font-weight: bold;">itemAmount</span> is <span style="color: #ffd95e; font-weight: bold;">5</span>.
+                  <br>
+                  5. Create a new subaction: <span style="color: #ffd95e; font-weight: bold;">Core → Actions → Run Action</span> and place it below the <span style="color: #ffd95e; font-weight: bold;">Set Argument</span> subactions.
+                  <br>
+                  6. Select the action <span style="color: #ffd95e; font-weight: bold;">[USER INVENTORY] [M] 1 - Add Item</span> and check <span style="color: #ffd95e; font-weight: bold;">Run Action Immediately</span>.
+                  <br>
+                  7. Done.
+                  <br>
+                    <br><br>
+                    <img src="{{ site.baseurl }}/assets/faq/user-inventory/user-inventory-example-2.webp" class="extension-image-smol" style="border-radius: 5px">
+                </p>
+
+            </div>
+            <!--------------------------------->
+                  <div class="extension-title-text-box-long">
+                <h3> <span style="font-weight: bold; color: #fff">How do I create an item effect?</span></h3>
+                <p>
+                  1. In our example, we want to create an item called <span style="color: #ffd95e; font-weight: bold;">Smoke Bomb</span>. Upon using it, the Twitch chat will be cleared.
+                  <br>
+                  2. Create a new action, name it something your will easily recognize, for example <span style="color: #ffd95e; font-weight: bold;">Item Effect: Smoke Bomb</span>.
+                  <br>
+                  3. We don't need any trigger, because using the item will trigger the action. So just leave the trigger section empty.
+                  <br>
+                  5. As for our subaction, we wanted to clear the Twitch chat, so we just create a new subaction: <span style="color: #ffd95e; font-weight: bold;">Twitch → Chat → Clear Chat Messages</span>. Nothing else required, our action is done.
+                  <br>
+                  6. Now open the <span style="color: #ffd95e; font-weight: bold;">Settings UI</span> and head to the <span style="color: #ffd95e; font-weight: bold;">Items</span> tab. Create the item <span style="color: #ffd95e; font-weight: bold;">Smoke Bomb</span>, give it a value if you want and then select the action we have just created.
+                  <br>
+                  7. Save and then you are done. You can now use <span style="color: #ffd95e; font-weight: bold;">'!useItem Smoke Bomb'</span> to clear your chat.
+                  <br>
+                    <br><br>
+                    <img src="{{ site.baseurl }}/assets/faq/user-inventory/user-inventory-example-4.webp" class="extension-image-smol" style="border-radius: 5px">
+                  <br><br>
+                    <img src="{{ site.baseurl }}/assets/faq/user-inventory/user-inventory-example-5.webp" class="extension-image-smol" style="border-radius: 5px">
+                </p>
+
+            </div>
+                  <!--------------------------------->
+                  <div class="extension-title-text-box-long">
+                <h3> <span style="font-weight: bold; color: #fff">How do I create an item effect with a targetted user?</span></h3>
+                <p>
+                  1. The procedure is exactly the same as creating a non-targetted item effect. Create a new action, name it something your will easily recognize, for example <span style="color: #ffd95e; font-weight: bold;">Item Effect: Rusty Dagger</span>. No triggers required.
+                  <br>
+                  2. When using an item with a targetted user <span style="color: #ffd95e; font-weight: bold;">'!useItem Rusty Dagger @tawmae'</span>, the action will populate a variable <span style="color: #ffd95e; font-weight: bold;">%hasTarget%</span> that can be either <span style="color: #ffd95e; font-weight: bold;">True</span> or <span style="color: #ffd95e; font-weight: bold;">False</span>. If it is <span style="color: #ffd95e; font-weight: bold;">True</span>, it will also populate target user variables: <span style="color: #ffd95e; font-weight: bold;">%targetUser%</span>, <span style="color: #ffd95e; font-weight: bold;">%targerUserName%</span> and <span style="color: #ffd95e; font-weight: bold;">%targerUserId%</span> that we can later use.
+                  <br>
+                  3. Create a new subaction: <span style="color: #ffd95e; font-weight: bold;">Core → Logic → If/Else</span> and check if <span style="color: #ffd95e; font-weight: bold;">%hasTarget% Equals True</span>. Then if <span style="color: #ffd95e; font-weight: bold;">True</span>, you can do whatever you want in the <span style="color: #ffd95e; font-weight: bold;">True Result</span> section (and make use of the other target variables) and if <span style="color: #ffd95e; font-weight: bold;">False</span>, whatever you want to do in the <span style="color: #ffd95e; font-weight: bold;">False Result</span> section.
+                  <br>
+                  4. And you're done!
+                  <br>
+                    <br><br>
+                    <img src="{{ site.baseurl }}/assets/faq/user-inventory/user-inventory-example-7.webp" class="extension-image-smol" style="border-radius: 5px">
+                </p>
+
+            </div>
+            <!--------------------------------->
+                  <div class="extension-title-text-box-long">
+                <h3> <span style="font-weight: bold; color: #fff">How do I check if a user has a certain item in their inventory?</span></h3>
+                <p>
+                  1. Create a new action.
+                  <br>
+                  2. Create three new subactions: <span style="color: #ffd95e; font-weight: bold;">Core → Arguments → Set Argument</span>. Check the <span style="color: #ffd95e; font-weight: bold;">[USER INVENTORY] [M] 5 - Check If User Has Item</span> action what those arguments are called: <span style="color: #ffd95e; font-weight: bold;">targetUserName</span>, <span style="color: #ffd95e; font-weight: bold;">itemName</span> and <span style="color: #ffd95e; font-weight: bold;">itemAmount</span>.
+                  <br>
+                  3. In our example, we have a <span style="color: #ffd95e; font-weight: bold;">'!timeout'</span> command want to check if the target has a <span style="color: #ffd95e; font-weight: bold;">Trap Card</span> in their inventory to potentially repel the timeout command.
+                  <br>
+                  4. So the <span style="color: #ffd95e; font-weight: bold;">Value</span> for <span style="color: #ffd95e; font-weight: bold;">targetUserName</span> will just be <span style="color: #ffd95e; font-weight: bold;">%rawInput%</span>, because the the redeemer enters the name of our target as the command input. Our <span style="color: #ffd95e; font-weight: bold;">itemName</span> is <span style="color: #ffd95e; font-weight: bold;">Trap Card</span> and our <span style="color: #ffd95e; font-weight: bold;">itemAmount</span> is <span style="color: #ffd95e; font-weight: bold;">1</span>.
+                  <br>
+                  6. Create a new subaction: <span style="color: #ffd95e; font-weight: bold;">Core → Actions → Run Action</span> and place it below the <span style="color: #ffd95e; font-weight: bold;">Set Argument</span> subactions.
+                  <br>
+                  7. Select the action <span style="color: #ffd95e; font-weight: bold;">[USER INVENTORY] [M] 5 - Check If User Has Item</span> and check <span style="color: #ffd95e; font-weight: bold;">Run Action Immediately</span>.
+                  <br>
+                  8. Running the action will populate the variable <span style="color: #ffd95e; font-weight: bold;">%hasItem%</span> that is either <span style="color: #ffd95e; font-weight: bold;">True</span> or <span style="color: #ffd95e; font-weight: bold;">False</span>. So you can then create a new subaction <span style="color: #ffd95e; font-weight: bold;">Core → Logic → If/Else</span> and check if <span style="color: #ffd95e; font-weight: bold;">%hasItem% Equals True</span>. Then if <span style="color: #ffd95e; font-weight: bold;">True</span>, you can do whatever you want in the <span style="color: #ffd95e; font-weight: bold;">True Result</span> section and if <span style="color: #ffd95e; font-weight: bold;">False</span>, whatever you want to do in the <span style="color: #ffd95e; font-weight: bold;">False Result</span> section.
+                  <br>
+                    <br><br>
+                    <img src="{{ site.baseurl }}/assets/faq/user-inventory/user-inventory-example-1.webp" class="extension-image-smol" style="border-radius: 5px">
+
+                </p>
+
+            </div>
+            <!--------------------------------->
+                   <div class="extension-title-text-box-long">
+                <h3> <span style="font-weight: bold; color: #fff">How do I create a loot table?</span></h3>
+                <p>
+                  1. Open the Settings UI and head to the Loot Tables tab.
+                  <br>
+                  2. Enter a name for the loot table, for example Chest (Epic). This will then later be used in the <span style="color: #ffd95e; font-weight: bold;">[USER INVENTORY] [L] 1 - Loot Random Item</span> action to determine which pool the random item is being looted from.
+                  <br>
+                  3. You can now start adding the items you have previously created in the <span style="color: #ffd95e; font-weight: bold;">Items</span> tab. Give them any amount you want and then the chance for them to be looted. Can be decimal numbers as well. Just make sure all items add up to exactly 100% for the table.
+                  <br>
+                  1. Hit <span style="color: #ffd95e; font-weight: bold;">Save</span> and you are done.
+                  
+                    <br><br>
+                    <img src="{{ site.baseurl }}/assets/faq/user-inventory/user-inventory-example-6.webp" class="extension-image-smol" style="border-radius: 5px">
+
+                </p>
+
+            </div>
+            <!--------------------------------->
+                  <div class="extension-title-text-box-long">
+                <h3> <span style="font-weight: bold; color: #fff">How do I create a random loot action and assign one of my loot tables?</span></h3>
+                <p>
+                  1. Create a new action.
+                  <br>
+                  2. Create two new subactions: <span style="color: #ffd95e; font-weight: bold;">Core → Arguments → Set Argument</span>. Check the <span style="color: #ffd95e; font-weight: bold;">[USER INVENTORY] [L] 1 - Loot Random Item</span> action what those arguments are called: <span style="color: #ffd95e; font-weight: bold;">targetUserName</span> and <span style="color: #ffd95e; font-weight: bold;">lootTableName</span>.
+                  <br>
+                  3. In our example, we have a <span style="color: #ffd95e; font-weight: bold;">'!loot'</span> command that users can redeem once per stream to get a random item from our loot table called <span style="color: #ffd95e; font-weight: bold;">Daily Loot Chest</span> (we already created that one in the <span style="color: #ffd95e; font-weight: bold;">Loot Tables</span> tab of our <span style="color: #ffd95e; font-weight: bold;">Settings UI</span>)
+                  <br>
+                  4. So the <span style="color: #ffd95e; font-weight: bold;">Value</span> for <span style="color: #ffd95e; font-weight: bold;">targetUserName</span> will just be <span style="color: #ffd95e; font-weight: bold;">%userName%</span>, because the the redeemer also is our receiving target. Our <span style="color: #ffd95e; font-weight: bold;">lootTableName</span> is <span style="color: #ffd95e; font-weight: bold;">Daily Loot Chest</span> and has to exactly match whatever we defined in our loot tables.
+                  <br>
+                  6. Create a new subaction: <span style="color: #ffd95e; font-weight: bold;">Core → Actions → Run Action</span> and place it below the <span style="color: #ffd95e; font-weight: bold;">Set Argument</span> subactions.
+                  <br>
+                  7. Select the action <span style="color: #ffd95e; font-weight: bold;">[USER INVENTORY] [L] 1 - Loot Random Item</span> and check <span style="color: #ffd95e; font-weight: bold;">Run Action Immediately</span>.
+                  <br>
+                  8. And then you are done. You can run the command and you will loot a random item of that loot table. Note: This action also populates some variables you can use afterwards: <span style="color: #ffd95e; font-weight: bold;">%lootedItemName%</span>, <span style="color: #ffd95e; font-weight: bold;">%lootedItemAmount%</span> and <span style="color: #ffd95e; font-weight: bold;">%lootedItemChance%</span>.
+                  <br>
+                    <br><br>
+                    <img src="{{ site.baseurl }}/assets/faq/user-inventory/user-inventory-example-3.webp" class="extension-image-smol" style="border-radius: 5px">
+
+                </p>
+
+            </div>
+            <!--------------------------------->
+        
+
+        </div>
+    </div>
+    <!---------------------------------------------------------------------------------------------------------------------------------->
+
+    <div class="accordion-divider"></div>
+    <!----    CHANGELOG    ------------------------------------------------------------------------------------------------------------------------------>
+    <div class="accordion-item">
+        <div class="accordion-header" id="changelog" onclick="toggleAccordion('changelog-acc')">
+            <span class="iconify title-icon" data-icon="line-md:rotate-270"></span>
+            <span>CHANGELOG</span>
+            <span class="iconify accordion-icon" data-icon="ic:baseline-keyboard-arrow-right"></span>
+        </div>
+        <div class="accordion-content" id="changelog-acc">
+            <table class="extension-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Changes</th>
+                        <th>Version</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!---------------------------------------------->
+                    <tr>
+                        <td>June 18, 2025</td>
+                        <td>Release</td>
+                        <td>1.0.0</td>
+                    </tr>
+                    <!---------------------------------------------->
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!---------------------------------------------------------------------------------------------------------------------------------->
+    <div class="accordion-divider"></div>
+    <!---------------------------------------------->
+</div>
