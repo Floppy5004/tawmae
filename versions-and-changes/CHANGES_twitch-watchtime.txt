@@ -1,1 +1,2 @@
-• Added a prompt to confirm the dll download if not already present
+• Added leaderboard customizations
+• Added a snooze button for updates notifications
