@@ -1,1 +1,1 @@
-• Release
+• Bumped the required dll version to 1.2.5 due to a bug for the item list when pressing 'Save'
