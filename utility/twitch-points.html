@@ -461,6 +461,172 @@ og_image: "/assets/page-design/page-cards/twitch-points.webp"
     </div>
     <!---------------------------------------------------------------------------------------------------------------------------------->
     <div class="accordion-divider"></div>
+  <!----    CUSTOM TRIGGERS    ------------------------------------------------------------------------------------------------------------------------------>
+    <div class="accordion-item">
+        <div class="accordion-header" id="custom-triggers" onclick="toggleAccordion('custom-triggers-acc')">
+            <span class="iconify title-icon" data-icon="line-md:bell-alert"></span>
+            <span>CUSTOM TRIGGERS</span>
+            <span class="iconify accordion-icon" data-icon="ic:baseline-keyboard-arrow-right"></span>
+        </div>
+        <div class="accordion-content" id="custom-triggers-acc">
+            <div class="extension-title-text-box-long">
+            <p>Under <span style="font-weight: bold; color: #ffd95e;">Custom -> TWITCH POINTS</span> you will be able
+                to find triggers for all the games. They all populate variables when triggered. You check them out below or in the action history.</p>
+            </div>
+            <!--------------------------------->
+            <img src="{{ site.baseurl }}/assets/custom-triggers/twitch-points.png" class="extension-image">
+            <!--------------------------------->
+            <p><br></p>
+            <!--------------------------------->
+            <!-- Gamble Finished -->
+<div class="extension-title-text-box-long">
+    <p style="font-weight: bold; font-size: 1.6rem; color: #ffd95e">Gamble Finished</p>
+    <p>Fires when a gamble game finishes.<br></p>
+    <p style="font-weight: bold;">Available variables:</p>
+    <ul style="list-style-position: inside; padding-left: 0; text-align: left;">
+        <li><span style="font-weight: bold; color: #ffd95e;">user</span> <span style="background-color: #fff; color: black; padding: 0 5px; opacity: 0.45;">(string)</span> – the username of the gambler</li>
+        <li><span style="font-weight: bold; color: #ffd95e;">userId</span> <span style="background-color: #fff; color: black; padding: 0 5px; opacity: 0.45;">(string)</span> – the ID of the gambler</li>
+        <li><span style="font-weight: bold; color: #ffd95e;">hasWon</span> <span style="background-color: #fff; color: black; padding: 0 5px; opacity: 0.45;">(bool)</span> – whether the gambler won</li>
+        <li><span style="font-weight: bold; color: #ffd95e;">wentAllIn</span> <span style="background-color: #fff; color: black; padding: 0 5px; opacity: 0.45;">(bool)</span> – whether the gambler went all in</li>
+        <li><span style="font-weight: bold; color: #ffd95e;">pointsGambled</span> <span style="background-color: #fff; color: black; padding: 0 5px; opacity: 0.45;">(number)</span> – the number of points gambled</li>
+        <li><span style="font-weight: bold; color: #ffd95e;">pointsBefore</span> <span style="background-color: #fff; color: black; padding: 0 5px; opacity: 0.45;">(number)</span> – points before the gamble</li>
+        <li><span style="font-weight: bold; color: #ffd95e;">pointsAfter</span> <span style="background-color: #fff; color: black; padding: 0 5px; opacity: 0.45;">(number)</span> – points after the gamble</li>
+    </ul>
+</div>
+
+<!-- Rumble Started -->
+<div class="extension-title-text-box-long">
+    <p style="font-weight: bold; font-size: 1.6rem; color: #ffd95e">Rumble Started</p>
+    <p>Fires when a new rumble starts.<br></p>
+    <p style="font-weight: bold;">Available variables:</p>
+    <ul style="list-style-position: inside; padding-left: 0; text-align: left;">
+        <li><span style="font-weight: bold; color: #ffd95e;">pointsPrize</span> <span style="background-color: #fff; color: black; padding: 0 5px; opacity: 0.45;">(number)</span> – total points prize for the rumble</li>
+        <li><span style="font-weight: bold; color: #ffd95e;">timeToJoin</span> <span style="background-color: #fff; color: black; padding: 0 5px; opacity: 0.45;">(number)</span> – time in seconds to join the rumble</li>
+        <li><span style="font-weight: bold; color: #ffd95e;">entryFeeValue</span> <span style="background-color: #fff; color: black; padding: 0 5px; opacity: 0.45;">(number)</span> – points fee required to enter</li>
+    </ul>
+</div>
+
+<!-- Rumble Entered -->
+<div class="extension-title-text-box-long">
+    <p style="font-weight: bold; font-size: 1.6rem; color: #ffd95e">Rumble Entered</p>
+    <p>Fires when a user enters the rumble.<br></p>
+    <p style="font-weight: bold;">Available variables:</p>
+    <ul style="list-style-position: inside; padding-left: 0; text-align: left;">
+        <li><span style="font-weight: bold; color: #ffd95e;">user</span> <span style="background-color: #fff; color: black; padding: 0 5px; opacity: 0.45;">(string)</span> – username of the entrant</li>
+        <li><span style="font-weight: bold; color: #ffd95e;">userId</span> <span style="background-color: #fff; color: black; padding: 0 5px; opacity: 0.45;">(string)</span> – ID of the entrant</li>
+        <li><span style="font-weight: bold; color: #ffd95e;">pointsBeforeEntry</span> <span style="background-color: #fff; color: black; padding: 0 5px; opacity: 0.45;">(number)</span> – points before joining</li>
+        <li><span style="font-weight: bold; color: #ffd95e;">pointsAfterEntry</span> <span style="background-color: #fff; color: black; padding: 0 5px; opacity: 0.45;">(number)</span> – points after joining</li>
+    </ul>
+</div>
+
+<!-- Rumble Finished -->
+<div class="extension-title-text-box-long">
+    <p style="font-weight: bold; font-size: 1.6rem; color: #ffd95e">Rumble Finished</p>
+    <p>Fires when the rumble ends.<br></p>
+    <p style="font-weight: bold;">Available variables:</p>
+    <ul style="list-style-position: inside; padding-left: 0; text-align: left;">
+        <li><span style="font-weight: bold; color: #ffd95e;">winnerUser</span> <span style="background-color: #fff; color: black; padding: 0 5px; opacity: 0.45;">(string)</span> – username of the winner</li>
+        <li><span style="font-weight: bold; color: #ffd95e;">winnerUserId</span> <span style="background-color: #fff; color: black; padding: 0 5px; opacity: 0.45;">(string)</span> – ID of the winner</li>
+        <li><span style="font-weight: bold; color: #ffd95e;">wonPoints</span> <span style="background-color: #fff; color: black; padding: 0 5px; opacity: 0.45;">(number)</span> – points won by the winner</li>
+        <li><span style="font-weight: bold; color: #ffd95e;">defeatedUserCount</span> <span style="background-color: #fff; color: black; padding: 0 5px; opacity: 0.45;">(number)</span> – number of opponents defeated</li>
+    </ul>
+</div>
+
+<!-- Duel Challenged -->
+<div class="extension-title-text-box-long">
+    <p style="font-weight: bold; font-size: 1.6rem; color: #ffd95e">Duel Challenged</p>
+    <p>Fires when a duel is challenged.<br></p>
+    <p style="font-weight: bold;">Available variables:</p>
+    <ul style="list-style-position: inside; padding-left: 0; text-align: left;">
+        <li><span style="font-weight: bold; color: #ffd95e;">challengerUser</span> <span style="background-color: #fff; color: black; padding: 0 5px; opacity: 0.45;">(string)</span> – username of the challenger</li>
+        <li><span style="font-weight: bold; color: #ffd95e;">challengerUserId</span> <span style="background-color: #fff; color: black; padding: 0 5px; opacity: 0.45;">(string)</span> – ID of the challenger</li>
+        <li><span style="font-weight: bold; color: #ffd95e;">challengedUser</span> <span style="background-color: #fff; color: black; padding: 0 5px; opacity: 0.45;">(string)</span> – username of the challenged</li>
+        <li><span style="font-weight: bold; color: #ffd95e;">challengedUserId</span> <span style="background-color: #fff; color: black; padding: 0 5px; opacity: 0.45;">(string)</span> – ID of the challenged</li>
+        <li><span style="font-weight: bold; color: #ffd95e;">duelsAcceptTime</span> <span style="background-color: #fff; color: black; padding: 0 5px; opacity: 0.45;">(DateTime)</span> – expiration time for accepting the duel</li>
+    </ul>
+</div>
+
+<!-- Duel Accepted -->
+<div class="extension-title-text-box-long">
+    <p style="font-weight: bold; font-size: 1.6rem; color: #ffd95e">Duel Accepted</p>
+    <p>Fires when a duel is accepted.<br></p>
+    <p style="font-weight: bold;">Available variables:</p>
+    <ul style="list-style-position: inside; padding-left: 0; text-align: left;">
+        <li><span style="font-weight: bold; color: #ffd95e;">challengerUser</span> <span style="background-color: #fff; color: black; padding: 0 5px; opacity: 0.45;">(string)</span> – username of the challenger</li>
+        <li><span style="font-weight: bold; color: #ffd95e;">challengerUserId</span> <span style="background-color: #fff; color: black; padding: 0 5px; opacity: 0.45;">(string)</span> – ID of the challenger</li>
+        <li><span style="font-weight: bold; color: #ffd95e;">challengedUser</span> <span style="background-color: #fff; color: black; padding: 0 5px; opacity: 0.45;">(string)</span> – username of the challenged</li>
+        <li><span style="font-weight: bold; color: #ffd95e;">challengedUserId</span> <span style="background-color: #fff; color: black; padding: 0 5px; opacity: 0.45;">(string)</span> – ID of the challenged</li>
+        <li><span style="font-weight: bold; color: #ffd95e;">duelsAcceptTime</span> <span style="background-color: #fff; color: black; padding: 0 5px; opacity: 0.45;">(DateTime)</span> – time when the duel was accepted</li>
+    </ul>
+</div>
+
+<!-- Duel Finished -->
+<div class="extension-title-text-box-long">
+    <p style="font-weight: bold; font-size: 1.6rem; color: #ffd95e">Duel Finished</p>
+    <p>Fires when a duel finishes.<br></p>
+    <p style="font-weight: bold;">Available variables:</p>
+    <ul style="list-style-position: inside; padding-left: 0; text-align: left;">
+        <li><span style="font-weight: bold; color: #ffd95e;">victoriousUser</span> <span style="background-color: #fff; color: black; padding: 0 5px; opacity: 0.45;">(string)</span> – username of the winner</li>
+        <li><span style="font-weight: bold; color: #ffd95e;">victoriousUserId</span> <span style="background-color: #fff; color: black; padding: 0 5px; opacity: 0.45;">(string)</span> – ID of the winner</li>
+        <li><span style="font-weight: bold; color: #ffd95e;">victoriousUser_oldPointsValue</span> <span style="background-color: #fff; color: black; padding: 0 5px; opacity: 0.45;">(number)</span> – winner’s points before duel</li>
+        <li><span style="font-weight: bold; color: #ffd95e;">victoriousUser_newPointsValue</span> <span style="background-color: #fff; color: black; padding: 0 5px; opacity: 0.45;">(number)</span> – winner’s points after duel</li>
+        <li><span style="font-weight: bold; color: #ffd95e;">defeatedUser</span> <span style="background-color: #fff; color: black; padding: 0 5px; opacity: 0.45;">(string)</span> – username of the defeated</li>
+        <li><span style="font-weight: bold; color: #ffd95e;">defeatedUserId</span> <span style="background-color: #fff; color: black; padding: 0 5px; opacity: 0.45;">(string)</span> – ID of the defeated</li>
+        <li><span style="font-weight: bold; color: #ffd95e;">defeatedUser_oldPointsValue</span> <span style="background-color: #fff; color: black; padding: 0 5px; opacity: 0.45;">(number)</span> – loser’s points before duel</li>
+        <li><span style="font-weight: bold; color: #ffd95e;">defeatedUser_newPointsValue</span> <span style="background-color: #fff; color: black; padding: 0 5px; opacity: 0.45;">(number)</span> – loser’s points after duel</li>
+    </ul>
+</div>
+
+<!-- Duel Expired -->
+<div class="extension-title-text-box-long">
+    <p style="font-weight: bold; font-size: 1.6rem; color: #ffd95e">Duel Expired</p>
+    <p>Fires when a duel challenge expires without acceptance.<br></p>
+    <p style="font-weight: bold;">Available variables:</p>
+    <ul style="list-style-position: inside; padding-left: 0; text-align: left;">
+        <li><span style="font-weight: bold; color: #ffd95e;">challengerUser</span> <span style="background-color: #fff; color: black; padding: 0 5px; opacity: 0.45;">(string)</span> – username of the challenger</li>
+        <li><span style="font-weight: bold; color: #ffd95e;">challengerUserId</span> <span style="background-color: #fff; color: black; padding: 0 5px; opacity: 0.45;">(string)</span> – ID of the challenger</li>
+        <li><span style="font-weight: bold; color: #ffd95e;">challengedUser</span> <span style="background-color: #fff; color: black; padding: 0 5px; opacity: 0.45;">(string)</span> – username of the challenged</li>
+        <li><span style="font-weight: bold; color: #ffd95e;">challengedUserId</span> <span style="background-color: #fff; color: black; padding: 0 5px; opacity: 0.45;">(string)</span> – ID of the challenged</li>
+        <li><span style="font-weight: bold; color: #ffd95e;">duelsAcceptTime</span> <span style="background-color: #fff; color: black; padding: 0 5px; opacity: 0.45;">(DateTime)</span> – time when the challenge expired</li>
+    </ul>
+</div>
+
+<!-- Scratch Card Won -->
+<div class="extension-title-text-box-long">
+    <p style="font-weight: bold; font-size: 1.6rem; color: #ffd95e">Scratch Card Won</p>
+    <p>Fires when a scratch card reveals a win.<br></p>
+    <p style="font-weight: bold;">Available variables:</p>
+    <ul style="list-style-position: inside; padding-left: 0; text-align: left;">
+        <li><span style="font-weight: bold; color: #ffd95e;">user</span> <span style="background-color: #fff; color: black; padding: 0 5px; opacity: 0.45;">(string)</span> – username of the player</li>
+        <li><span style="font-weight: bold; color: #ffd95e;">userId</span> <span style="background-color: #fff; color: black; padding: 0 5px; opacity: 0.45;">(string)</span> – ID of the player</li>
+        <li><span style="font-weight: bold; color: #ffd95e;">jackpotValue</span> <span style="background-color: #fff; color: black; padding: 0 5px; opacity: 0.45;">(number)</span> – points won from the scratch</li>
+        <li><span style="font-weight: bold; color: #ffd95e;">pointsBefore</span> <span style="background-color: #fff; color: black; padding: 0 5px; opacity: 0.45;">(number)</span> – points before scratching</li>
+        <li><span style="font-weight: bold; color: #ffd95e;">pointsAfter</span> <span style="background-color: #fff; color: black; padding: 0 5px; opacity: 0.45;">(number)</span> – points after scratching</li>
+    </ul>
+</div>
+
+<!-- Scratch Card Lost -->
+<div class="extension-title-text-box-long">
+    <p style="font-weight: bold; font-size: 1.6rem; color: #ffd95e">Scratch Card Lost</p>
+    <p>Fires when a scratch card reveals a loss.<br></p>
+    <p style="font-weight: bold;">Available variables:</p>
+    <ul style="list-style-position: inside; padding-left: 0; text-align: left;">
+        <li><span style="font-weight: bold; color: #ffd95e;">user</span> <span style="background-color: #fff; color: black; padding: 0 5px; opacity: 0.45;">(string)</span> – username of the player</li>
+        <li><span style="font-weight: bold; color: #ffd95e;">userId</span> <span style="background-color: #fff; color: black; padding: 0 5px; opacity: 0.45;">(string)</span> – ID of the player</li>
+        <li><span style="font-weight: bold; color: #ffd95e;">jackpotValue</span> <span style="background-color: #fff; color: black; padding: 0 5px; opacity: 0.45;">(number)</span> – potential jackpot value of the scratch</li>
+        <li><span style="font-weight: bold; color: #ffd95e;">pointsBefore</span> <span style="background-color: #fff; color: black; padding: 0 5px; opacity: 0.45;">(number)</span> – points before scratching</li>
+        <li><span style="font-weight: bold; color: #ffd95e;">pointsAfter</span> <span style="background-color: #fff; color: black; padding: 0 5px; opacity: 0.45;">(number)</span> – points after scratching</li>
+    </ul>
+</div>
+
+
+            <!---------------------------------------------->
+
+        </div>
+    </div>
+    <!---------------------------------------------------------------------------------------------------------------------------------->
+
+    <div class="accordion-divider"></div>
   <!----    FAQ    ------------------------------------------------------------------------------------------------------------------------------>
     <div class="accordion-item">
         <div class="accordion-header" id="faq" onclick="toggleAccordion('faq-acc')">
@@ -544,6 +710,12 @@ og_image: "/assets/page-design/page-cards/twitch-points.webp"
                     </tr>
                 </thead>
                 <tbody>
+                  <!---------------------------------------------->
+                    <tr>
+                        <td>June 19, 2025</td>
+                        <td>Added Custom Triggers for all games</td>
+                        <td>0.2.6</td>
+                    </tr>
                   <!---------------------------------------------->
                     <tr>
                         <td>June 19, 2025</td>
