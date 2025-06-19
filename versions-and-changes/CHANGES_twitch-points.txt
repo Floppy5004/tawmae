@@ -1,2 +1,2 @@
-• Added more leaderboard options
-• Added Snooze button for update notifications
+• Added an 'All Or Nothing' option for gambling
+• Added integrated points validation for leaderboards
