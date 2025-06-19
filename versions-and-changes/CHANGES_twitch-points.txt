@@ -1,2 +1,1 @@
-• Added an 'All Or Nothing' option for gambling
-• Added integrated points validation for leaderboards
+• Added Custom Triggers for all games
