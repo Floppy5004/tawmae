@@ -427,6 +427,28 @@ og_image: "/assets/page-design/page-cards/user-inventory.webp"
                 </p>
 
             </div>
+           <!--------------------------------->
+            <div class="extension-title-text-box-long">
+                <h3> <span style="font-weight: bold; color: #fff">I can sell items, but how can I make it so viewers can buy items?</span></h3>
+                <p>
+                  This already works like the <span style="color: #ffd95e; font-weight: bold;">'add item'</span> example above, but before handing the item out, you check for their points balance and deduct them. Depending which currency extension you use, there might already be a Check action implemented. I'll use my TWITCH POINTS extension as an example.
+                  <br>
+                  1. In this example, we want viewers to be able to buy a single <span style="color: #ffd95e; font-weight: bold;">Health Potion</span> with a <span style="color: #ffd95e; font-weight: bold;">'!buyPotion'</span> command. So we first create a new action and just duplicate all the subactions from the <span style="color: #ffd95e; font-weight: bold;">'add item'</span> example above.
+                   <br>
+                  2. Now we create a new subaction <span style="color: #ffd95e; font-weight: bold;">Core -> Arguments -> Set Argument</span>, with <span style="color: #ffd95e; font-weight: bold;">requiredPoints</span> as its <span style="color: #ffd95e; font-weight: bold;">Variable Name</span> and its price as the <span style="color: #ffd95e; font-weight: bold;">Value</span>, in our case <span style="color: #ffd95e; font-weight: bold;">500</span>. Place it on the very top.
+                  <br>
+                  3. Then we add another <span style="color: #ffd95e; font-weight: bold;">Core → Actions → Run Action</span> subaction and select the action <span style="color: #ffd95e; font-weight: bold;">[TWITCH POINTS] [A] 4 - Check If Redeemer Has Enough Points</span>. Place it right below the <span style="color: #ffd95e; font-weight: bold;">requiredPoints</span> subaction.
+                 <br>
+                  4. And we're done! People can now buy a potion for 500 points.
+                  
+        
+
+                  <br>
+                    <br><br>
+                    <img src="{{ site.baseurl }}/assets/faq/user-inventory/user-inventory-example-buy.webp" class="extension-image-smol" style="border-radius: 5px">
+                </p>
+
+            </div>
             <!--------------------------------->
                   <div class="extension-title-text-box-long">
                 <h3> <span style="font-weight: bold; color: #fff">How do I create an item effect?</span></h3>
