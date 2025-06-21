@@ -432,7 +432,7 @@ og_image: "/assets/page-design/page-cards/user-inventory.webp"
                 <h3> <span style="font-weight: bold; color: #fff">I can sell items, but how can I make it so viewers can buy items?</span></h3>
                 <p>
                   This already works like the <span style="color: #ffd95e; font-weight: bold;">'add item'</span> example above, but before handing the item out, you check for their points balance and deduct them. Depending which currency extension you use, there might already be a Check action implemented. I'll use my <a href="https://tawmae.xyz/utility/twitch-points.html" target="_blank">TWITCH POINTS</a> extension as an example.
-                  <br>
+                  <br><br>
                   1. In this example, we want viewers to be able to buy a single <span style="color: #ffd95e; font-weight: bold;">Health Potion</span> with a <span style="color: #ffd95e; font-weight: bold;">'!buyPotion'</span> command. So we first create a new action and just duplicate all the subactions from the <span style="color: #ffd95e; font-weight: bold;">'add item'</span> example above.
                    <br>
                   2. Now we create a new subaction <span style="color: #ffd95e; font-weight: bold;">Core -> Arguments -> Set Argument</span>, with <span style="color: #ffd95e; font-weight: bold;">requiredPoints</span> as its <span style="color: #ffd95e; font-weight: bold;">Variable Name</span> and its price as the <span style="color: #ffd95e; font-weight: bold;">Value</span>, in our case <span style="color: #ffd95e; font-weight: bold;">500</span>. Place it on the very top.
