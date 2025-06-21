@@ -1,2 +1,1 @@
-• Added a method to buy items
-• Added a method to post all available items tp chat
+• Added an exclusion list for buying and selling specific items
