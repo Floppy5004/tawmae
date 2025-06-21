@@ -1,1 +1,2 @@
-• Bumped the required dll version to 1.2.5 due to a bug for the item list when pressing 'Save'
+• Added a method to buy items
+• Added a method to post all available items tp chat
