@@ -185,6 +185,13 @@ document.addEventListener("DOMContentLoaded", function() {
         theme: 'light-border',
         delay: [100, 50], 
     });
+    tippy('.paypal-link', {
+        content: 'i love money',
+        placement: 'bottom',
+        animation: 'scale-subtle',
+        theme: 'light-border',
+        delay: [100, 50], 
+    });
     tippy('.product-card', {
         placement: 'bottom-end',
         animation: 'scale-subtle',
