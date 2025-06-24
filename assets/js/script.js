@@ -147,7 +147,7 @@ $(document).ready(function(){
 
 document.addEventListener("DOMContentLoaded", function() {
     tippy('.discord-link', {
-        content: 'Need help with something?',
+        content: 'Discord',
         placement: 'bottom',
         animation: 'scale-subtle',
         theme: 'light-border',
@@ -155,7 +155,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     tippy('.bluesky-link', {
-        content: 'Follow me on Bluesky (or not)',
+        content: 'Bluesky',
         placement: 'bottom',
         animation: 'scale-subtle',
         theme: 'light-border',
@@ -163,7 +163,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     tippy('.twitch-link', {
-        content: 'I don\'t stream KEKW',
+        content: 'Twitch',
         placement: 'bottom',
         animation: 'scale-subtle',
         theme: 'light-border',
@@ -171,7 +171,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     tippy('.youtube-link', {
-        content: 'My YouTube channel (german only)',
+        content: 'YouTube',
         placement: 'bottom',
         animation: 'scale-subtle',
         theme: 'light-border',
@@ -179,14 +179,14 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     tippy('.kofi-link', {
-        content: 'Buy me an Iced Pumpkin Spice Latte',
+        content: 'KoFi',
         placement: 'bottom',
         animation: 'scale-subtle',
         theme: 'light-border',
         delay: [100, 50], 
     });
     tippy('.paypal-link', {
-        content: 'i love money',
+        content: 'PayPal',
         placement: 'bottom',
         animation: 'scale-subtle',
         theme: 'light-border',
