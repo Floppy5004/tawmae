@@ -6,6 +6,11 @@ keywords: "Twitch, OBS, Streamer.bot, VIP, temporary VIP, timed VIP, Stream"
 og_image: "/assets/page-design/page-cards/temporary-vip.webp"
 ---
 <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/extension-page.css">
+
+
+<div class="warning-banner" style="background-color: #ffb347; color: #0d1117; border: 1px solid #ffeeba; padding: 10px; text-align: center; margin-bottom: 1rem;">
+  This extension requires <strong>Streamer.bot version 1.0.0</strong>.
+</div>
 <!----    TITLE   ------------------------------------------------------------------------------------------------------------------------------>
 <div class="extension-title">
     <div class="extension-title-text-box">
@@ -82,7 +87,7 @@ og_image: "/assets/page-design/page-cards/temporary-vip.webp"
             <div class="section-divider"></div>
             <!--------------------------------------------->
             <div class="description-container">
-                <img src="{{ site.baseurl }}/assets/setup/import-actions.webp" class="extension-image">
+                <img src="{{ site.baseurl }}/assets/setup/import-actions-1.0.0.png" class="extension-image">
                 <div class="extension-title-text-box">
                     <p><span style="font-weight: bold; color: #fff;">2.</span> In <span
                              style="font-weight: bold; color: #ffd95e;">Streamer.bot</span>, click the <span
@@ -110,7 +115,27 @@ og_image: "/assets/page-design/page-cards/temporary-vip.webp"
 
                     </p>
                 </div>
-                <img src="{{ site.baseurl }}/assets/setup/enable-commands.webp" class="extension-image">
+                <img src="{{ site.baseurl }}/assets/setup/enable-commands-1.0.0.png" class="extension-image">
+            </div>
+
+            <!---------------------------------------------->
+          <div class="description-container">
+
+               <img src="{{ site.baseurl }}/assets/setup/run-settings-ui.webp" class="extension-image">
+                <div class="extension-title-text-box">
+                    <p><span style="font-weight: bold; color: #fff;">5.</span>
+                        In the <span  style="font-weight: bold; color: #ffd95e;">[TEMPORARY VIP] 0 - Settings</span> action, rightclick the <span  style="font-weight: bold; color: #ffd95e;">Test</span> trigger and hit <span  style="font-weight: bold; color: #ffd95e;">Test Trigger</span> to open the Settings UI once. This makes sure that the .dll file has been downloaded and is up to date.
+                      <br><br>If you <strong>don't</strong> have my .dll in your Streamer.bot directory already, it will ask you to <strong>automatically download</strong> it. If you wish to manually place it there, you can to that <a href="https://tawmae.xyz/dll" style="text-decoration: underline; color: inherit;">here</a>.<br><br> 
+                      Press <span  style="font-weight: bold; color: #ffd95e;">Save And Exit</span> afterwards.  
+                      <br><br>
+                        And then you're done!
+                        <br>
+                        <span style="font-size: 1.5rem">Pog Clap</span>
+
+                    </p>
+                </div>
+           
+                
             </div>
 
             <!---------------------------------------------->
@@ -212,8 +237,7 @@ og_image: "/assets/page-design/page-cards/temporary-vip.webp"
             <div class="settings-ui-container">
                 <div class="extension-title-text-box">
                     <p><span style="font-weight: bold; color: #fff;">General</span> <br>You can change the general
-                        settings here. <span  style="font-weight: bold; color: #ffd95e;">Default Time Amount</span> and
-                        <span  style="font-weight: bold; color: #ffd95e;">Default Time Unit</span> are just a fallback in
+                        settings here. <span  style="font-weight: bold; color: #ffd95e;">Default Time Value</span> is just a fallback in
                         case you didn't specify any timespan. You add the timespan in commands directly by input (see
                         <span  style="font-weight: bold; color: #ffd95e;">Commands</span> above) and for any other
                         trigger, you just add a <span  style="font-weight: bold; color: #ffd95e;">Set Argument</span>
@@ -257,6 +281,12 @@ og_image: "/assets/page-design/page-cards/temporary-vip.webp"
                     </tr>
                 </thead>
                 <tbody>
+                    <!---------------------------------------------->
+                    <tr>
+                        <td>June 25, 2025</td>
+                        <td>Settings UI overhaul for Streamer.bot 1.0.0</td>
+                        <td>1.1.0</td>
+                    </tr>
                     <!---------------------------------------------->
                     <tr>
                         <td>March 05, 2025</td>
