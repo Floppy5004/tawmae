@@ -1,1 +1,2 @@
-• Fix: Default Fallback Time didn't work for seconds, weeks and months
+STREAMER.BOT 1.0.0 ONLY:
+• Overhaul for Streamer.bot 1.0.0
