@@ -1,1 +1,1 @@
-• Fixed an issue where UI wouldn't launch on the initial setup
+• Refined the refresh buttons in the Settings UI (requires dll update)
