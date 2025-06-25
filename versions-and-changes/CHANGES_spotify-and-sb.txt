@@ -1,3 +1,2 @@
 Streamer.bot 1.0.0 ONLY:
-• Added song vars for 'Skip Song' and 'Voteskip'
-• Added option to snooze update notifs
+• Added a new command to add the current song to your liked songs
