@@ -1,1 +1,3 @@
-• Refined the refresh buttons in the Settings UI (requires dll update)
+• Moved Sale/Purchase exclusion to 'Items' tab
+• Added Usage Exclusion
+• Added Item Description
