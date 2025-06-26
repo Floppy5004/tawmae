@@ -1,1 +1,3 @@
-• Added Custom Triggers for all games
+• New feature: Tax Collection
+• Refreshed some UI elements (requires dll update)
+• Scratch Card win chance limit increased to 100%
