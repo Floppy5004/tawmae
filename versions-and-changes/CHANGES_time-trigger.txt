@@ -1,1 +1,2 @@
-• Added a prompt to confirm the dll download if not already present
+• Updated a UI element (requires dll update)
+• Improved debugging
