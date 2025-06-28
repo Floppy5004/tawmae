@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SPOTIFY Overlay Compact</title>
+  <script src="https://unpkg.com/@streamerbot/client/dist/streamerbot-client.js"></script>
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      background: transparent;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      width: 100vw;
+      font-family: Arial, sans-serif;
+    }
+
+    #info {
+      width: 300px;
+      padding: 6px;
+      background: #fff;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 4px;
+    }
+
+    #info img {
+      width: 16px;
+      height: 16px;
+      margin-right: 8px;
+    }
+
+    #info span {
+      color: #000;
+      font-weight: bold;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    #visualizer {
+      display: flex;
+      width: 300px;
+      height: 16px;
+      margin-top: 3px;
+      overflow: hidden;
+    }
+
+    #visualizer .bar {
+      width: 4px;
+      margin-right: 2px;
+      height: 100%;
+      background: #555;
+      border-radius: 1px;
+      transform-origin: bottom center;
+      transform: scaleY(0);
+      transition: transform .5s ease-in-out, background .2s ease-in-out;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="info">
+    <img src="https://github.com/tawmae/tawmae/blob/main/assets/pic/spotify-icon-black.png?raw=true" alt="Spotify" />
+    <span id="text"></span>
+  </div>
+  <div id="visualizer"></div>
+  <script>
+    const params = new URLSearchParams(location.search),
+      address = params.get('address') || '127.0.0.1',
+      port = parseInt(params.get('port') || '8080', 10),
+      password = params.get('password') || '';
+    const client = new StreamerbotClient({ address, port, password, endpoint: '/', autoReconnect: true, immediate: true });
+    const infoText = document.getElementById('text'),
+      viz = document.getElementById('visualizer');
+    const bars = [];
+    let progressPct = 0;
+    for (let i = 0; i < 50; i++) {
+      const b = document.createElement('div');
+      b.className = 'bar';
+      viz.appendChild(b);
+      bars.push(b);
+    }
+    function sanitize(s) {
+      return s.length > 50 ? s.slice(0, 50).trim() + '...' : s;
+    }
+    function updateBars() {
+      bars.forEach((b, i) => {
+        const v = Math.random() * 0.7 + 0.2;
+        b.style.transform = `scaleY(${v})`;
+        const pct = i / (bars.length - 1);
+        b.style.background = pct <= progressPct ? '#fff' : '#555';
+      });
+    }
+    let vizInterval;
+    function startViz() {
+      if (vizInterval) return;
+      updateBars();
+      vizInterval = setInterval(updateBars, 200);
+    }
+    function stopViz() {
+      clearInterval(vizInterval);
+      vizInterval = null;
+      bars.forEach(b => b.style.transform = 'scaleY(0)');
+    }
+    function onData(d) {
+      const s = d.songInfo;
+      infoText.textContent = sanitize(s.trackName + ' – ' + s.artists);
+      progressPct = s.durationMs > 0 ? s.progressMs / s.durationMs : 0;
+      s.isPlaying ? startViz() : stopViz();
+    }
+    client.on('Misc.GlobalVariableUpdated', ({ data }) => {
+      if (data.name === 'tawmae_SPOTIFY_AND_SB_INFO') {
+        try {
+          onData(typeof data.newValue === 'string' ? JSON.parse(data.newValue) : data.newValue);
+        } catch { }
+      }
+    });
+  </script>
+</body>
+
+</html>
