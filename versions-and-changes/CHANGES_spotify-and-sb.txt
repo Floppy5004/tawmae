@@ -1,2 +1,2 @@
 Streamer.bot 1.0.0 ONLY:
-• Added a new command to add the current song to your liked songs
+• Added a 4th style to the Overlays tab
