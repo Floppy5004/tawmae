@@ -1,3 +1,1 @@
-• Moved Sale/Purchase exclusion to 'Items' tab
-• Added Usage Exclusion
-• Added Item Description
+• Fixed a bug with decimal loot probalities for cultures with comma decimal separators (requires dll update)
