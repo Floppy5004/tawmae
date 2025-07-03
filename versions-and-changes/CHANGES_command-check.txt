@@ -1,1 +1,1 @@
-• Fixed an issue when posting an alias command with permission check enabled
+• Fixed an issue with an empty 'OTHERS' group being populated
