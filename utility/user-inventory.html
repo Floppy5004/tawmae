@@ -505,6 +505,8 @@ og_image: "/assets/page-design/page-cards/user-inventory.webp"
                   <br>
                   4. And you're done!
                   <br>
+                  <bold>Note:</bold> If you want to return an item if it's only supposed to be used on a target (and had no target), you can add a <span style="color: #ffd95e; font-weight: bold;">Run Action</span> subaction into the <span style="color: #ffd95e; font-weight: bold;">else condition</span> of <span style="color: #ffd95e; font-weight: bold;">%hasTarget%</span> and select the action <span style="color: #ffd95e; font-weight: bold;">[USER INVENTORY] [M] 7 - Return Used Item</span>.
+                  <br>
                     <br><br>
                     <img src="{{ site.baseurl }}/assets/faq/user-inventory/user-inventory-example-7.webp" class="extension-image-smol" style="border-radius: 5px">
                 </p>
@@ -615,6 +617,12 @@ og_image: "/assets/page-design/page-cards/user-inventory.webp"
                     </tr>
                 </thead>
                 <tbody>
+                  <!---------------------------------------------->
+                    <tr>
+                        <td>July 03, 2025</td>
+                        <td>Added a new action to return a used item; added a button to the settings UI that clears all unlisted items from all user's inventories; fixed a bug where the selected chat response type wouldn't apply; fixed a bug where items without any name (blank spaces) were listed in the item list response</td>
+                        <td>1.0.8</td>
+                    </tr>
                   <!---------------------------------------------->
                     <tr>
                         <td>June 28, 2025</td>
