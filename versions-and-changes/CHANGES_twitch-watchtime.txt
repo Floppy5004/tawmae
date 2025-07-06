@@ -1,2 +1,1 @@
-• Added leaderboard customizations
-• Added a snooze button for updates notifications
+• Added Import for 'Deepbot'
