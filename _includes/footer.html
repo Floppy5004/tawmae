@@ -1,4 +1,26 @@
 <footer class="site-footer">
+  <style>
+    .site-footer {
+      text-align: center;
+      padding: 1rem 0;
+      background: transparent;
+      position: static;    
+      margin-top: auto;    
+    }
+    .footer-imprint {
+      display: inline-block;
+      opacity: 0.6;
+      transition: opacity 0.2s ease;
+    }
+    .footer-imprint:hover {
+      opacity: 1;
+    }
+    .footer-imprint .iconify {
+      font-size: 1.25rem;
+      vertical-align: middle;
+    }
+  </style>
+
   <a href="{{ site.baseurl }}/imprint.html" class="footer-imprint" aria-label="Imprint">
     <span class="iconify" data-icon="mdi:information-outline"></span>
   </a>
