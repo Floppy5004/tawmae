@@ -38,6 +38,29 @@ main {
   padding-right: var(--min-gap);
 }
 
+.site-footer {
+  text-align: center;
+  padding: 1rem 0;
+  background: transparent;
+  position: static; 
+  margin-top: auto; 
+}
+
+.footer-imprint {
+  display: inline-block;
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+}
+
+.footer-imprint .iconify {
+  font-size: 1.25rem;  
+  vertical-align: middle;
+}
+
+.footer-imprint:hover {
+  opacity: 1;
+}
+
 header {
   position: fixed;
   top: 0;
