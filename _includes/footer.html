@@ -1,29 +1,40 @@
-<link rel="stylesheet" href="{{ site.baseurl }}/assets/css/style.css">
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/style.css">
+    <link rel="icon" href="{{ site.baseurl }}/assets/page-design/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css">
+    <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
+    <script defer src="{{ site.baseurl }}/assets/js/script.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
+    <script defer src="{{ site.baseurl }}/assets/js/extension-script.js"></script>
 
-<footer class="site-footer">
+<footer style="width:100%; text-align:center; margin-top:auto; padding:1rem 0;">
   <style>
-    .site-footer {
-      text-align: center;
-      padding: 1rem 0;
-      background: transparent;
-      position: static;    
-      margin-top: auto;    
+    .footer-link {
+      text-decoration: none;
+      color: white;
+      font-weight: 600;
+      white-space: nowrap;
+      font-size: 1rem;
+      text-shadow: 2px 2px 1px rgba(0,0,0,0.9);
+      transition: color 0.3s ease;
     }
-    .footer-imprint {
-      display: inline-block;
-      opacity: 0.6;
-      transition: opacity 0.2s ease;
+    .footer-link:hover {
+      color: #466090;
     }
-    .footer-imprint:hover {
-      opacity: 1;
-    }
-    .footer-imprint .iconify {
-      font-size: 1.25rem;
+    .footer-link .iconify {
       vertical-align: middle;
+      margin-bottom: 3px;
+      filter: drop-shadow(2px 2px 1px rgba(0,0,0,0.9));
+      font-size: 1.2rem;
     }
   </style>
 
-  <a href="{{ site.baseurl }}/imprint.html" class="footer-imprint" aria-label="Imprint">
-    <span class="iconify" data-icon="mdi:information-outline"></span>
+  <a href="{{ site.baseurl }}/imprint.html" class="footer-link">
+    <span class="iconify" data-icon="mdi:information-outline"></span> IMPRINT
   </a>
 </footer>
+
