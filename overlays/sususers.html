@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>tawmae - MOD TOOLS - Sus User Monitoring - 1.0.0</title>
+    <script src="https://code.iconify.design/iconify-icon/3.0.0/iconify-icon.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+        :root {
+            --bg: #1e1e2e;
+            --fg: #ddd;
+            --card-bg: #313244;
+            --card-hover: #45475a;
+            --btn-start: #6b83c2;
+            --btn-end: #4b6aa0;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            width: 100vw;
+            height: 100vh;
+            background: var(--bg);
+            color: var(--fg);
+            overflow: hidden;
+        }
+
+        #container {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            height: 100%;
+            overflow-y: auto;
+            padding: 4px 0;
+        }
+
+        .no-items {
+            padding: 20px;
+            text-align: center;
+            font-size: 1rem;
+        }
+
+        .row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--card-bg);
+            border-radius: 8px;
+            margin: 0 8px 8px;
+            padding: 8px 12px;
+            transition: background 0.3s;
+        }
+
+        .row:hover {
+            background: var(--card-hover);
+        }
+
+        .left {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .top-left {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+        }
+
+        .username {
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        .hide-icon {
+            font-size: 1rem;
+            cursor: pointer;
+            margin-left: 6px;
+            transition: color 0.2s;
+        }
+
+        .hide-icon:hover {
+            color: #fff;
+        }
+
+        .banned-text {
+            background: #b71c1c;
+            color: #fff;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+
+        .bottom-row {
+            display: flex;
+            gap: 6px;
+        }
+
+        .indicator {
+            background: #90ee90;
+            color: var(--bg);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+        }
+
+        .age-box {
+            background: #444;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+        }
+
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .buttons button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            padding: 6px 8px;
+            border: none;
+            border-radius: 6px;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            font-weight: bold;
+            color: #fff;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            background: linear-gradient(135deg, var(--btn-start), var(--btn-end));
+            min-width: 60px;
+            text-align: center;
+        }
+
+        .buttons button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+        }
+
+        .buttons button:active {
+            transform: translateY(0);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+        }
+
+        .buttons button:disabled {
+            opacity: 0.5;
+            cursor: default;
+        }
+
+        .row.banned .avatar {
+            filter: grayscale(100%);
+            opacity: 0.6;
+        }
+
+        .row.banned .username,
+        .row.banned .indicator,
+        .row.banned .age-box {
+            text-decoration: line-through;
+            opacity: 0.6;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@streamerbot/client/dist/streamerbot-client.js"></script>
+</head>
+
+<body>
+    <div id="container">
+        <div class="no-items">No new chatters yet.</div>
+    </div>
+    <script>
+        const VARIABLE_NAME = 'tawmae_MOD_TOOLS_New_Chatters_Monitoring';
+        const ACTION_IDS = {
+            purge: '0ddf6b2c-6217-46f2-8d77-a1875b2fe1d1',
+            timeout: '0ddf6b2c-6217-46f2-8d77-a1875b2fe1d1',
+            ban: '3e7edfca-d58b-4c1d-9d7b-63ddf791d9e5',
+            unban: '4ba3c55c-a68b-40fd-93a0-caa2d0510d6c'
+        };
+        const params = new URLSearchParams(window.location.search);
+        const client = new StreamerbotClient({
+            host: params.get('host') || '127.0.0.1',
+            port: params.get('port') || 8080,
+            endpoint: params.get('endpoint') || '/',
+            password: params.get('password') || '',
+            onConnect, logLevel: 'debug'
+        });
+        async function onConnect() {
+            try {
+                const { variable } = await client.getGlobal(VARIABLE_NAME, false);
+                const raw = typeof variable.value === 'string' ? variable.value : JSON.stringify(variable.value);
+                const entries = typeof variable.value === 'string' ? JSON.parse(variable.value) : variable.value;
+                const order = Array.from(raw.matchAll(/"(\d+)"\s*:/g), m => m[1]);
+                renderList(entries, order);
+            } catch {
+                renderList({});
+            }
+        }
+        client.on('Misc.GlobalVariableUpdated', ({ data }) => {
+            if (data.name === VARIABLE_NAME) {
+                try {
+                    const raw = typeof data.newValue === 'string' ? data.newValue : JSON.stringify(data.newValue);
+                    const entries = typeof data.newValue === 'string' ? JSON.parse(data.newValue) : data.newValue;
+                    const order = Array.from(raw.matchAll(/"(\d+)"\s*:/g), m => m[1]);
+                    renderList(entries, order);
+                } catch { }
+            }
+        });
+        function renderList(entries, order) {
+            const c = document.getElementById('container');
+            c.innerHTML = '';
+            const ids = order ? order.slice().reverse() : Object.keys(entries).reverse();
+            if (!ids.length) {
+                const d = document.createElement('div');
+                d.className = 'no-items'; d.innerText = 'No new chatters yet.';
+                c.appendChild(d);
+                return;
+            }
+            ids.forEach(id => {
+                const e = entries[id];
+                const row = document.createElement('div');
+                row.className = 'row' + (e.isBanned ? ' banned' : '');
+                const left = document.createElement('div'); left.className = 'left';
+                const tl = document.createElement('div'); tl.className = 'top-left';
+                const img = document.createElement('img'); img.className = 'avatar'; img.src = e.ProfileImageUrl;
+                const un = document.createElement('div'); un.className = 'username';
+                un.innerText = e.user + (e.userName && e.userName !== e.user.toLowerCase() ? ` (${e.userName})` : '');
+                const hideBtn = document.createElement('iconify-icon');
+                hideBtn.setAttribute('icon', 'mdi:eye-off-outline');
+                hideBtn.setAttribute('title', 'Hide user');
+                hideBtn.className = 'hide-icon';
+                hideBtn.onclick = () => row.style.display = 'none';
+                tl.append(img, un, hideBtn);
+                left.append(tl);
+                if (e.isBanned) {
+                    const bt = document.createElement('div'); bt.className = 'banned-text'; bt.innerText = 'BANNED';
+                    left.append(bt);
+                }
+                const bottom = document.createElement('div'); bottom.className = 'bottom-row';
+                const ind = document.createElement('div'); ind.className = 'indicator';
+                ind.innerText = e.newChatter ? 'New Chatter' : 'Returning Chatter';
+                const ag = document.createElement('div'); ag.className = 'age-box';
+                ag.innerText = `Account created ${e.accountAgeDays} days ago.`;
+                bottom.append(ind, ag);
+                left.append(bottom);
+                const btns = document.createElement('div'); btns.className = 'buttons';
+                [
+                    { icon: 'material-symbols:delete-forever-outline', txt: 'Purge', id: ACTION_IDS.purge, args: { user: e.user, userName: e.userName, userId: e.userId, duration: 1, fromMonitoringDock: true } },
+                    { icon: 'mdi:timer-remove-outline', txt: 'Timeout', id: ACTION_IDS.timeout, args: { user: e.user, userName: e.userName, userId: e.userId, duration: 300, fromMonitoringDock: true } }
+                ].forEach(a => {
+                    const b = document.createElement('button');
+                    b.innerHTML = `<iconify-icon icon="${a.icon}" width="16" height="16"></iconify-icon><span>${a.txt}</span>`;
+                    b.disabled = e.isBanned;
+                    if (!e.isBanned) {
+                        b.onclick = () => {
+                            disableAll(btns);
+                            b.innerHTML = '<iconify-icon icon="mdi:check-bold" width="16" height="16"></iconify-icon>';
+                            client.doAction({ id: a.id }, a.args);
+                            setTimeout(() => {
+                                enableAll(btns);
+                                b.innerHTML = `<iconify-icon icon="${a.icon}" width="16" height="16"></iconify-icon><span>${a.txt}</span>`;
+                            }, 2000);
+                        };
+                    }
+                    btns.appendChild(b);
+                });
+                const last = document.createElement('button');
+                last.innerHTML = e.isBanned
+                    ? '<iconify-icon icon="mdi:undo-variant" width="16" height="16"></iconify-icon><span>Unban</span>'
+                    : '<iconify-icon icon="gravity-ui:ban" width="16" height="16"></iconify-icon><span>Ban</span>';
+                last.onclick = () => {
+                    disableAll(btns);
+                    last.innerHTML = '<iconify-icon icon="mdi:check-bold" width="16" height="16"></iconify-icon>';
+                    if (e.isBanned) {
+                        client.doAction({ id: ACTION_IDS.unban }, { user: e.user, userName: e.userName, userId: e.userId });
+                    } else {
+                        client.doAction({ id: ACTION_IDS.ban }, { user: e.user, userName: e.userName, userId: e.userId, fromMonitoringDock: true });
+                    }
+                    setTimeout(() => {
+                        enableAll(btns);
+                        last.innerHTML = e.isBanned
+                            ? '<iconify-icon icon="gravity-ui:ban" width="16" height="16"></iconify-icon><span>Ban</span>'
+                            : '<iconify-icon icon="mdi:undo-variant" width="16" height="16"></iconify-icon><span>Unban</span>';
+                    }, 2000);
+                };
+                btns.appendChild(last);
+                row.append(left, btns);
+                c.appendChild(row);
+            });
+        }
+        function disableAll(p) { p.querySelectorAll('button').forEach(x => x.disabled = true); }
+        function enableAll(p) { p.querySelectorAll('button').forEach(x => x.disabled = false); }
+    </script>
+</body>
+
+</html>
