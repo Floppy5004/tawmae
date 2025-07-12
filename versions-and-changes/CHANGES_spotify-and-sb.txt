@@ -1,2 +1,3 @@
 Streamer.bot 1.0.0 ONLY:
-• Added a 4th style to the Overlays tab
+• Added an option to hide individual replies
+• Improved debugging
