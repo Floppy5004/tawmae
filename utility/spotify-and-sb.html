@@ -1106,6 +1106,8 @@ og_image: "/assets/page-design/page-cards/spotify-and-sb.webp"
                         style="background-color: #fff; color: black; padding: 0 5px; opacity: 0.4;">-</span> as the
                     message and it'll then not post it to chat.
                     <br><br>
+                    Since version 1.3.7 you also have the possibility to add a <span style="color: #ffd95e; font-weight: bold;">noMessage</span> argument with a <span style="color: #ffd95e; font-weight: bold;">Set Argument</span> subaction to surpress a single reply, instead of ditching the entire reply with the hyphen as a whole. So let's say you want to pause the music when an alert plays but don't want the message in chat, but you still want the message when using the <span style="color: #ffd95e; font-weight: bold;">!pause</span> command, then simply add the <span style="color: #ffd95e; font-weight: bold;">noMessage</span> argument before running the <span style="color: #ffd95e; font-weight: bold;">Pause</span> action.
+                    <br><br>
                     <img src="{{ site.baseurl }}/assets/faq/spotify-and-sb/spotify-and-sb-hyphen.png" class="extension-image-smol" style="border-radius: 5px">
                 </p>
 
@@ -1173,9 +1175,15 @@ og_image: "/assets/page-design/page-cards/spotify-and-sb.webp"
                 <tbody>
                   <!---------------------------------------------->
                      <tr>
+                        <td>July 12, 2025</td>
+                        <td>Improved debugging; added the possibility to add a <code>noMessage</code> argument before running an action to surpress replies (instead of ditching the reply as a whole); whispering commands will now reply in whispers too; removed the OBS connection slider from the UI, connection is now getting determined automatically</td>
+                        <td>1.3.6</td>
+                    </tr>
+                  <!---------------------------------------------->
+                     <tr>
                         <td>June 28, 2025</td>
                         <td>Added a 4th overlay style</td>
-                        <td>1.3.5</td>
+                        <td>1.3.6</td>
                     </tr>
                   <!---------------------------------------------->
                      <tr>
