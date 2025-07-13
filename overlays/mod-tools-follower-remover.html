@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="UTF-8">
     <title>tawmae - MOD TOOLS - Follower Remover - 1.0.0</title>
     <script src="https://code.iconify.design/iconify-icon/3.0.0/iconify-icon.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
-
         :root {
             --bg: #1e1e2e;
             --fg: #ddd;
@@ -17,14 +15,11 @@
             --btn-end: #4b6aa0;
             --border-col: #45475a;
         }
-
         * {
             box-sizing: border-box;
             font-family: 'Poppins', sans-serif;
         }
-
-        html,
-        body {
+        html, body {
             margin: 0;
             padding: 0;
             width: 100vw;
@@ -33,17 +28,14 @@
             color: var(--fg);
             overflow: hidden;
         }
-
         #logo-container {
             text-align: center;
             padding: 12px 0;
         }
-
         #logo-container img {
             max-width: 200px;
             height: auto;
         }
-
         #banner {
             padding: 16px;
             font-size: 1.5rem;
@@ -51,8 +43,6 @@
             text-align: center;
             border-bottom: 1px solid var(--border-col);
         }
-
-
         #controls {
             display: none;
             gap: 8px;
@@ -60,7 +50,6 @@
             justify-content: center;
             align-items: center;
         }
-
         #controls input {
             background: var(--card-bg);
             color: var(--fg);
@@ -68,15 +57,12 @@
             border-radius: 4px;
             padding: 4px 8px;
         }
-
         #controls span {
             color: var(--fg);
         }
-
         #controls button {
             background: linear-gradient(135deg, var(--btn-start), var(--btn-end));
         }
-
         #loading {
             position: absolute;
             text-align: center;
@@ -85,97 +71,92 @@
             transform: translate(-50%, -50%);
             font-size: 2.25rem;
         }
-
-        #loading>div:first-child {
+        #loading > div:first-child {
             margin-bottom: 25px;
         }
-
         #ws-help {
             text-align: center;
             font-size: 0.8rem;
             font-weight: bold;
             opacity: 0.8;
         }
-
-        #header,
-        #container {
+        #header, #container {
             display: none;
         }
-
         #header {
             padding: 12px 8px;
             font-size: 1.25rem;
             font-weight: bold;
             text-align: center;
         }
-
         #container {
+            display: flex;
+            justify-content: center;
             overflow-y: auto;
             height: calc(100vh - 50px - 56px - 48px);
+            padding-bottom: 8px;
         }
-
+        .table {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            width: 60vw;
+            min-width: 500px;
+            max-width: 1000px;
+            margin: auto;
+        }
         .table-header,
         .row {
             display: grid;
-            grid-template-columns: 2fr 1fr 1fr;
+            grid-template-columns: 40px 2fr 2fr 80px;
             align-items: center;
             gap: 8px;
-            margin: 0 8px 4px;
             padding: 8px 12px;
             border-radius: 8px;
+            width: 100%;
+            margin: 0;
         }
-
         .table-header {
             background: var(--card-hover);
         }
-
         .table-header div {
             font-weight: bold;
             text-align: center;
         }
-
-        .table-header div:nth-child(-n+2) {
+        .table-header div:nth-child(2),
+        .table-header div:nth-child(3) {
             text-align: left;
         }
-
         .row {
             background: var(--card-bg);
             transition: background 0.3s;
         }
-
         .row:hover {
             background: var(--card-hover);
         }
-
         .row.highlight {
             background: rgba(107, 131, 194, 0.3);
         }
-
-        .row>div:not(:last-child),
-        .table-header>div:not(:last-child) {
+        .row > div:not(:last-child),
+        .table-header > div:not(:last-child) {
             border-right: 1px solid var(--border-col);
             padding-right: 8px;
         }
-
         .remove-cell {
             display: flex;
             justify-content: center;
         }
-
         .remove-cell button {
             background: linear-gradient(135deg, var(--btn-start), var(--btn-end));
         }
-
         .removed .name-cell {
             text-decoration: line-through;
             opacity: 0.6;
         }
-
         .removed .remove-cell button {
             opacity: 0.5;
             cursor: default;
         }
-
         .removed-text {
             background: #b71c1c;
             color: #fff;
@@ -185,7 +166,6 @@
             font-weight: bold;
             margin-left: 8px;
         }
-
         button {
             display: inline-flex;
             align-items: center;
@@ -202,17 +182,14 @@
             transition: transform 0.2s, box-shadow 0.2s;
             min-width: 100px;
         }
-
         button:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
         }
-
         button:active {
             transform: translateY(0);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
         }
-
         button:disabled {
             opacity: 0.5;
             cursor: default;
@@ -220,7 +197,6 @@
     </style>
     <script src="https://cdn.jsdelivr.net/npm/@streamerbot/client/dist/streamerbot-client.js"></script>
 </head>
-
 <body>
     <div id="logo-container">
         <img src="https://github.com/tawmae/tawmae/blob/main/assets/page-design/logo-1.png?raw=true" alt="Logo">
@@ -240,13 +216,7 @@
         </div>
     </div>
     <div id="header">Your Followers (Total: 0)</div>
-    <div id="container">
-        <div class="table-header">
-            <div>Name</div>
-            <div>Followed At</div>
-            <div>Remove</div>
-        </div>
-    </div>
+    <div id="container"></div>
     <script>
         const VARIABLE_NAME = 'tawmae_MOD_TOOLS_FollowerListOverlay';
         const ACTION_ID = 'f469ae8f-4a21-4f81-bfa7-705503a89d24';
@@ -259,12 +229,10 @@
             onConnect, logLevel: 'debug'
         });
         let followerList = [];
-
         function onConnect() {
             client.doAction({ id: ACTION_ID }, { _from: 'FollowerListOverlay' });
             setTimeout(fetchAndRender, 5000);
         }
-
         async function fetchAndRender() {
             try {
                 const { variable } = await client.getGlobal(VARIABLE_NAME, false);
@@ -274,8 +242,8 @@
                 followerList = Array.isArray(list) ? list : [];
                 document.getElementById('loading').style.display = 'none';
                 document.getElementById('header').style.display = 'block';
-                document.getElementById('container').style.display = 'block';
                 document.getElementById('controls').style.display = 'flex';
+                document.getElementById('container').style.display = 'flex';
                 document.getElementById('header').innerText = `Your Followers (Total: ${followerList.length})`;
                 renderRows(followerList);
                 setupRangeFilter();
@@ -283,11 +251,11 @@
                 document.getElementById('loading').innerText = 'Failed to load followers.';
             }
         }
-
         function renderRows(list) {
             const container = document.getElementById('container');
-            container.innerHTML = `<div class="table-header"><div>Name</div><div>Followed At</div><div>Remove</div></div>`;
-            list.forEach(item => {
+            container.innerHTML = '<div class="table"><div class="table-header"><div>#</div><div>Name</div><div>Followed At</div><div>Remove</div></div></div>';
+            const table = container.querySelector('.table');
+            list.forEach((item, i) => {
                 const dt = new Date(item.followed_at_local || item.followed_at);
                 const ms = dt.getTime();
                 const dateStr = isNaN(ms)
@@ -303,6 +271,9 @@
                 row.dataset.userName = item.user_name;
                 row.dataset.userLogin = item.user_login;
                 row.dataset.userId = item.user_id;
+                const countCell = document.createElement('div');
+                countCell.innerText = list.length - i;
+                countCell.style.textAlign = 'center';
                 const nameCell = document.createElement('div');
                 nameCell.className = 'name-cell';
                 nameCell.innerText = showLogin
@@ -316,11 +287,10 @@
                 btn.innerHTML = '<iconify-icon icon="mdi:account-remove" width="16" height="16"></iconify-icon><span>Remove</span>';
                 btn.onclick = () => removeSingle(row, btn);
                 removeCell.appendChild(btn);
-                row.append(nameCell, dateCell, removeCell);
-                container.appendChild(row);
+                row.append(countCell, nameCell, dateCell, removeCell);
+                table.appendChild(row);
             });
         }
-
         function setupRangeFilter() {
             const fromPicker = document.getElementById('fromPicker');
             const toPicker = document.getElementById('toPicker');
@@ -349,7 +319,6 @@
                 });
             };
         }
-
         function highlightRange() {
             const fromVal = document.getElementById('fromPicker').value;
             const toVal = document.getElementById('toPicker').value;
@@ -364,7 +333,6 @@
                 else r.classList.remove('highlight');
             });
         }
-
         function removeSingle(row, btn, doCall = true) {
             if (row.classList.contains('removed')) return;
             row.classList.add('removed');
@@ -382,10 +350,8 @@
                 });
             setTimeout(() => enableAll(row), 2000);
         }
-
         function disableAll(el) { el.querySelectorAll('button').forEach(b => b.disabled = true); }
         function enableAll(el) { el.querySelectorAll('button').forEach(b => b.disabled = false); }
     </script>
 </body>
-
 </html>
