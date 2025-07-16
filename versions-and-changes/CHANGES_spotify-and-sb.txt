@@ -1,3 +1,2 @@
 Streamer.bot 1.0.0 ONLY:
-• Added an option to hide individual replies
-• Improved debugging
+• Fixed a bug with replies not sending when using something different than Command triggers
