@@ -1,14 +1,15 @@
 ---
 layout: default
 title: "MOD TOOLS | tawmae"
-description: "The all in one method to manage your channel and keep bots away."
-keywords: "Twitch, OBS, Streamer.bot, Streamerbot, Mod, Bot, Follow Attack"
+description: "An all-in-one package to moderate your Twitch stream and keep it clean from bots and spam."
+keywords: "Twitch, OBS, Streamer.bot, Streamerbot, Moderation, Follow Bots, Follow Bot Attack, Spam"
 og_image: "/assets/page-design/page-cards/mod-tools.webp"
 ---
 <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/extension-page.css">
 
 <div class="warning-banner" style="background-color: #ffb347; color: #0d1117; border: 1px solid #ffeeba; padding: 10px; text-align: center; margin-bottom: 1rem;">
-  Site under construction, this is just to see the mod commands.
+  This extension requires <strong>Streamer.bot version 1.0.0</strong>.  
+  Page is under construction</a>.
 </div>
 
 
@@ -16,18 +17,200 @@ og_image: "/assets/page-design/page-cards/mod-tools.webp"
 <div class="extension-title">
     <div class="extension-title-text-box">
         <h1>MOD TOOLS</h1>
-        <p>Site under construction, this is just to see the mod commands.
+        <p>placeholder
         </p>
     </div>
+    <div class="carousel-2">
+  <div>
+      <img src="{{ site.baseurl }}/assets/covers/mod-tools-1.gif" class="carousel-image">
+  </div>
+  <div>
+      <img src="{{ site.baseurl }}/assets/covers/mod-tools-2.gif" class="carousel-image">
+    
+  </div>
+  <div>
+      <img src="{{ site.baseurl }}/assets/covers/mod-tools-3.gif" class="carousel-image">
+    
+  </div>
+  <div>
+      <img src="{{ site.baseurl }}/assets/settings/mod-tools/mod-tools-overlay-styles.png" class="carousel-image">
+    
+  </div>
+</div>
 </div>
 
 <!----    ENTIRE ACCORDION THINGY WHATEVER IT'S CALLED    ------------------------------------------------------------------------------------------------------------------------------>
 
 <div class="accordion">
+  <div class="accordion-divider"></div>
+<div class="warning-banner" style="background-color: #4a699f; color: #ffffff; border: 1px solid #000000; padding: 10px; text-align: center; margin-bottom: 1rem;">
+  This extension requires a <strong>.dll file (TawmaeUI.dll)</strong> to run. You will be asked to have it automatically downloaded from my <a href="https://github.com/tawmae/tawmae/tree/main/dll" style="text-decoration: underline; color: inherit;">Github Repository</a> to your Streamer.bot directory when you open the Settings UI, but you can also manually download it <a href="https://tawmae.xyz/dll" style="text-decoration: underline; color: inherit;">here</a>. You can use tools like <a href="https://www.jetbrains.com/decompiler/" style="text-decoration: underline; color: inherit;">JetBrain dotPeek</a> to check the .dll file's content.
+</div>
     <div class="accordion-divider"></div>
-  
+    <!----    ACTION IMPORT    ------------------------------------------------------------------------------------------------------------------------------>
+    <div class="accordion-item">
+    <div class="accordion-header" id="action-import" onclick="toggleAccordion('action-import-acc')">
+        <span class="iconify title-icon" data-icon="line-md:download"></span> <span>ACTION IMPORT</span>
+        <span class="iconify accordion-icon" data-icon="ic:baseline-keyboard-arrow-right"></span>
+    </div>
+    <div class="accordion-content" id="action-import-acc">
+        <div class="copy-box">
+            <span class="copy-text" id="import-string" data-copy-text="">Loading...</span>
+            <button class="copy-btn" onclick="copyToClipboard('import-string')">
+                <span class="iconify" data-icon="material-symbols:content-copy-outline-sharp"></span> Copy
+            </button>
+        </div>
+        <div style="margin-top: 10px; font-size: 0.8em; color: #aaa;">
+            <span class="iconify nav-icon-regular" data-icon="rivet-icons:exclamation-mark-circle-solid"></span> Never import actions from untrusted sources.
+            Want to know what you are importing?
+            Paste the import code in <a href="https://tawmae.xyz/Streamerbot%20ByteCode%20Decoder_v5_by_TakeJoshyy.html" target="_blank" style="color: #6fa8dc; text-decoration: underline;">here</a> (Decoder made by TakeJoshyy).
+        </div>
+    </div>
+</div>
+    <!---------------------------------------------->
 
-    <!----    COMMANDS    ------------------------------------------------------------------------------------------------------------------------------>
+    <div class="accordion-divider"></div>
+
+
+
+    <!----    SETUP    ------------------------------------------------------------------------------------------------------------------------------>
+    <div class="accordion-item">
+        <div class="accordion-header" id="setup" onclick="toggleAccordion('setup-acc')">
+            <span class="iconify title-icon" data-icon="line-md:cog-filled"></span> <span>SETUP</span>
+            <span class="iconify accordion-icon" data-icon="ic:baseline-keyboard-arrow-right"></span>
+        </div>
+        <div class="accordion-content" id="setup-acc">
+            <!---------------------------------------------->
+          
+            <div class="description-container">
+                <img src="{{ site.baseurl }}/assets/setup/copy-string.webp" class="extension-image">
+                <div class="extension-title-text-box">
+                    <p><span style="font-weight: bold; color: #fff;">1.</span> Copy the <span
+                            style="font-weight: bold; color: #ffd95e;">Action Import</span> text from above into your
+                        clipboard.</p>
+                </div>
+            </div>
+            <!---------------------------------------------->
+            <div class="section-divider"></div>
+            <!--------------------------------------------->
+            <div class="description-container">
+                <div class="extension-title-text-box">
+                    <p><span style="font-weight: bold; color: #fff;">2.</span> In <span
+                            style="font-weight: bold; color: #ffd95e;">Streamer.bot</span>, click the <span
+                            style="font-weight: bold; color: #ffd95e;">Import</span> button at the top of the window.
+                        Paste the text into the <span style="font-weight: bold; color: #ffd95e;">Import String</span>
+                        section and press <span style="font-weight: bold; color: #ffd95e;">Import</span> at the bottom.
+                    </p>
+                </div>
+                <img src="{{ site.baseurl }}/assets/setup/import-actions-1.0.0.png" class="extension-image">
+            </div>
+            <!---------------------------------------------->
+            <div class="section-divider"></div>
+            <!--------------------------------------------->
+            <div class="description-container">
+                <img src="{{ site.baseurl }}/assets/setup/enable-commands-1.0.0.png" class="extension-image">
+                <div class="extension-title-text-box">
+                    <p><span style="font-weight: bold; color: #fff;">3.</span> Now head to the <span
+                            style="font-weight: bold; color: #ffd95e;">Commands</span> tab and look for the imported
+                        commands. Then <span style="font-weight: bold; color: #ffd95e;">rightclick</span> the group and
+                        select <span style="font-weight: bold; color: #ffd95e;">Group -> Enable All</span>.</p>
+                </div>
+            </div>
+            <!---------------------------------------------->
+            <div class="section-divider"></div>
+            <!--------------------------------------------->
+            <div class="description-container">
+                <div class="extension-title-text-box">
+                    <p><span style="font-weight: bold; color: #fff;">4.</span> Go to <span
+                            style="font-weight: bold; color: #ffd95e;"><a href="https://developer.spotify.com/"
+                                class="link-preview" target="_blank">https://developer.spotify.com/ <span class="iconify title-icon" data-icon="rivet-icons:link-external" style="vertical-align: middle; margin-bottom: 3px"></span></a></span> and login
+                        with your Spotify account. Then enter your <span
+                            style="font-weight: bold; color: #ffd95e;">Dashboard</span> and hit <span
+                            style="font-weight: bold; color: #ffd95e;">Create app</span>.</p>
+                </div>
+                <img src="{{ site.baseurl }}/assets/setup/mod-tools/mod-tools-1.png" class="extension-image">
+            </div>
+            <!---------------------------------------------->
+            <div class="section-divider"></div>
+            <!--------------------------------------------->
+            <div class="description-container">
+                <img src="{{ site.baseurl }}/assets/setup/mod-tools/mod-tools-2.png" class="extension-image">
+                <div class="extension-title-text-box">
+                    <p><span style="font-weight: bold; color: #fff;">5.</span> Enter <span
+                            style="font-weight: bold; color: #ffd95e;">App name</span> and <span
+                            style="font-weight: bold; color: #ffd95e;">App description</span> (those can be whatever).
+                        Then copy this URL:
+                        <br><br>
+                        <div id="browser-source-url-acc">
+                <div class="copy-box-smol">
+                    <span class="copy-text" id="base64-string"
+                        data-copy-text="http://127.0.0.1:1312/tawmaeSpotify/">
+                        http://127.0.0.1:1312/tawmaeSpotify/
+                    </span>
+                    <button class="copy-btn"
+                        onclick="copyURLToClipboard('http://127.0.0.1:1312/tawmaeSpotify/')">
+                        <span class="iconify" data-icon="material-symbols:content-copy-outline-sharp"></span> Copy
+                    </button>
+                </div>
+            </div>
+                        <br><br> Paste it into the <span style="font-weight: bold; color: #ffd95e;">Redirect
+                            URIs</span>. It's important that this link is this exact one.
+                        <br><br> Accept the <span style="font-weight: bold; color: #ffd95e;">ToS</span> and hit <span
+                            style="font-weight: bold; color: #ffd95e;">Save</span>.
+                    </p>
+                </div>
+
+            </div>
+            <!---------------------------------------------->
+            <div class="section-divider"></div>
+            <!--------------------------------------------->
+            <div class="description-container">
+                <div class="extension-title-text-box">
+                    <p><span style="font-weight: bold; color: #fff;">6.</span> Now that your app has been created, click
+                        on <span style="font-weight: bold; color: #ffd95e;">Settings</span> in the top right corner.
+                        Click <span style="font-weight: bold; color: #ffd95e;">View client secret</span> below <span
+                            style="font-weight: bold; color: #ffd95e;">Client ID</span> to reveal your <span
+                            style="font-weight: bold; color: #ffd95e;">Client secret</span>. We will need both of them
+                        in a second.</p>
+                </div>
+                <img src="{{ site.baseurl }}/assets/setup/mod-tools/mod-tools-3.png" class="extension-image">
+            </div>
+            <!---------------------------------------------->
+            <div class="section-divider"></div>
+            <!--------------------------------------------->
+            <div class="description-container">
+                <img src="{{ site.baseurl }}/assets/setup/mod-tools/mod-tools-4.png" class="extension-image">
+                <div class="extension-title-text-box">
+                    <p><span style="font-weight: bold; color: #fff;">7. In <span
+                                style="font-weight: bold; color: #ffd95e;">Streamer.bot</span>, head into the <span
+                                style="font-weight: bold; color: #ffd95e;">[SPOTIFY & SB] # 0 - Settings</span> action,
+                            rightclick the <span style="font-weight: bold; color: #ffd95e;">Test</span> trigger and hit
+                            <span style="font-weight: bold; color: #ffd95e;">Test Trigger</span> to open the Settings
+                            UI. 
+                      <br><br>If you <strong>don't</strong> have my .dll in your Streamer.bot directory already, it will ask you to <strong>automatically download</strong> it. If you wish to manually place it there, you can to that <a href="https://tawmae.xyz/dll" style="text-decoration: underline; color: inherit;">here</a>.<br><br>
+                      
+                      
+                      Paste your <span style="font-weight: bold; color: #ffd95e;">Client ID</span> and <span
+                                style="font-weight: bold; color: #ffd95e;">Client secret</span> in there and hit <span
+                                style="font-weight: bold; color: #ffd95e;">Connect</span>. A browser page will open up
+                            and you'll need to click <span style="font-weight: bold; color: #ffd95e;">Accept</span>.
+                            <br><br>If the connection button turned <span
+                                style="font-weight: bold; color: lightgreen;">green</span>, you are good to go. Happy
+                            spotifying... or whatever!<br><br><span style="font-size: 2rem">catJAM Clap</span></span>
+                    </p>
+                </div>
+            </div>
+
+            <!---------------------------------------------->
+
+        </div>
+    </div>
+
+    <!---------------------------------------------------------------------------------------------------------------------------------->
+
+    <div class="accordion-divider"></div>
+
+     <!----    COMMANDS    ------------------------------------------------------------------------------------------------------------------------------>
      <div class="accordion-item">
     <div class="accordion-header" id="commands" onclick="toggleAccordion('commands-acc')">
         <span class="iconify title-icon" data-icon="line-md:alert-circle"></span>
@@ -58,7 +241,7 @@ og_image: "/assets/page-design/page-cards/mod-tools.webp"
             <div class="extension-title-text-box">
                 <p>
                     <span style="font-weight: bold; color: #fff;">
-                        !whitelistURL <span style="color: #ffd95e;">[URL]</span>
+                        !addURL <span style="color: #ffd95e;">[URL]</span>
                     </span>
                 </p>
             </div>
@@ -71,7 +254,7 @@ og_image: "/assets/page-design/page-cards/mod-tools.webp"
             <div class="extension-title-text-box">
                 <p>
                     <span style="font-weight: bold; color: #fff;">
-                        !removeWhitelistURL <span style="color: #ffd95e;">[URL]</span>
+                        !removeURL <span style="color: #ffd95e;">[URL]</span>
                     </span>
                 </p>
             </div>
@@ -80,21 +263,73 @@ og_image: "/assets/page-design/page-cards/mod-tools.webp"
             </div>
         </div>
 
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p>
+                    <span style="font-weight: bold; color: #fff;">
+                        !urlAddUser <span style="color: #ffd95e;">[Username]</span>
+                    </span>
+                </p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Add a user to the URL whitelist.</p>
+            </div>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p>
+                    <span style="font-weight: bold; color: #fff;">
+                        !urlRemoveUser <span style="color: #ffd95e;">[Username]</span>
+                    </span>
+                </p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Remove a user from the URL whitelist.</p>
+            </div>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p>
+                    <span style="font-weight: bold; color: #fff;">
+                        !urlFilter
+                    </span>
+                </p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Toggle the URL filter.</p>
+            </div>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p>
+                    <span style="font-weight: bold; color: #fff;">
+                        !whitelistedURLs
+                    </span>
+                </p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Post all whitelisted URLs to chat.</p>
+            </div>
+        </div>
+
         <!-- Follow Bot Attacks -->
         <h2 style="color: #ffd95e; text-align: center; font-size: 1.5rem; margin-bottom: 1rem;">
-            Follow Bot Attacks
+            Follow Bot Attack & Hate Raid Protection
         </h2>
 
         <div class="customization-text-container">
             <div class="extension-title-text-box">
                 <p>
                     <span style="font-weight: bold; color: #fff;">
-                        !followShield <span style="color: #ffd95e;">[on/off]</span>
+                        !enableFollowAttackProtection
                     </span>
                 </p>
             </div>
             <div class="extension-title-text-box">
-                <p>Toggles the Follow Bot Attack shield mode.</p>
+                <p>Manually enables the Follow Bot Attack protection mode.</p>
             </div>
         </div>
 
@@ -102,12 +337,12 @@ og_image: "/assets/page-design/page-cards/mod-tools.webp"
             <div class="extension-title-text-box">
                 <p>
                     <span style="font-weight: bold; color: #fff;">
-                        !followAttackUndoAll
+                        !disableFollowAttackProtection
                     </span>
                 </p>
             </div>
             <div class="extension-title-text-box">
-                <p>Unblocks and unbans every user that got caught during an active Follow Attack Shield. This is just a safety measure.</p>
+                <p>Manually disables the Follow Bot Attack protection mode.</p>
             </div>
         </div>
 
@@ -115,36 +350,44 @@ og_image: "/assets/page-design/page-cards/mod-tools.webp"
             <div class="extension-title-text-box">
                 <p>
                     <span style="font-weight: bold; color: #fff;">
-                        !removeAllFollowers <span style="color: #ffd95e;">[Minutes]</span>
+                        !removeBottedFollowers
                     </span>
                 </p>
             </div>
             <div class="extension-title-text-box">
-                <p>Removes all followers that have followed within the last X minutes. Also works if Streamer.bot was not active during the follows.</p>
+                <p>Manually remove botted followers from a registered attack.</p>
             </div>
         </div>
 
-        <!-- Hate Raid -->
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p>
+                    <span style="font-weight: bold; color: #fff;">
+                        !removeLatestFollowers <span style="color: #ffd95e;">[Minutes]</span>
+                    </span>
+                </p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Removes all followers that have followed within the last X minutes. Also works if Streamer.bot was not active during the follow attack. Requires double-confirmation to avoid accidental uses.</p>
+            </div>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p>
+                    <span style="font-weight: bold; color: #fff;">
+                        !hateRaid</span>
+                    </span>
+                </p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Toggles the hate raid protection.</p>
+            </div>
+        </div>
+
+        <!-- Custom Commands -->
         <h2 style="color: #ffd95e; text-align: center; font-size: 1.5rem; margin-bottom: 1rem;">
-            Hate Raid
-        </h2>
-
-        <div class="customization-text-container">
-            <div class="extension-title-text-box">
-                <p>
-                    <span style="font-weight: bold; color: #fff;">
-                        !hateShield <span style="color: #ffd95e;">[on/off]</span> or !hateRaid <span style="color: #ffd95e;">[on/off]</span>
-                    </span>
-                </p>
-            </div>
-            <div class="extension-title-text-box">
-                <p>Toggles the hate raid shield.</p>
-            </div>
-        </div>
-
-        <!-- Channel Management -->
-        <h2 style="color: #ffd95e; text-align: center; font-size: 1.5rem; margin-bottom: 1rem;">
-            Channel Management
+            Custom Commands
         </h2>
 
         <div class="customization-text-container">
@@ -156,7 +399,7 @@ og_image: "/assets/page-design/page-cards/mod-tools.webp"
                 </p>
             </div>
             <div class="extension-title-text-box">
-                <p>Adds a custom command with a simple text output. Can contain %user% and %userName% variables.</p>
+                <p>Adds a custom command with a simple text output. Can contain %user% and %userName% variables. For additional settings like cooldowns and permissions, check the Features tab for Custom Commands.</p>
             </div>
         </div>
 
@@ -169,7 +412,7 @@ og_image: "/assets/page-design/page-cards/mod-tools.webp"
                 </p>
             </div>
             <div class="extension-title-text-box">
-                <p>Edits a custom command.</p>
+                <p>Edits a custom command.  For additional settings like cooldowns and permissions, check the Features tab for Custom Commands.</p>
             </div>
         </div>
 
@@ -195,67 +438,21 @@ og_image: "/assets/page-design/page-cards/mod-tools.webp"
                 </p>
             </div>
             <div class="extension-title-text-box">
-                <p>Shows all custom commands.</p>
+                <p>Shows all custom commands in chat.</p>
             </div>
         </div>
+
+      <!-- Channel Management -->
+        <h2 style="color: #ffd95e; text-align: center; font-size: 1.5rem; margin-bottom: 1rem;">
+           Channel Management
+        </h2>      
+       
 
         <div class="customization-text-container">
             <div class="extension-title-text-box">
                 <p>
                     <span style="font-weight: bold; color: #fff;">
-                        !addCounter <span style="color: #ffd95e;">[!command]</span> <span style="color: #ffd95e;">[Command Text]</span>
-                    </span>
-                </p>
-            </div>
-            <div class="extension-title-text-box">
-                <p>Adds a custom counter with a simple text output. Can contain %count%, %user%, and %userName% variables. Use “+” to increment or “–” to decrement. E.g., !command +1 or !command -1. You can also set it directly: !command 50.</p>
-            </div>
-        </div>
-
-        <div class="customization-text-container">
-            <div class="extension-title-text-box">
-                <p>
-                    <span style="font-weight: bold; color: #fff;">
-                        !editCounter <span style="color: #ffd95e;">[!command]</span> <span style="color: #ffd95e;">[Command Text]</span>
-                    </span>
-                </p>
-            </div>
-            <div class="extension-title-text-box">
-                <p>Edits a custom counter.</p>
-            </div>
-        </div>
-
-        <div class="customization-text-container">
-            <div class="extension-title-text-box">
-                <p>
-                    <span style="font-weight: bold; color: #fff;">
-                        !removeCounter <span style="color: #ffd95e;">[!command]</span>
-                    </span>
-                </p>
-            </div>
-            <div class="extension-title-text-box">
-                <p>Removes a custom counter.</p>
-            </div>
-        </div>
-
-        <div class="customization-text-container">
-            <div class="extension-title-text-box">
-                <p>
-                    <span style="font-weight: bold; color: #fff;">
-                        !customCounters
-                    </span>
-                </p>
-            </div>
-            <div class="extension-title-text-box">
-                <p>Shows all custom counters and their current values.</p>
-            </div>
-        </div>
-
-        <div class="customization-text-container">
-            <div class="extension-title-text-box">
-                <p>
-                    <span style="font-weight: bold; color: #fff;">
-                        !channelTitle <span style="color: #ffd95e;">[Title]</span>
+                        !setTitle <span style="color: #ffd95e;">[Title]</span>
                     </span>
                 </p>
             </div>
@@ -268,7 +465,7 @@ og_image: "/assets/page-design/page-cards/mod-tools.webp"
             <div class="extension-title-text-box">
                 <p>
                     <span style="font-weight: bold; color: #fff;">
-                        !channelGame <span style="color: #ffd95e;">[Game]</span> or !channelCategory <span style="color: #ffd95e;">[Category]</span>
+                        !setGame <span style="color: #ffd95e;">[Game]</span>
                     </span>
                 </p>
             </div>
@@ -281,20 +478,7 @@ og_image: "/assets/page-design/page-cards/mod-tools.webp"
             <div class="extension-title-text-box">
                 <p>
                     <span style="font-weight: bold; color: #fff;">
-                        !channelSetTags <span style="color: #ffd95e;">[Tag1]</span> | <span style="color: #ffd95e;">[Tag2]</span> | <span style="color: #ffd95e;">[Tag3]</span> ...
-                    </span>
-                </p>
-            </div>
-            <div class="extension-title-text-box">
-                <p>Set up to 10 channel tags, separated by a | symbol.</p>
-            </div>
-        </div>
-
-        <div class="customization-text-container">
-            <div class="extension-title-text-box">
-                <p>
-                    <span style="font-weight: bold; color: #fff;">
-                        !channelAddTag <span style="color: #ffd95e;">[Tag]</span>
+                        !addTag <span style="color: #ffd95e;">[Tag]</span>
                     </span>
                 </p>
             </div>
@@ -307,25 +491,12 @@ og_image: "/assets/page-design/page-cards/mod-tools.webp"
             <div class="extension-title-text-box">
                 <p>
                     <span style="font-weight: bold; color: #fff;">
-                        !channelRemoveTag <span style="color: #ffd95e;">[Tag]</span>
+                        !removeTag <span style="color: #ffd95e;">[Tag]</span>
                     </span>
                 </p>
             </div>
             <div class="extension-title-text-box">
                 <p>Remove a channel tag.</p>
-            </div>
-        </div>
-
-        <div class="customization-text-container">
-            <div class="extension-title-text-box">
-                <p>
-                    <span style="font-weight: bold; color: #fff;">
-                        !channelClearTags
-                    </span>
-                </p>
-            </div>
-            <div class="extension-title-text-box">
-                <p>Clear all channel tags (Note: Twitch API requires at least one tag, so a “No Tags” placeholder will be added).</p>
             </div>
         </div>
 
@@ -351,7 +522,7 @@ og_image: "/assets/page-design/page-cards/mod-tools.webp"
             <div class="extension-title-text-box">
                 <p>
                     <span style="font-weight: bold; color: #fff;">
-                        !setScene <span style="color: #ffd95e;">[Scene Name]</span> or !changeScene <span style="color: #ffd95e;">[Scene Name]</span>
+                        !setScene <span style="color: #ffd95e;">[Scene Name]</span> or !scene <span style="color: #ffd95e;">[Scene Name]</span>
                     </span>
                 </p>
             </div>
@@ -364,69 +535,38 @@ og_image: "/assets/page-design/page-cards/mod-tools.webp"
             <div class="extension-title-text-box">
                 <p>
                     <span style="font-weight: bold; color: #fff;">
+                        !refreshAudio</span>
+                    </span>
+                </p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Refreshes all OBS Application Audio Capture Sources.</p>
+            </div>
+        </div>
+
+      <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p>
+                    <span style="font-weight: bold; color: #fff;">
+                        !refreshBrowserSources</span>
+                    </span>
+                </p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Refreshes all OBS Browser Sources.</p>
+            </div>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p>
+                    <span style="font-weight: bold; color: #fff;">
                         !endStream
                     </span>
                 </p>
             </div>
             <div class="extension-title-text-box">
-                <p>Ends the stream (double-confirmation required if enabled).</p>
-            </div>
-        </div>
-
-        <!-- Raids and Shoutouts -->
-        <h2 style="color: #ffd95e; text-align: center; font-size: 1.5rem; margin-bottom: 1rem;">
-            Raids and Shoutouts
-        </h2>
-
-        <div class="customization-text-container">
-            <div class="extension-title-text-box">
-                <p>
-                    <span style="font-weight: bold; color: #fff;">
-                        !raid <span style="color: #ffd95e;">[User]</span>
-                    </span>
-                </p>
-            </div>
-            <div class="extension-title-text-box">
-                <p>Raid a channel.</p>
-            </div>
-        </div>
-
-        <div class="customization-text-container">
-            <div class="extension-title-text-box">
-                <p>
-                    <span style="font-weight: bold; color: #fff;">
-                        !raidCancel or !cancelRaid
-                    </span>
-                </p>
-            </div>
-            <div class="extension-title-text-box">
-                <p>Cancel an ongoing raid.</p>
-            </div>
-        </div>
-
-        <div class="customization-text-container">
-            <div class="extension-title-text-box">
-                <p>
-                    <span style="font-weight: bold; color: #fff;">
-                        !raidMessage
-                    </span>
-                </p>
-            </div>
-            <div class="extension-title-text-box">
-                <p>Posts a custom raid message into chat (for users to copy when you’re about to start a raid).</p>
-            </div>
-        </div>
-
-        <div class="customization-text-container">
-            <div class="extension-title-text-box">
-                <p>
-                    <span style="font-weight: bold; color: #fff;">
-                        !modShoutout <span style="color: #ffd95e;">[User]</span>
-                    </span>
-                </p>
-            </div>
-            <div class="extension-title-text-box">
-                <p>Posts a shoutout into chat and also does the Twitch integrated shoutout.</p>
+                <p>Ends the stream. Requires double-confirmation to prevent accidental uses.</p>
             </div>
         </div>
 
@@ -439,38 +579,26 @@ og_image: "/assets/page-design/page-cards/mod-tools.webp"
             <div class="extension-title-text-box">
                 <p>
                     <span style="font-weight: bold; color: #fff;">
-                        !modTranslate <span style="color: #ffd95e;">[Text]</span>
+                        !shoutout <span style="color: #ffd95e;">[Username]</span>
                     </span>
                 </p>
             </div>
             <div class="extension-title-text-box">
-                <p>Translates a given text into a chosen language (also works with just !modTranslate when used in a reply).</p>
+                <p>Posts a shoutout into chat and also does the Twitch integrated shoutout.</p>
             </div>
         </div>
+
 
         <div class="customization-text-container">
             <div class="extension-title-text-box">
                 <p>
                     <span style="font-weight: bold; color: #fff;">
-                        !clearChat
+                        !translate <span style="color: #ffd95e;">[Text]</span>
                     </span>
                 </p>
             </div>
             <div class="extension-title-text-box">
-                <p>Clear chat.</p>
-            </div>
-        </div>
-
-        <div class="customization-text-container">
-            <div class="extension-title-text-box">
-                <p>
-                    <span style="font-weight: bold; color: #fff;">
-                        !warn <span style="color: #ffd95e;">[User]</span> <span style="color: #ffd95e;">[Reason]</span>
-                    </span>
-                </p>
-            </div>
-            <div class="extension-title-text-box">
-                <p>Warn a specified user. The reason is optional.</p>
+                <p>Translates a given text into a chosen language. You can also reply with a !translate command to translate the original message.</p>
             </div>
         </div>
 
@@ -483,7 +611,7 @@ og_image: "/assets/page-design/page-cards/mod-tools.webp"
                 </p>
             </div>
             <div class="extension-title-text-box">
-                <p>Timeout a specified user. Duration (seconds) and reason are optional.</p>
+                <p>Timeout a specified user. Duration (seconds) and reason are optional. Super moderators are able to timeout regular moderators.</p>
             </div>
         </div>
 
@@ -496,7 +624,27 @@ og_image: "/assets/page-design/page-cards/mod-tools.webp"
                 </p>
             </div>
             <div class="extension-title-text-box">
-                <p>Ban a specified user. The reason is optional.</p>
+                <p>Ban a specified user. The reason is optional. Super moderators are able to ban regular moderators.</p>
+            </div>
+        </div>
+
+
+
+        <!-- Chat Management -->
+        <h2 style="color: #ffd95e; text-align: center; font-size: 1.5rem; margin-bottom: 1rem;">
+            Spam Filter
+        </h2>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p>
+                    <span style="font-weight: bold; color: #fff;">
+                        !banWord <span style="color: #ffd95e;">[Word]</span>
+                    </span>
+                </p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Adds a word to the blacklist.</p>
             </div>
         </div>
 
@@ -504,12 +652,12 @@ og_image: "/assets/page-design/page-cards/mod-tools.webp"
             <div class="extension-title-text-box">
                 <p>
                     <span style="font-weight: bold; color: #fff;">
-                        !unban <span style="color: #ffd95e;">[User]</span>
+                        !unbanWord <span style="color: #ffd95e;">[Word]</span>
                     </span>
                 </p>
             </div>
             <div class="extension-title-text-box">
-                <p>Unban a specified user.</p>
+                <p>Removes a word from the blacklist.</p>
             </div>
         </div>
 
@@ -517,12 +665,12 @@ og_image: "/assets/page-design/page-cards/mod-tools.webp"
             <div class="extension-title-text-box">
                 <p>
                     <span style="font-weight: bold; color: #fff;">
-                        !purge <span style="color: #ffd95e;">[User]</span>
+                        !toggleBlacklistedWordsFilter
                     </span>
                 </p>
             </div>
             <div class="extension-title-text-box">
-                <p>Deletes all messages of a specified user.</p>
+                <p>Toggles the filter for blacklisted words.</p>
             </div>
         </div>
 
@@ -530,12 +678,12 @@ og_image: "/assets/page-design/page-cards/mod-tools.webp"
             <div class="extension-title-text-box">
                 <p>
                     <span style="font-weight: bold; color: #fff;">
-                        !addBlockedTerm <span style="color: #ffd95e;">[Term]</span>
+                       !toggleCapsProtection
                     </span>
                 </p>
             </div>
             <div class="extension-title-text-box">
-                <p>Adds a blocked term to the Twitch internal block list.</p>
+                <p>Toggles the caps filter.</p>
             </div>
         </div>
 
@@ -543,12 +691,12 @@ og_image: "/assets/page-design/page-cards/mod-tools.webp"
             <div class="extension-title-text-box">
                 <p>
                     <span style="font-weight: bold; color: #fff;">
-                        !removeBlockedTerm <span style="color: #ffd95e;">[Term]</span>
+                       !toggleEmoteProtection
                     </span>
                 </p>
             </div>
             <div class="extension-title-text-box">
-                <p>Removes a blocked term from the Twitch internal block list.</p>
+                <p>Toggles the emote filter.</p>
             </div>
         </div>
 
@@ -556,131 +704,20 @@ og_image: "/assets/page-design/page-cards/mod-tools.webp"
             <div class="extension-title-text-box">
                 <p>
                     <span style="font-weight: bold; color: #fff;">
-                        !modRunAd <span style="color: #ffd95e;">[Duration]</span>
+                       !toggleASCIIProtection
                     </span>
                 </p>
             </div>
             <div class="extension-title-text-box">
-                <p>Runs a commercial for the specified duration (max. 180 seconds, defaults to 180 if exceeded).</p>
+                <p>Toggles the ASCII filter.</p>
             </div>
         </div>
 
-        <div class="customization-text-container">
-            <div class="extension-title-text-box">
-                <p>
-                    <span style="font-weight: bold; color: #fff;">
-                        !slowMode <span style="color: #ffd95e;">[Delay (seconds)]</span>
-                    </span>
-                </p>
-            </div>
-            <div class="extension-title-text-box">
-                <p>Toggles chat slow mode with the specified delay in seconds.</p>
-            </div>
-        </div>
+       
 
-        <div class="customization-text-container">
-            <div class="extension-title-text-box">
-                <p>
-                    <span style="font-weight: bold; color: #fff;">
-                        !followerMode <span style="color: #ffd95e;">[Delay]</span> or !followersOnly <span style="color: #ffd95e;">[Duration]</span>
-                    </span>
-                </p>
-            </div>
-            <div class="extension-title-text-box">
-                <p>Toggles followers-only chat with the specified minimum follow duration. If [Duration] is a number, it defaults to hours. You can specify “min”, “h”, or “d”, e.g., !followerMode 1d.</p>
-            </div>
-        </div>
+        
 
-        <div class="customization-text-container">
-            <div class="extension-title-text-box">
-                <p>
-                    <span style="font-weight: bold; color: #fff;">
-                        !emoteOnly <span style="color: #ffd95e;">[on/off]</span>
-                    </span>
-                </p>
-            </div>
-            <div class="extension-title-text-box">
-                <p>Toggles emote-only chat.</p>
-            </div>
-        </div>
-
-        <div class="customization-text-container">
-            <div class="extension-title-text-box">
-                <p>
-                    <span style="font-weight: bold; color: #fff;">
-                        !subMode or !subOnly
-                    </span>
-                </p>
-            </div>
-            <div class="extension-title-text-box">
-                <p>Toggles subscribers-only chat.</p>
-            </div>
-        </div>
-
-        <div class="customization-text-container">
-            <div class="extension-title-text-box">
-                <p>
-                    <span style="font-weight: bold; color: #fff;">
-                        !ttsStop or !stopTts
-                    </span>
-                </p>
-            </div>
-            <div class="extension-title-text-box">
-                <p>Stops the current TTS queue.</p>
-            </div>
-        </div>
-
-        <div class="customization-text-container">
-            <div class="extension-title-text-box">
-                <p>
-                    <span style="font-weight: bold; color: #fff;">
-                        !ttsResume or !resumeTts
-                    </span>
-                </p>
-            </div>
-            <div class="extension-title-text-box">
-                <p>Resumes the TTS queue.</p>
-            </div>
-        </div>
-
-        <div class="customization-text-container">
-            <div class="extension-title-text-box">
-                <p>
-                    <span style="font-weight: bold; color: #fff;">
-                        !ttsClear or !clearTts
-                    </span>
-                </p>
-            </div>
-            <div class="extension-title-text-box">
-                <p>Clears the TTS queue.</p>
-            </div>
-        </div>
-
-        <div class="customization-text-container">
-            <div class="extension-title-text-box">
-                <p>
-                    <span style="font-weight: bold; color: #fff;">
-                        !ttsPause or !pauseTts
-                    </span>
-                </p>
-            </div>
-            <div class="extension-title-text-box">
-                <p>Pauses the TTS queue.</p>
-            </div>
-        </div>
-
-        <div class="customization-text-container">
-            <div class="extension-title-text-box">
-                <p>
-                    <span style="font-weight: bold; color: #fff;">
-                        !autoMod <span style="color: #ffd95e;">[Level]</span>
-                    </span>
-                </p>
-            </div>
-            <div class="extension-title-text-box">
-                <p>Enables AutoMod from level 0 to 4.</p>
-            </div>
-        </div>
+       
 
         <!-- Channel Point Rewards -->
         <h2 style="color: #ffd95e; text-align: center; font-size: 1.5rem; margin-bottom: 1rem;">
@@ -691,12 +728,12 @@ og_image: "/assets/page-design/page-cards/mod-tools.webp"
             <div class="extension-title-text-box">
                 <p>
                     <span style="font-weight: bold; color: #fff;">
-                        !rewardEnable <span style="color: #ffd95e;">[Reward Name]</span>
+                        !enableReward <span style="color: #ffd95e;">all</span> | !enableReward <span style="color: #ffd95e;">[Reward Group Name]</span> | !enableReward <span style="color: #ffd95e;">[Reward Name]</span>
                     </span>
                 </p>
             </div>
             <div class="extension-title-text-box">
-                <p>Enables a specified channel point reward.</p>
+                <p>Enable rewards. Allows to enable all, a specific group or a single rewards</p>
             </div>
         </div>
 
@@ -704,12 +741,12 @@ og_image: "/assets/page-design/page-cards/mod-tools.webp"
             <div class="extension-title-text-box">
                 <p>
                     <span style="font-weight: bold; color: #fff;">
-                        !rewardDisable <span style="color: #ffd95e;">[Reward Name]</span>
+                        !disableReward <span style="color: #ffd95e;">all</span> | !disableReward <span style="color: #ffd95e;">[Reward Group Name]</span> | !disableReward <span style="color: #ffd95e;">[Reward Name]</span>
                     </span>
                 </p>
             </div>
             <div class="extension-title-text-box">
-                <p>Disables a specified channel point reward.</p>
+                <p>Disable rewards. Allows to disable all, a specific group or a single rewards</p>
             </div>
         </div>
 
@@ -717,12 +754,12 @@ og_image: "/assets/page-design/page-cards/mod-tools.webp"
             <div class="extension-title-text-box">
                 <p>
                     <span style="font-weight: bold; color: #fff;">
-                        !rewardPause <span style="color: #ffd95e;">[Reward Name]</span>
+                        !pauseReward <span style="color: #ffd95e;">all</span> | !pauseReward <span style="color: #ffd95e;">[Reward Group Name]</span> | !pauseReward <span style="color: #ffd95e;">[Reward Name]</span>
                     </span>
                 </p>
             </div>
             <div class="extension-title-text-box">
-                <p>Pauses a specified channel point reward.</p>
+                <p>Pause rewards. Allows to pause all, a specific group or a single rewards</p>
             </div>
         </div>
 
@@ -730,12 +767,12 @@ og_image: "/assets/page-design/page-cards/mod-tools.webp"
             <div class="extension-title-text-box">
                 <p>
                     <span style="font-weight: bold; color: #fff;">
-                        !rewardUnpause <span style="color: #ffd95e;">[Reward Name]</span>
+                        !unpauseReward <span style="color: #ffd95e;">all</span> | !unpauseReward <span style="color: #ffd95e;">[Reward Group Name]</span> | !unpauseReward <span style="color: #ffd95e;">[Reward Name]</span>
                     </span>
                 </p>
             </div>
             <div class="extension-title-text-box">
-                <p>Unpauses a specified channel point reward.</p>
+                <p>Unpause rewards. Allows to unpause all, a specific group or a single rewards</p>
             </div>
         </div>
 
@@ -743,12 +780,12 @@ og_image: "/assets/page-design/page-cards/mod-tools.webp"
             <div class="extension-title-text-box">
                 <p>
                     <span style="font-weight: bold; color: #fff;">
-                        !rewardTitle <span style="color: #ffd95e;">[Reward Name]</span> | <span style="color: #ffd95e;">[Title]</span>
+                        !rewardTitle <span style="color: #ffd95e;">[Reward Name] &lt;New Title&gt;</span>
                     </span>
                 </p>
             </div>
             <div class="extension-title-text-box">
-                <p>Sets the title of a specified channel point reward, separated by a | symbol.</p>
+                <p>Change the title of a reward. The title needs to be in angled brackets.</p>
             </div>
         </div>
 
@@ -756,12 +793,12 @@ og_image: "/assets/page-design/page-cards/mod-tools.webp"
             <div class="extension-title-text-box">
                 <p>
                     <span style="font-weight: bold; color: #fff;">
-                        !rewardPrompt <span style="color: #ffd95e;">[Reward Name]</span> | <span style="color: #ffd95e;">[Prompt]</span> or !rewardDescription <span style="color: #ffd95e;">[Reward Name]</span> | <span style="color: #ffd95e;">[Cost]</span>
+                        !rewardPrompt <span style="color: #ffd95e;">[Reward Name] &lt;New Prompt&gt;</span>
                     </span>
                 </p>
             </div>
             <div class="extension-title-text-box">
-                <p>Sets the prompt/description of a specified channel point reward, separated by a | symbol.</p>
+                <p>Change the prompt of a reward. The prompt needs to be in angled brackets.</p>
             </div>
         </div>
 
@@ -769,123 +806,286 @@ og_image: "/assets/page-design/page-cards/mod-tools.webp"
             <div class="extension-title-text-box">
                 <p>
                     <span style="font-weight: bold; color: #fff;">
-                        !rewardCost <span style="color: #ffd95e;">[Reward Name]</span> | <span style="color: #ffd95e;">[Cost]</span>
+                        !rewardCost <span style="color: #ffd95e;">[Reward Name] &lt;New Cost&gt;</span>
                     </span>
                 </p>
             </div>
             <div class="extension-title-text-box">
-                <p>Sets the cost of a specified channel point reward, separated by a | symbol.</p>
+                <p>Change the cost of a reward. The cost needs to be in angled brackets.</p>
             </div>
         </div>
 
-        <!-- Predictions -->
+      <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p>
+                    <span style="font-weight: bold; color: #fff;">
+                        !rewardCooldown <span style="color: #ffd95e;">[Reward Name] &lt;New Cooldown&gt;</span>
+                    </span>
+                </p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Change the cooldown of a reward. The cooldown is in seconds and needs to be in angled brackets. 0 to disable it.</p>
+            </div>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p>
+                    <span style="font-weight: bold; color: #fff;">
+                        !rewardMaxPerStream <span style="color: #ffd95e;">[Reward Name] &lt;New Max&gt;</span>
+                    </span>
+                </p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Change the max redemptions of a reward. The max needs to be in angled brackets. 0 to disable it.</p>
+            </div>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p>
+                    <span style="font-weight: bold; color: #fff;">
+                        !rewardMaxPerUserPerStream <span style="color: #ffd95e;">[Reward Name] &lt;New Max&gt;</span>
+                    </span>
+                </p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Change the max redemptions per user of a reward. The max needs to be in angled brackets. 0 to disable it.</p>
+            </div>
+        </div>
+
+         <!-- Polls and Predictions -->
         <h2 style="color: #ffd95e; text-align: center; font-size: 1.5rem; margin-bottom: 1rem;">
-            Predictions
+            Polls & Predictions
         </h2>
 
         <div class="customization-text-container">
             <div class="extension-title-text-box">
                 <p>
                     <span style="font-weight: bold; color: #fff;">
-                        !predictionCreate <span style="color: #ffd95e;">[Title]</span> | <span style="color: #ffd95e;">[Duration]</span> | <span style="color: #ffd95e;">[Outcome1]</span> | <span style="color: #ffd95e;">[Outcome2]</span> ...
+                        !enableReward <span style="color: #ffd95e;">all</span> | !enableReward <span style="color: #ffd95e;">[Reward Group Name]</span> | !enableReward <span style="color: #ffd95e;">[Reward Name]</span>
                     </span>
                 </p>
             </div>
             <div class="extension-title-text-box">
-                <p>Creates a channel point prediction with up to 10 outcomes. Requires a title and at least two outcomes. Duration is optional. Separated by a | symbol.</p>
+                <p>Enable rewards. Allows to enable all, a specific group or a single rewards</p>
             </div>
         </div>
 
-        <div class="customization-text-container">
-            <div class="extension-title-text-box">
-                <p>
-                    <span style="font-weight: bold; color: #fff;">
-                        !predictionLock
-                    </span>
-                </p>
-            </div>
-            <div class="extension-title-text-box">
-                <p>Locks the currently active prediction.</p>
-            </div>
-        </div>
-
-        <div class="customization-text-container">
-            <div class="extension-title-text-box">
-                <p>
-                    <span style="font-weight: bold; color: #fff;">
-                        !predictionCancel
-                    </span>
-                </p>
-            </div>
-            <div class="extension-title-text-box">
-                <p>Cancels the currently active prediction.</p>
-            </div>
-        </div>
-
-        <div class="customization-text-container">
-            <div class="extension-title-text-box">
-                <p>
-                    <span style="font-weight: bold; color: #fff;">
-                        !predictionResolve <span style="color: #ffd95e;">[Outcome Number]</span> or <span style="color: #ffd95e;">[Outcome Title]</span>
-                    </span>
-                </p>
-            </div>
-            <div class="extension-title-text-box">
-                <p>Resolves a prediction after it’s been locked. Can use an outcome number or the actual outcome title.</p>
-            </div>
-        </div>
-
-        <!-- Polls -->
-        <h2 style="color: #ffd95e; text-align: center; font-size: 1.5rem; margin-bottom: 1rem;">
-            Polls
-        </h2>
-
-        <div class="customization-text-container">
-            <div class="extension-title-text-box">
-                <p>
-                    <span style="font-weight: bold; color: #fff;">
-                        !pollCreate <span style="color: #ffd95e;">[Title]</span> | <span style="color: #ffd95e;">[Duration]</span> | <span style="color: #ffd95e;">[Option1]</span> | <span style="color: #ffd95e;">[Option2]</span> ...
-                    </span>
-                </p>
-            </div>
-            <div class="extension-title-text-box">
-                <p>Creates a poll with up to 5 options. Requires a title and at least two options. Duration is optional. Separated by a | symbol.</p>
-            </div>
-        </div>
-
-        <div class="customization-text-container">
-            <div class="extension-title-text-box">
-                <p>
-                    <span style="font-weight: bold; color: #fff;">
-                        !pollEnd
-                    </span>
-                </p>
-            </div>
-            <div class="extension-title-text-box">
-                <p>Ends the current poll.</p>
-            </div>
-        </div>
-
-        <div class="customization-text-container">
-            <div class="extension-title-text-box">
-                <p>
-                    <span style="font-weight: bold; color: #fff;">
-                        !pollArchive
-                    </span>
-                </p>
-            </div>
-            <div class="extension-title-text-box">
-                <p>Archives the current poll.</p>
-            </div>
-        </div>
-
+        
+  <!------------------------------------------------>
     </div>
 </div>
 
 
     <!---------------------------------------------------------------------------------------------------------------------------------->
 
-    
+    <div class="accordion-divider"></div>
+
+
+    <!----    OBS DOCKS    ------------------------------------------------------------------------------------------------------------------------------>
+    <div class="accordion-item">
+        <div class="accordion-header" id="obs-widget" onclick="toggleAccordion('obs-widget-acc')">
+            <span class="iconify title-icon" data-icon="line-md:text-box"></span> <span>DOCKS AND ADDONS</span>
+            <span class="iconify accordion-icon" data-icon="ic:baseline-keyboard-arrow-right"></span>
+        </div>
+        <div class="accordion-content" id="obs-widget-acc">
+
+
+            <!---------------------------------------------->
+          <br><br>
+            <p><span style="font-weight: bold; color: #fff;">Note:</span> For these addons and docks to work, you will have to enable your websocket server in Streamer.bot. You can find it in the <span style="font-weight: bold; color: #fff;">Servers/Clients -> WebSocket Server</span> tab. Leave the <span style="font-weight: bold; color: #fff;">Address</span> at <span style="font-weight: bold; color: #fff;">127.0.0.1</span> and the <span style="font-weight: bold; color: #fff;">Port</span> at <span style="font-weight: bold; color: #fff;">8080</span></p>
+            <!---------------------------------------------->
+          <br>
+            <div class="extension-title-text-box-long">
+                <h3> <span style="font-weight: bold; color: #fff">Suspicious User Monitoring</span></h3>
+                <p>
+                  You can add the link below as a dock to your OBS. The dock will then list new chatters and accounts that are less than 90 days old and you'll be able to perform quick actions like a purge, timeout or bans on them.
+                <br>
+                <span style="font-weight: bold">Docking URL:</span> <span style="background-color: #fff; color: black; padding: 0 5px; opacity: 0.45;">https://tawmae.xyz/overlays/mod-tools-user-monitoring</span>
+                <br>
+                </p>
+            <img src="{{ site.baseurl }}/assets/settings/mod-tools/mod-tools-dock-1.webp" class="settings-ui-image">
+            </div>
+        <!---------------------------------------------->
+          <div class="extension-title-text-box-long">
+                <h3> <span style="font-weight: bold; color: #fff">Follower Remover</span></h3>
+                <p>
+                  In case you want to remove followers within a time range or single botted ones, you can go to this site and check when somebody followed your channel and remove them if needed.
+                <br>
+                <span style="font-weight: bold">URL:</span> <span style="background-color: #fff; color: black; padding: 0 5px; opacity: 0.45;">https://tawmae.xyz/overlays/mod-tools-follower-remover</span>
+                <br>
+                </p>
+            <img src="{{ site.baseurl }}/assets/settings/mod-tools/mod-tools-dock-2.webp" class="settings-ui-image">
+            </div>
+        <!---------------------------------------------->
+        </div>
+    </div>
+    <!---------------------------------------------->
+    <div class="accordion-divider"></div>
+    <!----    SETTINGS UI    ------------------------------------------------------------------------------------------------------------------------------>
+    <div class="accordion-item">
+        <div class="accordion-header" id="settings" onclick="toggleAccordion('settings-acc')">
+            <span class="iconify title-icon" data-icon="line-md:check-list-3"></span> <span>SETTINGS UI</span>
+            <span class="iconify accordion-icon" data-icon="ic:baseline-keyboard-arrow-right"></span>
+        </div>
+        <div class="accordion-content" id="settings-acc">
+            <div class="extension-title-text-box">
+            <p>The <span  style="font-weight: bold; color: #ffd95e;">Settings UI</span> allows for some customization.
+            </p>
+            </div>
+            <p><br><br></p>
+            <!---------------------------------------------->
+            <div class="settings-ui-container">
+                <div class="extension-title-text-box">
+                    <p><span style="font-weight: bold; color: #fff;">General</span>
+                    <br>
+                    Some general settings can be set in here.
+                    </p>
+                </div>
+                <img src="{{ site.baseurl }}/assets/settings/mod-tools/mod-tools-1.webp" class="settings-ui-image">
+            </div>
+
+          <!---------------------------------------------->
+            <div class="settings-ui-container">
+                <div class="extension-title-text-box">
+                    <p><span style="font-weight: bold; color: #fff;">URL Filter</span> <br>In here you can filter for links in chat, add links or users to a whitelist and and all the other link related stuff.
+                    </p>
+                </div>
+                <img src="{{ site.baseurl }}/assets/settings/mod-tools/mod-tools-2.webp" class="settings-ui-image">
+            </div>
+            <!---------------------------------------------->
+          
+            <div class="settings-ui-container">
+                <div class="extension-title-text-box">
+                    <p><span style="font-weight: bold; color: #fff;">Bot Protection</span> <br>Follow Bot Attacks and Spam Bots ("Cheap viewers on..") are getting handled in this tab. Especially the follow bot attack protection allows you to choose actions and queues to turn off during the attack and turn off browser sources etc. in case you are using external alerts.
+                    </p>
+                </div>
+                <img src="{{ site.baseurl }}/assets/settings/mod-tools/mod-tools-3.webp" class="settings-ui-image">
+            </div>
+            <!---------------------------------------------->
+          <div class="settings-ui-container">
+                <div class="extension-title-text-box">
+                    <p><span style="font-weight: bold; color: #fff;">Spam Protection</span> <br>This tab contains settings for blacklisted words, caps, emote spam and ASCII protection. There also is an available dock for OBS that monitors suspicious users (new chatters and accounts that are less than 90 days old).
+                    </p>
+                </div>
+                <img src="{{ site.baseurl }}/assets/settings/mod-tools/mod-tools-4.webp" class="settings-ui-image">
+            </div>
+            <!---------------------------------------------->
+          <div class="settings-ui-container">
+                <div class="extension-title-text-box">
+                    <p><span style="font-weight: bold; color: #fff;">Hate Raid Protection</span> <br>Hate Raids are just people trying to ruin your stream experience, usually by giving mean comments in chat. You can decide to what extent the protection mode operates. You can not only set chat modes, but also turn off rewards, alerts and actions for the duration of the attack.
+                    </p>
+                </div>
+                <img src="{{ site.baseurl }}/assets/settings/mod-tools/mod-tools-5.webp" class="settings-ui-image">
+            </div>
+            <!---------------------------------------------->
+          <div class="settings-ui-container">
+                <div class="extension-title-text-box">
+                    <p><span style="font-weight: bold; color: #fff;">Raids & Shoutouts</span> <br>Allows you to customize automatic chat shoutouts on raids, snoozing ads on raids, as well as automatically posting your raid messages whenever you raid out.
+                    </p>
+                </div>
+                <img src="{{ site.baseurl }}/assets/settings/mod-tools/mod-tools-6.webp" class="settings-ui-image">
+            </div>
+            <!---------------------------------------------->
+          <div class="settings-ui-container">
+                <div class="extension-title-text-box">
+                    <p><span style="font-weight: bold; color: #fff;">Chat Management</span> <br>In here you can set the default duration for polls and predictions (if no duration has been specified) as well as the custom command list settings.
+                    </p>
+                </div>
+                <img src="{{ site.baseurl }}/assets/settings/mod-tools/mod-tools-7.webp" class="settings-ui-image">
+            </div>
+            <!---------------------------------------------->
+           <div class="settings-ui-container">
+                <div class="extension-title-text-box">
+                    <p><span style="font-weight: bold; color: #fff;">OBS Management</span> <br>For your moderators to switch scenes, they'll have to know the name of your scenes. Here you can specify whether the list is one message, whether it's being whispered to the mod and you can exclude certain scenes from showing up in that list.
+                    </p>
+                </div>
+                <img src="{{ site.baseurl }}/assets/settings/mod-tools/mod-tools-8.webp" class="settings-ui-image">
+            </div>
+            <!---------------------------------------------->
+          <div class="settings-ui-container">
+                <div class="extension-title-text-box">
+                    <p><span style="font-weight: bold; color: #fff;">Super Moderators</span> <br>Choose your super moderators. Super moderators can use !ban and !timeout commands on other moderators and have special priviliges, if you toggle the according switches.
+                    </p>
+                </div>
+                <img src="{{ site.baseurl }}/assets/settings/mod-tools/mod-tools-9.webp" class="settings-ui-image">
+            </div>
+            <!---------------------------------------------->
+           <div class="settings-ui-container">
+                <div class="extension-title-text-box">
+                    <p><span style="font-weight: bold; color: #fff;">Chat Responses</span> <br>Customize your chat responses and make use of the variables listed below.
+                    </p>
+                </div>
+                <img src="{{ site.baseurl }}/assets/settings/mod-tools/mod-tools-10.webp" class="settings-ui-image">
+            </div>
+            <!---------------------------------------------->
+        </div>
+    </div>
+    <!---------------------------------------------------------------------------------------------------------------------------------->
+
+    <div class="accordion-divider"></div>
+
+
+    <!----    FAQ    ------------------------------------------------------------------------------------------------------------------------------>
+    <div class="accordion-item">
+        <div class="accordion-header" id="faq" onclick="toggleAccordion('faq-acc')">
+            <span class="iconify title-icon" data-icon="line-md:question-square"></span>
+            <span>FAQ & EXAMPLES</span>
+            <span class="iconify accordion-icon" data-icon="ic:baseline-keyboard-arrow-right"></span>
+        </div>
+        <div class="accordion-content" id="faq-acc">
+            <!--------------------------------->
+            <div class="extension-title-text-box-long">
+                <h3> <span style="font-weight: bold; color: #fff">Can I disable certain chat responses?</span></h3>
+                <p>Yes. In the <span style="color: #ffd95e; font-weight: bold;">Settings UI</span> in the <span
+                        style="color: #ffd95e; font-weight: bold;">Chat Responses</span> tab, you can enter a single
+                    <span style="color: #ffd95e; font-weight: bold;">hyphen</span> <span
+                        style="background-color: #fff; color: black; padding: 0 5px; opacity: 0.4;">-</span> as the
+                    message and it'll then not post it to chat.
+                    <br><br>
+                    <img src="{{ site.baseurl }}/assets/faq/mod-tools/mod-tools-hyphen.png" class="extension-image-smol" style="border-radius: 5px">
+                    <br><br>
+                    You also have the possibility to add a <span style="color: #ffd95e; font-weight: bold;">noMessage</span> argument with a <span style="color: #ffd95e; font-weight: bold;">Set Argument</span> subaction and its value at <span style="color: #ffd95e; font-weight: bold;">True</span> to surpress a single reply, instead of ditching the entire reply with the hyphen as a whole. So let's say you want to pause the music when an alert plays but don't want the message in chat, but you still want the message when using the <span style="color: #ffd95e; font-weight: bold;">!pause</span> command, then simply add the <span style="color: #ffd95e; font-weight: bold;">noMessage</span> argument with the value <span style="color: #ffd95e; font-weight: bold;">True</span> before running the <span style="color: #ffd95e; font-weight: bold;">Pause</span> action.
+                    
+                </p>
+
+            </div>
+            <!--------------------------------->
+
+        </div>
+    </div>
+    <!---------------------------------------------------------------------------------------------------------------------------------->
+
+    <div class="accordion-divider"></div>
+    <!----    CHANGELOG    ------------------------------------------------------------------------------------------------------------------------------>
+    <div class="accordion-item">
+        <div class="accordion-header" id="changelog" onclick="toggleAccordion('changelog-acc')">
+            <span class="iconify title-icon" data-icon="line-md:rotate-270"></span>
+            <span>CHANGELOG</span>
+            <span class="iconify accordion-icon" data-icon="ic:baseline-keyboard-arrow-right"></span>
+        </div>
+        <div class="accordion-content" id="changelog-acc">
+            <table class="extension-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Changes</th>
+                        <th>Version</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  <!---------------------------------------------->
+                     <tr>
+                        <td>July 19, 2025</td>
+                        <td>Release</td>
+                        <td>2.0.0</td>
+                    </tr>
+                    <!---------------------------------------------->
+                </tbody>
+            </table>
+        </div>
+    </div>
     <!---------------------------------------------------------------------------------------------------------------------------------->
     <div class="accordion-divider"></div>
     <!---------------------------------------------->
