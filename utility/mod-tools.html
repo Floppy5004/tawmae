@@ -169,8 +169,9 @@ og_image: "/assets/page-design/page-cards/mod-tools.webp"
           <h2 style="color: #ffd95e; text-align: center; font-size: 1.5rem; margin-bottom: 1rem;">
             Super Moderators
         </h2>
-          <div class="extension-title-text-box-long">
-                You can elevate some of your moderators to the rank of a super moderator. That's nothing natively for Twitch, but entirely made up by me. Super moderators enjoy certain priviliges that regular mods won't have. They're able to use the <code>!ban</code> and  <code>!timeout</code> command on regular mods and you can toggle stuff like OBS commands or Channel Point Reward commands to only be used by super moderators.
+          <div class="extension-title-text-box-long" style="text-align: left;">
+                You can elevate some of your moderators to the rank of a super moderator.<br><br>
+            That's nothing natively for Twitch, but entirely made up by me. Super moderators enjoy certain priviliges that regular mods won't have. They're able to use the <code>!ban</code> and  <code>!timeout</code> command on regular mods and you can toggle stuff like OBS commands or Channel Point Reward commands to only be used by super moderators.
                 </p>
 
             </div>
@@ -187,32 +188,33 @@ og_image: "/assets/page-design/page-cards/mod-tools.webp"
                <span style="font-weight: bold; color: #ffd95e;">Cooldowns:</span>
             <br>
             <i>Set global and/or user cooldowns.</i>
+            <br> <br>
+              <span style="font-weight: bold; color: #80FFFF;">&lt;GlobalCooldown:60&gt;</span>
             <br>
-              <span style="font-weight: bold; color: #ffd95e;">&lt;GlobalCooldown:60&gt;</span>
-            <br>
-              <span style="font-weight: bold; color: #ffd95e;">&lt;UserCooldown:60&gt;</span>
-            <br><br>
+              <span style="font-weight: bold; color: #80FFFF;">&lt;UserCooldown:60&gt;</span>
+            <br><br> <br>
                <span style="font-weight: bold; color: #ffd95e;">Permissions:</span>
             <br>
             <i>Set permissions for user groups, so only those groups are able to use that command. You can add multiple ones at once.</i>
+            <br> <br>
+              <span style="font-weight: bold; color: #80FFFF;">&lt;modOnly:true&gt;</span>
             <br>
-              <span style="font-weight: bold; color: #ffd95e;">&lt;modOnly:true&gt;</span>
+              <span style="font-weight: bold; color: #80FFFF;">&lt;vipOnly:true&gt;</span>
             <br>
-              <span style="font-weight: bold; color: #ffd95e;">&lt;vipOnly:true&gt;</span>
-            <br>
-              <span style="font-weight: bold; color: #ffd95e;">&lt;subOnly:true&gt;</span>
-             <br><br>
+              <span style="font-weight: bold; color: #80FFFF;">&lt;subOnly:true&gt;</span>
+             <br><br> <br>
                <span style="font-weight: bold; color: #ffd95e;">Counter Edit Permissions:</span>
             <br>
             <i>Each custom commands has a %count% variable to it. You can edit that counter by typing a plus or minus symbol after the command, or set it to a value. Example: !death +, !death -, !death +5, !death set 50. Every user is able to fetch the current count by just using the command, but you can decide which group is allowed to change the count.</i>
+            <br> <br>
+              <span style="font-weight: bold; color: #80FFFF;">&lt;counterEditModsOnly:true&gt;</span>
             <br>
-              <span style="font-weight: bold; color: #ffd95e;">&lt;counterEditModsOnly:true&gt;</span>
+              <span style="font-weight: bold; color: #80FFFF;">&lt;counterEditVipsOnly:true&gt;</span>
             <br>
-              <span style="font-weight: bold; color: #ffd95e;">&lt;counterEditVipsOnly:true&gt;</span>
-            <br>
-              <span style="font-weight: bold; color: #ffd95e;">&lt;counterEditSubsOnly:true&gt;</span>
-            <br><br>
+              <span style="font-weight: bold; color: #80FFFF;">&lt;counterEditSubsOnly:true&gt;</span>
+            <br><br> <br>
                <strong>Parseable variables:</strong>
+             <br>
            As mentioned above, you can for example use the variable %count% in your custom command's text. This variable will then be replaced with the attached counter number. But there's also %targetUser%, that will be replaced with the name of a user. If you use a custom command with an @-symbol, like !hug @tawmae, it will replace %targetUser% with 'tawmae'.
             
             
