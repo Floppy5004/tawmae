@@ -219,23 +219,24 @@ og_image: "/assets/page-design/page-cards/mod-tools.webp"
     </div>
     <div class="accordion-content" id="commands-acc">
 
-        <!-- URL Filter -->
+
+        <!-- Channel Management -->
         <h2 style="color: #ffd95e; text-align: center; font-size: 1.5rem; margin-bottom: 1rem;">
-            URL Filter
-        </h2>
+           Channel Management
+        </h2>      
+       
 
         <div class="customization-text-container">
             <div class="extension-title-text-box">
                 <p>
                     <span style="font-weight: bold; color: #fff;">
-                        !permit <span style="color: #ffd95e;">[User]</span>
+                        !setTitle <span style="color: #ffd95e;">[Title]</span>
                     </span>
                 </p>
             </div>
             <div class="extension-title-text-box">
-                <p>Permit a specified user to post links to chat for a given amount of time.
-                <br><br>
-                Example: <code>!permit tawmae</code>
+                <p>Set a channel title.<br><br>
+                Example: <code>!setTitle This is a super cool channel title | !sr !commands</code>
                 </p>
             </div>
         </div>
@@ -244,13 +245,13 @@ og_image: "/assets/page-design/page-cards/mod-tools.webp"
             <div class="extension-title-text-box">
                 <p>
                     <span style="font-weight: bold; color: #fff;">
-                        !addURL <span style="color: #ffd95e;">[URL]</span>
+                        !setGame <span style="color: #ffd95e;">[Game]</span>
                     </span>
                 </p>
             </div>
             <div class="extension-title-text-box">
-                <p>Add a link to the whitelist.<br><br>
-                Example: <code>!addURL twitch.tv</code>
+                <p>Set the channel game/category.<br><br>
+                Example: <code>!setGame Witcher 3</code>
                 </p>
             </div>
         </div>
@@ -259,13 +260,13 @@ og_image: "/assets/page-design/page-cards/mod-tools.webp"
             <div class="extension-title-text-box">
                 <p>
                     <span style="font-weight: bold; color: #fff;">
-                        !removeURL <span style="color: #ffd95e;">[URL]</span>
+                        !addTag <span style="color: #ffd95e;">[Tag]</span>
                     </span>
                 </p>
             </div>
             <div class="extension-title-text-box">
-                <p>Removes a link from the whitelist.<br><br>
-                Example: <code>!removeURL twitch.tv</code>
+                <p>Add a channel tag.<br><br>
+                Example: <code>!addTag LGBTQFriendly</code>
                 </p>
             </div>
         </div>
@@ -274,142 +275,18 @@ og_image: "/assets/page-design/page-cards/mod-tools.webp"
             <div class="extension-title-text-box">
                 <p>
                     <span style="font-weight: bold; color: #fff;">
-                        !urlAddUser <span style="color: #ffd95e;">[Username]</span>
+                        !removeTag <span style="color: #ffd95e;">[Tag]</span>
                     </span>
                 </p>
             </div>
             <div class="extension-title-text-box">
-                <p>Add a user to the URL whitelist.<br><br>
-                Example: <code>!urlAddUser tawmae</code>
+                <p>Remove a channel tag.<br><br>
+                Example: <code>!removeTag Calm</code>
                 </p>
             </div>
         </div>
 
-        <div class="customization-text-container">
-            <div class="extension-title-text-box">
-                <p>
-                    <span style="font-weight: bold; color: #fff;">
-                        !urlRemoveUser <span style="color: #ffd95e;">[Username]</span>
-                    </span>
-                </p>
-            </div>
-            <div class="extension-title-text-box">
-                <p>Remove a user from the URL whitelist.
-                  <br><br>
-                Example: <code>!urlRemoveUser tawmae</code>
-                </p>
-            </div>
-        </div>
-
-        <div class="customization-text-container">
-            <div class="extension-title-text-box">
-                <p>
-                    <span style="font-weight: bold; color: #fff;">
-                        !urlFilter
-                    </span>
-                </p>
-            </div>
-            <div class="extension-title-text-box">
-                <p>Toggle the URL filter.<br><br>
-                Example: <code>!urlFilter</code>
-                </p>
-            </div>
-        </div>
-
-        <div class="customization-text-container">
-            <div class="extension-title-text-box">
-                <p>
-                    <span style="font-weight: bold; color: #fff;">
-                        !whitelistedURLs
-                    </span>
-                </p>
-            </div>
-            <div class="extension-title-text-box">
-                <p>Post all whitelisted URLs to chat.<br><br>
-                Example: <code>!whitelistedURLs</code>
-                </p>
-            </div>
-        </div>
-
-        <!-- Follow Bot Attacks -->
-        <h2 style="color: #ffd95e; text-align: center; font-size: 1.5rem; margin-bottom: 1rem;">
-            Follow Bot Attack & Hate Raid Protection
-        </h2>
-
-        <div class="customization-text-container">
-            <div class="extension-title-text-box">
-                <p>
-                    <span style="font-weight: bold; color: #fff;">
-                        !enableFollowAttackProtection
-                    </span>
-                </p>
-            </div>
-            <div class="extension-title-text-box">
-                <p>Manually enables the Follow Bot Attack protection mode.<br><br>
-                Example: <code>!enableFollowAttackProtection</code>
-                </p>
-            </div>
-        </div>
-
-        <div class="customization-text-container">
-            <div class="extension-title-text-box">
-                <p>
-                    <span style="font-weight: bold; color: #fff;">
-                        !disableFollowAttackProtection
-                    </span>
-                </p>
-            </div>
-            <div class="extension-title-text-box">
-                <p>Manually disables the Follow Bot Attack protection mode.<br><br>
-                Example: <code>!disableFollowAttackProtection</code>
-                </p>
-            </div>
-        </div>
-
-        <div class="customization-text-container">
-            <div class="extension-title-text-box">
-                <p>
-                    <span style="font-weight: bold; color: #fff;">
-                        !removeBottedFollowers
-                    </span>
-                </p>
-            </div>
-            <div class="extension-title-text-box">
-                <p>Manually remove botted followers from a registered attack.<br><br>
-                Example: <code>!removeBottedFollowers</code>
-                </p>
-            </div>
-        </div>
-
-        <div class="customization-text-container">
-            <div class="extension-title-text-box">
-                <p>
-                    <span style="font-weight: bold; color: #fff;">
-                        !removeLatestFollowers <span style="color: #ffd95e;">[Minutes]</span>
-                    </span>
-                </p>
-            </div>
-            <div class="extension-title-text-box">
-                <p>Removes all followers that have followed within the last X minutes. Also works if Streamer.bot was not active during the follow attack. Requires double-confirmation to avoid accidental uses.<br><br>
-                Example: <code>!removeLatestFollowers 15</code>
-                </p>
-            </div>
-        </div>
-
-        <div class="customization-text-container">
-            <div class="extension-title-text-box">
-                <p>
-                    <span style="font-weight: bold; color: #fff;">
-                        !hateRaid</span>
-                    </span>
-                </p>
-            </div>
-            <div class="extension-title-text-box">
-                <p>Toggles the hate raid protection.<br><br>
-                Example: <code>!hateRaid</code>
-                </p>
-            </div>
-        </div>
+        <div class="accordion-divider"></div>
 
         <!-- Custom Commands -->
         <h2 style="color: #ffd95e; text-align: center; font-size: 1.5rem; margin-bottom: 1rem;">
@@ -476,71 +353,7 @@ og_image: "/assets/page-design/page-cards/mod-tools.webp"
             </div>
         </div>
 
-      <!-- Channel Management -->
-        <h2 style="color: #ffd95e; text-align: center; font-size: 1.5rem; margin-bottom: 1rem;">
-           Channel Management
-        </h2>      
-       
-
-        <div class="customization-text-container">
-            <div class="extension-title-text-box">
-                <p>
-                    <span style="font-weight: bold; color: #fff;">
-                        !setTitle <span style="color: #ffd95e;">[Title]</span>
-                    </span>
-                </p>
-            </div>
-            <div class="extension-title-text-box">
-                <p>Set a channel title.<br><br>
-                Example: <code>!setTitle This is a super cool channel title | !sr !commands</code>
-                </p>
-            </div>
-        </div>
-
-        <div class="customization-text-container">
-            <div class="extension-title-text-box">
-                <p>
-                    <span style="font-weight: bold; color: #fff;">
-                        !setGame <span style="color: #ffd95e;">[Game]</span>
-                    </span>
-                </p>
-            </div>
-            <div class="extension-title-text-box">
-                <p>Set the channel game/category.<br><br>
-                Example: <code>!setGame Witcher 3</code>
-                </p>
-            </div>
-        </div>
-
-        <div class="customization-text-container">
-            <div class="extension-title-text-box">
-                <p>
-                    <span style="font-weight: bold; color: #fff;">
-                        !addTag <span style="color: #ffd95e;">[Tag]</span>
-                    </span>
-                </p>
-            </div>
-            <div class="extension-title-text-box">
-                <p>Add a channel tag.<br><br>
-                Example: <code>!addTag LGBTQFriendly</code>
-                </p>
-            </div>
-        </div>
-
-        <div class="customization-text-container">
-            <div class="extension-title-text-box">
-                <p>
-                    <span style="font-weight: bold; color: #fff;">
-                        !removeTag <span style="color: #ffd95e;">[Tag]</span>
-                    </span>
-                </p>
-            </div>
-            <div class="extension-title-text-box">
-                <p>Remove a channel tag.<br><br>
-                Example: <code>!removeTag Calm</code>
-                </p>
-            </div>
-        </div>
+        <div class="accordion-divider"></div>
 
         <!-- OBS Management -->
         <h2 style="color: #ffd95e; text-align: center; font-size: 1.5rem; margin-bottom: 1rem;">
@@ -622,6 +435,8 @@ og_image: "/assets/page-design/page-cards/mod-tools.webp"
             </div>
         </div>
 
+      <div class="accordion-divider"></div>
+      
         <!-- Chat Management -->
         <h2 style="color: #ffd95e; text-align: center; font-size: 1.5rem; margin-bottom: 1rem;">
             Chat Management
@@ -764,6 +579,211 @@ og_image: "/assets/page-design/page-cards/mod-tools.webp"
         </div>
 
 
+      <div class="accordion-divider"></div>
+
+      
+        <!-- URL Filter -->
+        <h2 style="color: #ffd95e; text-align: center; font-size: 1.5rem; margin-bottom: 1rem;">
+            URL Filter
+        </h2>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p>
+                    <span style="font-weight: bold; color: #fff;">
+                        !permit <span style="color: #ffd95e;">[User]</span>
+                    </span>
+                </p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Permit a specified user to post links to chat for a given amount of time.
+                <br><br>
+                Example: <code>!permit tawmae</code>
+                </p>
+            </div>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p>
+                    <span style="font-weight: bold; color: #fff;">
+                        !addURL <span style="color: #ffd95e;">[URL]</span>
+                    </span>
+                </p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Add a link to the whitelist.<br><br>
+                Example: <code>!addURL twitch.tv</code>
+                </p>
+            </div>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p>
+                    <span style="font-weight: bold; color: #fff;">
+                        !removeURL <span style="color: #ffd95e;">[URL]</span>
+                    </span>
+                </p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Removes a link from the whitelist.<br><br>
+                Example: <code>!removeURL twitch.tv</code>
+                </p>
+            </div>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p>
+                    <span style="font-weight: bold; color: #fff;">
+                        !urlAddUser <span style="color: #ffd95e;">[Username]</span>
+                    </span>
+                </p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Add a user to the URL whitelist.<br><br>
+                Example: <code>!urlAddUser tawmae</code>
+                </p>
+            </div>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p>
+                    <span style="font-weight: bold; color: #fff;">
+                        !urlRemoveUser <span style="color: #ffd95e;">[Username]</span>
+                    </span>
+                </p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Remove a user from the URL whitelist.
+                  <br><br>
+                Example: <code>!urlRemoveUser tawmae</code>
+                </p>
+            </div>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p>
+                    <span style="font-weight: bold; color: #fff;">
+                        !urlFilter
+                    </span>
+                </p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Toggle the URL filter.<br><br>
+                Example: <code>!urlFilter</code>
+                </p>
+            </div>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p>
+                    <span style="font-weight: bold; color: #fff;">
+                        !whitelistedURLs
+                    </span>
+                </p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Post all whitelisted URLs to chat.<br><br>
+                Example: <code>!whitelistedURLs</code>
+                </p>
+            </div>
+        </div>
+
+
+
+      <div class="accordion-divider"></div>
+
+      
+
+        <!-- Follow Bot Attacks -->
+        <h2 style="color: #ffd95e; text-align: center; font-size: 1.5rem; margin-bottom: 1rem;">
+            Bot & Hate Raid Protection
+        </h2>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p>
+                    <span style="font-weight: bold; color: #fff;">
+                        !enableFollowAttackProtection
+                    </span>
+                </p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Manually enables the Follow Bot Attack protection mode.<br><br>
+                Example: <code>!enableFollowAttackProtection</code>
+                </p>
+            </div>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p>
+                    <span style="font-weight: bold; color: #fff;">
+                        !disableFollowAttackProtection
+                    </span>
+                </p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Manually disables the Follow Bot Attack protection mode.<br><br>
+                Example: <code>!disableFollowAttackProtection</code>
+                </p>
+            </div>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p>
+                    <span style="font-weight: bold; color: #fff;">
+                        !removeBottedFollowers
+                    </span>
+                </p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Manually remove botted followers from a registered attack.<br><br>
+                Example: <code>!removeBottedFollowers</code>
+                </p>
+            </div>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p>
+                    <span style="font-weight: bold; color: #fff;">
+                        !removeLatestFollowers <span style="color: #ffd95e;">[Minutes]</span>
+                    </span>
+                </p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Removes all followers that have followed within the last X minutes. Also works if Streamer.bot was not active during the follow attack. Requires double-confirmation to avoid accidental uses.<br><br>
+                Example: <code>!removeLatestFollowers 15</code>
+                </p>
+            </div>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p>
+                    <span style="font-weight: bold; color: #fff;">
+                        !hateRaid</span>
+                    </span>
+                </p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Toggles the hate raid protection.<br><br>
+                Example: <code>!hateRaid</code>
+                </p>
+            </div>
+        </div>
+
+
+
+<div class="accordion-divider"></div>
+      
 
         <!-- Spam Filter -->
         <h2 style="color: #ffd95e; text-align: center; font-size: 1.5rem; margin-bottom: 1rem;">
@@ -862,7 +882,7 @@ og_image: "/assets/page-design/page-cards/mod-tools.webp"
 
        
 
-        
+        <div class="accordion-divider"></div>
 
        
 
@@ -1076,6 +1096,14 @@ og_image: "/assets/page-design/page-cards/mod-tools.webp"
                 </p>
             </div>
         </div>
+
+
+
+
+      <div class="accordion-divider"></div>
+
+
+      
 
          <!-- Polls and Predictions -->
         <h2 style="color: #ffd95e; text-align: center; font-size: 1.5rem; margin-bottom: 1rem;">
