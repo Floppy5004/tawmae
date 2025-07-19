@@ -44,6 +44,7 @@ og_image: "/assets/page-design/page-cards/mod-tools.webp"
       <img src="{{ site.baseurl }}/assets/covers/mod-tools-6.webp" class="carousel-image">
 </div>
 </div>
+  </div>
 
 <!----    ENTIRE ACCORDION THINGY WHATEVER IT'S CALLED    ------------------------------------------------------------------------------------------------------------------------------>
 
@@ -154,7 +155,184 @@ og_image: "/assets/page-design/page-cards/mod-tools.webp"
 
     <!---------------------------------------------------------------------------------------------------------------------------------->
 
-    
+    <div class="accordion-divider"></div>
+
+    <!----    FEATURES    ------------------------------------------------------------------------------------------------------------------------------>
+    <div class="accordion-item">
+        <div class="accordion-header" id="features" onclick="toggleAccordion('features-acc')">
+            <span class="iconify title-icon" data-icon="line-md:question-square"></span>
+            <span>FEATURES</span>
+            <span class="iconify accordion-icon" data-icon="ic:baseline-keyboard-arrow-right"></span>
+        </div>
+        <div class="accordion-content" id="features-acc">
+            <!--------------------------------->
+          <div class="extension-title-text-box-long">
+                <h3> <span style="font-weight: bold; color: #fff">Super Moderators</span></h3>
+                You can elevate some of your moderators to the rank of a super moderator. That's nothing natively for Twitch, but entirely made up by me. Super moderators enjoy certain priviliges that regular mods won't have. They're able to use the <code>!ban</code> and  <code>!timeout</code> command on regular mods and you can toggle stuff like OBS commands or Channel Point Reward commands to only be used by super moderators.
+                </p>
+
+            </div>
+            <!--------------------------------->
+          <div class="extension-title-text-box-long">
+                <h3> <span style="font-weight: bold; color: #fff">Custom Commands</span></h3>
+                Sometimes you need to add a quick and dirty command via chat or have one of your mods to that for you. Streamer.bot doesn't allow to natively add commands without doing it manually, but this method allows to add commands via chat and also allows for fancy stuff like counters, cooldowns, permissions and targets. You can also edit and remove them and also output all custom commands to chat.
+  <br><br>
+                To do that, you simply add one of those parameters to the end of the add- or edit-command.
+            <br><br>
+            Example: <code>!addCommand !bluesky Check out my Bluesky profile: https://bsky.app/profile/tawmae.xyz &lt;GlobalCooldown:60&gt;</code>
+            <br><br>
+               <strong>Cooldowns:</strong>
+            <br>
+            <i>Set global and/or user cooldowns.</i>
+            <br>
+              <span style="font-weight: bold; color: #ffd95e;">&lt;GlobalCooldown:60&gt;</span>
+            <br>
+              <span style="font-weight: bold; color: #ffd95e;">&lt;UserCooldown:60&gt;</span>
+            <br><br>
+               <strong>Permissions:</strong>
+            <br>
+            <i>Set permissions for user groups, so only those groups are able to use that command. You can add multiple ones at once.</i>
+            <br>
+              <span style="font-weight: bold; color: #ffd95e;">&lt;modOnly:true&gt;</span>
+            <br>
+              <span style="font-weight: bold; color: #ffd95e;">&lt;vipOnly:true&gt;</span>
+            <br>
+              <span style="font-weight: bold; color: #ffd95e;">&lt;subOnly:true&gt;</span>
+             <br><br>
+               <strong>Counter Edit Permissions:</strong>
+            <br>
+            <i>Each custom commands has a %count% variable to it. You can edit that counter by typing a plus or minus symbol after the command, or set it to a value. Example: !death +, !death -, !death +5, !death set 50. Every user is able to fetch the current count by just using the command, but you can decide which group is allowed to change the count.</i>
+            <br>
+              <span style="font-weight: bold; color: #ffd95e;">&lt;counterEditModsOnly:true&gt;</span>
+            <br>
+              <span style="font-weight: bold; color: #ffd95e;">&lt;counterEditVipsOnly:true&gt;</span>
+            <br>
+              <span style="font-weight: bold; color: #ffd95e;">&lt;counterEditSubsOnly:true&gt;</span>
+            <br><br>
+               <strong>Parseable variables:</strong>
+           As mentioned above, you can for example use the variable %count% in your custom command's text. This variable will then be replaced with the attached counter number. But there's also %targetUser%, that will be replaced with the name of a user. If you use a custom command with an @-symbol, like !hug @tawmae, it will replace %targetUser% with 'tawmae'.
+            
+            
+                </p>
+
+            </div>
+            <!--------------------------------->
+            <div class="extension-title-text-box-long">
+                <h3> <span style="font-weight: bold; color: #fff">Bot & Hate Raid Protection</span></h3>
+                <strong>1. Spam Bots</strong>
+                <br>
+                By now we all know the spam bots that are trying to sell viewbots and other goodies. They're being automatically detected and banned for you.
+               <br><br>
+                <strong>2. Follow Bot Attacks</strong>
+                  <br>
+                  The main part is the Follow Attack protection though. Follow Attacks are just massive bot follow waves. They not only mess with your follower count, they also trigger alerts which might ruin your stream experience. These attacks will be identified automatically, but you're also able to manually enable the protective mode. While in the protective mode, all botted followers are getting removed automatically and alerts will be paused for the duration of the attack. And even if you forget to enable the protective mode, there are tools and commands to get rid of the bots afterwards.
+                  <br><br>
+                  <strong>3. Hate Raids</strong>
+                  <br>
+                  Hate Raids are usually led by real people. But they join your chat to spread hate and ruin your stream experience as well. The Hate Raid protection can be easily toggled and will automatically pause your rewards, alerts and put the chat in follower mode / slow mode etc.
+                </p>
+
+            </div>
+            <!--------------------------------->
+          <div class="extension-title-text-box-long">
+                <h3> <span style="font-weight: bold; color: #fff">Spam Filter</span></h3>
+                <strong>1. Blacklisted Words</strong>
+                <br>
+                You can put certain words on a blacklist, which are then getting filtered from chat. There's a <i>smart</i> mechanism to avoid workarounds with spaces, special characters etc. Your mods can easily add and remove words via commands and toggle the filter.
+               <br><br>
+                <strong>2. Caps Protection</strong>
+                <br>
+                The caps protection checks for x consecutive caps letters in a message and will delete the message if it exceeds that limit. Mods can easily toggle that filter via commands.
+                  <br><br>
+                <strong>3. Emote Protection</strong>
+                <br>
+                The caps protection checks for x amount of emotes in a message and will delete the message if it exceeds that limit. Mods can easily toggle that filter via commands.
+            <br><br>
+                <strong>4. ASCII Protection</strong>
+                <br>
+                The ASCII protection checks for ASCII symbols in a message and will purge it if it detects ASCII art or spam. Mods can easily toggle that filter via commands.
+                </p>
+
+            </div>
+            <!--------------------------------->
+          <div class="extension-title-text-box-long">
+                <h3> <span style="font-weight: bold; color: #fff">URL Filter</span></h3>
+                The URL filter checks for links in chat. What's better than the Twitch integrated blocker you ask?
+              <br><br>
+                <strong>1. URL Whitelist</strong>
+                <br>
+                You don't have to block ALL links. Twitch and Instagram links are fine? Just add them to a whitelist and those are no longer getting filtered. Mods can easily add and remove links via commands, and people are also able to fetch all whitelisted commands to check what's fine and what's not.
+            <br><br>
+                <strong>2. User Permit & Whitelist</strong>
+                <br>
+                The whitelist also works for specific users and/or user groups. Either specific people, or VIPs, or subs. You decide. You can also permit a single user for x seconds, so they're allowed to post links during that time frame.
+                </p>
+
+            </div>
+            <!--------------------------------->
+          <div class="extension-title-text-box-long">
+                <h3> <span style="font-weight: bold; color: #fff">OBS Management</span></h3>
+                <strong>1. Get and set scenes</strong>
+                <br>
+               You forgot to change your scene and don't have time to check the chat? Well, now your mods change the scene for you. They also can get a list of your scenes, so they know the name they need to switch to. To not spam all your 100 scenes into chat, you can exclude certain scenes from being shown in that list and/or have the list whispered to your mods.
+            <br><br>
+                <strong>2. Refresh Audio and Browser Sources</strong>
+                <br>
+                Do you use Audio Application Capture Sources (BETA) and ever experienced that your chat complains about crackling audio? Well, that's a known OBS bug, but can be easily fixed by refreshing the source. Your mods can now easily to that via chat command. The same applies for browser sources, in case they ever need a refresh.
+            <br><br>
+                <strong>3. End your stream</strong>
+                <br>
+                Accidents happen. And for those cases it can be nice that your mods are able to end the stream for you. This will require a double-confirmation to avoid accidental uses and you can limit OBS management commands to super moderators only.
+                </p>
+
+            </div>
+            <!--------------------------------->
+          <div class="extension-title-text-box-long">
+                <h3> <span style="font-weight: bold; color: #fff">Chat Management</span></h3>
+                <strong>1. Set Channel Title</strong>
+                <br>
+               Change the channel title via command. With integrated checks for the max. character limit and other goodies.
+            <br><br>
+                <strong>2. Change Channel Game/Category</strong>
+                <br>
+                Change the game/category via command. If Twitch fails to recognize the proper category, another catch mechanism is in place to determine the game. This isn't perfect, but allows for typos in the input.
+            <br><br>
+                <strong>3. Ads</strong>
+                <br>
+                Have your mods run ads, check the preroll-free time and snooze ads if needed.
+            <br><br>
+                <strong>4. Raids and Shoutouts</strong>
+                <br>
+                Automatically shoutout incoming raids, but not everyone.. You can limit auto-shoutouts to raiders you follow or only for a min. amount of raid viewers. Also post your raid messages to chat whenever you raid out and have your mods to a custom chat shoutout for specific users.
+            <br><br>
+                <strong>5. Translate</strong>
+                <br>
+                A message in a foreign language pops up? Simply reply to it with the !translate command or enter a text after the command to translate unrelated text to your target language.
+                </p>
+
+            </div>
+            <!--------------------------------->
+          <div class="extension-title-text-box-long">
+                <h3> <span style="font-weight: bold; color: #fff">Channel Point Rewards & Polls & Predictions</span></h3>
+            <strong>1. Rewards:</strong>
+            <br>
+                Change the titles, enabled-states, paused-states, cooldown, max limits, cost and prompts of channel point rewards via commands.
+            <br><br>
+            <strong>2. Polls:</strong>
+            <br>
+                Create and end polls via commands.
+            <br><br>
+            <strong>3. Predictions:</strong>
+            <br>
+                Create, lock, resolve or cancel predictions via chat commands.
+                </p>
+
+            </div>
+            <!--------------------------------->
+
+        </div>
+    </div>
+    <!---------------------------------------------------------------------------------------------------------------------------------->
 
     <div class="accordion-divider"></div>
 
