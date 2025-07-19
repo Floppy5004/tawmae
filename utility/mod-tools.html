@@ -233,7 +233,7 @@ og_image: "/assets/page-design/page-cards/mod-tools.webp"
                <br><br>
                 <span style="font-weight: bold; color: #ffd95e;">2. Follow Bot Attacks</span>
                   <br>
-                  The main part is the Follow Attack protection though. Follow Attacks are just massive bot follow waves. They not only mess with your follower count, they also trigger alerts which might ruin your stream experience. These attacks will be identified automatically, but you're also able to manually enable the protective mode. While in the protective mode, all botted followers are getting removed automatically and alerts will be paused for the duration of the attack. And even if you forget to enable the protective mode, there are tools and commands to get rid of the bots afterwards.
+                  The main part is the Follow Attack protection though. Follow Attacks are just massive bot follow waves. They not only mess with your follower count, they also trigger alerts which might ruin your stream experience. These attacks will be identified automatically, but you're also able to manually enable the protective mode. While in the protective mode, all botted followers are getting removed automatically and alerts will be paused for the duration of the attack. And even if you forget to enable the protective mode, there are tools and commands to get rid of the bots afterwards. For example as a web page, you can check the 'DOCKS AND ADDONS' tab for that. 
                   <br><br>
                   <span style="font-weight: bold; color: #ffd95e;">3. Hate Raids</span>
                   <br>
@@ -262,6 +262,10 @@ og_image: "/assets/page-design/page-cards/mod-tools.webp"
                 <span style="font-weight: bold; color: #ffd95e;">4. ASCII Protection</span>
                 <br>
                 The ASCII protection checks for ASCII symbols in a message and will purge it if it detects ASCII art or spam. Mods can easily toggle that filter via commands.
+              <br><br>
+                <span style="font-weight: bold; color: #ffd95e;">4. OBS Dock for sus users</span>
+                <br>
+                There's also a neat little OBS dock that you can add, that displays new chatters and accounts that are less than 90 days old to perform quick actions on. You can check the 'DOCKS AND ADDONS' tab for that. 
                 </p>
 
             </div>
@@ -348,6 +352,17 @@ og_image: "/assets/page-design/page-cards/mod-tools.webp"
             <span style="font-weight: bold; color: #ffd95e;">3. Predictions:</span>
             <br>
                 Create, lock, resolve or cancel predictions via chat commands.
+                </p>
+
+            </div>
+            <!--------------------------------->
+           <div class="accordion-divider"></div>
+          <h2 style="color: #ffd95e; text-align: center; font-size: 1.5rem; margin-bottom: 1rem;">
+            Get Better Target Info
+        </h2>
+          <div class="extension-title-text-box-long" style="text-align: left;">
+           Chatters can have localized names in non-latin letters. Japanese, chinese, kyrillic and newly arabic as well. This can cause issues for targeted commands, because the Twitch API only allows to fetch data for user logins, not localized display names. The MOD TOOLS happen to have an integration that saves localized usernames and allows to target them with their display names via commands.
+            <br><br>I did extend on that feature and by adding a Execute C# Method, choosing MOD TOOLS Actions and then GetBetterTargetInfo, it'll give you all the target info variables like the subaction does, but also returns results when you enter a localized display name.
                 </p>
 
             </div>
