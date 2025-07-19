@@ -233,7 +233,10 @@ og_image: "/assets/page-design/page-cards/mod-tools.webp"
                 </p>
             </div>
             <div class="extension-title-text-box">
-                <p>Permit a specified user to post links to chat for a given amount of time.</p>
+                <p>Permit a specified user to post links to chat for a given amount of time.
+                <br><br>
+                Example: <code>!permit tawmae</code>
+                </p>
             </div>
         </div>
 
@@ -246,7 +249,9 @@ og_image: "/assets/page-design/page-cards/mod-tools.webp"
                 </p>
             </div>
             <div class="extension-title-text-box">
-                <p>Add a link to the whitelist.</p>
+                <p>Add a link to the whitelist.<br><br>
+                Example: <code>!addURL twitch.tv</code>
+                </p>
             </div>
         </div>
 
@@ -259,7 +264,9 @@ og_image: "/assets/page-design/page-cards/mod-tools.webp"
                 </p>
             </div>
             <div class="extension-title-text-box">
-                <p>Removes a link from the whitelist.</p>
+                <p>Removes a link from the whitelist.<br><br>
+                Example: <code>!removeURL twitch.tv</code>
+                </p>
             </div>
         </div>
 
@@ -272,7 +279,9 @@ og_image: "/assets/page-design/page-cards/mod-tools.webp"
                 </p>
             </div>
             <div class="extension-title-text-box">
-                <p>Add a user to the URL whitelist.</p>
+                <p>Add a user to the URL whitelist.<br><br>
+                Example: <code>!urlAddUser tawmae</code>
+                </p>
             </div>
         </div>
 
@@ -285,7 +294,10 @@ og_image: "/assets/page-design/page-cards/mod-tools.webp"
                 </p>
             </div>
             <div class="extension-title-text-box">
-                <p>Remove a user from the URL whitelist.</p>
+                <p>Remove a user from the URL whitelist.
+                  <br><br>
+                Example: <code>!urlRemoveUser tawmae</code>
+                </p>
             </div>
         </div>
 
@@ -298,7 +310,9 @@ og_image: "/assets/page-design/page-cards/mod-tools.webp"
                 </p>
             </div>
             <div class="extension-title-text-box">
-                <p>Toggle the URL filter.</p>
+                <p>Toggle the URL filter.<br><br>
+                >Example: <code!urlFilter</code>
+                </p>
             </div>
         </div>
 
@@ -311,7 +325,9 @@ og_image: "/assets/page-design/page-cards/mod-tools.webp"
                 </p>
             </div>
             <div class="extension-title-text-box">
-                <p>Post all whitelisted URLs to chat.</p>
+                <p>Post all whitelisted URLs to chat.<br><br>
+                Example: <code>!whitelistedURLs</code>
+                </p>
             </div>
         </div>
 
@@ -329,7 +345,9 @@ og_image: "/assets/page-design/page-cards/mod-tools.webp"
                 </p>
             </div>
             <div class="extension-title-text-box">
-                <p>Manually enables the Follow Bot Attack protection mode.</p>
+                <p>Manually enables the Follow Bot Attack protection mode.<br><br>
+                Example: <code>!enableFollowAttackProtection</code>
+                </p>
             </div>
         </div>
 
@@ -342,7 +360,9 @@ og_image: "/assets/page-design/page-cards/mod-tools.webp"
                 </p>
             </div>
             <div class="extension-title-text-box">
-                <p>Manually disables the Follow Bot Attack protection mode.</p>
+                <p>Manually disables the Follow Bot Attack protection mode.<br><br>
+                Example: <code>!disableFollowAttackProtection</code>
+                </p>
             </div>
         </div>
 
@@ -628,9 +648,74 @@ og_image: "/assets/page-design/page-cards/mod-tools.webp"
             </div>
         </div>
 
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p>
+                    <span style="font-weight: bold; color: #fff;">
+                        !runAds <span style="color: #ffd95e;">[User]</span> <span style="color: #ffd95e;">[Duration]</span>
+                    </span>
+                </p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Run an ad for the specified duration (in seconds). From 30s to 180s, will default to 180s if no duration is provided.</p>
+            </div>
+        </div>
+
+      <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p>
+                    <span style="font-weight: bold; color: #fff;">
+                        !prerollTime
+                    </span>
+                </p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Post the remaining preroll-ad-free time to chat.</p>
+            </div>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p>
+                    <span style="font-weight: bold; color: #fff;">
+                        !snoozeAd
+                    </span>
+                </p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Snooze the next upcoming ad.</p>
+            </div>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p>
+                    <span style="font-weight: bold; color: #fff;">
+                        !skipTTS
+                    </span>
+                </p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Skips the currently playing TTS in Speaker.bot.</p>
+            </div>
+        </div>
+
+        <div class="customization-text-container">
+            <div class="extension-title-text-box">
+                <p>
+                    <span style="font-weight: bold; color: #fff;">
+                        !modCommands
+                    </span>
+                </p>
+            </div>
+            <div class="extension-title-text-box">
+                <p>Sends a link of this website from the commands tab into the chat.</p>
+            </div>
+        </div>
 
 
-        <!-- Chat Management -->
+
+        <!-- Spam Filter -->
         <h2 style="color: #ffd95e; text-align: center; font-size: 1.5rem; margin-bottom: 1rem;">
             Spam Filter
         </h2>
