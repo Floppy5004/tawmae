@@ -39,11 +39,6 @@
       padding: 12px 0;
     }
 
-    #logo-container img {
-      max-width: 200px;
-      height: auto;
-    }
-
     #banner {
       padding: 16px;
       font-size: 1.5rem;
@@ -85,10 +80,6 @@
       font-size: 2.25rem;
     }
 
-    #loading>div:first-child {
-      margin-bottom: 25px;
-    }
-
     #ws-help {
       text-align: center;
       font-size: 0.8rem;
@@ -117,7 +108,6 @@
       padding-bottom: 12px;
     }
 
-
     .table {
       display: flex;
       flex-direction: column;
@@ -131,7 +121,7 @@
     .table-header,
     .row {
       display: grid;
-      grid-template-columns: 40px 2fr 2fr 80px;
+      grid-template-columns: 30px 40px 2fr 2fr 80px;
       align-items: center;
       gap: 8px;
       padding: 8px 12px;
@@ -144,13 +134,14 @@
       background: var(--card-hover);
     }
 
-    .table-header div {
+    .table-header div,
+    .table-header input {
       font-weight: bold;
       text-align: center;
     }
 
-    .table-header div:nth-child(2),
-    .table-header div:nth-child(3) {
+    .table-header div:nth-child(3),
+    .table-header div:nth-child(4) {
       text-align: left;
     }
 
@@ -171,6 +162,11 @@
     .table-header>div:not(:last-child) {
       border-right: 1px solid var(--border-col);
       padding-right: 8px;
+    }
+
+    .select-cell {
+      display: flex;
+      justify-content: center;
     }
 
     .remove-cell {
@@ -241,12 +237,12 @@
   <div id="logo-container">
     <img src="https://github.com/tawmae/tawmae/blob/main/assets/page-design/logo-1.png?raw=true" alt="Logo">
   </div>
-  <div id="banner">tawmae.xyz - MOD TOOLS - Follower Remover - 1.0.0</div>
+  <div id="banner">tawmae.xyz - MOD TOOLS - Follower Remover - 1.0.1</div>
   <div id="controls">
     <input id="fromPicker" type="datetime-local">
     <span>to</span>
     <input id="toPicker" type="datetime-local">
-    <button id="rangeRemoveBtn" disabled>Remove All Followers In Range</button>
+    <button id="removeSelectedBtn" disabled>Remove All Marked</button>
   </div>
   <div id="loading">
     <div>Loading followers...</div>
@@ -276,9 +272,7 @@
     async function fetchAndRender() {
       try {
         const { variable } = await client.getGlobal(VARIABLE_NAME, false);
-        const list = typeof variable.value === 'string'
-          ? JSON.parse(variable.value)
-          : variable.value;
+        const list = typeof variable.value === 'string' ? JSON.parse(variable.value) : variable.value;
         followerList = Array.isArray(list) ? list : [];
         document.getElementById('loading').style.display = 'none';
         document.getElementById('header').style.display = 'block';
@@ -286,24 +280,22 @@
         document.getElementById('container').style.display = 'flex';
         document.getElementById('header').innerText = `Your Followers (Total: ${followerList.length})`;
         renderRows(followerList);
-        setupRangeFilter();
+        setupFilterAndSelection();
       } catch {
         document.getElementById('loading').innerText = 'Failed to load followers.';
       }
     }
     function renderRows(list) {
       const container = document.getElementById('container');
-      container.innerHTML = '<div class="table"><div class="table-header"><div>#</div><div>Name</div><div>Followed At</div><div>Remove</div></div></div>';
+      container.innerHTML = '<div class="table"><div class="table-header"><div><input id="selectAll" type="checkbox"></div><div>#</div><div>Name</div><div>Followed At</div><div>Remove</div></div></div>';
       const table = container.querySelector('.table');
       list.forEach((item, i) => {
         const dt = new Date(item.followed_at_local || item.followed_at);
         const ms = dt.getTime();
-        const dateStr = isNaN(ms)
-          ? (item.followed_at_local || item.followed_at)
-          : dt.toLocaleString(undefined, {
-            year: 'numeric', month: '2-digit', day: '2-digit',
-            hour: '2-digit', minute: '2-digit', second: '2-digit'
-          });
+        const dateStr = isNaN(ms) ? (item.followed_at_local || item.followed_at) : dt.toLocaleString(undefined, {
+          year: 'numeric', month: '2-digit', day: '2-digit',
+          hour: '2-digit', minute: '2-digit', second: '2-digit'
+        });
         const showLogin = item.user_name.toLowerCase() !== item.user_login;
         const row = document.createElement('div');
         row.className = 'row';
@@ -311,14 +303,18 @@
         row.dataset.userName = item.user_name;
         row.dataset.userLogin = item.user_login;
         row.dataset.userId = item.user_id;
+        const selectCell = document.createElement('div');
+        selectCell.className = 'select-cell';
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.className = 'row-select';
+        selectCell.appendChild(checkbox);
         const countCell = document.createElement('div');
         countCell.innerText = list.length - i;
         countCell.style.textAlign = 'center';
         const nameCell = document.createElement('div');
         nameCell.className = 'name-cell';
-        nameCell.innerText = showLogin
-          ? `${item.user_name} (${item.user_login})`
-          : item.user_name;
+        nameCell.innerText = showLogin ? `${item.user_name} (${item.user_login})` : item.user_name;
         const dateCell = document.createElement('div');
         dateCell.innerText = dateStr;
         const removeCell = document.createElement('div');
@@ -327,56 +323,66 @@
         btn.innerHTML = '<iconify-icon icon="mdi:account-remove" width="16" height="16"></iconify-icon><span>Remove</span>';
         btn.onclick = () => removeSingle(row, btn);
         removeCell.appendChild(btn);
-        row.append(countCell, nameCell, dateCell, removeCell);
+        row.append(selectCell, countCell, nameCell, dateCell, removeCell);
         table.appendChild(row);
       });
     }
-    function setupRangeFilter() {
+    function setupFilterAndSelection() {
       const fromPicker = document.getElementById('fromPicker');
       const toPicker = document.getElementById('toPicker');
-      const btn = document.getElementById('rangeRemoveBtn');
-      fromPicker.addEventListener('change', () => {
-        toPicker.min = fromPicker.value;
-        highlightRange();
+      const removeBtn = document.getElementById('removeSelectedBtn');
+      const selectAll = document.getElementById('selectAll');
+      fromPicker.addEventListener('change', filterRows);
+      toPicker.addEventListener('change', filterRows);
+      function filterRows() {
+        const fromMs = fromPicker.value ? new Date(fromPicker.value).getTime() : NaN;
+        const toMs = toPicker.value ? new Date(toPicker.value).getTime() : NaN;
+        document.querySelectorAll('.row').forEach(r => {
+          const ms = parseInt(r.dataset.followedMs, 10);
+          const inRange = !isNaN(fromMs) && !isNaN(toMs) && ms >= fromMs && ms <= toMs;
+          if (inRange) {
+            r.classList.add('highlight');
+            r.querySelector('.row-select').checked = true;
+          } else {
+            r.classList.remove('highlight');
+          }
+        });
+        const anyChecked = Array.from(document.querySelectorAll('.row-select')).some(cb => cb.checked);
+        removeBtn.disabled = !anyChecked;
+      }
+      document.addEventListener('change', e => {
+        if (e.target.classList.contains('row-select')) {
+          const any = Array.from(document.querySelectorAll('.row-select')).some(cb => cb.checked);
+          removeBtn.disabled = !any;
+        } else if (e.target === selectAll) {
+          document.querySelectorAll('.row-select').forEach(cb => {
+            cb.checked = selectAll.checked;
+          });
+          removeBtn.disabled = !selectAll.checked;
+        }
       });
-      toPicker.addEventListener('change', () => {
-        fromPicker.max = toPicker.value;
-        highlightRange();
-      });
-      btn.onclick = () => {
-        const highlighted = Array.from(document.querySelectorAll('.row.highlight'));
-        if (!highlighted.length) return;
-        if (!confirm(`Remove ${highlighted.length} followers in selected range?`)) return;
-        const toRemove = highlighted.map(r => ({
+      removeBtn.onclick = () => {
+        const selected = Array.from(document.querySelectorAll('.row')).filter(r => r.querySelector('.row-select').checked && !r.classList.contains('removed'));
+        if (!selected.length) return;
+        if (!confirm(`Remove ${selected.length} selected followers?`)) return;
+        const users = selected.map(r => ({
           user_name: r.dataset.userName,
           user_login: r.dataset.userLogin,
           user_id: r.dataset.userId
         }));
-        client.doAction({ id: ACTION_ID }, { _from: 'RemoveFollowerRange', users: toRemove });
-        highlighted.forEach(r => {
+        client.doAction({ id: ACTION_ID }, { _from: 'RemoveFollowerRange', users });
+        selected.forEach(r => {
           const btn = r.querySelector('button');
           removeSingle(r, btn, false);
         });
+        removeBtn.disabled = true;
+        selectAll.checked = false;
       };
-    }
-    function highlightRange() {
-      const fromVal = document.getElementById('fromPicker').value;
-      const toVal = document.getElementById('toPicker').value;
-      const fromMs = fromVal ? new Date(fromVal).getTime() : NaN;
-      const toMs = toVal ? new Date(toVal).getTime() : NaN;
-      const btn = document.getElementById('rangeRemoveBtn');
-      let valid = !isNaN(fromMs) && !isNaN(toMs) && fromMs <= toMs;
-      btn.disabled = !valid;
-      document.querySelectorAll('.row').forEach(r => {
-        const ms = parseInt(r.dataset.followedMs, 10);
-        if (valid && ms >= fromMs && ms <= toMs) r.classList.add('highlight');
-        else r.classList.remove('highlight');
-      });
     }
     function removeSingle(row, btn, doCall = true) {
       if (row.classList.contains('removed')) return;
       row.classList.add('removed');
-      disableAll(row);
+      row.querySelectorAll('button, .row-select').forEach(el => el.disabled = true);
       const txt = document.createElement('span');
       txt.className = 'removed-text';
       txt.innerText = 'REMOVED';
@@ -388,10 +394,8 @@
           user_login: row.dataset.userLogin,
           user_id: row.dataset.userId
         });
-      setTimeout(() => enableAll(row), 2000);
+      setTimeout(() => row.querySelectorAll('button').forEach(b => b.disabled = false), 2000);
     }
-    function disableAll(el) { el.querySelectorAll('button').forEach(b => b.disabled = true); }
-    function enableAll(el) { el.querySelectorAll('button').forEach(b => b.disabled = false); }
   </script>
 </body>
 
