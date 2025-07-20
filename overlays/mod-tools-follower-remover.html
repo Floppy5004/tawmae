@@ -1,357 +1,398 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <meta charset="UTF-8">
-    <title>tawmae - MOD TOOLS - Follower Remover - 1.0.0</title>
-    <script src="https://code.iconify.design/iconify-icon/3.0.0/iconify-icon.min.js"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
-        :root {
-            --bg: #1e1e2e;
-            --fg: #ddd;
-            --card-bg: #313244;
-            --card-hover: #45475a;
-            --btn-start: #6b83c2;
-            --btn-end: #4b6aa0;
-            --border-col: #45475a;
-        }
-        * {
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
-        html, body {
-            margin: 0;
-            padding: 0;
-            width: 100vw;
-            height: 100vh;
-            background: var(--bg);
-            color: var(--fg);
-            overflow: hidden;
-        }
-        #logo-container {
-            text-align: center;
-            padding: 12px 0;
-        }
-        #logo-container img {
-            max-width: 200px;
-            height: auto;
-        }
-        #banner {
-            padding: 16px;
-            font-size: 1.5rem;
-            font-weight: bold;
-            text-align: center;
-            border-bottom: 1px solid var(--border-col);
-        }
-        #controls {
-            display: none;
-            gap: 8px;
-            margin: 8px;
-            justify-content: center;
-            align-items: center;
-        }
-        #controls input {
-            background: var(--card-bg);
-            color: var(--fg);
-            border: 1px solid var(--border-col);
-            border-radius: 4px;
-            padding: 4px 8px;
-        }
-        #controls span {
-            color: var(--fg);
-        }
-        #controls button {
-            background: linear-gradient(135deg, var(--btn-start), var(--btn-end));
-        }
-        #loading {
-            position: absolute;
-            text-align: center;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 2.25rem;
-        }
-        #loading > div:first-child {
-            margin-bottom: 25px;
-        }
-        #ws-help {
-            text-align: center;
-            font-size: 0.8rem;
-            font-weight: bold;
-            opacity: 0.8;
-        }
-        #header, #container {
-            display: none;
-        }
-        #header {
-            padding: 12px 8px;
-            font-size: 1.25rem;
-            font-weight: bold;
-            text-align: center;
-        }
-        #container {
-            display: flex;
-            justify-content: center;
-            overflow-y: auto;
-            height: calc(100vh - 50px - 56px - 48px);
-            padding-bottom: 8px;
-        }
-        .table {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-            width: 60vw;
-            min-width: 500px;
-            max-width: 1000px;
-            margin: auto;
-        }
-        .table-header,
-        .row {
-            display: grid;
-            grid-template-columns: 40px 2fr 2fr 80px;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 12px;
-            border-radius: 8px;
-            width: 100%;
-            margin: 0;
-        }
-        .table-header {
-            background: var(--card-hover);
-        }
-        .table-header div {
-            font-weight: bold;
-            text-align: center;
-        }
-        .table-header div:nth-child(2),
-        .table-header div:nth-child(3) {
-            text-align: left;
-        }
-        .row {
-            background: var(--card-bg);
-            transition: background 0.3s;
-        }
-        .row:hover {
-            background: var(--card-hover);
-        }
-        .row.highlight {
-            background: rgba(107, 131, 194, 0.3);
-        }
-        .row > div:not(:last-child),
-        .table-header > div:not(:last-child) {
-            border-right: 1px solid var(--border-col);
-            padding-right: 8px;
-        }
-        .remove-cell {
-            display: flex;
-            justify-content: center;
-        }
-        .remove-cell button {
-            background: linear-gradient(135deg, var(--btn-start), var(--btn-end));
-        }
-        .removed .name-cell {
-            text-decoration: line-through;
-            opacity: 0.6;
-        }
-        .removed .remove-cell button {
-            opacity: 0.5;
-            cursor: default;
-        }
-        .removed-text {
-            background: #b71c1c;
-            color: #fff;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-size: 0.7rem;
-            font-weight: bold;
-            margin-left: 8px;
-        }
-        button {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 4px;
-            padding: 6px 8px;
-            border: none;
-            border-radius: 6px;
-            text-transform: uppercase;
-            font-size: 0.75rem;
-            font-weight: bold;
-            color: #fff;
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-            min-width: 100px;
-        }
-        button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
-        }
-        button:active {
-            transform: translateY(0);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
-        }
-        button:disabled {
-            opacity: 0.5;
-            cursor: default;
-        }
-    </style>
-    <script src="https://cdn.jsdelivr.net/npm/@streamerbot/client/dist/streamerbot-client.js"></script>
+  <meta charset="UTF-8">
+  <title>tawmae - MOD TOOLS - Follower Remover - 1.0.0</title>
+  <script src="https://code.iconify.design/iconify-icon/3.0.0/iconify-icon.min.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+    :root {
+      --bg: #1e1e2e;
+      --fg: #ddd;
+      --card-bg: #313244;
+      --card-hover: #45475a;
+      --btn-start: #6b83c2;
+      --btn-end: #4b6aa0;
+      --border-col: #45475a;
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--fg);
+    }
+
+    #logo-container {
+      text-align: center;
+      padding: 12px 0;
+    }
+
+    #logo-container img {
+      max-width: 200px;
+      height: auto;
+    }
+
+    #banner {
+      padding: 16px;
+      font-size: 1.5rem;
+      font-weight: bold;
+      text-align: center;
+      border-bottom: 1px solid var(--border-col);
+    }
+
+    #controls {
+      display: none;
+      gap: 8px;
+      margin: 8px;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #controls input {
+      background: var(--card-bg);
+      color: var(--fg);
+      border: 1px solid var(--border-col);
+      border-radius: 4px;
+      padding: 4px 8px;
+    }
+
+    #controls span {
+      color: var(--fg);
+    }
+
+    #controls button {
+      background: linear-gradient(135deg, var(--btn-start), var(--btn-end));
+    }
+
+    #loading {
+      position: absolute;
+      text-align: center;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 2.25rem;
+    }
+
+    #loading>div:first-child {
+      margin-bottom: 25px;
+    }
+
+    #ws-help {
+      text-align: center;
+      font-size: 0.8rem;
+      font-weight: bold;
+      opacity: 0.8;
+    }
+
+    #header,
+    #container {
+      display: none;
+    }
+
+    #header {
+      padding: 12px 8px;
+      font-size: 1.25rem;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    #container {
+      flex: 1 1 auto;
+      min-height: 0;
+      display: flex;
+      justify-content: center;
+      overflow-y: auto;
+      padding-bottom: 12px;
+    }
+
+
+    .table {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      width: 60vw;
+      min-width: 500px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .table-header,
+    .row {
+      display: grid;
+      grid-template-columns: 40px 2fr 2fr 80px;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 8px;
+      width: 100%;
+      margin: 0;
+    }
+
+    .table-header {
+      background: var(--card-hover);
+    }
+
+    .table-header div {
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .table-header div:nth-child(2),
+    .table-header div:nth-child(3) {
+      text-align: left;
+    }
+
+    .row {
+      background: var(--card-bg);
+      transition: background 0.3s;
+    }
+
+    .row:hover {
+      background: var(--card-hover);
+    }
+
+    .row.highlight {
+      background: rgba(107, 131, 194, 0.3);
+    }
+
+    .row>div:not(:last-child),
+    .table-header>div:not(:last-child) {
+      border-right: 1px solid var(--border-col);
+      padding-right: 8px;
+    }
+
+    .remove-cell {
+      display: flex;
+      justify-content: center;
+    }
+
+    .remove-cell button {
+      background: linear-gradient(135deg, var(--btn-start), var(--btn-end));
+    }
+
+    .removed .name-cell {
+      text-decoration: line-through;
+      opacity: 0.6;
+    }
+
+    .removed .remove-cell button {
+      opacity: 0.5;
+      cursor: default;
+    }
+
+    .removed-text {
+      background: #b71c1c;
+      color: #fff;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      font-weight: bold;
+      margin-left: 8px;
+    }
+
+    button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      padding: 6px 8px;
+      border: none;
+      border-radius: 6px;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      font-weight: bold;
+      color: #fff;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      min-width: 100px;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+    }
+
+    button:active {
+      transform: translateY(0);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+    }
+
+    button:disabled {
+      opacity: 0.5;
+      cursor: default;
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/@streamerbot/client/dist/streamerbot-client.js"></script>
 </head>
+
 <body>
-    <div id="logo-container">
-        <img src="https://github.com/tawmae/tawmae/blob/main/assets/page-design/logo-1.png?raw=true" alt="Logo">
+  <div id="logo-container">
+    <img src="https://github.com/tawmae/tawmae/blob/main/assets/page-design/logo-1.png?raw=true" alt="Logo">
+  </div>
+  <div id="banner">tawmae.xyz - MOD TOOLS - Follower Remover - 1.0.0</div>
+  <div id="controls">
+    <input id="fromPicker" type="datetime-local">
+    <span>to</span>
+    <input id="toPicker" type="datetime-local">
+    <button id="rangeRemoveBtn" disabled>Remove All Followers In Range</button>
+  </div>
+  <div id="loading">
+    <div>Loading followers...</div>
+    <div id="ws-help">
+      Make sure that the websocket server in Streamer.bot under 'Servers/Clients' → 'WebSocket Server' is enabled.<br>
+      Leave the client at 127.0.0.1 and the port at 8080.
     </div>
-    <div id="banner">tawmae.xyz - MOD TOOLS - Follower Remover - 1.0.0</div>
-    <div id="controls">
-        <input id="fromPicker" type="datetime-local">
-        <span>to</span>
-        <input id="toPicker" type="datetime-local">
-        <button id="rangeRemoveBtn" disabled>Remove All Followers In Range</button>
-    </div>
-    <div id="loading">
-        <div>Loading followers...</div>
-        <div id="ws-help">
-            Make sure that the websocket server in Streamer.bot under 'Servers/Clients' → 'WebSocket Server' is enabled.<br>
-            Leave the client at 127.0.0.1 and the port at 8080.
-        </div>
-    </div>
-    <div id="header">Your Followers (Total: 0)</div>
-    <div id="container"></div>
-    <script>
-        const VARIABLE_NAME = 'tawmae_MOD_TOOLS_FollowerListOverlay';
-        const ACTION_ID = 'f469ae8f-4a21-4f81-bfa7-705503a89d24';
-        const params = new URLSearchParams(window.location.search);
-        const client = new StreamerbotClient({
-            host: params.get('host') || '127.0.0.1',
-            port: params.get('port') || 8080,
-            endpoint: params.get('endpoint') || '/',
-            password: params.get('password') || '',
-            onConnect, logLevel: 'debug'
+  </div>
+  <div id="header">Your Followers (Total: 0)</div>
+  <div id="container"></div>
+  <script>
+    const VARIABLE_NAME = 'tawmae_MOD_TOOLS_FollowerListOverlay';
+    const ACTION_ID = 'f469ae8f-4a21-4f81-bfa7-705503a89d24';
+    const params = new URLSearchParams(window.location.search);
+    const client = new StreamerbotClient({
+      host: params.get('host') || '127.0.0.1',
+      port: params.get('port') || 8080,
+      endpoint: params.get('endpoint') || '/',
+      password: params.get('password') || '',
+      onConnect, logLevel: 'debug'
+    });
+    let followerList = [];
+    function onConnect() {
+      client.doAction({ id: ACTION_ID }, { _from: 'FollowerListOverlay' });
+      setTimeout(fetchAndRender, 5000);
+    }
+    async function fetchAndRender() {
+      try {
+        const { variable } = await client.getGlobal(VARIABLE_NAME, false);
+        const list = typeof variable.value === 'string'
+          ? JSON.parse(variable.value)
+          : variable.value;
+        followerList = Array.isArray(list) ? list : [];
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('header').style.display = 'block';
+        document.getElementById('controls').style.display = 'flex';
+        document.getElementById('container').style.display = 'flex';
+        document.getElementById('header').innerText = `Your Followers (Total: ${followerList.length})`;
+        renderRows(followerList);
+        setupRangeFilter();
+      } catch {
+        document.getElementById('loading').innerText = 'Failed to load followers.';
+      }
+    }
+    function renderRows(list) {
+      const container = document.getElementById('container');
+      container.innerHTML = '<div class="table"><div class="table-header"><div>#</div><div>Name</div><div>Followed At</div><div>Remove</div></div></div>';
+      const table = container.querySelector('.table');
+      list.forEach((item, i) => {
+        const dt = new Date(item.followed_at_local || item.followed_at);
+        const ms = dt.getTime();
+        const dateStr = isNaN(ms)
+          ? (item.followed_at_local || item.followed_at)
+          : dt.toLocaleString(undefined, {
+            year: 'numeric', month: '2-digit', day: '2-digit',
+            hour: '2-digit', minute: '2-digit', second: '2-digit'
+          });
+        const showLogin = item.user_name.toLowerCase() !== item.user_login;
+        const row = document.createElement('div');
+        row.className = 'row';
+        row.dataset.followedMs = ms;
+        row.dataset.userName = item.user_name;
+        row.dataset.userLogin = item.user_login;
+        row.dataset.userId = item.user_id;
+        const countCell = document.createElement('div');
+        countCell.innerText = list.length - i;
+        countCell.style.textAlign = 'center';
+        const nameCell = document.createElement('div');
+        nameCell.className = 'name-cell';
+        nameCell.innerText = showLogin
+          ? `${item.user_name} (${item.user_login})`
+          : item.user_name;
+        const dateCell = document.createElement('div');
+        dateCell.innerText = dateStr;
+        const removeCell = document.createElement('div');
+        removeCell.className = 'remove-cell';
+        const btn = document.createElement('button');
+        btn.innerHTML = '<iconify-icon icon="mdi:account-remove" width="16" height="16"></iconify-icon><span>Remove</span>';
+        btn.onclick = () => removeSingle(row, btn);
+        removeCell.appendChild(btn);
+        row.append(countCell, nameCell, dateCell, removeCell);
+        table.appendChild(row);
+      });
+    }
+    function setupRangeFilter() {
+      const fromPicker = document.getElementById('fromPicker');
+      const toPicker = document.getElementById('toPicker');
+      const btn = document.getElementById('rangeRemoveBtn');
+      fromPicker.addEventListener('change', () => {
+        toPicker.min = fromPicker.value;
+        highlightRange();
+      });
+      toPicker.addEventListener('change', () => {
+        fromPicker.max = toPicker.value;
+        highlightRange();
+      });
+      btn.onclick = () => {
+        const highlighted = Array.from(document.querySelectorAll('.row.highlight'));
+        if (!highlighted.length) return;
+        if (!confirm(`Remove ${highlighted.length} followers in selected range?`)) return;
+        const toRemove = highlighted.map(r => ({
+          user_name: r.dataset.userName,
+          user_login: r.dataset.userLogin,
+          user_id: r.dataset.userId
+        }));
+        client.doAction({ id: ACTION_ID }, { _from: 'RemoveFollowerRange', users: toRemove });
+        highlighted.forEach(r => {
+          const btn = r.querySelector('button');
+          removeSingle(r, btn, false);
         });
-        let followerList = [];
-        function onConnect() {
-            client.doAction({ id: ACTION_ID }, { _from: 'FollowerListOverlay' });
-            setTimeout(fetchAndRender, 5000);
-        }
-        async function fetchAndRender() {
-            try {
-                const { variable } = await client.getGlobal(VARIABLE_NAME, false);
-                const list = typeof variable.value === 'string'
-                    ? JSON.parse(variable.value)
-                    : variable.value;
-                followerList = Array.isArray(list) ? list : [];
-                document.getElementById('loading').style.display = 'none';
-                document.getElementById('header').style.display = 'block';
-                document.getElementById('controls').style.display = 'flex';
-                document.getElementById('container').style.display = 'flex';
-                document.getElementById('header').innerText = `Your Followers (Total: ${followerList.length})`;
-                renderRows(followerList);
-                setupRangeFilter();
-            } catch {
-                document.getElementById('loading').innerText = 'Failed to load followers.';
-            }
-        }
-        function renderRows(list) {
-            const container = document.getElementById('container');
-            container.innerHTML = '<div class="table"><div class="table-header"><div>#</div><div>Name</div><div>Followed At</div><div>Remove</div></div></div>';
-            const table = container.querySelector('.table');
-            list.forEach((item, i) => {
-                const dt = new Date(item.followed_at_local || item.followed_at);
-                const ms = dt.getTime();
-                const dateStr = isNaN(ms)
-                    ? (item.followed_at_local || item.followed_at)
-                    : dt.toLocaleString(undefined, {
-                        year: 'numeric', month: '2-digit', day: '2-digit',
-                        hour: '2-digit', minute: '2-digit', second: '2-digit'
-                    });
-                const showLogin = item.user_name.toLowerCase() !== item.user_login;
-                const row = document.createElement('div');
-                row.className = 'row';
-                row.dataset.followedMs = ms;
-                row.dataset.userName = item.user_name;
-                row.dataset.userLogin = item.user_login;
-                row.dataset.userId = item.user_id;
-                const countCell = document.createElement('div');
-                countCell.innerText = list.length - i;
-                countCell.style.textAlign = 'center';
-                const nameCell = document.createElement('div');
-                nameCell.className = 'name-cell';
-                nameCell.innerText = showLogin
-                    ? `${item.user_name} (${item.user_login})`
-                    : item.user_name;
-                const dateCell = document.createElement('div');
-                dateCell.innerText = dateStr;
-                const removeCell = document.createElement('div');
-                removeCell.className = 'remove-cell';
-                const btn = document.createElement('button');
-                btn.innerHTML = '<iconify-icon icon="mdi:account-remove" width="16" height="16"></iconify-icon><span>Remove</span>';
-                btn.onclick = () => removeSingle(row, btn);
-                removeCell.appendChild(btn);
-                row.append(countCell, nameCell, dateCell, removeCell);
-                table.appendChild(row);
-            });
-        }
-        function setupRangeFilter() {
-            const fromPicker = document.getElementById('fromPicker');
-            const toPicker = document.getElementById('toPicker');
-            const btn = document.getElementById('rangeRemoveBtn');
-            fromPicker.addEventListener('change', () => {
-                toPicker.min = fromPicker.value;
-                highlightRange();
-            });
-            toPicker.addEventListener('change', () => {
-                fromPicker.max = toPicker.value;
-                highlightRange();
-            });
-            btn.onclick = () => {
-                const highlighted = Array.from(document.querySelectorAll('.row.highlight'));
-                if (!highlighted.length) return;
-                if (!confirm(`Remove ${highlighted.length} followers in selected range?`)) return;
-                const toRemove = highlighted.map(r => ({
-                    user_name: r.dataset.userName,
-                    user_login: r.dataset.userLogin,
-                    user_id: r.dataset.userId
-                }));
-                client.doAction({ id: ACTION_ID }, { _from: 'RemoveFollowerRange', users: toRemove });
-                highlighted.forEach(r => {
-                    const btn = r.querySelector('button');
-                    removeSingle(r, btn, false);
-                });
-            };
-        }
-        function highlightRange() {
-            const fromVal = document.getElementById('fromPicker').value;
-            const toVal = document.getElementById('toPicker').value;
-            const fromMs = fromVal ? new Date(fromVal).getTime() : NaN;
-            const toMs = toVal ? new Date(toVal).getTime() : NaN;
-            const btn = document.getElementById('rangeRemoveBtn');
-            let valid = !isNaN(fromMs) && !isNaN(toMs) && fromMs <= toMs;
-            btn.disabled = !valid;
-            document.querySelectorAll('.row').forEach(r => {
-                const ms = parseInt(r.dataset.followedMs, 10);
-                if (valid && ms >= fromMs && ms <= toMs) r.classList.add('highlight');
-                else r.classList.remove('highlight');
-            });
-        }
-        function removeSingle(row, btn, doCall = true) {
-            if (row.classList.contains('removed')) return;
-            row.classList.add('removed');
-            disableAll(row);
-            const txt = document.createElement('span');
-            txt.className = 'removed-text';
-            txt.innerText = 'REMOVED';
-            row.querySelector('.name-cell').appendChild(txt);
-            if (doCall)
-                client.doAction({ id: ACTION_ID }, {
-                    _from: 'BlockUser',
-                    user_name: row.dataset.userName,
-                    user_login: row.dataset.userLogin,
-                    user_id: row.dataset.userId
-                });
-            setTimeout(() => enableAll(row), 2000);
-        }
-        function disableAll(el) { el.querySelectorAll('button').forEach(b => b.disabled = true); }
-        function enableAll(el) { el.querySelectorAll('button').forEach(b => b.disabled = false); }
-    </script>
+      };
+    }
+    function highlightRange() {
+      const fromVal = document.getElementById('fromPicker').value;
+      const toVal = document.getElementById('toPicker').value;
+      const fromMs = fromVal ? new Date(fromVal).getTime() : NaN;
+      const toMs = toVal ? new Date(toVal).getTime() : NaN;
+      const btn = document.getElementById('rangeRemoveBtn');
+      let valid = !isNaN(fromMs) && !isNaN(toMs) && fromMs <= toMs;
+      btn.disabled = !valid;
+      document.querySelectorAll('.row').forEach(r => {
+        const ms = parseInt(r.dataset.followedMs, 10);
+        if (valid && ms >= fromMs && ms <= toMs) r.classList.add('highlight');
+        else r.classList.remove('highlight');
+      });
+    }
+    function removeSingle(row, btn, doCall = true) {
+      if (row.classList.contains('removed')) return;
+      row.classList.add('removed');
+      disableAll(row);
+      const txt = document.createElement('span');
+      txt.className = 'removed-text';
+      txt.innerText = 'REMOVED';
+      row.querySelector('.name-cell').appendChild(txt);
+      if (doCall)
+        client.doAction({ id: ACTION_ID }, {
+          _from: 'BlockUser',
+          user_name: row.dataset.userName,
+          user_login: row.dataset.userLogin,
+          user_id: row.dataset.userId
+        });
+      setTimeout(() => enableAll(row), 2000);
+    }
+    function disableAll(el) { el.querySelectorAll('button').forEach(b => b.disabled = true); }
+    function enableAll(el) { el.querySelectorAll('button').forEach(b => b.disabled = false); }
+  </script>
 </body>
+
 </html>
