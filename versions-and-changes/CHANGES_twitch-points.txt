@@ -1,1 +1,2 @@
-• Added Import for 'Deepbot'
+• Added 'Cheer' trigger for Bonus Points
+• Fixed an issue with Streamlabs imports
