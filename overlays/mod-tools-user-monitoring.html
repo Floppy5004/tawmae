@@ -199,66 +199,29 @@
             port: params.get('port') || 8080,
             endpoint: params.get('endpoint') || '/',
             password: params.get('password') || '',
-            onConnect, logLevel: 'verbose'
+            onConnect, logLevel: 'debug'
         });
         async function onConnect() {
-    console.debug('onConnect: starting connect sequence');
-    try {
-        console.debug(`onConnect: fetching global variable "${VARIABLE_NAME}"`);
-        const { variable } = await client.getGlobal(VARIABLE_NAME, false);
-        console.debug('onConnect: raw variable received →', variable);
-
-        const raw = typeof variable.value === 'string'
-            ? variable.value
-            : JSON.stringify(variable.value);
-        console.debug('onConnect: raw JSON string →', raw);
-
-        const entries = typeof variable.value === 'string'
-            ? JSON.parse(variable.value)
-            : variable.value;
-        console.debug('onConnect: parsed entries →', entries);
-
-        const order = Array.from(
-            raw.matchAll(/"(\d+)"\s*:/g),
-            m => m[1]
-        );
-        console.debug('onConnect: computed order →', order);
-
-        renderList(entries, order);
-        console.debug('onConnect: renderList called successfully');
-    } catch (error) {
-        console.error('onConnect: error fetching or parsing global variable', error);
-        renderList({});
-    }
-}
-
-client.on('Misc.GlobalVariableUpdated', ({ data }) => {
-    if (data.name !== VARIABLE_NAME) return;
-
-    console.debug(`GlobalVariableUpdated: "${VARIABLE_NAME}" changed`);
-    try {
-        const raw = typeof data.newValue === 'string'
-            ? data.newValue
-            : JSON.stringify(data.newValue);
-        console.debug('GlobalVariableUpdated: raw newValue →', raw);
-
-        const entries = typeof data.newValue === 'string'
-            ? JSON.parse(data.newValue)
-            : data.newValue;
-        console.debug('GlobalVariableUpdated: parsed entries →', entries);
-
-        const order = Array.from(
-            raw.matchAll(/"(\d+)"\s*:/g),
-            m => m[1]
-        );
-        console.debug('GlobalVariableUpdated: computed order →', order);
-
-        renderList(entries, order);
-        console.debug('GlobalVariableUpdated: renderList called successfully');
-    } catch (error) {
-        console.error('GlobalVariableUpdated: error parsing newValue or rendering list', error);
-    }
-});
+            try {
+                const { variable } = await client.getGlobal(VARIABLE_NAME, false);
+                const raw = typeof variable.value === 'string' ? variable.value : JSON.stringify(variable.value);
+                const entries = typeof variable.value === 'string' ? JSON.parse(variable.value) : variable.value;
+                const order = Array.from(raw.matchAll(/"(\d+)"\s*:/g), m => m[1]);
+                renderList(entries, order);
+            } catch {
+                renderList({});
+            }
+        }
+        client.on('Misc.GlobalVariableUpdated', ({ data }) => {
+            if (data.name === VARIABLE_NAME) {
+                try {
+                    const raw = typeof data.newValue === 'string' ? data.newValue : JSON.stringify(data.newValue);
+                    const entries = typeof data.newValue === 'string' ? JSON.parse(data.newValue) : data.newValue;
+                    const order = Array.from(raw.matchAll(/"(\d+)"\s*:/g), m => m[1]);
+                    renderList(entries, order);
+                } catch { }
+            }
+        });
 
         function renderList(entries, order) {
             const c = document.getElementById('container');
