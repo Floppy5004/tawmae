@@ -1,1 +1,1 @@
-• Added Import for 'Deepbot'
+• Fixed an issue with the Streamlabs import
