@@ -1,1 +1,1 @@
-• Fixed an issue with the Streamlabs import
+• Added a new import method to import from Streamlabs Desktop via CSV file
