@@ -1,2 +1,3 @@
-• Added 'Cheer' trigger for Bonus Points
-• Fixed an issue with Streamlabs imports
+• Added 'Distribute To Active' for Tax Collection
+• Added SL Desktop import from CSV
+• Settings UI updates
