@@ -303,9 +303,9 @@
       const backgroundEnabled = getParam('background', 'false') === 'true';
       const backgroundOpacity = getParam('backgroundopacity', '90');
       const backgroundColor = getParam('backgroundcolor', 'black');
-      const hidePronouns = getParam('hidepronouns', 'false') !== 'true';
-      const hideTimestamp = getParam('hidetimestamp', 'true') === 'false';
-      const showAvatars = getParam('showavatars', 'true') !== 'false';
+      const hidePronouns   = getParam('hidepronouns', 'false') === 'true';
+      const hideTimestamp  = getParam('hidetimestamp', 'true')  === 'true';
+      const hideAvatars    = getParam('hideavatars',  'false') === 'true';
       const minRewardCost = parseInt(getParam('minrewardcost', '0'), 10);
       const hideAfterSeconds = parseInt(getParam('hideafter', '0'), 10) || null;
       const hideIcons = getParam('hideicons', 'false') === 'true';
@@ -429,7 +429,7 @@
         const header = document.createElement('div');
         header.classList.add('message-header');
 
-        if (showAvatars) {
+        if (!hideAvatars) {
           const avatar = document.createElement('img');
           avatar.classList.add('avatar');
           if (avatarCache.has(user)) {
@@ -462,7 +462,7 @@
         header.appendChild(uname);
 
         if (!hidePronouns || !hideTimestamp) {
-          if (!hidePronouns) {
+         if (!hidePronouns) {
             getPronouns(user).then(p => {
               if (p) {
                 const pn = document.createElement('span');
