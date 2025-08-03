@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>VERTICAL CHAT - v.1.0.6 - tawmae</title>
+  <title>VERTICAL CHAT - v.1.0.7 - tawmae</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
   <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@streamerbot/client/dist/streamerbot-client.js"></script>
@@ -64,14 +64,12 @@
       flex-direction: column;
       overflow: hidden;
       position: relative;
+      justify-content: flex-end;
     }
 
     #message-list {
       display: flex;
       flex-direction: column;
-      position: relative;
-      transform: translateY(0);
-      will-change: transform;
     }
 
     .message,
@@ -80,38 +78,18 @@
       margin-bottom: 0.625em;
       display: flex;
       flex-direction: column;
-      opacity: 0;
-      transform: translateY(100%);
       animation: slide-in-up 0.5s forwards;
       color: #ffffff;
     }
 
-    @keyframes slide-in-up {
-      from {
-        opacity: 0;
-        transform: translateY(100%);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    .message,
+    .announcement,
+    .subscription {
+      transition: opacity 0.5s ease;
     }
 
     .fade-out {
-      animation: fade-out 0.5s forwards;
-    }
-
-    @keyframes fade-out {
-      from {
-        opacity: 1;
-        transform: translateY(0);
-      }
-
-      to {
-        opacity: 0;
-        transform: translateY(-20px);
-      }
+      opacity: 0 !important;
     }
 
     .message-header,
@@ -316,7 +294,6 @@
         .map(acc => acc.trim().toLowerCase())
         .filter(acc => acc);
       const excludeCommands = getParam('excludecommands', 'false') === 'true';
-      const enterDirection = getParam('enter', 'right') === 'left' ? 'left' : 'right';
       const excludeEventsParam = getParam('excludeevents', '')
         .split(/[,+\s]+/)
         .map(e => e.trim().toLowerCase())
@@ -331,9 +308,6 @@
       const showAvatars = getParam('showavatars', 'true') !== 'false';
       const minRewardCost = parseInt(getParam('minrewardcost', '0'), 10);
       const hideAfterSeconds = parseInt(getParam('hideafter', '0'), 10) || null;
-      const justify = getParam('justify', '');
-      const forceUpper = getParam('forceuppercase', 'false') === 'true';
-      const forceLower = getParam('forcelowercase', 'false') === 'true';
       const hideIcons = getParam('hideicons', 'false') === 'true';
       const hideBadges = getParam('hidebadges', 'false') === 'true';
       const bigDropshadow = getParam('bigdropshadow', 'false') === 'true';
@@ -345,40 +319,16 @@
         document.body.classList.add(bigDropshadow ? 'big-dropshadow' : 'dropshadow');
       }
       document.body.style.backgroundColor = 'transparent';
-      if (forceUpper) {
-        document.body.style.textTransform = 'uppercase';
-      } else if (forceLower) {
-        document.body.style.textTransform = 'lowercase';
-      }
 
       const chatContainer = document.getElementById('chat-container');
       const messagesContainer = document.getElementById('messages');
       const messageList = document.getElementById('message-list');
       const statusIndicator = document.getElementById('status-indicator');
-
       chatContainer.style.position = 'absolute';
       chatContainer.style.top = '0';
-      if (enterDirection === 'left') {
-        chatContainer.style.left = '0';
-        chatContainer.style.right = 'auto';
-      } else {
-        chatContainer.style.right = '0';
-        chatContainer.style.left = 'auto';
-      }
+      chatContainer.style.textAlign = 'left';
+      messageList.style.alignItems = 'flex-start';
 
-      if (justify === 'right') {
-        chatContainer.style.textAlign = 'right';
-        messageList.style.alignItems = 'flex-end';
-        const styleEl = document.createElement('style');
-        styleEl.innerHTML =
-          ".message, .announcement, .subscription { text-align: right; }" +
-          ".message-header, .announcement-header, .subscription-header { justify-content: flex-end; }" +
-          ".message-text, .announcement-text, .subscription-text { text-align: right; }";
-        document.head.appendChild(styleEl);
-      } else if (justify === 'left') {
-        chatContainer.style.textAlign = 'left';
-        messageList.style.alignItems = 'flex-start';
-      }
 
       function parseColorToRGBA(col, alpha) {
         const temp = document.createElement('div');
@@ -431,57 +381,10 @@
       const pronounCache = new Map();
       const pendingGigantify = new Map();
 
-      let offset = 0;
-      let animating = false;
-      let eventQueue = Promise.resolve();
-      let eventQueueCount = 0;
 
-      function processEvent(fn) {
-        return new Promise(resolve => {
-          fn();
-          adjustOffset().then(resolve);
-        });
-      }
 
-      function adjustOffset() {
-        return new Promise(resolve => {
-          const containerH = messagesContainer.clientHeight;
-          const contentH = messageList.scrollHeight;
-          const desired = Math.max(0, contentH - containerH);
-          if (desired === offset) return resolve();
-          animateOffsetChange(offset, desired).then(() => {
-            offset = desired;
-            resolve();
-          });
-        });
-      }
 
-      function animateOffsetChange(from, to) {
-        return new Promise(resolve => {
-          if (document.hidden) {
-            messageList.style.transition = 'none';
-            messageList.style.transform = `translateY(-${to}px)`;
-            return resolve();
-          }
-          if (animating) {
-            return requestAnimationFrame(() => {
-              animateOffsetChange(from, to).then(resolve);
-            });
-          }
-          animating = true;
-          const duration = eventQueueCount > 3 ? 0.1 : 0.5;
-          messageList.style.transition = `transform ${duration}s ease`;
-          messageList.addEventListener('transitionend', onEnd);
-          requestAnimationFrame(() => {
-            messageList.style.transform = `translateY(-${to}px)`;
-          });
-          function onEnd() {
-            messageList.removeEventListener('transitionend', onEnd);
-            animating = false;
-            resolve();
-          }
-        });
-      }
+
 
       async function getPronouns(login) {
         if (pronounCache.has(login)) return pronounCache.get(login);
@@ -629,12 +532,10 @@
         if (!hideAfterSeconds) return;
         setTimeout(() => {
           el.classList.add('fade-out');
-          el.addEventListener('animationend', () => {
-            if (el.parentNode) el.parentNode.removeChild(el);
-            adjustOffset();
-          }, { once: true });
+          setTimeout(() => el.remove(), 500);
         }, hideAfterSeconds * 1000);
       }
+
 
       const client = new StreamerbotClient({
         host: address,
@@ -652,105 +553,102 @@
         onError: err => console.error('Streamer.bot Client Error', err)
       });
 
-      client.on('Twitch.ChatMessage', async evt => {
+      client.on('Twitch.ChatMessage', evt => {
         const d = evt.data || evt;
         const type = 'chatmessage';
-        if (!excludeEventsParam.includes(type)) {
-          eventQueueCount++;
-          eventQueue = eventQueue
-            .then(() => processEvent(() => addChatMessage(d.message, d.user, d.emotes, d.isSharedChat, d.sharedChat)))
-            .finally(() => eventQueueCount--);
-        }
+        if (excludeEventsParam.includes(type)) return;
+        addChatMessage(d.message, d.user, d.emotes, d.isSharedChat, d.sharedChat);
       });
-      client.on('Twitch.ChatMessageDeleted', async (evt) => {
+
+      client.on('Twitch.ChatMessageDeleted', (evt) => {
         const data = evt.data || evt;
         const type = 'chatmessagedeleted';
         if (excludeEventsParam.includes(type)) return;
-        await processEvent(() => deleteChatMessage(data.messageId));
+        deleteChatMessage(data.messageId);
       });
-      client.on('Twitch.UserTimedOut', async (evt) => {
+      client.on('Twitch.UserTimedOut', (evt) => {
         const data = evt.data || evt;
         const type = 'usertimedout';
         if (excludeEventsParam.includes(type)) return;
-        await processEvent(() => removeUserMessages(data.user_id));
+        removeUserMessages(data.user_id);
       });
-      client.on('Twitch.UserBanned', async (evt) => {
+      client.on('Twitch.UserBanned', (evt) => {
         const data = evt.data || evt;
         const type = 'userbanned';
         if (excludeEventsParam.includes(type)) return;
-        await processEvent(() => removeUserMessages(data.user_id));
+        removeUserMessages(data.user_id);
       });
-      client.on('Twitch.ChatCleared', async (evt) => {
+      client.on('Twitch.ChatCleared', (evt) => {
         const data = evt.data || evt;
         const type = 'chatcleared';
         if (excludeEventsParam.includes(type)) return;
-        await processEvent(() => clearAllMessages());
+        clearAllMessages();
       });
-      client.on('Twitch.AutomaticRewardRedemption', async (evt) => {
+      client.on('Twitch.AutomaticRewardRedemption', (evt) => {
         const data = evt.data || evt;
         const type = 'automaticrewardredemption';
         if (excludeEventsParam.includes(type)) return;
-        await processEvent(() => handleAutomaticRewardRedemption(data));
+        handleAutomaticRewardRedemption(data);
       });
-      client.on('Twitch.Announcement', async (evt) => {
+      client.on('Twitch.Announcement', (evt) => {
         const data = evt.data || evt;
         const type = 'announcement';
         if (excludeEventsParam.includes(type)) return;
-        await processEvent(() => handleAnnouncement(data));
+        handleAnnouncement(data);
       });
-      client.on('Twitch.Sub', async (evt) => {
+      client.on('Twitch.Sub', (evt) => {
         const data = evt.data || evt;
         const type = 'sub';
         if (excludeEventsParam.includes(type)) return;
-        await processEvent(() => handleSubscription(data));
+        handleSubscription(data);
       });
-      client.on('Twitch.ReSub', async (evt) => {
+      client.on('Twitch.ReSub', (evt) => {
         const data = evt.data || evt;
         const type = 'resub';
         if (excludeEventsParam.includes(type)) return;
-        await processEvent(() => handleReSubscription(data));
+        handleReSubscription(data);
       });
-      client.on('Twitch.GiftSub', async (evt) => {
+      client.on('Twitch.GiftSub', (evt) => {
         const data = evt.data || evt;
         const type = 'giftsub';
         if (excludeEventsParam.includes(type)) return;
-        await processEvent(() => handleGiftSubscription(data));
+        handleGiftSubscription(data);
       });
-      client.on('Twitch.GiftBomb', async (evt) => {
+      client.on('Twitch.GiftBomb', (evt) => {
         const data = evt.data || evt;
         const type = 'giftbomb';
         if (excludeEventsParam.includes(type)) return;
-        await processEvent(() => handleGiftBombSubscription(data));
+        handleGiftBombSubscription(data);
       });
-      client.on('Twitch.RewardRedemption', async (evt) => {
+      client.on('Twitch.RewardRedemption', (evt) => {
         const data = evt.data || evt;
         const type = 'rewardredemption';
         if (excludeEventsParam.includes(type)) return;
-        await processEvent(() => handleRewardRedemption(data));
+        handleRewardRedemption(data);
       });
-      client.on('Twitch.WatchStreak', async (evt) => {
+      client.on('Twitch.WatchStreak', (evt) => {
         const data = evt.data || evt;
         const type = 'watchstreak';
         if (excludeEventsParam.includes(type)) return;
-        await processEvent(() => handleWatchStreak(data));
+        handleWatchStreak(data);
       });
-      client.on('Twitch.Cheer', async (evt) => {
+      client.on('Twitch.Cheer', (evt) => {
         const data = evt.data || evt;
         const type = 'cheer';
         if (excludeEventsParam.includes(type)) return;
-        await processEvent(() => handleCheer(data));
+        handleCheer(data);
       });
-      client.on('Twitch.Raid', async (evt) => {
+      client.on('Twitch.Raid', (evt) => {
         const data = evt.data || evt;
         const type = 'raid';
         if (excludeEventsParam.includes(type)) return;
-        await processEvent(() => handleRaid(data));
+        handleRaid(data);
       });
-      client.on('Kofi.Donation', async (evt) => {
+      client.on('Kofi.Donation', (evt) => {
         const data = evt.data || evt;
         const type = 'donation';
         if (excludeEventsParam.includes(type)) return;
-        await processEvent(() => handleDonation(data));
+        handleDonation(data);
       });
     })();
   </script>
