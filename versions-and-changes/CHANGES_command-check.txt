@@ -1,2 +1,2 @@
-• Fixed an issue with an empty 'OTHERS' group being populated
-(requires dll update)
+NOTE: A current SB Alpha bug prevents this extension from working for some.
+• Added Custom Commands from MOD TOOLS
