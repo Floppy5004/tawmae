@@ -1,2 +1,3 @@
 Streamer.bot 1.0.0 ONLY:
-• Fixed a bug with replies not sending when using something different than Command triggers
+• Added Reset Connection button (requires dll update)
+• Song Limit Count now directly removed on !wrongsong
