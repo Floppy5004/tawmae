@@ -1,2 +1,2 @@
-NOTE: Please upgrade to Streamer.bot 1.0.0 Alpha.52!
+NOTE: Streamer.bot 1.0.0 Alpha.52+ required!
 • Added Custom Commands from MOD TOOLS
