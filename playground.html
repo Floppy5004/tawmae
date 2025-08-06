@@ -4,134 +4,45 @@ title: "START | tawmae"
 description: "A free-to-use collection of Streamer.bot extensions for Twitch"
 ---
 
-<!----    FEATURED    ---------------------------------------------------------------------------------------------------->
 <h1>
-  <span style="background: rgba(255, 255, 255, 0.05);
-               border: 1px solid rgba(255, 255, 255, 0.2);
+  <span style="background: rgba(255,255,255,0.05);
+               border: 1px solid rgba(255,255,255,0.2);
                border-radius: 12px;
                padding: 24px;
                color: white;
                backdrop-filter: blur(10px);
-               box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-               margin-bottom: 10px;
-               display: inline-block;">
-    FEATURED
-  </span>
-</h1>
-
-<div class="masonry-gallery" data-masonry='{"itemSelector":".gallery-item","columnWidth":".gallery-sizer","percentPosition":true}'>
-  <div class="gallery-sizer"></div>
-
-  <a href="{{ site.baseurl }}/utility/spotify-and-sb.html" class="gallery-item">
-    <img src="{{ site.baseurl }}/assets/rotator-images/spotify-and-sb.webp" alt="SPOTIFY & SB">
-    <div class="gallery-text">
-      <h3>SPOTIFY & SB</h3>
-      <p>Song requests and player control.</p>
-    </div>
-  </a>
-
-  <a href="{{ site.baseurl }}/chat-games/movie-and-tv-show-quiz.html" class="gallery-item">
-    <img src="{{ site.baseurl }}/assets/rotator-images/movie-and-tv-show-quiz.webp" alt="MOVIE & TV SHOW QUIZ">
-    <div class="gallery-text">
-      <h3>MOVIE & TV SHOW QUIZ</h3>
-      <p>Guess movies and shows in chat.</p>
-    </div>
-  </a>
-</div>
-
-<div class="section-divider"></div>
-
-<!----    NEW    --------------------------------------------------------------------------------------------------------->
-<h1>
-  <span style="background: rgba(255, 255, 255, 0.05);
-               border: 1px solid rgba(255, 255, 255, 0.2);
-               border-radius: 12px;
-               padding: 24px;
-               color: white;
-               backdrop-filter: blur(10px);
-               box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-               margin-bottom: 10px;
-               display: inline-block;">
+               box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+               display: inline-block;
+               margin-bottom: 10px;">
     NEW
   </span>
 </h1>
 
-<div class="masonry-gallery" data-masonry='{"itemSelector":".gallery-item","columnWidth":".gallery-sizer","percentPosition":true}'>
-  <div class="gallery-sizer"></div>
-
-  <a href="{{ site.baseurl }}/utility/mod-tools.html" class="gallery-item">
+<div id="gallery">
+  <a href="{{ site.baseurl }}/utility/mod-tools.html">
     <img src="{{ site.baseurl }}/assets/cards-images/mod-tools.webp" alt="MOD TOOLS">
-    <div class="gallery-text">
-      <h3>MOD TOOLS</h3>
-      <p>"Cheap viewers a.." SHUT THE HELL UP!</p>
-    </div>
   </a>
-
-  <a href="{{ site.baseurl }}/utility/user-inventory.html" class="gallery-item">
+  <a href="{{ site.baseurl }}/utility/user-inventory.html">
     <img src="{{ site.baseurl }}/assets/cards-images/user-inventory.webp" alt="USER INVENTORY">
-    <div class="gallery-text">
-      <h3>USER INVENTORY</h3>
-      <p>LOOT GOBLINS UNITE!</p>
-    </div>
   </a>
-
-  <a href="{{ site.baseurl }}/utility/twitch-watchtime.html" class="gallery-item">
+  <a href="{{ site.baseurl }}/utility/twitch-watchtime.html">
     <img src="{{ site.baseurl }}/assets/cards-images/twitch-watchtime.webp" alt="TWITCH WATCHTIME">
-    <div class="gallery-text">
-      <h3>TWITCH WATCHTIME</h3>
-      <p>Who missed my stream last week?!</p>
-    </div>
   </a>
-
-  <a href="{{ site.baseurl }}/utility/twitch-points.html" class="gallery-item">
+  <a href="{{ site.baseurl }}/utility/twitch-points.html">
     <img src="{{ site.baseurl }}/assets/cards-images/twitch-points.webp" alt="TWITCH POINTS">
-    <div class="gallery-text">
-      <h3>TWITCH POINTS</h3>
-      <p>Unreal points to fire very real gamble addictions :)</p>
-    </div>
   </a>
 </div>
 
-<style>
-  .masonry-gallery {
-    margin: 0;
-  }
-  .gallery-sizer {
-    width: 33.33%;
-  }
-  .gallery-item {
-    width: 33.33%;
-    margin-bottom: 16px;
-    position: relative;
-    overflow: hidden;
-    border-radius: 12px;
-    display: block;
-  }
-  .gallery-item img {
-    width: 100%;
-    display: block;
-  }
-  .gallery-text {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: rgba(0, 0, 0, 0.5);
-    color: #fff;
-    padding: 12px;
-    box-sizing: border-box;
-  }
-</style>
+<link rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css">
+<script src="https://cdn.jsdelivr.net/gh/jquery/jquery/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js"></script>
 
-<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script> <!-- Masonry: cascading grid layout library :contentReference[oaicite:0]{index=0} -->
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    document.querySelectorAll(".masonry-gallery").forEach(function(gallery) {
-      new Masonry(gallery, {
-        itemSelector: ".gallery-item",
-        columnWidth: ".gallery-sizer",
-        percentPosition: true
-      });
+  $(function() {
+    $('#gallery').justifiedGallery({
+      rowHeight : 180,
+      margins   : 8
     });
   });
 </script>
