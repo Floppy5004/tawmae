@@ -1,1 +1,2 @@
-• Release
+• Added 'Suspicious User Message' trigger
+• Note: Requires .dll update and SB 1.0.0.alpha53+
