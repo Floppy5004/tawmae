@@ -1,2 +1,2 @@
-NOTE: A current SB Alpha bug prevents this extension from working for some.
+NOTE: Please upgrade to Streamer.bot 1.0.0 Alpha.52!
 • Added Custom Commands from MOD TOOLS
