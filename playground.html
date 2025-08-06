@@ -18,31 +18,71 @@ description: "A free-to-use collection of Streamer.bot extensions for Twitch"
   </span>
 </h1>
 
-<div id="gallery">
-  <a href="{{ site.baseurl }}/utility/mod-tools.html">
+<div class="gallery">
+  <a href="{{ site.baseurl }}/utility/mod-tools.html" class="gallery-item">
     <img src="{{ site.baseurl }}/assets/cards-images/mod-tools.webp" alt="MOD TOOLS">
+    <div class="gallery-text">
+      <h3>MOD TOOLS <span class="iconify title-icon" data-icon="material-symbols:fiber-new"></span></h3>
+      <p>"Cheap viewers a.." SHUT THE HELL UP!</p>
+    </div>
   </a>
-  <a href="{{ site.baseurl }}/utility/user-inventory.html">
+  <a href="{{ site.baseurl }}/utility/user-inventory.html" class="gallery-item">
     <img src="{{ site.baseurl }}/assets/cards-images/user-inventory.webp" alt="USER INVENTORY">
+    <div class="gallery-text">
+      <h3>USER INVENTORY <span class="iconify title-icon" data-icon="material-symbols:fiber-new"></span></h3>
+      <p>LOOT GOBLINS UNITE!</p>
+    </div>
   </a>
-  <a href="{{ site.baseurl }}/utility/twitch-watchtime.html">
+  <a href="{{ site.baseurl }}/utility/twitch-watchtime.html" class="gallery-item">
     <img src="{{ site.baseurl }}/assets/cards-images/twitch-watchtime.webp" alt="TWITCH WATCHTIME">
+    <div class="gallery-text">
+      <h3>TWITCH WATCHTIME <span class="iconify title-icon" data-icon="material-symbols:fiber-new"></span></h3>
+      <p>Who missed my stream last week?!</p>
+    </div>
   </a>
-  <a href="{{ site.baseurl }}/utility/twitch-points.html">
+  <a href="{{ site.baseurl }}/utility/twitch-points.html" class="gallery-item">
     <img src="{{ site.baseurl }}/assets/cards-images/twitch-points.webp" alt="TWITCH POINTS">
+    <div class="gallery-text">
+      <h3>TWITCH POINTS <span class="iconify title-icon" data-icon="material-symbols:fiber-new"></span></h3>
+      <p>Unreal points to fire very real gamble addictions :)</p>
+    </div>
   </a>
 </div>
 
-<link rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css">
-<script src="https://cdn.jsdelivr.net/gh/jquery/jquery/dist/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js"></script>
-
-<script>
-  $(function() {
-    $('#gallery').justifiedGallery({
-      rowHeight : 180,
-      margins   : 8
-    });
-  });
-</script>
+<style>
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+    width: 100%;
+  }
+  .gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    background: #111;
+    text-decoration: none;
+    color: inherit;
+  }
+  .gallery-item img {
+    width: 100%;
+    display: block;
+  }
+  .gallery-text {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0,0,0,0.6);
+    padding: 12px;
+    box-sizing: border-box;
+  }
+  .gallery-text h3 {
+    margin: 0 0 4px;
+    font-size: 1.1rem;
+  }
+  .gallery-text p {
+    margin: 0;
+    font-size: 0.9rem;
+  }
+</style>
