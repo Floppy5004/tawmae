@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HOT WORDS - v.1.0.1 - tawmae.xyz</title>
+    <title>HOT WORDS - v.1.0.2 - tawmae.xyz</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap"
         rel="stylesheet">
     <script src="https://unpkg.com/@streamerbot/client/dist/streamerbot-client.js"></script>
@@ -286,6 +286,11 @@
             leaderboardEl.style.height = totalHeight + 'px';
         }
         function handleChatMessage(messageData) {
+            if (messageData.emotes && messageData.emotes.length) {
+                messageData.emotes.forEach(e => {
+                    if (e.imageUrl) emoteLookup[e.name.toLowerCase()] = e.imageUrl;
+                });
+            }
             const userName = messageData.username.toLowerCase();
             if (excludedUsersSet.has(userName)) return;
             if (singleUserVote && usersVoted.has(userName)) return;
@@ -308,12 +313,16 @@
                 setTimeout(() => { connectedStatusEl.style.display = 'none'; }, 1000);
                 client.getEmotes('twitch').then(function (response) {
                     if (response.status === "ok") {
-                        response.emotes.userEmotes.forEach(emote => { emoteLookup[emote.name.toLowerCase()] = emote.imageUrl; });
-                        response.emotes.bttvEmotes.forEach(emote => { emoteLookup[emote.name.toLowerCase()] = emote.imageUrl; });
-                        response.emotes.ffzEmotes.forEach(emote => { emoteLookup[emote.name.toLowerCase()] = emote.imageUrl; });
-                        response.emotes.sevenTvEmotes.forEach(emote => { emoteLookup[emote.name.toLowerCase()] = emote.imageUrl; });
+                        response.emotes.userEmotes.forEach(e => emoteLookup[e.name.toLowerCase()] = e.imageUrl);
+                        response.emotes.bttvEmotes.forEach(e => emoteLookup[e.name.toLowerCase()] = e.imageUrl);
+                        response.emotes.ffzEmotes.forEach(e => emoteLookup[e.name.toLowerCase()] = e.imageUrl);
+                        response.emotes.sevenTvEmotes.forEach(e => emoteLookup[e.name.toLowerCase()] = e.imageUrl);
+                        if (response.emotes.twitchEmotes) {
+                            response.emotes.twitchEmotes.forEach(e => emoteLookup[e.name.toLowerCase()] = e.imageUrl);
+                        }
                     }
                 });
+
             },
             onDisconnect: function () {
                 connectionStatusEl.style.display = 'block';
