@@ -86,11 +86,7 @@ document.addEventListener("DOMContentLoaded", function () {
         loadImportString("/action-imports/rotator.txt");
     } else if (currentPage.includes("stream-receipt")) {
         loadImportString("/action-imports/stream-receipt.txt");
-    }else if (currentPage.includes("spotify-and-sb-legacy")) {
-        loadImportString("/action-imports/spotify-and-sb-legacy.txt");
-    }
-
- else if (currentPage.includes("spotify-and-sb")) {
+    }else if (currentPage.includes("spotify-and-sb")) {
         loadImportString("/action-imports/spotify-and-sb.txt");
     } else if (currentPage.includes("bluesky-and-sb")) {
         loadImportString("/action-imports/bluesky-and-sb.txt");
