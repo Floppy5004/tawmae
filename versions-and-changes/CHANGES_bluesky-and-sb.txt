@@ -1,4 +1,2 @@
 Streamer.bot 1.0.0 required!
-• Settings UI to save credentials
-• New Embed Formats
-• Better Login Flow
+• Added a button to Reset the current login session
