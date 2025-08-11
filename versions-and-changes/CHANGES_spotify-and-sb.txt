@@ -1,2 +1,3 @@
 Streamer.bot 1.0.0 ONLY:
-• Fixed an issue with the change of the Followers Only requirement causing SR to break
+• Added a new command: !restartSong
+• Added whisper sources for all commands
