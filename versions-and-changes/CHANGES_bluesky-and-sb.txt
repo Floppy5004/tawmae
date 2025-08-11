@@ -1,2 +1,2 @@
 Streamer.bot 1.0.0 required!
-• Added a button to Reset the current login session
+• Fixed an issue where copying the handle from Bluesky would insert invisible characters
