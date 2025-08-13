@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SPOTIFY & SB v2 Style 4 - 1.0.0</title>
+  <title>SPOTIFY & SB v2 Style 4 - 1.0.1</title>
   <script src="https://unpkg.com/@streamerbot/client/dist/streamerbot-client.js"></script>
   <style>
-    html,
-    body {
+    html, body {
       margin: 0;
       padding: 0;
       background: transparent;
@@ -31,6 +29,14 @@
       align-items: center;
       justify-content: center;
       border-radius: 4px;
+      opacity: 1;
+      transition: opacity 0.8s ease;
+    }
+
+    body.hide #info,
+    body.hide #visualizer {
+      opacity: 0;
+      pointer-events: none;
     }
 
     #info img {
@@ -53,6 +59,8 @@
       height: 16px;
       margin-top: 3px;
       overflow: hidden;
+      opacity: 1;
+      transition: opacity 0.8s ease;
     }
 
     #visualizer .bar {
@@ -67,7 +75,6 @@
     }
   </style>
 </head>
-
 <body>
   <div id="info">
     <img src="https://github.com/tawmae/tawmae/blob/main/assets/pic/spotify-icon-black.png?raw=true" alt="Spotify" />
@@ -79,7 +86,16 @@
       address = params.get('address') || '127.0.0.1',
       port = parseInt(params.get('port') || '8080', 10),
       password = params.get('password') || '';
-    const client = new StreamerbotClient({ address, port, password, endpoint: '/', autoReconnect: true, immediate: true });
+
+    function getBoolParam(name, def=false){
+      const v = params.get(name);
+      if (v==null) return def;
+      return /^(1|true|yes|on)$/i.test(String(v).trim());
+    }
+    const autoHide = getBoolParam('autoHide', false);
+    const songChangeOnly = getBoolParam('songChangeOnly', false);
+    const PROGRESS_BACK_TOLERANCE = 1500;
+
     const infoText = document.getElementById('text'),
       viz = document.getElementById('visualizer');
     const bars = [];
@@ -90,6 +106,7 @@
       viz.appendChild(b);
       bars.push(b);
     }
+
     function sanitize(s) {
       return s.length > 50 ? s.slice(0, 50).trim() + '...' : s;
     }
@@ -112,20 +129,83 @@
       vizInterval = null;
       bars.forEach(b => b.style.transform = 'scaleY(0)');
     }
+
+    function showOverlay(){ document.body.classList.remove('hide'); }
+    function hideOverlay(){ document.body.classList.add('hide'); }
+
+    let prevIsPlaying = null,
+        prevProgressMs = null,
+        prevTrackId = null;
+    let songRevealTimer = null,
+        songHideTimer = null;
+
+    function clearSongChangeTimers(){
+      if (songRevealTimer){ clearTimeout(songRevealTimer); songRevealTimer=null; }
+      if (songHideTimer){ clearTimeout(songHideTimer); songHideTimer=null; }
+    }
+    function scheduleSongChangeWindow(){
+      clearSongChangeTimers();
+      hideOverlay();
+      songRevealTimer = setTimeout(()=>{
+        showOverlay();
+        songHideTimer = setTimeout(()=>{
+          hideOverlay();
+        },10000);
+      },5000);
+    }
+
     function onData(d) {
       const s = d.songInfo;
       infoText.textContent = sanitize(s.trackName + ' – ' + s.artists);
       progressPct = s.durationMs > 0 ? s.progressMs / s.durationMs : 0;
       s.isPlaying ? startViz() : stopViz();
+
+      if (songChangeOnly) {
+        const progressWentBack = (prevProgressMs != null) && (s.progressMs + PROGRESS_BACK_TOLERANCE < prevProgressMs);
+        const trackChanged = (prevTrackId != null) && (s.trackId !== prevTrackId);
+        if (trackChanged || progressWentBack) {
+          scheduleSongChangeWindow();
+        }
+      } else if (autoHide) {
+        if (prevIsPlaying !== null && prevIsPlaying !== s.isPlaying) {
+          if (s.isPlaying) {
+            showOverlay();
+          } else {
+            hideOverlay();
+          }
+        }
+      } else {
+        showOverlay();
+      }
+
+      prevIsPlaying = s.isPlaying;
+      prevProgressMs = s.progressMs;
+      prevTrackId = s.trackId;
     }
+
+    const client = new StreamerbotClient({
+      address,
+      port,
+      password,
+      endpoint: '/',
+      autoReconnect: true,
+      immediate: true,
+      onConnect: () => {
+        if (songChangeOnly) {
+          hideOverlay();
+        } else {
+          showOverlay();
+        }
+      }
+    });
+
     client.on('Misc.GlobalVariableUpdated', ({ data }) => {
       if (data.name === 'tawmae_SPOTIFY_AND_SB_INFO') {
         try {
           onData(typeof data.newValue === 'string' ? JSON.parse(data.newValue) : data.newValue);
-        } catch { }
+        } catch {}
       }
     });
   </script>
 </body>
-
 </html>
