@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SPOTIFY & SB v2 Style 3 - 1.0.0</title>
+    <title>SPOTIFY & SB v2 Style 3 - 1.0.1</title>
     <script src="https://unpkg.com/@streamerbot/client/dist/streamerbot-client.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Material+Icons&display=swap" rel="stylesheet" />
     <style>
@@ -29,6 +29,8 @@
             overflow: hidden;
             box-shadow: 0 0 20px rgba(0, 0, 0, .5);
             background: rgba(0, 0, 0, .6);
+            opacity: 1;
+            transition: opacity .8s ease;
         }
         .dcBanner {
             position: absolute;
@@ -174,7 +176,7 @@
         }
         body.hide .container {
             opacity: 0;
-            transition: opacity 1s ease;
+            pointer-events: none;
         }
     </style>
 </head>
@@ -228,7 +230,14 @@
         const params = new URLSearchParams(location.search),
               address = params.get('address') || '127.0.0.1',
               port = parseInt(params.get('port') || '8080', 10);
-              const password = params.get("password") || "";
+        const password = params.get("password") || "";
+        function getBoolParam(name, def=false){
+            const v = params.get(name);
+            if (v==null) return def;
+            return /^(1|true|yes|on)$/i.test(String(v).trim());
+        }
+        const autoHide = getBoolParam('autoHide', false);
+        const songChangeOnly = getBoolParam('songChangeOnly', false);
         const dcBanner = document.getElementById('dcBanner'),
               coverBg = document.getElementById('coverBg'),
               titleEl = document.getElementById('songTitle'),
@@ -245,6 +254,12 @@
             lastUpdate = 0,
             animReq = null,
             vizInterval = null;
+        let prevIsPlaying = null,
+            prevProgressMs = null,
+            prevTrackId = null;
+        let songRevealTimer = null,
+            songHideTimer = null;
+        const PROGRESS_BACK_TOLERANCE = 1500;
         const visualizer = document.querySelector('.visualizer');
         for (let i = 0; i < 50; i++) {
             let bar = document.createElement('div');
@@ -276,6 +291,20 @@
                 bar.style.transform = 'scaleY(0)';
             });
         }
+        function clearSongChangeTimers(){
+            if (songRevealTimer){ clearTimeout(songRevealTimer); songRevealTimer=null; }
+            if (songHideTimer){ clearTimeout(songHideTimer); songHideTimer=null; }
+        }
+        function scheduleSongChangeWindow(){
+            clearSongChangeTimers();
+            hideOverlay();
+            songRevealTimer = setTimeout(()=>{
+                showOverlay();
+                songHideTimer = setTimeout(()=>{
+                    hideOverlay();
+                },10000);
+            },5000);
+        }
         function showOverlay() {
             document.body.classList.remove('hide');
         }
@@ -302,7 +331,6 @@
         function datenDings(data) {
             const s = data.songInfo;
             hideDisconnectBanner();
-            showOverlay();
             coverBg.style.backgroundImage = `url('${s.coverImageUrl}')`;
             titleEl.textContent = sanitizeText(s.trackName);
             artistEl.textContent = sanitizeArtists(s.artists);
@@ -330,6 +358,26 @@
                 trackLine.style.background = `linear-gradient(to right, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.8) ${pct}%, rgba(255,255,255,0.3) ${pct}%, rgba(255,255,255,0.3) 100%)`;
             }
             animate(s.isPlaying);
+            if (songChangeOnly) {
+                const progressWentBack = (prevProgressMs != null) && (s.progressMs + PROGRESS_BACK_TOLERANCE < prevProgressMs);
+                const trackChanged = (prevTrackId != null) && (s.trackId !== prevTrackId);
+                if (trackChanged || progressWentBack) {
+                    scheduleSongChangeWindow();
+                }
+            } else if (autoHide) {
+                if (prevIsPlaying !== null && prevIsPlaying !== s.isPlaying) {
+                    if (s.isPlaying) {
+                        showOverlay();
+                    } else {
+                        hideOverlay();
+                    }
+                }
+            } else {
+                showOverlay();
+            }
+            prevIsPlaying = s.isPlaying;
+            prevProgressMs = s.progressMs;
+            prevTrackId = s.trackId;
         }
         const client = new StreamerbotClient({
             address,
@@ -340,7 +388,11 @@
             immediate: true,
             onConnect: () => {
                 hideDisconnectBanner();
-                showOverlay();
+                if (songChangeOnly) {
+                    hideOverlay();
+                } else {
+                    showOverlay();
+                }
             },
             onDisconnect: () => {
                 showDisconnectBanner();
@@ -352,12 +404,9 @@
         client.on('Misc.GlobalVariableUpdated', ({ data }) => {
             if (data.name === 'tawmae_SPOTIFY_AND_SB_INFO') {
                 try {
-                    const v = typeof data.newValue === 'string' ?
-                        JSON.parse(data.newValue) :
-                        data.newValue;
+                    const v = typeof data.newValue === 'string' ? JSON.parse(data.newValue) : data.newValue;
                     datenDings(v);
-                } catch {
-                }
+                } catch {}
             }
         });
     </script>
