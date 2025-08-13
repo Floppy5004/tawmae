@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SPOTIFY & SB v2 Style 1 - 1.0.0</title>
+    <title>SPOTIFY & SB v2 Style 1 - 1.0.1</title>
     <script src="https://unpkg.com/@streamerbot/client/dist/streamerbot-client.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Material+Icons&display=swap" rel="stylesheet" />
     <style>
@@ -242,9 +242,16 @@
             transition: width .5s ease;
         }
 
+
+        .container {
+            opacity: 1;
+            transition: opacity 0.8s ease;
+        }
+
+
         body.hide .container {
             opacity: 0;
-            transition: opacity 1s ease;
+            pointer-events: none;
         }
     </style>
 </head>
@@ -291,15 +298,15 @@
     <script>
         function formatTime(ms) {
             const t = Math.floor(ms / 1000),
-                  m = Math.floor(t / 60),
-                  s = t % 60;
+                m = Math.floor(t / 60),
+                s = t % 60;
             return m + ":" + (s < 10 ? "0" : "") + s;
         }
 
         function sanitizeText(str) {
             let t = str.replace(/\s*\([^)]*\)/g, '')
-                       .replace(/\s*-.*$/, '')
-                       .trim();
+                .replace(/\s*-.*$/, '')
+                .trim();
             return t.length <= 40
                 ? t
                 : t.slice(0, 40).replace(/\s+\S*$/, '') + ' (...)';
@@ -313,30 +320,55 @@
         }
 
         const params = new URLSearchParams(location.search),
-              address = params.get('address') || '127.0.0.1',
-              port = parseInt(params.get('port') || '8080', 10);
-              const password = params.get("password") || "";
+            address = params.get('address') || '127.0.0.1',
+            port = parseInt(params.get('port') || '8080', 10);
+        const password = params.get("password") || "";
+
+
+        function getBoolParam(name, defaultVal = false) {
+            const v = params.get(name);
+            if (v == null) return defaultVal;
+            return /^(1|true|yes|on)$/i.test(String(v).trim());
+        }
+
+
+        const autoHide = getBoolParam('autoHide', false);
+        const songChangeOnly = getBoolParam('songChangeOnly', false);
+
         const dcBanner = document.getElementById('dcBanner'),
-              coverBg = document.getElementById('coverBg'),
-              titleEl = document.getElementById('songTitle'),
-              artistEl = document.getElementById('songArtist'),
-              curEl = document.getElementById('currentTime'),
-              totEl = document.getElementById('totalTime'),
-              knob = document.getElementById('knob'),
-              volFill = document.querySelector('.volume-fill'),
-              playIcon = document.getElementById('playPauseIcon'),
-              shuffleIcon = document.getElementById('shuffleIcon'),
-              repeatIcon = document.getElementById('repeatIcon'),
-              reqInfo = document.getElementById('requesterInfo'),
-              reqName = document.getElementById('requesterName'),
-              reqAv = document.getElementById('requesterAvatar'),
-              trackLine = document.getElementById('trackLine');
+            coverBg = document.getElementById('coverBg'),
+            titleEl = document.getElementById('songTitle'),
+            artistEl = document.getElementById('songArtist'),
+            curEl = document.getElementById('currentTime'),
+            totEl = document.getElementById('totalTime'),
+            knob = document.getElementById('knob'),
+            volFill = document.querySelector('.volume-fill'),
+            playIcon = document.getElementById('playPauseIcon'),
+            shuffleIcon = document.getElementById('shuffleIcon'),
+            repeatIcon = document.getElementById('repeatIcon'),
+            reqInfo = document.getElementById('requesterInfo'),
+            reqName = document.getElementById('requesterName'),
+            reqAv = document.getElementById('requesterAvatar'),
+            trackLine = document.getElementById('trackLine');
 
         let lastProgress = 0,
             duration = 0,
             lastUpdate = 0,
             animReq = null,
             vizInterval = null;
+
+
+        let prevIsPlaying = null;
+        let prevProgressMs = null;
+        let prevTrackId = null;
+
+
+        let songRevealTimer = null;
+        let songHideTimer = null;
+
+
+        const PROGRESS_BACK_TOLERANCE = 1500;
+
 
         const visualizer = document.querySelector('.visualizer');
         for (let i = 0; i < 50; i++) {
@@ -347,8 +379,8 @@
 
         function updateBars() {
             const bars = document.querySelectorAll('.visualizer .bar'),
-                  knobLeft = parseFloat(knob.style.left) || 0,
-                  total = bars.length;
+                knobLeft = parseFloat(knob.style.left) || 0,
+                total = bars.length;
             bars.forEach((bar, i) => {
                 const v = Math.random() * 1.5 + .2;
                 bar.style.transform = `scaleY(${v})`;
@@ -373,6 +405,24 @@
             });
         }
 
+        function clearSongChangeTimers() {
+            if (songRevealTimer) { clearTimeout(songRevealTimer); songRevealTimer = null; }
+            if (songHideTimer) { clearTimeout(songHideTimer); songHideTimer = null; }
+        }
+
+        function scheduleSongChangeWindow() {
+            clearSongChangeTimers();
+            hideOverlay();
+
+            songRevealTimer = setTimeout(() => {
+                showOverlay();
+                songHideTimer = setTimeout(() => {
+                    hideOverlay();
+                }, 10000);
+            }, 5000);
+        }
+
+
         function showOverlay() {
             document.body.classList.remove('hide');
         }
@@ -394,8 +444,8 @@
         function animate(isPlaying) {
             if (!isPlaying) return;
             const now = performance.now(),
-                  elapsed = now - lastUpdate,
-                  current = Math.min(lastProgress + elapsed, duration);
+                elapsed = now - lastUpdate,
+                current = Math.min(lastProgress + elapsed, duration);
             curEl.textContent = formatTime(Math.round(current));
             const pct = duration > 0 ? current / duration * 100 : 0;
             knob.style.left = pct + '%';
@@ -405,7 +455,6 @@
         function datenDings(data) {
             const s = data.songInfo;
             hideDisconnectBanner();
-            showOverlay();
             coverBg.style.backgroundImage = `url('${s.coverImageUrl}')`;
             titleEl.textContent = sanitizeText(s.trackName);
             artistEl.textContent = sanitizeArtists(s.artists);
@@ -440,6 +489,29 @@
                 trackLine.style.background = `linear-gradient(to right, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.8) ${pct}%, rgba(255,255,255,0.3) ${pct}%, rgba(255,255,255,0.3) 100%)`;
             }
             animate(s.isPlaying);
+
+            if (songChangeOnly) {
+                const progressWentBack = (prevProgressMs != null) && (s.progressMs + PROGRESS_BACK_TOLERANCE < prevProgressMs);
+                const trackChanged = (prevTrackId != null) && (s.trackId !== prevTrackId);
+
+                if (trackChanged || progressWentBack) {
+                    scheduleSongChangeWindow();
+                }
+            } else if (autoHide) {
+                if (prevIsPlaying !== null && prevIsPlaying !== s.isPlaying) {
+                    if (s.isPlaying) {
+                        showOverlay();
+                    } else {
+                        hideOverlay();
+                    }
+                }
+            } else {
+                showOverlay();
+            }
+            prevIsPlaying = s.isPlaying;
+            prevProgressMs = s.progressMs;
+            prevTrackId = s.trackId;
+
         }
 
         const client = new StreamerbotClient({
@@ -452,8 +524,13 @@
             logLevel: 'verbose',
             onConnect: () => {
                 hideDisconnectBanner();
-                showOverlay();
+                if (songChangeOnly) {
+                    hideOverlay();
+                } else {
+                    showOverlay();
+                }
             },
+
             onDisconnect: () => {
                 showDisconnectBanner();
             },
