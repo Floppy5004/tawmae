@@ -1,1 +1,1 @@
-• Fixed a bug where users were able to transfer points to themselves
+• Fixed a bug that allowed users to transfer points to themselves
