@@ -39,6 +39,19 @@
       flex-direction: column
     }
 
+    header {
+      padding: 14px 16px;
+      text-align: center;
+      font-weight: 600;
+      font-size: clamp(18px, 2.6vw, 28px);
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin: 14px;
+      position: relative;
+    }
+
+
     .status {
       position: absolute;
       right: 12px;
@@ -424,6 +437,13 @@
 </head>
 
 <body>
+  <header>
+    tawmae - MOD TOOLS - User Chat Logs
+    <div id="apiStatus" class="status" style="display:flex">
+      <div class="dot"></div><span>Disconnected</span>
+    </div>
+  </header>
+
   <div class="wrap">
     <div class="box">
       <div class="dropdown">
