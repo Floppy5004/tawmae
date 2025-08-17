@@ -1,2 +1,2 @@
-• Added 'Suspicious User Message' trigger
-• Note: Requires .dll update and SB 1.0.0.alpha53+
+• Added a new OBS dock 'User Chat Logs' (check the website)
+• Fixed 'Hate Raid Emote Only' toggling
