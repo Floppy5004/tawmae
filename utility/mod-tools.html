@@ -275,9 +275,9 @@ og_image: "/assets/page-design/page-cards/mod-tools.webp"
                 <br>
                 The ASCII protection checks for ASCII symbols in a message and will purge it if it detects ASCII art or spam. Mods can easily toggle that filter via commands.
               <br><br>
-                <span style="font-weight: bold; color: #ffd95e;">4. OBS Dock for sus users</span>
+                <span style="font-weight: bold; color: #ffd95e;">4. OBS Docks</span>
                 <br>
-                There's also a neat little OBS dock that you can add, that displays new chatters and accounts that are less than 90 days old to perform quick actions on. You can check the 'DOCKS AND ADDONS' tab for that. 
+                There are also neat OBS docks that you can add, one for displaying suspicious users and the other one is a full on chat log. You can check the 'DOCKS AND ADDONS' tab for that. 
                 <br><br>
                 </p>
               <img src="{{ site.baseurl }}/assets/settings/mod-tools/mod-tools-features-4.webp" class="extension-image">
@@ -391,6 +391,7 @@ og_image: "/assets/page-design/page-cards/mod-tools.webp"
 
             </div>
             <!--------------------------------->
+            
 
         </div>
     </div>
@@ -1420,6 +1421,21 @@ og_image: "/assets/page-design/page-cards/mod-tools.webp"
           <br><br>
             <p><span style="font-weight: bold; color: #fff;">Note:</span> For these addons and docks to work, you will have to enable your websocket server in Streamer.bot. You can find it in the <span style="font-weight: bold; color: #fff;">Servers/Clients -> WebSocket Server</span> tab. Leave the <span style="font-weight: bold; color: #fff;">Address</span> at <span style="font-weight: bold; color: #fff;">127.0.0.1</span> and the <span style="font-weight: bold; color: #fff;">Port</span> at <span style="font-weight: bold; color: #fff;">8080</span></p>
             <!---------------------------------------------->
+            <br>
+            <div class="extension-title-text-box-long">
+                <h3> <span style="font-weight: bold; color: #fff">User Chat Log</span></h3>
+                <p>
+                  You can either open the link below in a browser or dock it directly into your OBS that shows the latest chat messages of a user. By the local nature of Streamer.bot, this only captures messages while Streamer.bot is running and connected to Twitch. You can filter for a time range and perform quick actions like timeouts and bans. It also gives neat little extra information, like the profile picture, account age, roles etc.
+                <br>
+                <span style="font-weight: bold">Docking URL:</span> <span style="background-color: #fff; color: black; padding: 0 5px; opacity: 0.45;">https://tawmae.xyz/overlays/mod-tools-user-chat-logs</span>
+                <br>
+                  <br>
+                </p>
+              
+           <img src="{{ site.baseurl }}/assets/settings/mod-tools/mod-tools-features-10.webp" class="extension-image">
+            </div>
+           
+        <!---------------------------------------------->
           <br>
             <div class="extension-title-text-box-long">
                 <h3> <span style="font-weight: bold; color: #fff">Suspicious User Monitoring</span></h3>
@@ -1602,6 +1618,12 @@ og_image: "/assets/page-design/page-cards/mod-tools.webp"
                     </tr>
                 </thead>
                 <tbody>
+                    <!---------------------------------------------->
+                     <tr>
+                        <td>August 17, 2025</td>
+                        <td>Fixed an issue with emote-only mode not toggling when activating hate raid protection; added a new OBS dock "User Chat Log"</td>
+                        <td>2.0.2</td>
+                    </tr>
                   <!---------------------------------------------->
                      <tr>
                         <td>August 06, 2025</td>
