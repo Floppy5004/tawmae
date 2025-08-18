@@ -620,7 +620,7 @@
       <div class="messages-header">
         <div class="left-head">
           <div class="section-title">Chat Log</div>
-          <span id="totalCount" class="total">0 messages</span>
+          <span id="totalCount" class="total"></span>
         </div>
         <div class="msg-tools" id="searchTools" style="display:none">
           <span id="resultCount" class="count hidden">0 Results</span>
@@ -681,6 +681,7 @@
     let currentList = []; let renderIndex = 0; const CHUNK_SIZE = 120; let currentTerm = '';
 
     async function onConnect() {
+      totalCountEl.textContent = '';
       let needStart = true;
       try {
         const res = await sb.getGlobal("tawmae_MOD_TOOLS_ChatLog_ListenerState", false);
