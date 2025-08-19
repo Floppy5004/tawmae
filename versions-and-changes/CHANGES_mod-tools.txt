@@ -1,2 +1,1 @@
-• Added a new OBS dock 'User Chat Logs' (check the website)
-• Fixed 'Hate Raid Emote Only' toggling
+• Fixed a potential issue with file locks for User Chat Logs
