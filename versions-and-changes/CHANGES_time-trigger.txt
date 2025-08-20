@@ -1,3 +1,1 @@
-• Updated a UI element (requires dll update)
-• Improved debugging
-• Added Snooze button for updates
+• Updated the required dll version. Please run the settings UI again after updating.
