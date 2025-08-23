@@ -1,3 +1,4 @@
-• New: Button to clear all unlisted items from inventories
-• New: Action to return used item
-• Fixed: Chat Response Type, Item List Response
+• New: Item Limit
+• New: Mods can fetch other's inventories
+• Fix: Remove Item now case-insensitive
+• Fix: Self-Trading forbidden
