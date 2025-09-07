@@ -1,2 +1,2 @@
-• Added: Transfer Fees, %-Support for Add/Remove Points
+• Added: Transfer Fees, %-Support for Add/Remove Points, Watchtime-Distro Toggle
 • Fixed: Scratch Card Triggers
