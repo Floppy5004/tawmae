@@ -430,6 +430,13 @@
                 el.dataset.msgId = msgId;
                 el.dataset.raw = message;
                 el.dataset.userName = user;
+                el.dataset.userId = u.userId; 
+
+                if (!userMessagesMap.has(u.userId)) {
+                    userMessagesMap.set(u.userId, new Set());
+                }
+                userMessagesMap.get(u.userId).add(msgId);
+
 
                 const header = document.createElement('div');
                 header.classList.add('message-header');
