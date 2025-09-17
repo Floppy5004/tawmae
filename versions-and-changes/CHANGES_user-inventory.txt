@@ -1,4 +1,1 @@
-• New: Item Limit
-• New: Mods can fetch other's inventories
-• Fix: Remove Item now case-insensitive
-• Fix: Self-Trading forbidden
+• New: Added Crafting
