@@ -139,6 +139,9 @@ document.addEventListener("DOMContentLoaded", function () {
     else if (currentPage.includes("twitch-watchtime")) {
         loadImportString("/action-imports/twitch-watchtime.txt");
     }
+    else if (currentPage.includes("twitch-goalbar")) {
+        loadImportString("/action-imports/twitch-goalbar.txt");
+    }
     
     
 });
