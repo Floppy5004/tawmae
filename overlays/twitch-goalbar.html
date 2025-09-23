@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>tawmae - TWITCH GOALBAR - v.1.0.0</title>
+  <title>tawmae - TWITCH GOALBAR - v.1.0.1</title>
   <link
     href="https://fonts.googleapis.com/css2?family=Poppins&family=Inter&family=Roboto&family=Bitcount+Ink&family=Open+Sans&family=Lato&family=Oswald&family=SUSE&family=Arimo&family=Ubuntu&family=Nunito&family=Merriweather&family=Playfair+Display&family=Libre+Baskerville&family=Mulish&family=Barlow&family=Inconsolata&family=Bebas+Neue&family=Figtree&family=Saira&family=Josefin+Sans&family=Fjalla+One&family=Bungee&family=Plus+Jakarta+Sans&family=Pacifico&family=Comfortaa&family=Overpass&family=Urbanist&display=swap"
     rel="stylesheet">
@@ -18,8 +18,10 @@
       --edge2: #00e5ff;
       --edge3: #22e0a6;
       --text: #eef2ff;
-      --muted: #c9cfdd
+      --muted: #c9cfdd;
+      --zoom: 1
     }
+
 
     * {
       box-sizing: border-box
@@ -48,9 +50,22 @@
       justify-content: center
     }
 
+    .zoom-stage {
+      width: 92vw;
+      display: flex;
+      align-items: center;
+      justify-content: center
+    }
+
+    .zoom-stage .goal {
+      transform: scale(var(--zoom));
+      transform-origin: center center
+    }
+
+
     .goal {
       position: relative;
-      width: 92vw;
+      width: calc(100% / var(--zoom));
       padding: 10px 10px 10px;
       border-radius: 14px;
       border: 1px solid rgba(255, 255, 255, .14);
@@ -106,7 +121,8 @@
       place-items: center;
       font-weight: 800;
       font-size: 1.05rem;
-      text-shadow: 0 1px 6px rgba(0, 0, 0, .6)
+      stroke: black;
+      text-shadow: 0 1px 1px rgba(0, 0, 0, .5)
     }
 
     .progress-row {
@@ -205,22 +221,25 @@
 
 <body>
   <div class="wrap">
-    <div class="goal">
-      <div class="goal-header">
-        <iconify-icon icon="ri:poker-diamonds-line"></iconify-icon>
-        <div class="goal-title">Bits</div>
-      </div>
-      <div class="progress-wrapper">
-        <div class="progress-row">
-          <div class="current-value">0</div>
-          <div class="progress-bar">
-            <div class="progress-fill"><span class="progress-text">0%</span></div>
-          </div>
-          <div class="goal-value">0</div>
+    <div class="zoom-stage">
+      <div class="goal">
+        <div class="goal-header">
+          <iconify-icon icon="ri:poker-diamonds-line"></iconify-icon>
+          <div class="goal-title">Bits</div>
         </div>
-      </div>
-      <div class="change-indicator"></div>
-      <div class="completed-badge"><iconify-icon icon="gridicons:checkmark-circle"></iconify-icon><span>COMPLETED</span>
+        <div class="progress-wrapper">
+          <div class="progress-row">
+            <div class="current-value">0</div>
+            <div class="progress-bar">
+              <div class="progress-fill"><span class="progress-text">0%</span></div>
+            </div>
+            <div class="goal-value">0</div>
+          </div>
+        </div>
+        <div class="change-indicator"></div>
+        <div class="completed-badge"><iconify-icon
+            icon="gridicons:checkmark-circle"></iconify-icon><span>COMPLETED</span>
+        </div>
       </div>
     </div>
   </div>
@@ -258,7 +277,7 @@
     function parseConfig(cfg) {
       const included = getIncludedArray(cfg)
       const evNames = names.filter((_, i) => included[i])
-      const evs = evNames.map(n => { const max = Number(cfg['goal_amount_' + n]); const displayMax = (n === 'Donations') ? `${max.toFixed(2)}` : `${max}`; return { icon: cfg['icon_' + n], title: cfg['title_' + n], max, displayMax, color: cfg['bar_color_' + n] } })
+      const evs = evNames.map(n => { const max = Number(cfg['goal_amount_' + n]); const displayMax = (n === 'Donations') ? `${max.toFixed(2)}` : `${max}`; return { type: n, icon: cfg['icon_' + n], title: cfg['title_' + n], max, displayMax, color: cfg['bar_color_' + n] } })
       const counts = evNames.map(n => { const current = Number(cfg['currentCount_' + n]); const displayCurrent = (n === 'Donations') ? `${current.toFixed(2)}` : `${current}`; return { current, displayCurrent } })
       const bg = cfg['bar_color_Background'] || '#07070b'
       const bgT = cfg['background_Transparency'] ?? 100
@@ -268,14 +287,16 @@
       const font = fontMap[fontKey] || 'Poppins'
       const fontColor = cfg['bar_font_Color'] || '#eef2ff'
       const currency = cfg['bar_Currency'] || 'USD'
-      return { evs, counts, duration: cfg['rotaton_duration_milliseconds'], bg, bgT, roundedBg, roundedBar, font, fontColor, currency }
+      const zoom = Number(cfg['zoomLevel']) || 1
+      return { evs, counts, duration: cfg['rotaton_duration_milliseconds'], bg, bgT, roundedBg, roundedBar, font, fontColor, currency, zoom }
     }
     function applyBackground(bg, bgT) { goalBox.style.background = computeGradient(bg, bgT) }
-    function initialize(evs, counts, duration, bg, bgT, roundedBg, roundedBar, font, fontColor, currency) {
+    function initialize(evs, counts, duration, bg, bgT, roundedBg, roundedBar, font, fontColor, currency, zoom) {
       currentCurrency = currency
       events = evs.map((e, i) => ({ ...e, ...counts[i] }))
       lastCounts = events.map(e => e.current)
       lastPercents = events.map(e => Math.min(100, Math.round((e.current / e.max) * 100)))
+      document.documentElement.style.setProperty('--zoom', String(zoom || 1))
       applyBackground(bg, bgT)
       goalBox.style.borderRadius = roundedBg ? '14px' : '0'
       progressBar.style.borderRadius = roundedBar ? '9px' : '0'
@@ -286,6 +307,7 @@
       if (rotationIntervalId) clearInterval(rotationIntervalId)
       if (events.length > 1) startCycle(duration || 6000)
     }
+
     function animateCount(el, fromVal, toVal, isDonation, duration) {
       let obj = { val: fromVal }
       const symbol = isDonation ? (currencySymbols[currentCurrency] || currentCurrency) : ""
@@ -304,9 +326,10 @@
       const e = events[i]
       iconEl.setAttribute('icon', e.icon)
       titleEl.textContent = e.title
-      currentValEl.textContent = "0"
-      const symbol = e.title.includes("Donations") ? (currencySymbols[currentCurrency] || currentCurrency) : ""
-      goalValEl.textContent = e.displayMax + (symbol ? " " + symbol : "")
+      const isDonation = e.type === "Donations"
+      const symbol = isDonation ? (currencySymbols[currentCurrency] || currentCurrency) : ""
+      currentValEl.textContent = isDonation ? `0.00 ${symbol}` : "0"
+      goalValEl.textContent = isDonation ? `${e.displayMax} ${symbol}` : e.displayMax
       fillEl.style.background = e.color ? e.color : 'linear-gradient(90deg,#7f5af0,#00e5ff,#22e0a6)'
       fillEl.style.width = '0%'
       textEl.textContent = '0%'
@@ -324,7 +347,7 @@
       gsap.to(fillEl, { width: `${target}%`, duration: d, ease: 'power2.out' })
       animatePercent(startPercent, target, d)
       if (withCountUp) {
-        const isDonation = e.title.includes("Donations")
+        const isDonation = e.type === "Donations"
         const fromVal = fromZero ? 0 : lastCounts[i] || 0
         animateCount(currentValEl, fromVal, e.current, isDonation, d)
       }
@@ -335,24 +358,26 @@
     function showChange(delta) {
       if (delta <= 0) return
       if (completedEl.style.display === 'inline-flex') return
-      const isDonation = ['Donations'].includes(events[idx].title)
+      const isDonation = events[idx].type === "Donations"
       const symbol = isDonation ? (currencySymbols[currentCurrency] || currentCurrency) : ""
       const formatted = isDonation ? delta.toFixed(2) : delta
       changeEl.textContent = `+${formatted}${symbol ? " " + symbol : ""}`
       gsap.fromTo(changeEl, { x: 24, opacity: 0 }, { x: 0, opacity: 1, duration: .3, ease: 'power2.out', onComplete: () => gsap.to(changeEl, { x: 24, opacity: 0, duration: .35, delay: 1 }) })
     }
     function updateCountsOnly(newCfg) {
-      const { evs, counts, bg, bgT, roundedBg, roundedBar, font, fontColor, currency } = parseConfig(newCfg)
+      const { evs, counts, bg, bgT, roundedBg, roundedBar, font, fontColor, currency, zoom } = parseConfig(newCfg)
       currentCurrency = currency
+      document.documentElement.style.setProperty('--zoom', String(zoom || 1))
       applyBackground(bg, bgT)
       goalBox.style.borderRadius = roundedBg ? '14px' : '0'
       progressBar.style.borderRadius = roundedBar ? '9px' : '0'
       fillEl.style.borderRadius = roundedBar ? '9px' : '0'
         ;[goalBox, titleEl, textEl, currentValEl, goalValEl, iconEl].forEach(t => { t.style.fontFamily = `'${font}', sans-serif`; t.style.color = fontColor })
-      evs.forEach((e, i) => { const oldMax = events[i]?.max; events[i].max = e.max; events[i].displayMax = e.displayMax; if (i === idx && oldMax !== e.max) { const symbol = e.title.includes("Donations") ? (currencySymbols[currentCurrency] || currentCurrency) : ""; goalValEl.textContent = e.displayMax + (symbol ? " " + symbol : ""); animateFill(i, true, false) } })
+      evs.forEach((e, i) => { const oldMax = events[i]?.max; events[i].max = e.max; events[i].displayMax = e.displayMax; if (i === idx && oldMax !== e.max) { const symbol = e.type === "Donations" ? (currencySymbols[currentCurrency] || currentCurrency) : ""; goalValEl.textContent = e.type === "Donations" ? `${e.displayMax} ${symbol}` : e.displayMax; animateFill(i, true, false) } })
       counts.forEach((c, i) => { const prev = lastCounts[i] ?? 0; const diff = c.current - prev; events[i].current = c.current; events[i].displayCurrent = c.displayCurrent; if (i === idx && diff !== 0) { animateFill(i, true, false); showChange(diff) } lastCounts[i] = c.current; lastPercents[i] = Math.min(100, Math.round((events[i].current / events[i].max) * 100)) })
       updateCompletedVisibility(lastPercents[idx] || 0)
     }
+
     function getConnParams() { const sp = new URLSearchParams(location.search); let host = '127.0.0.1', port = 8080; let password = sp.get('password') || undefined; for (const [k, v] of sp.entries()) { const lk = k.toLowerCase(); if (lk === 'address') host = v; if (lk === 'port') port = Number(v) || 8080 } return { host, port, password } }
     function showBadge(el, show) { el.style.display = show ? 'flex' : 'none' }
     const { host, port, password } = getConnParams()
@@ -369,8 +394,9 @@
           if (!g || g.status === 'error') { showBadge(badgeSettings, true); return }
           showBadge(badgeSettings, false)
           const cfg = typeof g.variable.value === 'string' ? JSON.parse(g.variable.value) : g.variable.value
-          const { evs, counts, duration, bg, bgT, roundedBg, roundedBar, font, fontColor, currency } = parseConfig(cfg)
-          initialize(evs, counts, duration, bg, bgT, roundedBg, roundedBar, font, fontColor, currency)
+          const { evs, counts, duration, bg, bgT, roundedBg, roundedBar, font, fontColor, currency, zoom } = parseConfig(cfg)
+          initialize(evs, counts, duration, bg, bgT, roundedBg, roundedBar, font, fontColor, currency, zoom)
+
         } catch (err) { showBadge(badgeSettings, true) }
       },
       onDisconnect: () => { showBadge(badgeDisconnected, true) },
@@ -393,8 +419,9 @@
         return false
       })()
       if (designChange) {
-        const { evs, counts, duration, bg, bgT, roundedBg, roundedBar, font, fontColor, currency } = parseConfig(newCfg)
-        initialize(evs, counts, duration, bg, bgT, roundedBg, roundedBar, font, fontColor, currency)
+        const { evs, counts, duration, bg, bgT, roundedBg, roundedBar, font, fontColor, currency, zoom } = parseConfig(newCfg)
+        initialize(evs, counts, duration, bg, bgT, roundedBg, roundedBar, font, fontColor, currency, zoom)
+
       } else {
         updateCountsOnly(newCfg)
       }
