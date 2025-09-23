@@ -1,0 +1,2 @@
+• Added 'Zoom Level' to the settings
+• Added currency symbols to the overlay
