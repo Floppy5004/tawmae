@@ -1,2 +1,1 @@
-NOTE: Streamer.bot 1.0.0 Alpha.52+ required!
-• Added Custom Commands from MOD TOOLS
+• Mistyping a command will now show a suggested command if there's one that fits.
