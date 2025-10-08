@@ -26,29 +26,26 @@ og_image: "/assets/page-design/page-cards/steam-welcome.webp"
 <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/extension-page.css">
 <!----    TITLE    ------------------------------------------------------------------------------------------------------------------------------>
 <div class="extension-title">
-    <div class="extension-title-text-box">
-        <h1>STEAM WELCOME</h1>
-        <p>Steam notifications whenever your best friend xXxBigStewxXx69 starts Skyrim for the 150th time is annoying as heck, but a Steam notification whenever a chatter joins your chat?! HELL YEAH! <br><span
-                style="font-size: 3rem">kingGABEN</span></p>
+  <div class="extension-title-text-box">
+    <h1>{{ page.title }}</h1>
+    <p>
+      Steam notifications whenever your best friend xXxBigStewxXx69 launches Skyrim for the 150th time? Annoying.  
+      But a Steam-style notification whenever a chatter joins your chat? HELL YEAH!<br>
+      <span style="font-size: 3rem">kingGABEN</span>
+    </p>
+  </div>
+
+  {% if page.og_image %}
+    <div class="extension-cover-wrapper">
+      <img src="{{ page.og_image | relative_url }}" alt="{{ page.title }} Cover Image" class="extension-cover-image">
     </div>
-    <div class="carousel-2">
-  <div>
-      <img src="{{ site.baseurl }}/assets/covers/steam-welcome.webp" class="carousel-image">
-  </div>
-  <div>
-      <img src="{{ site.baseurl }}/assets/covers/steam-welcome-2.webp" class="carousel-image">
-    
-  </div>
-  <div>
-      <img src="{{ site.baseurl }}/assets/covers/steam-welcome-3.webp" class="carousel-image">
-    
-  </div>
-  <div>
-      <img src="{{ site.baseurl }}/assets/covers/steam-welcome-4.webp" class="carousel-image">
-    
-  </div>
+  {% else %}
+    <div class="extension-cover-wrapper">
+      <img src="{{ '/assets/page-design/website-card.webp' | relative_url }}" alt="{{ page.title }} Cover Image" class="extension-cover-image">
+    </div>
+  {% endif %}
 </div>
-</div>
+
 
 <div class="accordion">
     <div class="accordion-divider"></div>
