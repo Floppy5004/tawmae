@@ -111,40 +111,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // ====================================================================================================================
 
-$(document).ready(function(){
-  $('.carousel-1').slick({
-    autoplay: true,
-    autoplaySpeed: 8000,
-    fade: true,
-    speed: 1500,
-    arrows: true,
-    dots: true,
-    infinite: true,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    cssEase: 'linear',
-    prevArrow: '<button type="button" class="slick-prev" aria-label="Previous">&#10094;</button>',
-    nextArrow: '<button type="button" class="slick-next" aria-label="Next">&#10095;</button>'
-  });
-});
-    // =================================
-$(document).ready(function(){
-  $('.carousel-2').slick({
-    autoplay: true,
-    autoplaySpeed: 12000,
-    speed: 700,
-    arrows: true,
-    dots: true,
-    infinite: true,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    prevArrow: '<button type="button" class="slick-prev" aria-label="Previous">&#10094;</button>',
-    nextArrow: '<button type="button" class="slick-next" aria-label="Next">&#10095;</button>'
-  });
-});
-
-// ====================================================================================================================
-
 document.addEventListener("DOMContentLoaded", function() {
     tippy('.discord-link', {
         content: 'Discord',
