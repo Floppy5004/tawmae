@@ -731,3 +731,21 @@ header {
   display: flex !important;
   flex-direction: column;
 }
+
+@media (max-width: 900px) {
+  .home-intro {
+    flex-direction: column !important;
+    gap: 30px !important;
+  }
+
+  .home-intro .intro-text,
+  .home-intro .intro-image {
+    max-width: 100% !important;
+  }
+
+  .home-intro .intro-image img {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+}
+
