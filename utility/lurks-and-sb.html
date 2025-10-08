@@ -24,43 +24,33 @@ og_image: "/assets/page-design/page-cards/lurks-and-sb.webp"
 
 <!----    TITLE   ------------------------------------------------------------------------------------------------------------------------------>
 <div class="extension-title">
-    <div class="extension-title-text-box">
-        <h1>LURKS & SB</h1>
-        <p>
-            Any lurkers in chat???
-            <br><br>
-            • Track lurking time
-          <br>
-            • Automatically unlurk on command or when people chat again
-          <br>
-            • Automatically unlurk when people aren't in the viewers list anymore
-            <br>
-          • Display all current lurkers
-          
-            <br>
-          • Display your own lurking stats
-            <br>
-          • A lurk leaderboard with the cumulated lurk time
-            <br>
-          <br>
-            <span style="font-size: 3rem">happie</span>
-        </p>
+  <div class="extension-title-text-box">
+    <h1>LURKS & SB</h1>
+    <p>
+      Any lurkers in chat???
+      <br><br>
+      • Track lurking time<br>
+      • Automatically unlurk on command or when people chat again<br>
+      • Automatically unlurk when people aren't in the viewers list anymore<br>
+      • Display all current lurkers<br>
+      • Display your own lurking stats<br>
+      • A lurk leaderboard with the cumulated lurk time
+      <br><br>
+      <span style="font-size: 3rem">happie</span>
+    </p>
+  </div>
+
+  {% if page.og_image %}
+    <div class="extension-cover-wrapper">
+      <img src="{{ page.og_image | relative_url }}" alt="{{ page.title }} Cover Image" class="extension-cover-image">
     </div>
-    <div class="carousel-2">
-  <div>
-      <img src="{{ site.baseurl }}/assets/covers/lurks-and-sb-1.webp" class="carousel-image">
-  </div>
-      <div>
-      <img src="{{ site.baseurl }}/assets/covers/lurks-and-sb-2.webp" class="carousel-image">
-  </div>
-      <div>
-      <img src="{{ site.baseurl }}/assets/covers/lurks-and-sb-3.webp" class="carousel-image">
-  </div>
-      <div>
-      <img src="{{ site.baseurl }}/assets/covers/lurks-and-sb-4.webp" class="carousel-image">
-  </div>
+  {% else %}
+    <div class="extension-cover-wrapper">
+      <img src="{{ '/assets/page-design/website-card.webp' | relative_url }}" alt="{{ page.title }} Cover Image" class="extension-cover-image">
+    </div>
+  {% endif %}
 </div>
-</div>
+
 
 <!----    ENTIRE ACCORDION THINGY WHATEVER IT'S CALLED    ------------------------------------------------------------------------------------------------------------------------------>
 
