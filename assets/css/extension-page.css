@@ -173,6 +173,36 @@ h3 {
   text-align: left;
 }
 
+h2.section-title {
+  background: var(--bg-glass);
+  border: 1px solid var(--border-glass);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  max-width: var(--container-width);
+  margin: 50px auto 10px auto;
+  padding: 14px 25px;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #fff;
+  text-align: left;
+  text-transform: none;
+  letter-spacing: 0.2px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+h2.section-title::after {
+  content: "";
+  flex-grow: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--accent-color), transparent);
+  margin-left: 15px;
+  opacity: 0.4;
+}
+
+
 p {
   font-size: 1.1rem;
   color: #ccc;
