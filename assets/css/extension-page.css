@@ -160,6 +160,13 @@ h1 {
   text-align: left;
 }
 
+h2 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+
 h3 {
   font-size: 1.5rem;
   margin-bottom: 5px;
