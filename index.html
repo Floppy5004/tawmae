@@ -38,14 +38,14 @@ keywords:
 <section class="all-extensions">
   <h2 class="related-title">
     <span class="iconify" data-icon="material-symbols:apps"></span>
-    All Extensions
+    Discover Extensions
   </h2>
 
-  <div class="related-grid">
+  <div class="related-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;">
     {% assign utility_pages = site.html_pages | where_exp: "p", "p.path contains 'utility/'" %}
     {% assign obs_pages = site.html_pages | where_exp: "p", "p.path contains 'obs-widgets/'" %}
     {% assign chat_pages = site.html_pages | where_exp: "p", "p.path contains 'chat-games/'" %}
-    {% assign all_extensions = utility_pages | concat: obs_pages | concat: chat_pages | shuffle %}
+    {% assign all_extensions = utility_pages | concat: obs_pages | concat: chat_pages | shuffle | slice: 0, 9 %}
 
     {% for ext in all_extensions %}
       <a href="{{ ext.url | relative_url }}" class="related-card" target="_blank" rel="noopener noreferrer">
