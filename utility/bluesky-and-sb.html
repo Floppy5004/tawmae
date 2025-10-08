@@ -413,7 +413,7 @@ og_image: "/assets/page-design/page-cards/bluesky-and-sb.webp"
     <!---------------------------------------------------------------------------------------------------------------------------------->
     <div class="accordion-divider"></div>
     <!---------------------------------------------->
-  <section class="related-extensions">
+<section class="related-extensions">
   <h2 class="related-title">
     <span class="iconify" data-icon="material-symbols:thumbs-up-double"></span>
     Other extensions you may like
@@ -424,13 +424,10 @@ og_image: "/assets/page-design/page-cards/bluesky-and-sb.webp"
     {% assign obs_pages = site.html_pages | where_exp: "p", "p.path contains 'obs-widgets/'" %}
     {% assign chat_pages = site.html_pages | where_exp: "p", "p.path contains 'chat-games/'" %}
     {% assign all_extensions = utility_pages | concat: obs_pages | concat: chat_pages %}
-
-    {% assign current = page.url | replace: '.html', '' %}
-    {% assign current_slash = current | append: '/' %}
-    {% assign filtered = all_extensions | where_exp: "p", "p.url != page.url and p.url != current and p.url != current_slash" %}
+    {% assign filtered = all_extensions | where_exp: "p", "p.url != page.url" %}
 
     {% for ext in filtered %}
-      <a href="{{ ext.url | relative_url }}" class="related-card" target="_blank" rel="noopener noreferrer">
+      <a href="{{ ext.url | relative_url }}" class="related-card" style="display:none;">
         <img src="{{ ext.og_image | default: '/assets/page-design/website-card.webp' | relative_url }}" alt="{{ ext.title }} Streamer.bot Extension">
         <div class="related-card-text">
           <h3>{{ ext.title }}</h3>
