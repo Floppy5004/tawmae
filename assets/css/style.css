@@ -716,6 +716,7 @@ header {
 
 .all-extensions .related-grid .row-divider {
   grid-column: 1 / -1;
+  justify-self: center;
   margin: 24px 0;
 }
 
