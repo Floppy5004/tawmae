@@ -363,4 +363,30 @@ og_image: "/assets/page-design/page-cards/lurks-and-sb.webp"
     <!---------------------------------------------------------------------------------------------------------------------------------->
     <div class="accordion-divider"></div>
     <!---------------------------------------------->
+  <section class="related-extensions">
+  <h2 class="related-title">
+    <span class="iconify" data-icon="material-symbols:thumbs-up-double"></span>
+    Other extensions you may like
+  </h2>
+
+  <div class="related-grid">
+    {% assign utility_pages = site.html_pages | where_exp: "p", "p.path contains 'utility/'" %}
+    {% assign obs_pages = site.html_pages | where_exp: "p", "p.path contains 'obs-widgets/'" %}
+    {% assign chat_pages = site.html_pages | where_exp: "p", "p.path contains 'chat-games/'" %}
+    {% assign all_extensions = utility_pages | concat: obs_pages | concat: chat_pages %}
+    {% assign filtered = all_extensions | where_exp: "p", "p.url != page.url" %}
+
+    {% for ext in filtered %}
+      <a href="{{ ext.url | relative_url }}" class="related-card" style="display:none;">
+        <img src="{{ ext.og_image | default: '/assets/page-design/website-card.webp' | relative_url }}" alt="{{ ext.title }} Streamer.bot Extension">
+        <div class="related-card-text">
+          <h3>{{ ext.title }}</h3>
+          <p>{{ ext.description | truncate: 160 }}</p>
+        </div>
+      </a>
+    {% endfor %}
+  </div>
+</section>
+
+  <!---------------------------------------------->
 </div>
