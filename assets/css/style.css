@@ -30,7 +30,7 @@ body {
 
 main {
   flex: 1;
-  padding-top: 140px;
+  padding-top: 50px;
   width: 100%;
   max-width: var(--container-width);
   margin: 0 auto;
