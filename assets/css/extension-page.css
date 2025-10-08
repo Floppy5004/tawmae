@@ -102,13 +102,10 @@ body {
 }
 
 .accordion-title {
-  font-size: 1rem;
-  font-weight: 700;
   text-transform: uppercase;
-  margin: 0;
-  padding: 0;
-  color: #fff;
-  display: inline-block;
+  font-size: 1.4rem;
+  font-weight: bold;
+  padding: 10px 0;
 }
 
 .accordion-header {
