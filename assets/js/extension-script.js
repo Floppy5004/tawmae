@@ -180,24 +180,25 @@ document.addEventListener("DOMContentLoaded", function() {
 
 // ====================================================================================================================
 document.addEventListener("DOMContentLoaded", () => {
-  const grid = document.querySelector(".all-extensions .related-grid");
-  if (!grid) return;
+  const grids = document.querySelectorAll(".related-grid");
 
-  function shuffleCardsInGrid() {
-    const cards = Array.from(grid.querySelectorAll("a.related-card"));
-    for (let i = cards.length - 1; i > 0; i--) {
+  function shuffle(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
-      [cards[i], cards[j]] = [cards[j], cards[i]];
+      [arr[i], arr[j]] = [arr[j], arr[i]];
     }
-    cards.forEach(card => grid.appendChild(card));
+    return arr;
   }
 
-  function insertRowDividers() {
-    grid.querySelectorAll(".row-divider").forEach(el => el.remove());
-    const cards = Array.from(grid.querySelectorAll("a.related-card"));
-    const cols = getComputedStyle(grid).gridTemplateColumns.split(" ").length;
-    if (!cols || cols < 1) return;
+  function computeGridCols(grid) {
+    const tpl = getComputedStyle(grid).gridTemplateColumns || "";
+    return tpl.split(" ").filter(Boolean).length || 1;
+  }
 
+  function insertRowDividers(grid) {
+    grid.querySelectorAll(".row-divider").forEach(el => el.remove());
+    const cols = computeGridCols(grid);
+    const cards = Array.from(grid.querySelectorAll("a.related-card"));
     for (let i = cols; i < cards.length; i += cols) {
       const hr = document.createElement("hr");
       hr.className = "section-divider row-divider";
@@ -205,18 +206,34 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  const isHome = location.pathname === "/" || location.pathname.endsWith("/index.html");
-  if (isHome) {
-    shuffleCardsInGrid();
+  function debounce(fn, delay = 120) {
+    let t; 
+    return () => { clearTimeout(t); t = setTimeout(fn, delay); };
   }
 
-  insertRowDividers();
+  grids.forEach(grid => {
+    const isHomeGrid = !!grid.closest(".all-extensions");
+    const cards = Array.from(grid.children);
+    if (!cards.length) return;
 
-  let resizeTO;
-  window.addEventListener("resize", () => {
-    clearTimeout(resizeTO);
-    resizeTO = setTimeout(insertRowDividers, 120);
+    shuffle(cards);
+
+    grid.innerHTML = "";
+    const limit = isHomeGrid ? 9 : 3;
+    const slice = cards.slice(0, limit);
+
+    slice.forEach(c => {
+      c.style.display = "flex";
+      grid.appendChild(c);
+    });
+
+    if (isHomeGrid) {
+      insertRowDividers(grid);
+      const rebalance = debounce(() => insertRowDividers(grid));
+      window.addEventListener("resize", rebalance);
+    }
   });
 });
+
 
 
