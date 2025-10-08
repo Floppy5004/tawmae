@@ -714,6 +714,10 @@ header {
   gap: 24px;
 }
 
+.all-extensions .related-grid .row-divider {
+  grid-column: 1 / -1;
+  margin: 24px 0;
+}
 
 
 @media (min-width: 1200px) {
