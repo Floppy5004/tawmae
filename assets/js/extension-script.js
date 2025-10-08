@@ -180,24 +180,26 @@ document.addEventListener("DOMContentLoaded", function() {
 
 // ====================================================================================================================
 document.addEventListener("DOMContentLoaded", () => {
-  const grid = document.querySelector(".related-grid");
+  const grid = document.querySelector(".related-grid, .all-extensions .related-grid");
   if (!grid) return;
-
   const cards = Array.from(grid.children);
   if (cards.length === 0) return;
-
   const isHome = window.location.pathname === "/" || window.location.pathname.endsWith("/index.html");
-
   for (let i = cards.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [cards[i], cards[j]] = [cards[j], cards[i]];
   }
-
+  grid.innerHTML = "";
   if (isHome) {
-    cards.forEach(c => c.style.display = "flex");
+    cards.slice(0, 9).forEach(c => {
+      c.style.display = "flex";
+      grid.appendChild(c);
+    });
   } else {
-    cards.forEach(c => c.style.display = "none");
-    cards.slice(0, 3).forEach(c => c.style.display = "flex");
+    cards.slice(0, 3).forEach(c => {
+      c.style.display = "flex";
+      grid.appendChild(c);
+    });
   }
 });
 
