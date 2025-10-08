@@ -24,30 +24,27 @@ og_image: "/assets/page-design/page-cards/raffle.webp"
 
 <!----    TITLE   ------------------------------------------------------------------------------------------------------------------------------>
 <div class="extension-title">
-    <div class="extension-title-text-box">
-        <h1>RAFFLE</h1>
-        <p>
-        Let's face it, <span style="font-family: 'Segoe Script', sans-serif; color: #ffd95e; font-weight: bold">GIVEAWAY</span> just sounds wrong, <span style="font-family: 'Segoe Script', sans-serif; color: #ffd95e; font-weight: bold">RAFFLE</span> is a so much cooler word.
-        <br><br>
-        Anyway, create a raffle for your viewers and choose the entry for each pleb category yourself. Don't want your mods to participate at all? Want your T3 subs to be able to get 10 times more entry tickets? No entries for non-followers? All that and more covered with this beauty of a raffle extension!
-            <br><br>
-            It also allows to use global variables to integrate things like watchtime or points as an entry barrier or price.
-        <br><span style="font-size: 3rem">RIGGED</span>
-        </p>
+  <div class="extension-title-text-box">
+    <h1>{{ page.title }}</h1>
+    <p>
+      Let's face it, <span style="font-family: 'Segoe Script', sans-serif; color: #ffd95e; font-weight: bold">GIVEAWAY</span> just sounds wrong, <span style="font-family: 'Segoe Script', sans-serif; color: #ffd95e; font-weight: bold">RAFFLE</span> is a so much cooler word.
+      <br><br>
+      Anyway, create a raffle for your viewers and choose the entry for each pleb category yourself. Don't want your mods to participate at all? Want your T3 subs to be able to get 10 times more entry tickets? No entries for non-followers? All that and more covered with this beauty of a raffle extension!
+      <br><br>
+      It also allows to use global variables to integrate things like watchtime or points as an entry barrier or price.
+      <br><span style="font-size: 3rem">RIGGED</span>
+    </p>
+  </div>
+
+  {% if page.og_image %}
+    <div class="extension-cover-wrapper">
+      <img src="{{ page.og_image | relative_url }}" alt="{{ page.title }} Cover Image" class="extension-cover-image">
     </div>
-    <div class="carousel-2">
-  <div>
-      <img src="{{ site.baseurl }}/assets/covers/raffle-1.webp" class="carousel-image">
-  </div>
-  <div>
-      <img src="{{ site.baseurl }}/assets/covers/raffle-2.webp" class="carousel-image">
-    
-  </div>
-         <div>
-      <img src="{{ site.baseurl }}/assets/covers/raffle-3.webp" class="carousel-image">
-    
-  </div>
-</div>
+  {% else %}
+    <div class="extension-cover-wrapper">
+      <img src="{{ '/assets/page-design/website-card.webp' | relative_url }}" alt="{{ page.title }} Cover Image" class="extension-cover-image">
+    </div>
+  {% endif %}
 </div>
 
 <!----    ENTIRE ACCORDION THINGY WHATEVER IT'S CALLED    ------------------------------------------------------------------------------------------------------------------------------>
