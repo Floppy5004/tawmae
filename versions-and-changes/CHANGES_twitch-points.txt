@@ -1,2 +1,2 @@
-• Added: Adjustable win chance for gambling
-• Fixed: Double reward points for Gift Bombs 
+++ DLL UPDATE REQUIRED (1.4.8) ++
+• Fixed MIU & DeepBot imports
