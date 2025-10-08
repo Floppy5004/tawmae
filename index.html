@@ -45,10 +45,9 @@ keywords:
     {% assign utility_pages = site.html_pages | where_exp: "p", "p.path contains 'utility/'" %}
     {% assign obs_pages = site.html_pages | where_exp: "p", "p.path contains 'obs-widgets/'" %}
     {% assign chat_pages = site.html_pages | where_exp: "p", "p.path contains 'chat-games/'" %}
-    {% assign all_extensions = utility_pages | concat: obs_pages | concat: chat_pages %}
-    {% assign shuffled = all_extensions | sample: all_extensions.size %}
+    {% assign all_extensions = utility_pages | concat: obs_pages | concat: chat_pages | shuffle %}
 
-    {% for ext in shuffled %}
+    {% for ext in all_extensions %}
       <a href="{{ ext.url | relative_url }}" class="related-card" target="_blank" rel="noopener noreferrer">
         <img src="{{ ext.og_image | default: '/assets/page-design/website-card.webp' | relative_url }}" alt="{{ ext.title }} Streamer.bot Extension">
         <div class="related-card-text">
@@ -59,3 +58,4 @@ keywords:
     {% endfor %}
   </div>
 </section>
+
