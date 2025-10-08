@@ -46,19 +46,24 @@
     <!--------------------->
     <!--------------------->
     <!--------------------->
-    <link rel="canonical" href="{{ page.url | replace:'index.html','' | absolute_url }}">
-    <!--------------------->
-    <meta property="og:title" content="{{ page.title | default: 'tawmae' }}">
-    <meta property="og:description" content="{{ page.description | default: 'A collection of Streamer.bot extensions for Twitch and OBS.' }}">
-    <meta name="keywords" content="{{ page.keywords | default: 'Streamerbot, Streaming, Twitch, OBS, Widgets, Streamer.bot' }}">
-    <meta property="og:image" content="{{ page.og_image | default: '/assets/page-design/website-card.webp' | absolute_url }}">
-    <meta property="og:url" content="{{ site.url }}{{ page.url }}">
-    <meta property="og:type" content="website">
-    <!--------------------->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="{{ page.title | default: 'tawmae' }}">
-    <meta name="twitter:image" content="{{ page.og_image | default: '/assets/page-design/website-card.webp' | absolute_url }}">
-    <!--------------------->
+<!------------------------------------------>
+<meta name="description" content="{{ page.description | default: 'A collection of Streamer.bot extensions, Twitch utilities, and OBS widgets by tawmae.' }}">
+<meta name="keywords" content="{% if page.keywords %}{{ page.keywords | join: ', ' }}{% else %}Streamer.bot, Streamerbot, Twitch, OBS, Widgets, tawmae{% endif %}">
+<link rel="canonical" href="{{ page.url | replace:'index.html','' | absolute_url }}">
+
+<meta property="og:title" content="{{ page.title | default: 'tawmae' }}">
+<meta property="og:description" content="{{ page.description | default: 'A collection of Streamer.bot extensions, Twitch utilities, and OBS widgets by tawmae.' }}">
+<meta property="og:type" content="website">
+<meta property="og:url" content="{{ site.url }}{{ page.url }}">
+<meta property="og:image" content="{{ page.og_image | default: '/assets/page-design/website-card.webp' | absolute_url }}">
+<meta property="og:site_name" content="tawmae">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ page.title | default: 'tawmae' }}">
+<meta name="twitter:description" content="{{ page.description | default: 'Streamer.bot extensions, Twitch utilities, and OBS widgets.' }}">
+<meta name="twitter:image" content="{{ page.og_image | default: '/assets/page-design/website-card.webp' | absolute_url }}">
+<!----------------------------------------->
+
     
 </head>
 
