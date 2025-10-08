@@ -558,6 +558,7 @@
       gap: 16px;
       width: 90%;
       max-width: 1100px;
+      margin-top: 50px;
     }
 
     .noscript-close {
@@ -572,8 +573,13 @@
     }
 
     #close-noscript:checked + .noscript-box {
-      display: none;
-    }
+  animation: fadeOut 0.3s ease forwards;
+}
+
+ @keyframes fadeOut {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(-10px); }
+}
 
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(-10px); }
