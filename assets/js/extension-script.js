@@ -177,3 +177,20 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 });
 
+
+// ====================================================================================================================
+document.addEventListener("DOMContentLoaded", () => {
+  const grid = document.querySelector(".related-grid");
+  if (!grid) return;
+
+  const cards = Array.from(grid.children);
+  if (cards.length <= 3) return;
+
+  for (let i = cards.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [cards[i], cards[j]] = [cards[j], cards[i]];
+  }
+
+  grid.innerHTML = "";
+  cards.slice(0, 3).forEach(card => grid.appendChild(card));
+})
