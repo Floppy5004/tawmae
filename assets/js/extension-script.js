@@ -191,6 +191,6 @@ document.addEventListener("DOMContentLoaded", () => {
     [cards[i], cards[j]] = [cards[j], cards[i]];
   }
 
-  grid.innerHTML = "";
-  cards.slice(0, 3).forEach(card => grid.appendChild(card));
-})
+  cards.forEach(c => c.style.display = "none");
+  cards.slice(0, 3).forEach(c => c.style.display = "flex");
+});
