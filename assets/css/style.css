@@ -714,15 +714,6 @@ header {
   gap: 24px;
 }
 
-.all-extensions .related-grid > a:nth-child(3n)::after {
-  content: "";
-  display: block;
-  grid-column: 1 / -1;
-  height: 1px;
-  background: rgba(255, 255, 255, 0.1);
-  margin: 24px 0;
-}
-
 
 
 @media (min-width: 1200px) {
