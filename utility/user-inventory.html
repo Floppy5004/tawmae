@@ -25,49 +25,32 @@ og_image: "/assets/page-design/page-cards/user-inventory.webp"
 
 <!----    TITLE   ------------------------------------------------------------------------------------------------------------------------------>
 <div class="extension-title">
-    <div class="extension-title-text-box">
-        <h1>USER INVENTORY</h1>
-        <p>Satisfy the desire to COLLECT and LOOT!
-            <br><br>
-            • Create custom items with custom item effects
-          <br>
-            • Create loot pools and allow for random drops with different rarities
-          <br>
-            • Add and remove items from user's inventories
-            <br>
-          • Have users trade items between one another
-          <br>
-          • Buy and sell items in combination with a currency system
-          <br>
-            • NEW: Create crafting recipes and craft items
-          <br>
-          • AND MORE! Check it out already!
-            <br><span style="font-size: 3rem">Pog Clap</span>
-        </p>
+  <div class="extension-title-text-box">
+    <h1>{{ page.title }}</h1>
+    <p>
+      Satisfy the desire to COLLECT and LOOT!<br><br>
+      • Create custom items with custom item effects<br>
+      • Create loot pools and allow for random drops with different rarities<br>
+      • Add and remove items from user's inventories<br>
+      • Have users trade items between one another<br>
+      • Buy and sell items in combination with a currency system<br>
+      • NEW: Create crafting recipes and craft items<br>
+      • AND MORE! Check it out already!<br>
+      <span style="font-size: 3rem">Pog Clap</span>
+    </p>
+  </div>
+
+  {% if page.og_image %}
+    <div class="extension-cover-wrapper">
+      <img src="{{ page.og_image | relative_url }}" alt="{{ page.title }} Cover Image" class="extension-cover-image">
     </div>
-    <div class="carousel-2">
-  <div>
-      <img src="{{ site.baseurl }}/assets/covers/user-inventory-1.webp" class="carousel-image">
-  </div>
-      <div>
-      <img src="{{ site.baseurl }}/assets/covers/user-inventory-2.webp" class="carousel-image">
-    
-  </div>
-  <div>
-      <img src="{{ site.baseurl }}/assets/covers/user-inventory-3.webp" class="carousel-image">
-    
-  </div>
-      <div>
-      <img src="{{ site.baseurl }}/assets/covers/user-inventory-4.webp" class="carousel-image">
-    
-  </div>
-  <div>
-      <img src="{{ site.baseurl }}/assets/covers/user-inventory-5.webp" class="carousel-image">
-    
-  </div>
-      
+  {% else %}
+    <div class="extension-cover-wrapper">
+      <img src="{{ '/assets/page-design/website-card.webp' | relative_url }}" alt="{{ page.title }} Cover Image" class="extension-cover-image">
+    </div>
+  {% endif %}
 </div>
-</div>
+
 
 <!----    ENTIRE ACCORDION THINGY WHATEVER IT'S CALLED    ------------------------------------------------------------------------------------------------------------------------------>
 
