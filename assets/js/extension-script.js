@@ -180,26 +180,43 @@ document.addEventListener("DOMContentLoaded", function() {
 
 // ====================================================================================================================
 document.addEventListener("DOMContentLoaded", () => {
-  const grid = document.querySelector(".related-grid, .all-extensions .related-grid");
+  const grid = document.querySelector(".all-extensions .related-grid");
   if (!grid) return;
-  const cards = Array.from(grid.children);
-  if (cards.length === 0) return;
-  const isHome = window.location.pathname === "/" || window.location.pathname.endsWith("/index.html");
-  for (let i = cards.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [cards[i], cards[j]] = [cards[j], cards[i]];
+
+  function shuffleCardsInGrid() {
+    const cards = Array.from(grid.querySelectorAll("a.related-card"));
+    for (let i = cards.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [cards[i], cards[j]] = [cards[j], cards[i]];
+    }
+    cards.forEach(card => grid.appendChild(card));
   }
-  grid.innerHTML = "";
+
+  function insertRowDividers() {
+    grid.querySelectorAll(".row-divider").forEach(el => el.remove());
+    const cards = Array.from(grid.querySelectorAll("a.related-card"));
+    const cols = getComputedStyle(grid).gridTemplateColumns.split(" ").length;
+    if (!cols || cols < 1) return;
+
+    for (let i = cols; i < cards.length; i += cols) {
+      const hr = document.createElement("hr");
+      hr.className = "section-divider row-divider";
+      grid.insertBefore(hr, cards[i]);
+    }
+  }
+
+  const isHome = location.pathname === "/" || location.pathname.endsWith("/index.html");
   if (isHome) {
-    cards.slice(0, 9).forEach(c => {
-      c.style.display = "flex";
-      grid.appendChild(c);
-    });
-  } else {
-    cards.slice(0, 3).forEach(c => {
-      c.style.display = "flex";
-      grid.appendChild(c);
-    });
+    shuffleCardsInGrid();
   }
+
+  insertRowDividers();
+
+  let resizeTO;
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTO);
+    resizeTO = setTimeout(insertRowDividers, 120);
+  });
 });
+
 
