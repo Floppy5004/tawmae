@@ -206,4 +206,19 @@ document.addEventListener("DOMContentLoaded", function() {
 // ====================================================================================================================
 
 
+document.addEventListener("DOMContentLoaded", function () {
+  const coverContainer = document.getElementById("extension-cover");
+  if (!coverContainer) return;
+
+  const ogImage = document.querySelector('meta[property="og:image"]')?.getAttribute("content") 
+    || document.querySelector('meta[name="og_image"]')?.getAttribute("content");
+
+  if (ogImage) {
+    const img = document.createElement("img");
+    img.src = ogImage;
+    img.alt = "Extension cover";
+    img.className = "extension-cover-image";
+    coverContainer.appendChild(img);
+  }
+});
 
