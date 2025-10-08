@@ -1,126 +1,61 @@
 ---
 layout: default
-title: "START | tawmae"
-description: "A free-to-use collection of Streamer.bot extensions for Twitch"
+title: "tawmae | Streamer.bot Extensions"
+description: "A growing collection of Streamer.bot extensions, overlays, and tools for Twitch to elevate your stream."
+keywords:
+  - Streamer.bot
+  - Streamerbot
+  - Streamer.bot Extension
+  - Streamerbot Extension
+  - Streamer.bot Extensions
+  - Streamerbot Extensions
+  - SB Extension
+  - SB Extensions
+  - Twitch
+  - tawmae
+  - OBS
+  - OBS Overlays
+  - OBS Widgets
+  - Twitch Widgets
 ---
-<!----    TITLE    ------------------------------------------------------------------------------------------------------------------------------>
-<h1><span style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 12px; padding: 24px; color: white; backdrop-filter: blur(10px); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); box-sizing: border-box; margin-bottom: 10px">FEATURED</span></h1>
-<div class="rotator-wrapper">
-    <!--------------------------------------------->
-<div class="product-card-container">
 
+<link rel="stylesheet" href="{{ site.baseurl }}/assets/css/extension-page.css">
 
-    <a href="{{ site.baseurl }}/utility/spotify-and-sb.html" target="_blank" class="product-card-link">
-        <div class="product-card" data-tippy-content="catjam">
-            <img src="{{ site.baseurl }}/assets/cards-images/spotify-and-sb.webp" alt="">
-            <div class="product-info">
-                <h3>SPOTIFY & SB <span class="iconify title-icon" data-icon="mdi:star-box" style="vertical-align: middle; color: #FFD700" ></span></h3>
-                <p>Songrequests Poggers</p>
-            </div>
+<section class="home-intro">
+  <div class="intro-text">
+    <h1>Hello there!</h1>
+    <p>
+  This is a free collection of custom-built <strong>Streamer.bot extensions</strong>.  
+  You'll find a mix of <strong>OBS overlays</strong>, useful <strong>utilities</strong>, smart <strong>integrations</strong>, and interactive <strong>chat games</strong> — all designed to make your Twitch stream stand out.<br><br>
+  Looking for something custom that nobody else has? Or do you have a project in mind that nobody has created yet? Check out the <a href="{{ site.baseurl }}/commissions.html" style="color:#ffd95e; text-decoration:underline;">Commissions</a> page to request a tailored Streamer.bot project.
+</p>
+
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<section class="all-extensions">
+  <h2 class="related-title">
+    <span class="iconify" data-icon="material-symbols:apps"></span>
+    All Extensions
+  </h2>
+
+  <div class="related-grid">
+    {% assign utility_pages = site.html_pages | where_exp: "p", "p.path contains 'utility/'" %}
+    {% assign obs_pages = site.html_pages | where_exp: "p", "p.path contains 'obs-widgets/'" %}
+    {% assign chat_pages = site.html_pages | where_exp: "p", "p.path contains 'chat-games/'" %}
+    {% assign all_extensions = utility_pages | concat: obs_pages | concat: chat_pages %}
+    {% assign shuffled = all_extensions | sample: all_extensions.size %}
+
+    {% for ext in shuffled %}
+      <a href="{{ ext.url | relative_url }}" class="related-card" target="_blank" rel="noopener noreferrer">
+        <img src="{{ ext.og_image | default: '/assets/page-design/website-card.webp' | relative_url }}" alt="{{ ext.title }} Streamer.bot Extension">
+        <div class="related-card-text">
+          <h3>{{ ext.title }}</h3>
+          <p>{{ ext.description | truncate: 160 }}</p>
         </div>
-    </a>
-
-
-    
-
-    
-
-    <a href="{{ site.baseurl }}/utility/mod-tools.html" target="_blank" class="product-card-link">
-        <div class="product-card" data-tippy-content="Mods can end your stream now D:">
-            <img src="{{ site.baseurl }}/assets/cards-images/mod-tools.webp" alt="">
-            <div class="product-info">
-                <h3>MOD TOOLS <span class="iconify title-icon" data-icon="mdi:star-box" style="vertical-align: middle; color: #FFD700" ></span></h3>
-                <p>Bye bye, spam bots</p>
-            </div>
-        </div>
-    </a>
-
-    <a href="{{ site.baseurl }}/utility/twitch-points.html" target="_blank" class="product-card-link">
-        <div class="product-card" data-tippy-content="gamble all">
-            <img src="{{ site.baseurl }}/assets/cards-images/twitch-points.webp" alt="">
-            <div class="product-info">
-                <h3>TWITCH POINTS <span class="iconify title-icon" data-icon="mdi:star-box" style="vertical-align: middle; color: #FFD700" ></span></h3>
-                <p>!gamble all</p>
-            </div>
-        </div>
-    </a>
-
-    <a href="{{ site.baseurl }}/obs-widgets/twitch-goalbar.html" target="_blank" class="product-card-link">
-        <div class="product-card" data-tippy-content="It goals.. and it bars..">
-            <img src="{{ site.baseurl }}/assets/cards-images/twitch-goalbar.webp" alt="">
-            <div class="product-info">
-                <h3>TWITCH GOALBAR <span class="iconify title-icon" data-icon="material-symbols:fiber-new" style="vertical-align: middle; color: #00ffff" ></span></h3>
-                <p>It goals.. and it bars..</p>
-            </div>
-        </div>
-    </a>
-
-    <a href="{{ site.baseurl }}/utility/user-inventory.html" target="_blank" class="product-card-link">
-        <div class="product-card" data-tippy-content="looten und leveln (german insider)">
-            <img src="{{ site.baseurl }}/assets/cards-images/user-inventory.webp">
-            <div class="product-info">
-                <h3>USER INVENTORY <span class="iconify title-icon" data-icon="mdi:star-box" style="vertical-align: middle; color: #FFD700"></span></h3>
-                <p>LOOT GOBLINS UNITE!</p>
-            </div>
-        </div>
-    </a>
-
-    <a href="{{ site.baseurl }}/utility/twitch-watchtime.html" target="_blank" class="product-card-link">
-        <div class="product-card" data-tippy-content="Oh wowie!">
-            <img src="{{ site.baseurl }}/assets/cards-images/twitch-watchtime.webp" alt="Dynamic Timers">
-            <div class="product-info">
-                <h3>TWITCH WATCHTIME <span class="iconify title-icon" data-icon="mdi:star-box" style="vertical-align: middle; color: #FFD700"></span></h3>
-                <p>clock-o</p>
-            </div>
-        </div>
-    </a>
-
-
-    <a href="{{ site.baseurl }}/utility/bluesky-and-sb.html" target="_blank" class="product-card-link">
-        <div class="product-card" data-tippy-content="euck flon">
-            <img src="{{ site.baseurl }}/assets/cards-images/bluesky-and-sb.webp" alt="">
-            <div class="product-info">
-                <h3>BLUESKY & SB <span class="iconify title-icon" data-icon="mdi:star-box" style="vertical-align: middle; color: #FFD700" ></span></h3>
-                <p>RIP Twitter (2006 - 2022)</p>
-            </div>
-        </div>
-    </a>
-
-    <a href="{{ site.baseurl }}/chat-games/movie-and-tv-show-quiz.html" target="_blank" class="product-card-link">
-        <div class="product-card" data-tippy-content="erm, sorry, i don't akshually watch movies">
-            <img src="{{ site.baseurl }}/assets/cards-images/movie-and-tv-show-quiz.webp" alt="">
-            <div class="product-info">
-                <h3>MOVIE & TV SHOW QUIZ <span class="iconify title-icon" data-icon="mdi:star-box" style="vertical-align: middle; color: #FFD700" ></span></h3>
-                <p>Omg, I know that one</p>
-            </div>
-        </div>
-    </a>
-
-
-    
-  
-
-       
-
-
-       
-    
-
-   
-</div>
-
-
-
-
-<!--------------------------------------------->
-
-<div class="section-divider"></div>
-
-
-
-
-
-
-
-
-
+      </a>
+    {% endfor %}
+  </div>
+</section>
