@@ -25,31 +25,27 @@ og_image: "/assets/page-design/page-cards/hot-words.webp"
 <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/extension-page.css">
 <!----    TITLE    ------------------------------------------------------------------------------------------------------------------------------>
 <div class="extension-title">
-    <div class="extension-title-text-box">
-        <h1>HOT WORDS</h1>
-        <p>Too lazy to start a poll and just need a quick overview of what your massive chat thinks? All run locally?!
-            No worries, Hot Words' got you covered and displays the most used words in a ranked leaderboard. <br><span
-                style="font-size: 3rem">thisIsFine</span></p>
+  <div class="extension-title-text-box">
+    <h1>{{ page.title }}</h1>
+    <p>
+      Too lazy to start a poll and just need a quick overview of what your chat thinks — all running locally?  
+      Hot Words has you covered, showing the most used words in a ranked leaderboard.<br>
+      <span style="font-size: 3rem">thisIsFine</span>
+    </p>
+  </div>
+
+  {% if page.og_image %}
+    <div class="extension-cover-wrapper">
+      <img src="{{ page.og_image | relative_url }}" alt="{{ page.title }} Cover Image" class="extension-cover-image">
     </div>
-    <div class="carousel-2">
-  <div>
-      <img src="{{ site.baseurl }}/assets/covers/hot-words.webp" class="carousel-image">
-  </div>
-  <div>
-      <img src="{{ site.baseurl }}/assets/covers/hot-words-2.webp" class="carousel-image">
-    
-  </div>
-  <div>
-      <img src="{{ site.baseurl }}/assets/covers/hot-words-3.webp" class="carousel-image">
-    
-  </div>
-  <div>
-      <img src="{{ site.baseurl }}/assets/covers/hot-words-4.webp" class="carousel-image">
-    
-  </div>
-</div>
+  {% else %}
+    <div class="extension-cover-wrapper">
+      <img src="{{ '/assets/page-design/website-card.webp' | relative_url }}" alt="{{ page.title }} Cover Image" class="extension-cover-image">
+    </div>
+  {% endif %}
 </div>
 
+<!---------------------------------------------------------------------------------------------------------------------------------->
 <div class="accordion">
     <div class="accordion-divider"></div>
     <!----    BROWSER SOURCE URL    ------------------------------------------------------------------------------------------------------------------------------>
