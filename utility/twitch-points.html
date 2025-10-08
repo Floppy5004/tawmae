@@ -44,55 +44,32 @@ og_image: "/assets/page-design/page-cards/twitch-points.webp"
 
 <!----    TITLE   ------------------------------------------------------------------------------------------------------------------------------>
 <div class="extension-title">
-    <div class="extension-title-text-box">
-        <h1>TWITCH POINTS</h1>
-        <p>The ideal Streamer.bot loyalty points integration for all non-affiliates and gamba-addicts!
-            <br><br>
-            • Points for watchtime and special events
-          <br>
-            • Extremely customizable
-          <br>
-            • Integrated features like gamble, rumble, duels, scratch cards and  tax collection
-            <br>
-          • Integrated leaderboard
-          
-            <br>
-          • One-click imports for Streamelements, Mix It Up, Firebot, Wizebot and Streamlabs
-            <br>
-          • AND MORE! Check it out already!
-            <br><span style="font-size: 3rem">Pog Clap</span>
-        </p>
+  <div class="extension-title-text-box">
+    <h1>{{ page.title }}</h1>
+    <p>
+      The ideal Streamer.bot loyalty points integration for all non-affiliates and gamba-addicts!
+      <br><br>
+      • Points for watchtime and special events<br>
+      • Extremely customizable<br>
+      • Integrated features like gamble, rumble, duels, scratch cards and tax collection<br>
+      • Integrated leaderboard<br>
+      • One-click imports for Streamelements, Mix It Up, Firebot, Wizebot and Streamlabs<br>
+      • AND MORE! Check it out already!<br>
+      <span style="font-size: 3rem">Pog Clap</span>
+    </p>
+  </div>
+
+  {% if page.og_image %}
+    <div class="extension-cover-wrapper">
+      <img src="{{ page.og_image | relative_url }}" alt="{{ page.title }} Cover Image" class="extension-cover-image">
     </div>
-    <div class="carousel-2">
-  <div>
-      <img src="{{ site.baseurl }}/assets/covers/twitch-points-0.webp" class="carousel-image">
-  </div>
-      <div>
-      <img src="{{ site.baseurl }}/assets/covers/twitch-points-4.webp" class="carousel-image">
-    
-  </div>
-  <div>
-      <img src="{{ site.baseurl }}/assets/covers/twitch-points-1.webp" class="carousel-image">
-    
-  </div>
-      <div>
-      <img src="{{ site.baseurl }}/assets/covers/twitch-points-5.webp" class="carousel-image">
-    
-  </div>
-  <div>
-      <img src="{{ site.baseurl }}/assets/covers/twitch-points-2.webp" class="carousel-image">
-    
-  </div>
-      <div>
-      <img src="{{ site.baseurl }}/assets/covers/twitch-points-6.webp" class="carousel-image">
-    
-  </div>
-  <div>
-      <img src="{{ site.baseurl }}/assets/covers/twitch-points-3.webp" class="carousel-image">
-    
-  </div>
+  {% else %}
+    <div class="extension-cover-wrapper">
+      <img src="{{ '/assets/page-design/website-card.webp' | relative_url }}" alt="{{ page.title }} Cover Image" class="extension-cover-image">
+    </div>
+  {% endif %}
 </div>
-</div>
+
 
 <!----    ENTIRE ACCORDION THINGY WHATEVER IT'S CALLED    ------------------------------------------------------------------------------------------------------------------------------>
 
