@@ -23,36 +23,26 @@ og_image: "/assets/page-design/page-cards/user-birthdays.webp"
 <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/extension-page.css">
 <!----    TITLE   ------------------------------------------------------------------------------------------------------------------------------>
 <div class="extension-title">
-    <div class="extension-title-text-box">
-        <h1>USER BIRTHDAYS</h1>
-        <p>
-            Never ever get into the situation of forgetting someone's birthday again! Have your viewers add their
-            birthday (or let your mods add them) and the bot will automatically wish happy birthday once they join the
-            chat.
-            <br>
-            <br>
-            And no worries if you didn't stream on their birthday – it works for belated birthday wishes too!
-            <br>
-            <span style="font-size: 3rem">catBirthday</span>
-        </p>
+  <div class="extension-title-text-box">
+    <h1>{{ page.title }}</h1>
+    <p>
+      Never ever get into the situation of forgetting someone's birthday again! Have your viewers add their
+      birthday (or let your mods add them) and the bot will automatically wish happy birthday once they join the
+      chat.<br><br>
+      And no worries if you didn't stream on their birthday – it works for belated birthday wishes too!
+      <br><span style="font-size: 3rem">catBirthday</span>
+    </p>
+  </div>
+
+  {% if page.og_image %}
+    <div class="extension-cover-wrapper">
+      <img src="{{ page.og_image | relative_url }}" alt="{{ page.title }} Cover Image" class="extension-cover-image">
     </div>
-    <div class="carousel-2">
-  <div>
-      <img src="{{ site.baseurl }}/assets/covers/user-birthdays.webp" class="carousel-image">
-  </div>
-  <div>
-      <img src="{{ site.baseurl }}/assets/covers/user-birthdays-2.webp" class="carousel-image">
-    
-  </div>
-  <div>
-      <img src="{{ site.baseurl }}/assets/covers/user-birthdays-3.webp" class="carousel-image">
-    
-  </div>
-  <div>
-      <img src="{{ site.baseurl }}/assets/covers/user-birthdays-4.webp" class="carousel-image">
-    
-  </div>
-</div>
+  {% else %}
+    <div class="extension-cover-wrapper">
+      <img src="{{ '/assets/page-design/website-card.webp' | relative_url }}" alt="{{ page.title }} Cover Image" class="extension-cover-image">
+    </div>
+  {% endif %}
 </div>
 
 <!----    ENTIRE ACCORDION THINGY WHATEVER IT'S CALLED    ------------------------------------------------------------------------------------------------------------------------------>
