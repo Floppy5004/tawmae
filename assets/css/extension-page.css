@@ -101,6 +101,16 @@ body {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
+.accordion-title {
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin: 0;
+  padding: 0;
+  color: #fff;
+  display: inline-block;
+}
+
 .accordion-header {
   display: flex;
   justify-content: flex-start;
