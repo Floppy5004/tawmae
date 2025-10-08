@@ -27,30 +27,26 @@ og_image: "/assets/page-design/page-cards/ad-notification.webp"
 <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/extension-page.css">
 <!----    TITLE    ------------------------------------------------------------------------------------------------------------------------------>
 <div class="extension-title">
-    <div class="extension-title-text-box">
-        <h1>AD NOTIFICATION</h1>
-        <p>An OBS widget for Twitch that notifies both you and your viewers when ads are starting and for how long they last.<br><br>Sucks to be a non-sub, huh? <br><span style="font-size: 3rem">pepeSmoke</span>
-        </p>
+  <div class="extension-title-text-box">
+    <h1>{{ page.title }}</h1>
+    <p>
+      An OBS widget for Twitch that notifies both you and your viewers when ads are starting and for how long they last.<br><br>
+      Sucks to be a non-sub, huh?<br>
+      <span style="font-size: 3rem">pepeSmoke</span>
+    </p>
+  </div>
+
+  {% if page.og_image %}
+    <div class="extension-cover-wrapper">
+      <img src="{{ page.og_image | relative_url }}" alt="{{ page.title }} Cover Image" class="extension-cover-image">
     </div>
-
-    <div class="carousel-2">
-  <div>
-      <img src="{{ site.baseurl }}/assets/covers/ad-notification.webp" class="carousel-image">
-  </div>
-  <div>
-      <img src="{{ site.baseurl }}/assets/covers/ad-notification-3.webp" class="carousel-image">
-    
-  </div>
-  <div>
-      <img src="{{ site.baseurl }}/assets/covers/ad-notification-4.webp" class="carousel-image">
-    
-  </div>
+  {% else %}
+    <div class="extension-cover-wrapper">
+      <img src="{{ '/assets/page-design/website-card.webp' | relative_url }}" alt="{{ page.title }} Cover Image" class="extension-cover-image">
+    </div>
+  {% endif %}
 </div>
 
-
-
-
-</div>
 
 <div class="accordion">
     <div class="accordion-divider"></div>
