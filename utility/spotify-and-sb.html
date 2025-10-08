@@ -32,40 +32,27 @@ og_image: "/assets/page-design/page-cards/spotify-and-sb.webp"
 
 <!----    TITLE   ------------------------------------------------------------------------------------------------------------------------------>
 <div class="extension-title">
-    <div class="extension-title-text-box">
-        <h1>SPOTIFY & SB</h1>
-        <p>A full Spotify integration in Streamer.bot! <br><br> Your viewers can finally request the dumbest songs
-            possible Pog But at least your mods can also skip songs or lower the volume in case you forgot your audio
-            engineering degree at work... <br><span style="font-size: 3rem">catJAM _EDM</span>
+  <div class="extension-title-text-box">
+    <h1>{{ page.title }}</h1>
+    <p>
+      A full Spotify integration in Streamer.bot! <br><br> Your viewers can finally request the dumbest songs possible Pog But at least your mods can also skip songs or lower the volume in case you forgot your audio engineering degree at work... 
+      <br><span style="font-size: 3rem">catJAM _EDM</span>
+      <br><br>
+      <span style="font-size: 0.7rem"><span style="color: lightgreen; font-size: 0.7rem">Note:</span> This extension requires <span style="font-weight: bold; color: #ffd95e;">Spotify Premium</span></span>
+    </p>
+  </div>
 
-          
-
-
-            <br>
-        
-        <br>
-            <span style="font-size: 0.7rem"><span style=" color: lightgreen; font-size: 0.7rem">Note:</span> This extension requires <span
-                    style="font-weight: bold; color: #ffd95e;">Spotify Premium</span></span>
-        </p>
+  {% if page.og_image %}
+    <div class="extension-cover-wrapper">
+      <img src="{{ page.og_image | relative_url }}" alt="{{ page.title }} Cover Image" class="extension-cover-image">
     </div>
-    <div class="carousel-2">
-  <div>
-      <img src="{{ site.baseurl }}/assets/covers/spotify-and-sb-1.gif" class="carousel-image">
-  </div>
-  <div>
-      <img src="{{ site.baseurl }}/assets/covers/spotify-and-sb-2.gif" class="carousel-image">
-    
-  </div>
-  <div>
-      <img src="{{ site.baseurl }}/assets/covers/spotify-and-sb-3.gif" class="carousel-image">
-    
-  </div>
-  <div>
-      <img src="{{ site.baseurl }}/assets/settings/spotify-and-sb/spotify-and-sb-overlay-styles.png" class="carousel-image">
-    
-  </div>
+  {% else %}
+    <div class="extension-cover-wrapper">
+      <img src="{{ '/assets/page-design/website-card.webp' | relative_url }}" alt="{{ page.title }} Cover Image" class="extension-cover-image">
+    </div>
+  {% endif %}
 </div>
-</div>
+
 
 <!----    ENTIRE ACCORDION THINGY WHATEVER IT'S CALLED    ------------------------------------------------------------------------------------------------------------------------------>
 
