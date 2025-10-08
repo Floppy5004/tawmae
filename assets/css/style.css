@@ -707,3 +707,22 @@ header {
 
 
 }
+
+.all-extensions .related-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)) !important;
+  max-width: 1100px;
+  margin: 0 auto;
+  gap: 24px;
+}
+
+@media (min-width: 1200px) {
+  .all-extensions .related-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
+
+.all-extensions .related-card {
+  display: flex !important;
+  flex-direction: column;
+}
