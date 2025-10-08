@@ -1,1 +1,2 @@
-• Added a new import method to import from Streamlabs Desktop via CSV file
+++ REQUIRES DLL UPDATE (1.4.8) ++
+• Fixed Deep Bot and MIU import
