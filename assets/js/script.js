@@ -202,3 +202,61 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 
+// ====================================================================================================================
+// ====================================================================================================================
+
+document.addEventListener("DOMContentLoaded", async function () {
+  const carousel = document.getElementById("auto-carousel");
+  if (!carousel) return;
+
+  const currentFile = window.location.pathname.split("/").pop().replace(".html", "");
+  const basePath = `/assets/covers/${currentFile}`;
+  const extensions = [".webp", ".png", ".jpg", ".jpeg"];
+  const slides = [];
+
+  for (let i = 1; i <= 10; i++) {
+    for (const ext of extensions) {
+      const url = `${basePath}${i === 1 ? "" : `-${i}`}${ext}`;
+      try {
+        const res = await fetch(url, { method: "HEAD" });
+        if (res.ok) slides.push(url);
+      } catch {}
+    }
+  }
+
+  if (!slides.length) {
+    for (const ext of extensions) {
+      const url = `${basePath}${ext}`;
+      try {
+        const res = await fetch(url, { method: "HEAD" });
+        if (res.ok) slides.push(url);
+      } catch {}
+    }
+  }
+
+  if (slides.length) {
+    slides.forEach(src => {
+      const div = document.createElement("div");
+      const img = document.createElement("img");
+      img.src = src;
+      img.className = "carousel-image";
+      div.appendChild(img);
+      carousel.appendChild(div);
+    });
+
+    $(carousel).slick({
+      autoplay: true,
+      autoplaySpeed: 12000,
+      speed: 700,
+      arrows: true,
+      dots: true,
+      infinite: true,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      prevArrow: '<button type="button" class="slick-prev" aria-label="Previous">&#10094;</button>',
+      nextArrow: '<button type="button" class="slick-next" aria-label="Next">&#10095;</button>'
+    });
+  }
+});
+
+
