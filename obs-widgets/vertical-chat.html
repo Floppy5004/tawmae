@@ -25,30 +25,27 @@ og_image: "/assets/page-design/page-cards/vertical-chat.webp"
 <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/extension-page.css">
 <!----    TITLE    ------------------------------------------------------------------------------------------------------------------------------>
 <div class="extension-title">
-    <div class="extension-title-text-box">
-        <h1>VERTICAL CHAT</h1>
-        <p>BRING Clap BACK Clap VERTICAL Clap CHATS! <br><br> This is a very simple but also customizable vertical chat
-            overlay you can throw into your OBS. And you can run it all locally (if you wanted to)... <br><span
-                style="font-size: 3rem">griffinTyping</span></p>
+  <div class="extension-title-text-box">
+    <h1>{{ page.title }}</h1>
+    <p>
+      BRING Clap BACK Clap VERTICAL Clap CHATS!<br><br>
+      A clean, customizable vertical chat overlay for OBS — simple to set up, easy to theme,  
+      and completely local if you want it to be.<br>
+      <span style="font-size: 3rem">griffinTyping</span>
+    </p>
+  </div>
+
+  {% if page.og_image %}
+    <div class="extension-cover-wrapper">
+      <img src="{{ page.og_image | relative_url }}" alt="{{ page.title }} Cover Image" class="extension-cover-image">
     </div>
-    <div class="carousel-2">
-  <div>
-      <img src="{{ site.baseurl }}/assets/covers/vertical-chat.webp" class="carousel-image">
-  </div>
-  <div>
-      <img src="{{ site.baseurl }}/assets/covers/vertical-chat-2.webp" class="carousel-image">
-    
-  </div>
-  <div>
-      <img src="{{ site.baseurl }}/assets/covers/vertical-chat-3.webp" class="carousel-image">
-    
-  </div>
-  <div>
-      <img src="{{ site.baseurl }}/assets/covers/vertical-chat-4.webp" class="carousel-image">
-    
-  </div>
+  {% else %}
+    <div class="extension-cover-wrapper">
+      <img src="{{ '/assets/page-design/website-card.webp' | relative_url }}" alt="{{ page.title }} Cover Image" class="extension-cover-image">
+    </div>
+  {% endif %}
 </div>
-</div>
+
 
 <div class="accordion">
     <div class="accordion-divider"></div>
