@@ -6,3 +6,8 @@ author: "tawmae"
 plugins:
   - jekyll-sitemap
   - jekyll-seo-tag
+sitemap:
+  filename: "sitemap.xml"
+  exclude:
+    - /assets/
+    - /404.html
