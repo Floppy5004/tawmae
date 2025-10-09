@@ -425,9 +425,9 @@ border: 1px solid var(--glass-border);
 
 .related-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 20px;
-  justify-content: center;
+  justify-items: center;
 }
 
 .related-card {
@@ -565,6 +565,15 @@ border: 1px solid var(--glass-border);
         margin-left: 0;
         overflow: visible;
     }
+
+    .related-grid {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+  .related-card {
+    width: 90%;
+    max-width: 400px;
+  }
 }
 
 @media (max-width: 480px) {
