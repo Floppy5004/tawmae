@@ -1,1 +1,1 @@
-• Mistyping a command will now show a suggested command if there's one that fits.
+• Fixed an isseu with best-matching not considering aliases
