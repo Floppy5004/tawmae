@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AD NOTIFICATION - v.1.1.0 - tawmae.xyz</title>
+  <title>AD NOTIFICATION - v.1.1.2 - tawmae.xyz</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/@streamerbot/client/dist/streamerbot-client.js"></script>
   <style>
@@ -16,10 +16,28 @@
       color: white;
     }
 
+    #status-indicator {
+      position: fixed;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: red;
+      color: #fff;
+      padding: 5px 12px;
+      border-radius: 6px;
+      font-size: 14px;
+      z-index: 9999;
+      transition: background 0.5s, opacity 0.5s;
+    }
+
+    .hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
     .notification-container {
       position: fixed;
       top: 20px;
-      right: -420px;
       width: auto;
       background: linear-gradient(145deg, #2a2a2a, #1e1e1e);
       color: white;
@@ -30,7 +48,6 @@
       padding: 15px 20px;
       gap: 15px;
       overflow: hidden;
-      animation: slideIn 0.6s ease-out forwards;
       zoom: 150%;
     }
 
@@ -98,7 +115,7 @@
       font-weight: 700;
     }
 
-    @keyframes slideIn {
+    @keyframes slideInRight {
       from {
         right: -420px;
         opacity: 0;
@@ -110,7 +127,7 @@
       }
     }
 
-    @keyframes slideOut {
+    @keyframes slideOutRight {
       from {
         right: 20px;
         opacity: 1;
@@ -118,6 +135,30 @@
 
       to {
         right: -420px;
+        opacity: 0;
+      }
+    }
+
+    @keyframes slideInLeft {
+      from {
+        left: -420px;
+        opacity: 0;
+      }
+
+      to {
+        left: 20px;
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideOutLeft {
+      from {
+        left: 20px;
+        opacity: 1;
+      }
+
+      to {
+        left: -420px;
         opacity: 0;
       }
     }
@@ -125,6 +166,7 @@
 </head>
 
 <body>
+  <div id="status-indicator">[TAWMAE - AD NOTIFICATION] DISCONNECTED</div>
   <div id="notification" class="notification-container">
     <div class="circle-container">
       <div class="countdown-circle" id="countdown-circle" style="--progress: 100%;">
@@ -148,15 +190,27 @@
     const address = urlParams.get("address") || "localhost";
     const port = parseInt(urlParams.get("port") || "8080", 10);
     const password = urlParams.get("password") || undefined;
+    const reverseEntry = urlParams.get("reverseEntry") === "true";
     const warningsParam = (urlParams.get("warnings") || "1")
       .split(",")
       .map(s => parseInt(s.trim(), 10))
       .filter(n => [1, 2, 3, 4, 5].includes(n));
     const warningsSet = new Set(warningsParam.length ? warningsParam : [1]);
 
+    const notification = document.getElementById("notification");
+    notification.style[reverseEntry ? "left" : "right"] = "-420px";
+
     const audioCache = new Map();
     const notificationQueue = [];
     let isNotificationActive = false;
+    let upcomingCounter = 0;
+    let lastUpcomingAt = 0;
+
+    const statusIndicator = document.getElementById("status-indicator");
+
+    function log(...args) {
+      console.log("[AD OVERLAY]", ...args);
+    }
 
     function normalizeColor(color) {
       const hexPattern = /^[0-9a-f]{6}$/i;
@@ -169,6 +223,7 @@
     document.body.style.fontFamily = font;
 
     function enqueueNotification(title, description, duration, soundUrl, iconUrl) {
+      log(`Enqueued notification: "${title}" (${duration}s)`);
       notificationQueue.push({ title, description, duration, soundUrl, iconUrl });
       if (!isNotificationActive) processQueue();
     }
@@ -193,7 +248,6 @@
 
     function showNotification(title, description, duration, soundUrl, iconUrl) {
       return new Promise((resolve) => {
-        const notification = document.getElementById("notification");
         const titleElem = document.getElementById("notification-title");
         const descriptionElem = document.getElementById("notification-description");
         const iconElem = document.getElementById("notification-icon");
@@ -205,14 +259,17 @@
         countdownValue.textContent = duration;
         iconElem.src = iconUrl || "";
         countdownCircle.style.setProperty("--progress", "100%");
-
         notification.style.display = "flex";
-        notification.style.animation = "slideIn 0.6s ease-out forwards";
+
+        const inAnim = reverseEntry ? "slideInLeft" : "slideInRight";
+        const outAnim = reverseEntry ? "slideOutLeft" : "slideOutRight";
+        notification.style.animation = `${inAnim} 0.6s ease-out forwards`;
 
         if (soundEnabled && soundUrl) {
           const audio = getAudio(soundUrl);
           audio.currentTime = 0;
           audio.play().catch(() => { });
+          log("Playing sound:", soundUrl);
         }
 
         const startTime = Date.now();
@@ -223,17 +280,15 @@
           const elapsed = currentTime - startTime;
           const remainingTime = Math.max(0, Math.ceil((endTime - currentTime) / 1000));
           const progress = Math.max(0, 1 - elapsed / (duration * 1000));
-
           countdownValue.textContent = remainingTime;
           countdownCircle.style.setProperty("--progress", `${progress * 100}%`);
-
           if (remainingTime > 0) {
             requestAnimationFrame(updateProgress);
           } else {
             countdownValue.textContent = 0;
             countdownCircle.style.setProperty("--progress", `0%`);
             setTimeout(() => {
-              notification.style.animation = "slideOut 0.6s ease-in forwards";
+              notification.style.animation = `${outAnim} 0.6s ease-in forwards`;
               setTimeout(() => {
                 notification.style.display = "none";
                 resolve();
@@ -245,9 +300,6 @@
         requestAnimationFrame(updateProgress);
       });
     }
-
-    let upcomingCounter = 0;
-    let lastUpcomingAt = 0;
 
     function deriveMinutesFromSequence() {
       const now = Date.now();
@@ -264,45 +316,66 @@
         host: address,
         port,
         password,
-        logLevel = 'verbose'
+        logLevel: "verbose",
+        onConnect: () => {
+          log("Connected to Streamer.bot");
+          statusIndicator.textContent = "[TAWMAE - AD NOTIFICATION] CONNECTED";
+          statusIndicator.style.background = "green";
+          setTimeout(() => statusIndicator.classList.add("hidden"), 2000);
+        },
+        onDisconnect: () => {
+          log("Disconnected from Streamer.bot");
+          statusIndicator.textContent = "[TAWMAE - AD NOTIFICATION] DISCONNECTED";
+          statusIndicator.style.background = "red";
+          statusIndicator.classList.remove("hidden");
+        },
+        onError: (err) => {
+          log("Error:", err);
+          statusIndicator.textContent = "[TAWMAE - AD NOTIFICATION] ERROR";
+          statusIndicator.style.background = "orange";
+          statusIndicator.classList.remove("hidden");
+        },
+        reconnect: true,
+        reconnectInterval: 5000
       });
 
-      client.on('Twitch.UpcomingAd', (evt) => {
+      client.on("Twitch.UpcomingAd", (evt) => {
         const data = evt?.data || {};
-        let minutes = typeof data.minutes === 'number' ? data.minutes : deriveMinutesFromSequence();
+        let minutes = typeof data.minutes === "number" ? data.minutes : deriveMinutesFromSequence();
         minutes = Math.min(Math.max(minutes, 1), 5);
         upcomingCounter = 5 - minutes + 1;
         lastUpcomingAt = Date.now();
-
+        log(`Received UpcomingAd (#${upcomingCounter}) => ${minutes} minute(s)`);
         if (warningsSet.has(minutes)) {
-          const text = `Ads start in about ${minutes} ${minutes === 1 ? 'minute' : 'minutes'}`;
+          const text = `Ads start in about ${minutes} ${minutes === 1 ? "minute" : "minutes"}`;
           enqueueNotification(
-            'Upcoming Ads',
+            "Upcoming Ads",
             text,
             5,
             null,
-            'https://raw.githubusercontent.com/tawmae/tawmae.github.io/refs/heads/main/overlays/ads_2.webp'
+            "https://raw.githubusercontent.com/tawmae/tawmae.github.io/refs/heads/main/overlays/ads_2.webp"
           );
+        } else {
+          log(`Skipped UpcomingAd for ${minutes} minute(s)`);
         }
       });
 
-      client.on('Twitch.AdRun', (evt) => {
+      client.on("Twitch.AdRun", (evt) => {
         const data = evt?.data || {};
         const len =
-          (typeof data.length_seconds === 'number' && data.length_seconds) ||
-          (typeof data.adLength === 'number' && data.adLength) ||
-          (typeof data.adLengthMs === 'number' && Math.round(data.adLengthMs / 1000)) ||
+          (typeof data.length_seconds === "number" && data.length_seconds) ||
+          (typeof data.adLength === "number" && data.adLength) ||
+          (typeof data.adLengthMs === "number" && Math.round(data.adLengthMs / 1000)) ||
           30;
-
         upcomingCounter = 0;
         lastUpcomingAt = 0;
-
+        log("Received AdRun event");
         enqueueNotification(
-          'Ads Running',
-          'Ads are currently in progress',
+          "Ads Running",
+          "Ads are currently in progress",
           len,
-          'https://tawmae.github.io/overlays/ads_1.mp3',
-          'https://raw.githubusercontent.com/tawmae/tawmae.github.io/refs/heads/main/overlays/ads_2.webp'
+          "https://tawmae.github.io/overlays/ads_1.mp3",
+          "https://raw.githubusercontent.com/tawmae/tawmae.github.io/refs/heads/main/overlays/ads_2.webp"
         );
       });
     }
