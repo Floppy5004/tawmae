@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>tawmae - TWITCH GOALBAR - v.1.0.6</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins&family=Inter&family=Roboto&family=Open+Sans&family=Lato&family=Oswald&family=SUSE&family=Arimo&family=Ubuntu&family=Nunito&family=Merriweather&family=Playfair+Display&family=Libre+Baskerville&family=Mulish&family=Barlow&family=Inconsolata&family=Bebas+Neue&family=Figtree&family=Saira&family=Josefin+Sans&family=Fjalla+One&family=Bungee&family=Plus+Jakarta+Sans&family=Pacifico&family=Comfortaa&family=Overpass&family=Urbanist&family=Raleway&family=Montserrat&family=Source+Sans+Pro&family=Work+Sans&family=Noto+Sans&family=DM+Sans&family=Rubik&family=Kanit&family=Quicksand&family=Exo+2&family=Manrope&family=Titillium+Web&family=Anton&family=Heebo&family=Mukta&family=Prompt&family=Archivo&family=Teko&family=Barlow+Condensed&display=swap"
+    rel="stylesheet">
+  <script src="https://code.iconify.design/iconify-icon/1.0.2/iconify-icon.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@streamerbot/client/dist/streamerbot-client.js"></script>
+  <style>
+    :root {
+      --edge1: #7f5af0;
+      --edge2: #00e5ff;
+      --edge3: #22e0a6;
+      --text: #eef2ff;
+      --muted: #c9cfdd;
+      --zoom: 1
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    html,
+    body {
+      height: 100%
+    }
+
+    body {
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      font-family: 'Poppins', sans-serif;
+      color: var(--text);
+      overflow: hidden
+    }
+
+    .wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center
+    }
+
+    .zoom-stage {
+      width: 92vw;
+      display: flex;
+      align-items: center;
+      justify-content: center
+    }
+
+    .zoom-stage .goal {
+      transform: scale(var(--zoom));
+      transform-origin: center center
+    }
+
+    .goal {
+      position: relative;
+      width: calc(100%/var(--zoom));
+      padding: 10px;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, .14);
+      box-shadow: 0 8px 26px rgba(0, 0, 0, .45), inset 0 0 0 1px rgba(255, 255, 255, .05);
+      overflow: hidden
+    }
+
+    .goal-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+      justify-content: center;
+      white-space: nowrap
+    }
+
+    .goal-header iconify-icon {
+      font-size: 2.2rem
+    }
+
+    .goal-title {
+      font-size: 1.9rem;
+      font-weight: 900;
+      letter-spacing: .4px
+    }
+
+    .progress-wrapper {
+      position: relative;
+      margin-top: 2px
+    }
+
+    .progress-row {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: nowrap;
+      white-space: nowrap
+    }
+
+    .current-value,
+    .goal-value {
+      font-size: 1.35rem;
+      font-weight: 900;
+      min-width: 65px;
+      text-align: center;
+      white-space: nowrap
+    }
+
+    .current-value {
+      color: #fff
+    }
+
+    .goal-value {
+      color: var(--muted)
+    }
+
+    .progress-bar {
+      flex: 1;
+      min-width: 0;
+      height: 28px;
+      border-radius: 9px;
+      background: rgba(255, 255, 255, .09);
+      border: 1px solid rgba(255, 255, 255, .14);
+      overflow: hidden;
+      position: relative
+    }
+
+    .progress-fill {
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 0%;
+      border-radius: 9px;
+      background: linear-gradient(90deg, var(--edge1), var(--edge2), var(--edge3))
+    }
+
+    .progress-text {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      font-size: 1.08rem;
+      text-shadow: 0 1px 1px rgba(0, 0, 0, .5)
+    }
+
+    .change-indicator {
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      font-size: 1.1rem;
+      font-weight: 900;
+      opacity: 0;
+      white-space: nowrap;
+      color: #22e0a6;
+      pointer-events: none;
+      z-index: 10
+    }
+
+    .completed-badge {
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      display: none;
+      align-items: center;
+      gap: 6px;
+      font-size: .95rem;
+      font-weight: 900;
+      color: #ffd54a;
+      pointer-events: none;
+      z-index: 11
+    }
+
+    .overlay {
+      position: fixed;
+      z-index: 9999;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+      pointer-events: none
+    }
+
+    .badge {
+      display: none;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 12px;
+      font-weight: 900;
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, .18);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, .35)
+    }
+
+    .badge--error {
+      background: rgba(255, 92, 122, .92);
+      color: #fff
+    }
+
+    .badge--warn {
+      background: rgba(255, 209, 102, .95);
+      color: #341f00
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="zoom-stage">
+      <div class="goal">
+        <div class="goal-header">
+          <iconify-icon icon="ri:poker-diamonds-line"></iconify-icon>
+          <div class="goal-title">Bits</div>
+        </div>
+        <div class="progress-wrapper">
+          <div class="progress-row">
+            <div class="current-value">0</div>
+            <div class="progress-bar">
+              <div class="progress-fill"><span class="progress-text">0%</span></div>
+            </div>
+            <div class="goal-value">0</div>
+          </div>
+        </div>
+        <div class="change-indicator"></div>
+        <div class="completed-badge"><iconify-icon
+            icon="gridicons:checkmark-circle"></iconify-icon><span>COMPLETED</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="overlay">
+    <div id="badge-disconnected" class="badge badge--error">Disconnected</div>
+    <div id="badge-actions" class="badge badge--warn">Please import the Streamer.bot actions first</div>
+    <div id="badge-settings" class="badge badge--warn">Please initialize the settings UI first</div>
+  </div>
+  <script>
+    const names = ['Follows', 'Subs', 'Bits', 'Donations', 'New Follows', 'New Subs', 'Overall Goal']
+    let events = [], idx = 0, rotationIntervalId, lastCounts = [], lastPercents = []
+    const iconEl = document.querySelector('iconify-icon')
+    const titleEl = document.querySelector('.goal-title')
+    const fillEl = document.querySelector('.progress-fill')
+    const textEl = document.querySelector('.progress-text')
+    const changeEl = document.querySelector('.change-indicator')
+    const completedEl = document.querySelector('.completed-badge')
+    const currentValEl = document.querySelector('.current-value')
+    const goalValEl = document.querySelector('.goal-value')
+    const goalBox = document.querySelector('.goal')
+    const progressBar = document.querySelector('.progress-bar')
+    const badgeDisconnected = document.getElementById('badge-disconnected')
+    const badgeActions = document.getElementById('badge-actions')
+    const badgeSettings = document.getElementById('badge-settings')
+    const fontMap = { "Poppins": "Poppins", "Inter": "Inter", "Roboto": "Roboto", "Open Sans": "Open Sans", "Lato": "Lato", "Oswald": "Oswald", "SUSE": "SUSE", "Arimo": "Arimo", "Ubuntu": "Ubuntu", "Nunito": "Nunito", "Merriweather": "Merriweather", "Playfair Display": "Playfair Play", "Libre Baskerville": "Libre Baskerville", "Mulish": "Mulish", "Barlow": "Barlow", "Inconsolata": "Inconsolata", "Bebas Neue": "Bebas Neue", "Figtree": "Figtree", "Saira": "Saira", "Josefin Sans": "Josefin Sans", "Fjalla One": "Fjalla One", "Bungee": "Bungee", "Plus Jakarta Sans": "Plus Jakarta Sans", "Pacifico": "Pacifico", "Comfortaa": "Comfortaa", "Overpass": "Overpass", "Urbanist": "Urbanist", "Raleway": "Raleway", "Montserrat": "Montserrat", "Source Sans Pro": "Source Sans Pro", "Work Sans": "Work Sans", "Noto Sans": "Noto Sans", "DM Sans": "DM Sans", "Rubik": "Rubik", "Kanit": "Kanit", "Quicksand": "Quicksand", "Exo 2": "Exo 2", "Manrope": "Manrope", "Titillium Web": "Titillium Web", "Anton": "Anton", "Heebo": "Heebo", "Mukta": "Mukta", "Prompt": "Prompt", "Archivo": "Archivo", "Teko": "Teko", "Barlow Condensed": "Barlow Condensed" }
+    const animations = [el => anime({ targets: el, scale: [0, 1], opacity: [0, 1], duration: 450, easing: 'easeOutBack' }), el => anime({ targets: el, scale: [0, 1.08, 1], opacity: [0, 1], duration: 550, easing: 'easeOutElastic(1,.6)' }), el => anime({ targets: el, translateY: [-10, 0], opacity: [0, 1], duration: 420, easing: 'easeOutBounce' })]
+    const currencySymbols = { "USD": "$", "EUR": "€", "GBP": "£", "JPY": "¥", "CNY": "¥", "AUD": "A$", "CAD": "C$", "CHF": "CHF", "SEK": "kr", "NZD": "NZ$", "BRL": "R$", "INR": "₹", "MXN": "MX$", "RUB": "₽", "KRW": "₩", "SGD": "S$", "HKD": "HK$", "NOK": "kr", "DKK": "kr", "ZAR": "R" }
+    let currentCurrency = "USD"
+    function clamp(n, min, max) { return Math.min(Math.max(n, min), max) }
+    function hexToRgb(hex) { let h = String(hex || '').replace('#', '').trim(); if (h.length === 3) h = h.split('').map(x => x + x).join(''); if (!/^[0-9a-fA-F]{6}$/.test(h)) h = '07070b'; const num = parseInt(h, 16); return { r: (num >> 16) & 255, g: (num >> 8) & 255, b: num & 255 } }
+    function rgba(r, g, b, a) { return `rgba(${r},${g},${b},${a})` }
+    function computeGradient(baseHex, transparency) { const base = hexToRgb(baseHex); const alpha = clamp((Number(transparency) || 0) / 100, 0, 1); const mix = (a, b, t) => Math.round(a + (b - a) * t); const light = { r: mix(base.r, 255, 0.12), g: mix(base.g, 255, 0.12), b: mix(base.b, 255, 0.12) }; const dark = { r: mix(base.r, 0, 0.18), g: mix(base.g, 0, 0.18), b: mix(base.b, 0, 0.18) }; return `linear-gradient(180deg,${rgba(light.r, light.g, light.b, alpha)} 0%,${rgba(base.r, base.g, base.b, alpha)} 50%,${rgba(dark.r, dark.g, dark.b, alpha)} 100%)` }
+    function applyBackground(bg, bgT) { goalBox.style.background = computeGradient(bg, bgT) }
+    const keyMap = { "New Follows": "NewFollows", "New Subs": "NewSubs", "Overall Goal": "OverallGoal" }
+    function k(n) { return keyMap[n] || n.replace(/\s+/g, '') }
+    function parseIncluded(cfg) { try { if (typeof cfg.includedEvents === 'object' && cfg.includedEvents !== null) return cfg.includedEvents; if (typeof cfg.includedEvents === 'string') { const o = JSON.parse(cfg.includedEvents); if (typeof o === 'object' && o !== null) return o } } catch (e) { } const legacy = {}; names.forEach(n => legacy[n] = !!cfg['include_' + k(n)]); return legacy }
+    function parseConfig(cfg) {
+      const included = parseIncluded(cfg)
+      const evNames = names.filter(n => included[n])
+      const evs = evNames.map(n => {
+        const kk = k(n)
+        const max = Number(cfg['goal_amount_' + kk])
+        const displayMax = (n === 'Donations') ? max.toFixed(2) : String(Math.round(max))
+        return { type: n, icon: cfg['icon_' + kk], title: cfg['title_' + kk] || n, max, displayMax, color: cfg['bar_color_' + kk] }
+      })
+      const counts = evNames.map(n => {
+        const kk = k(n)
+        const current = Number(cfg['currentCount_' + kk])
+        const displayCurrent = (n === 'Donations') ? current.toFixed(2) : String(Math.round(current))
+        return { current, displayCurrent }
+      })
+      const bg = cfg['bar_color_Background'] || '#07070b'
+      const bgT = cfg['background_Transparency'] ?? 100
+      const roundedBg = cfg['rounded_Corners_Background'] === true
+      const roundedBar = cfg['rounded_Corners_Bar'] === true
+      const fontKey = cfg['bar_Font'] || 'Poppins'
+      const font = fontMap[fontKey] || 'Poppins'
+      const fontColor = cfg['bar_font_Color'] || '#eef2ff'
+      const currency = cfg['bar_Currency'] || 'USD'
+      const zoom = parseFloat(cfg['zoomLevel']) || 1
+      const duration = Number(cfg['rotaton_duration_milliseconds']) || 6000
+      return { evs, counts, duration, bg, bgT, roundedBg, roundedBar, font, fontColor, currency, zoom }
+    }
+    function initialize(evs, counts, duration, bg, bgT, roundedBg, roundedBar, font, fontColor, currency, zoom) {
+      currentCurrency = currency
+      events = evs.map((e, i) => ({ ...e, ...counts[i] }))
+      lastCounts = events.map(e => e.current || 0)
+      lastPercents = events.map(e => Math.min(100, Math.round((e.current / e.max) * 100) || 0))
+      document.documentElement.style.setProperty('--zoom', String(zoom || 1))
+      applyBackground(bg, bgT);
+      applyElevation(bgT);
+      goalBox.style.borderRadius = roundedBg ? '14px' : '0'
+      progressBar.style.borderRadius = roundedBar ? '9px' : '0'
+      fillEl.style.borderRadius = roundedBar ? '9px' : '0'
+        ;[goalBox, titleEl, textEl, currentValEl, goalValEl, iconEl].forEach(t => { t.style.fontFamily = `'${font}', sans-serif`; t.style.color = fontColor })
+      idx = 0
+      showEvent(0)
+      if (rotationIntervalId) clearInterval(rotationIntervalId)
+      if (events.length > 1) startCycle(duration)
+    }
+    function animateCount(el, fromVal, toVal, isMoney, duration) {
+      const start = Number(fromVal) || 0
+      const end = Number(toVal) || 0
+      let obj = { val: start }
+      gsap.to(obj, { val: end, duration: duration, ease: 'power2.out', onUpdate: () => { el.textContent = isMoney ? obj.val.toFixed(2) : String(Math.round(obj.val)) } })
+    }
+    function animatePercent(from, to, duration) { let obj = { val: from }; gsap.to(obj, { val: to, duration: duration, ease: 'power2.out', onUpdate: () => { textEl.textContent = `${Math.round(obj.val)}%` } }) }
+    function updateCompletedVisibility(pct) { if (pct >= 100) { completedEl.style.display = 'inline-flex'; changeEl.style.opacity = 0 } else { completedEl.style.display = 'none' } }
+    function isMoney(type) { return type === 'Donations' }
+    function showEvent(i) {
+      const e = events[i]
+      iconEl.setAttribute('icon', e.icon || 'mdi:information-outline')
+      titleEl.textContent = e.title || e.type
+      const money = isMoney(e.type)
+      const symbol = money ? (currencySymbols[currentCurrency] || currentCurrency) : ""
+      currentValEl.textContent = money ? '0.00' : '0'
+      goalValEl.textContent = money ? `${e.max.toFixed(2)} ${symbol}` : String(Math.round(e.max))
+      fillEl.style.background = e.color ? e.color : 'linear-gradient(90deg,#7f5af0,#00e5ff,#22e0a6)'
+      fillEl.style.width = '0%'
+      textEl.textContent = '0%'
+      completedEl.style.display = 'none'
+      const a = animations[Math.floor(Math.random() * animations.length)]
+      a(iconEl)
+      gsap.fromTo(titleEl, { y: 4, opacity: 0 }, { y: 0, opacity: 1, duration: .4, ease: 'power3.out' })
+      animateFill(i, true, true)
+    }
+    function animateFill(i, withCountUp = false, fromZero = false) {
+      const e = events[i]
+      const target = isFinite(e.max) && e.max > 0 ? Math.min(100, (e.current / e.max) * 100) : 0
+      const startPercent = fromZero ? 0 : lastPercents[i] || 0
+      const d = 1
+      gsap.to(fillEl, { width: `${target}%`, duration: d, ease: 'power2.out' })
+      animatePercent(startPercent, target, d)
+      if (withCountUp) {
+        const money = isMoney(e.type)
+        const fromVal = fromZero ? 0 : lastCounts[i] || 0
+        animateCount(currentValEl, fromVal, e.current, money, d)
+      }
+      lastCounts[i] = e.current
+      lastPercents[i] = Math.round(target)
+      updateCompletedVisibility(target)
+    }
+    function startCycle(duration) { if (rotationIntervalId) clearInterval(rotationIntervalId); rotationIntervalId = setInterval(() => { idx = (idx + 1) % events.length; showEvent(idx) }, duration) }
+    function showChange(delta) {
+      if (delta <= 0) return
+      if (completedEl.style.display === 'inline-flex') return
+      const e = events[idx]
+      const money = isMoney(e.type)
+      const symbol = money ? (currencySymbols[currentCurrency] || currentCurrency) : ""
+      const formatted = money ? delta.toFixed(2) : String(Math.round(delta))
+      changeEl.textContent = `+${formatted}${symbol ? " " + symbol : ""}`
+      gsap.fromTo(changeEl, { x: 24, opacity: 0 }, { x: 0, opacity: 1, duration: .3, ease: 'power2.out', onComplete: () => gsap.to(changeEl, { x: 24, opacity: 0, duration: .35, delay: 1 }) })
+    }
+    function updateCountsOnly(newCfg) {
+      const { evs, counts, bg, bgT, roundedBg, roundedBar, font, fontColor, currency, zoom } = parseConfig(newCfg)
+      currentCurrency = currency
+      document.documentElement.style.setProperty('--zoom', String(zoom || 1))
+      applyBackground(bg, bgT);
+      applyElevation(bgT);
+      goalBox.style.borderRadius = roundedBg ? '14px' : '0'
+      progressBar.style.borderRadius = roundedBar ? '9px' : '0'
+      fillEl.style.borderRadius = roundedBar ? '9px' : '0'
+        ;[goalBox, titleEl, textEl, currentValEl, goalValEl, iconEl].forEach(t => { t.style.fontFamily = `'${font}', sans-serif`; t.style.color = fontColor })
+      evs.forEach((e, i) => { const oldMax = events[i]?.max; events[i].max = e.max; events[i].displayMax = e.displayMax; events[i].title = e.title; events[i].icon = e.icon; events[i].color = e.color; if (i === idx && (oldMax !== e.max)) { const money = isMoney(e.type); const symbol = money ? (currencySymbols[currentCurrency] || currentCurrency) : ""; goalValEl.textContent = money ? `${e.max.toFixed(2)} ${symbol}` : String(Math.round(e.max)); animateFill(i, true, false) } })
+      counts.forEach((c, i) => { const prev = lastCounts[i] ?? 0; const diff = (Number(c.current) || 0) - (Number(prev) || 0); events[i].current = Number(c.current) || 0; events[i].displayCurrent = c.displayCurrent; if (i === idx && diff !== 0) { animateFill(i, true, false); showChange(diff) } lastCounts[i] = events[i].current; lastPercents[i] = isFinite(events[i].max) && events[i].max > 0 ? Math.min(100, Math.round((events[i].current / events[i].max) * 100)) : 0 })
+      updateCompletedVisibility(lastPercents[idx] || 0)
+    }
+    function getIncludedNamesString(x) { try { return JSON.stringify(x) } catch (e) { return '' } }
+    function getConnParams() { const sp = new URLSearchParams(location.search); let host = '127.0.0.1', port = 8080; let password = sp.get('password') || undefined; for (const [k, v] of sp.entries()) { const lk = k.toLowerCase(); if (lk === 'address') host = v; if (lk === 'port') port = Number(v) || 8080 } return { host, port, password } }
+    function showBadge(el, show) { el.style.display = show ? 'flex' : 'none' }
+    const { host, port, password } = getConnParams()
+    const client = new StreamerbotClient({
+      host, port, endpoint: '/', password,
+      subscribe: { Misc: ['GlobalVariableUpdated'] },
+      onConnect: async (info) => {
+        showBadge(badgeDisconnected, false)
+        let actionsOk = false
+        try { const res = await client.getActions(); if (res && res.status === 'ok') { actionsOk = res.actions.some(a => a.id === 'b7bf5290-6372-4a17-8db9-66f0e1719711') } } catch (e) { }
+        showBadge(badgeActions, !actionsOk)
+        try {
+          const g = await client.getGlobal('tawmae_Settings_TWITCH GOALBAR')
+          if (!g || g.status === 'error') { showBadge(badgeSettings, true); return }
+          showBadge(badgeSettings, false)
+          const cfg = typeof g.variable.value === 'string' ? JSON.parse(g.variable.value) : g.variable.value
+          const { evs, counts, duration, bg, bgT, roundedBg, roundedBar, font, fontColor, currency, zoom } = parseConfig(cfg)
+          initialize(evs, counts, duration, bg, bgT, roundedBg, roundedBar, font, fontColor, currency, zoom)
+        } catch (err) { showBadge(badgeSettings, true) }
+      },
+      onDisconnect: () => { showBadge(badgeDisconnected, true) },
+      onError: () => { showBadge(badgeDisconnected, true) }
+    })
+    client.on('Misc.GlobalVariableUpdated', data => {
+      if (data.data.name !== 'tawmae_Settings_TWITCH GOALBAR') return
+      const oldCfg = JSON.parse(data.data.oldValue)
+      const newCfg = JSON.parse(data.data.newValue)
+      const designChange = (() => {
+        if (oldCfg.rotaton_duration_milliseconds !== newCfg.rotaton_duration_milliseconds) return true
+        if (oldCfg.bar_color_Background !== newCfg.bar_color_Background) return true
+        if (oldCfg.background_Transparency !== newCfg.background_Transparency) return true
+        if (oldCfg.rounded_Corners_Background !== newCfg.rounded_Corners_Background) return true
+        if (oldCfg.rounded_Corners_Bar !== newCfg.rounded_Corners_Bar) return true
+        if (oldCfg.bar_Font !== newCfg.bar_Font) return true
+        if (oldCfg.bar_font_Color !== newCfg.bar_font_Color) return true
+        if (String(getIncludedNamesString(oldCfg.includedEvents)) !== String(getIncludedNamesString(newCfg.includedEvents))) return true
+        for (let n of names) { const kk = k(n); if (oldCfg['icon_' + kk] !== newCfg['icon_' + kk]) return true; if (oldCfg['title_' + kk] !== newCfg['title_' + kk]) return true; if (oldCfg['bar_color_' + kk] !== newCfg['bar_color_' + kk]) return true }
+        return false
+      })()
+      if (designChange) {
+        const { evs, counts, duration, bg, bgT, roundedBg, roundedBar, font, fontColor, currency, zoom } = parseConfig(newCfg)
+        initialize(evs, counts, duration, bg, bgT, roundedBg, roundedBar, font, fontColor, currency, zoom)
+      } else {
+        updateCountsOnly(newCfg)
+      }
+    })
+
+    const BASE_SHADOW = '0 8px 26px rgba(0,0,0,.45), inset 0 0 0 1px rgba(255,255,255,.05)';
+    const BASE_BORDER = '1px solid rgba(255,255,255,.14)';
+
+    function applyElevation(bgT) {
+      const off = Number(bgT) <= 0;
+      goalBox.style.boxShadow = off ? 'none' : BASE_SHADOW;
+      goalBox.style.border = off ? 'none' : BASE_BORDER;
+    }
+
+  </script>
+</body>
+
+</html>
