@@ -33,7 +33,9 @@ og_image: "/assets/page-design/page-cards/twitch-goalbar.webp"
       (Kofi, StreamElements, Streamlabs, Fourthwall, and Tipeeestream).<br><br>
       • Adjust goals easily via chat commands<br>
       • Automatic currency conversion for donations<br>
-      • Clean and adorable Settings UI for quick customization<br><br>
+      • An overall goal that includes all types of events<br>
+      • Custom Triggers for completed goals<br>
+      • Clean and adorable (uwu) Settings UI for quick customization<br><br>
       <span style="font-size: 3rem">happie</span>
     </p>
   </div>
@@ -67,11 +69,11 @@ og_image: "/assets/page-design/page-cards/twitch-goalbar.webp"
         <div class="accordion-content" id="browser-source-url-acc">
             <div class="copy-box">
                 <span class="copy-text" id="base64-string"
-                    data-copy-text="https://tawmae.xyz/overlays/twitch-goalbar">
-                    https://tawmae.xyz/overlays/twitch-goalbar
+                    data-copy-text="https://tawmae.xyz/overlays/twitch-goalbar-v2">
+                    https://tawmae.xyz/overlays/twitch-goalbar-v2
                 </span>
                 <button class="copy-btn"
-                    onclick="copyURLToClipboard('https://tawmae.xyz/overlays/twitch-goalbar')">
+                    onclick="copyURLToClipboard('https://tawmae.xyz/overlays/twitch-goalbar-v2')">
                     <span class="iconify" data-icon="material-symbols:content-copy-outline-sharp"></span> Copy
                 </button>
             </div>
@@ -353,6 +355,53 @@ og_image: "/assets/page-design/page-cards/twitch-goalbar.webp"
     </div>
 
     <div class="accordion-divider"></div>
+
+
+
+   <!----    CUSTOM TRIGGERS    ------------------------------------------------------------------------------------------------------------------------------>
+    <div class="accordion-item">
+        <div class="accordion-header" id="custom-triggers" onclick="toggleAccordion('custom-triggers-acc')">
+            <span class="iconify title-icon" data-icon="line-md:bell-alert"></span><span>CUSTOM TRIGGERS</span>
+            <span class="iconify accordion-icon" data-icon="ic:baseline-keyboard-arrow-right"></span>
+        </div>
+        <div class="accordion-content" id="custom-triggers-acc">
+            <div class="extension-title-text-box-long">
+            <p>Under <span style="font-weight: bold; color: #ffd95e;">Custom -> TWITCH GOALBAR</span> you will be able
+                to find various triggers that populate variables whenever a goal is completed.</p>
+            </div>
+<!---------------------------------------------->
+<div class="accordion-divider"></div>
+            <!---------------------------------------------->
+            <a href="{{ site.baseurl }}/assets/custom-triggers/twitch-goalbar.webp" target="_blank">
+                <div class="extension-image-2"
+                    style="background-image: url('{{ site.baseurl }}/assets/custom-triggers/twitch-goalbar.webp');">
+                </div>
+            </a>
+            <!---------------------------------------------->
+            <p><br></p>
+            <div class="extension-title-text-box-long">
+                <p style="font-weight: bold;">Available variables:</p>
+<ul style="list-style-position: inside; padding-left: 0; text-align: left;">
+  <li><span style="font-weight: bold; color: #ffd95e;">goalName</span> <span
+      style="background-color: #fff; color: black; padding: 0 5px; opacity: 0.4; font-size: 0.7rem">string</span>
+    - the name of the goal</li>
+  <li><span style="font-weight: bold; color: #ffd95e;">goalValue</span> <span
+      style="background-color: #fff; color: black; padding: 0 5px; opacity: 0.4; font-size: 0.7rem">double / int</span>
+    - the target value of the goal</li>
+  <li><span style="font-weight: bold; color: #ffd95e;">currentValue</span> <span
+      style="background-color: #fff; color: black; padding: 0 5px; opacity: 0.4; font-size: 0.7rem">double / int</span>
+    - the current progress value of the goal</li>
+</ul>
+            </div>
+            <p><br><br></p>
+
+            <!---------------------------------------------->
+
+        </div>
+    </div>
+    <!---------------------------------------------------------------------------------------------------------------------------------->
+
+    <div class="accordion-divider"></div>
     <!----    CHANGELOG    ------------------------------------------------------------------------------------------------------------------------------>
     <div class="accordion-item">
         <div class="accordion-header" id="changelog" onclick="toggleAccordion('changelog-acc')">
@@ -370,6 +419,12 @@ og_image: "/assets/page-design/page-cards/twitch-goalbar.webp"
                     </tr>
                 </thead>
                 <tbody>
+                  <!---------------------------------------------->
+                    <tr>
+                        <td>October 12, 2025</td>
+                        <td>This change requires to add a new browser source URL (check above); added new events: New Followers, New Subscribers, Overall Goal; new followers and new subs resets back to 0 whenever you start your stream; the overall goal combines all kinds of events and add their points to an overall goal; added more fonts; added more currencies; setting the background transparency now removes the dropshadow of the background; added custom triggers when goals are completed</td>
+                        <td>1.0.2</td>
+                    </tr>
                     <!---------------------------------------------->
                     <tr>
                         <td>September 23, 2025</td>
