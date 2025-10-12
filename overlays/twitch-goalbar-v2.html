@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>tawmae - TWITCH GOALBAR - v.1.0.6</title>
+  <title>tawmae - TWITCH GOALBAR - v.1.0.2</title>
   <link
     href="https://fonts.googleapis.com/css2?family=Poppins&family=Inter&family=Roboto&family=Open+Sans&family=Lato&family=Oswald&family=SUSE&family=Arimo&family=Ubuntu&family=Nunito&family=Merriweather&family=Playfair+Display&family=Libre+Baskerville&family=Mulish&family=Barlow&family=Inconsolata&family=Bebas+Neue&family=Figtree&family=Saira&family=Josefin+Sans&family=Fjalla+One&family=Bungee&family=Plus+Jakarta+Sans&family=Pacifico&family=Comfortaa&family=Overpass&family=Urbanist&family=Raleway&family=Montserrat&family=Source+Sans+Pro&family=Work+Sans&family=Noto+Sans&family=DM+Sans&family=Rubik&family=Kanit&family=Quicksand&family=Exo+2&family=Manrope&family=Titillium+Web&family=Anton&family=Heebo&family=Mukta&family=Prompt&family=Archivo&family=Teko&family=Barlow+Condensed&display=swap"
     rel="stylesheet">
@@ -296,7 +296,7 @@
     }
     function initialize(evs, counts, duration, bg, bgT, roundedBg, roundedBar, font, fontColor, currency, zoom) {
       currentCurrency = currency
-      events = evs.map((e, i) => ({ ...e, ...counts[i] }))
+      events = evs.map((e, i) => ({ ...e, ...counts[i], _triggered: false }))
       lastCounts = events.map(e => e.current || 0)
       lastPercents = events.map(e => Math.min(100, Math.round((e.current / e.max) * 100) || 0))
       document.documentElement.style.setProperty('--zoom', String(zoom || 1))
@@ -344,6 +344,9 @@
       const d = 1
       gsap.to(fillEl, { width: `${target}%`, duration: d, ease: 'power2.out' })
       animatePercent(startPercent, target, d)
+      if (!fromZero) {
+        maybeTrigger(i, startPercent, target);
+      }
       if (withCountUp) {
         const money = isMoney(e.type)
         const fromVal = fromZero ? 0 : lastCounts[i] || 0
@@ -375,7 +378,35 @@
       fillEl.style.borderRadius = roundedBar ? '9px' : '0'
         ;[goalBox, titleEl, textEl, currentValEl, goalValEl, iconEl].forEach(t => { t.style.fontFamily = `'${font}', sans-serif`; t.style.color = fontColor })
       evs.forEach((e, i) => { const oldMax = events[i]?.max; events[i].max = e.max; events[i].displayMax = e.displayMax; events[i].title = e.title; events[i].icon = e.icon; events[i].color = e.color; if (i === idx && (oldMax !== e.max)) { const money = isMoney(e.type); const symbol = money ? (currencySymbols[currentCurrency] || currentCurrency) : ""; goalValEl.textContent = money ? `${e.max.toFixed(2)} ${symbol}` : String(Math.round(e.max)); animateFill(i, true, false) } })
-      counts.forEach((c, i) => { const prev = lastCounts[i] ?? 0; const diff = (Number(c.current) || 0) - (Number(prev) || 0); events[i].current = Number(c.current) || 0; events[i].displayCurrent = c.displayCurrent; if (i === idx && diff !== 0) { animateFill(i, true, false); showChange(diff) } lastCounts[i] = events[i].current; lastPercents[i] = isFinite(events[i].max) && events[i].max > 0 ? Math.min(100, Math.round((events[i].current / events[i].max) * 100)) : 0 })
+      counts.forEach((c, i) => {
+        const prevCount = Number(events[i]?.current) || 0;
+        const prevPct = lastPercents[i] ?? (
+          (isFinite(events[i]?.max) && events[i].max > 0)
+            ? Math.round((prevCount / events[i].max) * 100)
+            : 0
+        );
+
+        const newCount = Number(c.current) || 0;
+        events[i].current = newCount;
+        events[i].displayCurrent = c.displayCurrent;
+
+        const newPct = (isFinite(events[i].max) && events[i].max > 0)
+          ? Math.min(100, Math.round((newCount / events[i].max) * 100))
+          : 0;
+
+        if (i === idx && newCount !== prevCount) {
+          animateFill(i, true, false);
+          showChange(newCount - prevCount);
+        }
+
+        if (prevPct < 100 && newPct >= 100 && !events[i]._triggered) {
+          events[i]._triggered = true;
+          fireGoalTrigger(events[i]);
+        }
+
+        lastCounts[i] = newCount;
+        lastPercents[i] = newPct;
+      });
       updateCompletedVisibility(lastPercents[idx] || 0)
     }
     function getIncludedNamesString(x) { try { return JSON.stringify(x) } catch (e) { return '' } }
@@ -433,6 +464,40 @@
       const off = Number(bgT) <= 0;
       goalBox.style.boxShadow = off ? 'none' : BASE_SHADOW;
       goalBox.style.border = off ? 'none' : BASE_BORDER;
+    }
+
+    function slugifyName(name) {
+      return String(name || '')
+        .toLowerCase()
+        .replace(/\s+/g, '_')
+        .replace(/[^a-z0-9_]/g, '');
+    }
+
+    async function fireGoalTrigger(evt) {
+      if (!evt) return;
+      const triggerName = `twitch_goalbar_${slugifyName(evt.type || evt.title)}`;
+      const args = {
+        goalName: String(evt.title || evt.type || ''),
+        goalValue: Number(evt.max) || 0,
+        currentValue: Number(evt.current) || 0
+      };
+      console.log(`[GOALBAR] Executing Trigger: ${triggerName}`, args);
+      try {
+        const res = await client.executeCodeTrigger(triggerName, args);
+        console.log(`[GOALBAR] Trigger Response (${triggerName}):`, res);
+      } catch (e) {
+        console.error(`[GOALBAR] Trigger Error (${triggerName}):`, e);
+      }
+    }
+
+
+    function maybeTrigger(i, startPercent, targetPercent) {
+      const e = events[i];
+      if (!e) return;
+      if (startPercent < 100 && targetPercent >= 100 && !e._triggered) {
+        e._triggered = true;
+        fireGoalTrigger(e);
+      }
     }
 
   </script>
