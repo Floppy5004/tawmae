@@ -30,7 +30,7 @@ og_image: "/assets/page-design/page-cards/ad-notification.webp"
   <div class="extension-title-text-box">
     <h1>{{ page.title }}</h1>
     <p>
-      An OBS widget for Twitch that notifies both you and your viewers when ads are starting and for how long they last.<br><br>
+      An OBS widget for Twitch that notifies both you and your viewers about upcoming scheduled ads, when ads are actually starting and for how long they last.<br><br>
       Sucks to be a non-sub, huh?<br>
       <span style="font-size: 3rem">pepeSmoke</span>
     </p>
@@ -154,7 +154,20 @@ og_image: "/assets/page-design/page-cards/ad-notification.webp"
             </p>
             </div>
             <!---------------------------------------------->
-            <div class="accordion-divider"></div>
+           <div class="accordion-divider"></div>
+            <!---------------------------------------------->
+            <div class="customization-text-container">
+                <div class="extension-title-text-box">
+                    <p><span class="iconify title-icon" data-icon="material-symbols:notification-important-rounded"></span><span
+                            style="font-size: 1.1rem; color: #fff; font-weight: bold;">Upcoming Ad Warning</span></p>
+                    <p>Set the warning interval for upcoming scheduled ads. Scheduled ad warnings come 5, 4, 3, 2 and 1 minute before the ad actually starts. The default settings only shows the upcoming ad alert 1 minute before. But you can include all or just specific times to get multiple warnings.</p>
+                </div>
+                <div class="extension-title-text-box">
+                    <p><span style="font-weight: bold; color: #ffd95e;">?warnings=5,4,3,2,1</span></p>
+                    <p><br></p>
+                    <p><span style="font-weight: bold; color: #ffd95e;">?warnings=5,1</span></p>
+                </div>
+            </div>
             <!---------------------------------------------->
             <div class="customization-text-container">
                 <div class="extension-title-text-box">
@@ -195,6 +208,17 @@ og_image: "/assets/page-design/page-cards/ad-notification.webp"
                 </div>
             </div>
             <!---------------------------------------------->
+          <div class="customization-text-container">
+                <div class="extension-title-text-box">
+                    <p><span class="iconify title-icon" data-icon="pixelarticons:animation"></span><span
+                            style="font-size: 1.1rem; color: #fff; font-weight: bold;">Entry Direction</span></p>
+                    <p>Toggles the position and entry direction. Default is top right and transitioning from right to left. Setting this to <code>True</code> will reverse it, being top left and transitioning from left to right.</p>
+                </div>
+                <div class="extension-title-text-box">
+                    <p><span style="font-weight: bold; color: #ffd95e;">reverseEntry=true</span></p>
+                </div>
+            </div>
+            <!---------------------------------------------->
         </div>
     </div>
     <!---------------------------------------------------------------------------------------------------------------------------------->
@@ -216,6 +240,12 @@ og_image: "/assets/page-design/page-cards/ad-notification.webp"
                     </tr>
                 </thead>
                 <tbody>
+                   <!---------------------------------------------->
+                    <tr>
+                        <td>October 13, 2025</td>
+                        <td>Added notifications for upcoming scheduled ads; added two new URL parameters for upcoming ad warnings and for the position/entry direction</td>
+                        <td>1.0.2</td>
+                    </tr>
                     <!---------------------------------------------->
                     <tr>
                         <td>May 17, 2025</td>
