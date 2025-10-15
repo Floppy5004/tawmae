@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "VERTICAL CHAT"
+title: "VERTICAL CHAT – tawmae"
 description: "A vertical Twitch chat overlay for OBS, powered by Streamer.bot. Customizable, supports pronouns, profile pictures and Twitch events."
 keywords:
   - Streamer.bot
@@ -227,7 +227,7 @@ og_image: "/assets/page-design/page-cards/vertical-chat.webp"
       <a href="{{ ext.url | relative_url }}" class="related-card" style="display:none;">
         <img src="{{ ext.og_image | default: '/assets/page-design/website-card.webp' | relative_url }}" alt="{{ ext.title }} Streamer.bot Extension">
         <div class="related-card-text">
-          <h3>{{ ext.title }}</h3>
+          <h3>{{ ext.title | replace: " – tawmae", "" | strip }}</h3>
           <p>{{ ext.description | truncate: 160 }}</p>
         </div>
       </a>
