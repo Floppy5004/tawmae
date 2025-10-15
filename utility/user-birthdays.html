@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "USER BIRTHDAYS"
+title: "USER BIRTHDAYS – tawmae"
 description: "A birthday integration for your Twitch viewers, powered by Streamer.bot. Add user birthdays and have them automatically congratulated — even supports belated birthday wishes!"
 keywords:
   - Streamer.bot
@@ -444,7 +444,7 @@ og_image: "/assets/page-design/page-cards/user-birthdays.webp"
       <a href="{{ ext.url | relative_url }}" class="related-card" style="display:none;">
         <img src="{{ ext.og_image | default: '/assets/page-design/website-card.webp' | relative_url }}" alt="{{ ext.title }} Streamer.bot Extension">
         <div class="related-card-text">
-          <h3>{{ ext.title }}</h3>
+          <h3>{{ ext.title | replace: " – tawmae", "" | strip }}</h3>
           <p>{{ ext.description | truncate: 160 }}</p>
         </div>
       </a>
