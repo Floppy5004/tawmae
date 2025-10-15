@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "MOD TOOLS"
+title: "MOD TOOLS – tawmae"
 description: "An all-in-one solution to moderate your Twitch streams with Streamer.bot. Prevent spam bots, deal with follow bot attacks and hate raids - and give your mods handy tools to manage your stream."
 keywords:
   - Streamer.bot
@@ -1671,7 +1671,7 @@ og_image: "/assets/page-design/page-cards/mod-tools.webp"
       <a href="{{ ext.url | relative_url }}" class="related-card" style="display:none;">
         <img src="{{ ext.og_image | default: '/assets/page-design/website-card.webp' | relative_url }}" alt="{{ ext.title }} Streamer.bot Extension">
         <div class="related-card-text">
-          <h3>{{ ext.title }}</h3>
+         <h3>{{ ext.title | replace: " – tawmae", "" | strip }}</h3>
           <p>{{ ext.description | truncate: 160 }}</p>
         </div>
       </a>
