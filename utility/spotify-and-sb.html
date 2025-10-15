@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "SPOTIFY & SB"
+title: "SPOTIFY & SB – tawmae"
 description: "A full Spotify integration for Twitch, powered by Streamer.bot. Request songs, control your player, tracks song stats, display a song overlay on OBS and much much more."
 keywords:
   - Streamer.bot
@@ -1393,7 +1393,7 @@ og_image: "/assets/page-design/page-cards/spotify-and-sb.webp"
       <a href="{{ ext.url | relative_url }}" class="related-card" style="display:none;">
         <img src="{{ ext.og_image | default: '/assets/page-design/website-card.webp' | relative_url }}" alt="{{ ext.title }} Streamer.bot Extension">
         <div class="related-card-text">
-          <h3>{{ ext.title }}</h3>
+          <h3>{{ ext.title | replace: " – tawmae", "" | strip }}</h3>
           <p>{{ ext.description | truncate: 160 }}</p>
         </div>
       </a>
