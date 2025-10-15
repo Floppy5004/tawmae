@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "TWITCH POINTS"
+title: "TWITCH POINTS – tawmae"
 description: "A fully featured loyalty points system for Twitch, powered by Streamer.bot. Fully customizable, with built-in games and support for importing data from other bots."
 keywords:
   - Streamer.bot
@@ -914,7 +914,7 @@ og_image: "/assets/page-design/page-cards/twitch-points.webp"
       <a href="{{ ext.url | relative_url }}" class="related-card" style="display:none;">
         <img src="{{ ext.og_image | default: '/assets/page-design/website-card.webp' | relative_url }}" alt="{{ ext.title }} Streamer.bot Extension">
         <div class="related-card-text">
-          <h3>{{ ext.title }}</h3>
+          <h3>{{ ext.title | replace: " – tawmae", "" | strip }}</h3>
           <p>{{ ext.description | truncate: 160 }}</p>
         </div>
       </a>
