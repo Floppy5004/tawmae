@@ -55,7 +55,7 @@ keywords:
       <a href="{{ ext.url | relative_url }}" class="related-card" target="_blank" rel="noopener noreferrer">
         <img src="{{ ext.og_image | default: '/assets/page-design/website-card.webp' | relative_url }}" alt="{{ ext.title }} Streamer.bot Extension">
         <div class="related-card-text">
-          <h3>{{ ext.title }}</h3>
+          <h3>{{ ext.title | replace: " – tawmae", "" | strip }}</h3>
           <p>{{ ext.description | truncate: 160 }}</p>
         </div>
       </a>
