@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "STEAM WELCOME"
+title: "STEAM WELCOME – tawmae"
 description: "An OBS widget that displays a welcome message for your Twitch viewers in the style of a Steam notification, powered by Streamer.bot."
 keywords:
   - Streamer.bot
@@ -213,7 +213,7 @@ og_image: "/assets/page-design/page-cards/steam-welcome.webp"
       <a href="{{ ext.url | relative_url }}" class="related-card" style="display:none;">
         <img src="{{ ext.og_image | default: '/assets/page-design/website-card.webp' | relative_url }}" alt="{{ ext.title }} Streamer.bot Extension">
         <div class="related-card-text">
-          <h3>{{ ext.title }}</h3>
+          <h3>{{ ext.title | replace: " – tawmae", "" | strip }}</h3>
           <p>{{ ext.description | truncate: 160 }}</p>
         </div>
       </a>
