@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "MOVIE & TV SHOW QUIZ"
+title: "MOVIE & TV SHOW QUIZ – tawmae"
 description: "A fun and interactive movie & TV show guessing game for your Twitch chat, powered by TMDB and Streamer.bot. Viewers guess the title based on the synopsis, tagline, cast, or images to compete for the right answer."
 keywords:
   - Streamer.bot
@@ -614,7 +614,7 @@ og_image: "/assets/page-design/page-cards/movie-and-tv-show-quiz.webp"
       <a href="{{ ext.url | relative_url }}" class="related-card" style="display:none;">
         <img src="{{ ext.og_image | default: '/assets/page-design/website-card.webp' | relative_url }}" alt="{{ ext.title }} Streamer.bot Extension">
         <div class="related-card-text">
-          <h3>{{ ext.title }}</h3>
+          <h3>{{ ext.title | replace: " – tawmae", "" | strip }}</h3>
           <p>{{ ext.description | truncate: 160 }}</p>
         </div>
       </a>
