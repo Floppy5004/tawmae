@@ -8,179 +8,175 @@ description: "Want something unique for your stream and need someone to build it
 
 <style>
   :root {
-    --border: rgba(255,255,255,0.18);
+    --border: rgba(255,255,255,0.15);
     --muted: rgba(255,255,255,0.7);
     --accent1: #6366f1;
     --accent2: #a855f7;
+    --bg-dark: rgba(10, 10, 15, 0.85);
   }
 
-  .commissions-wrapper {
+  .commissions-container {
+    max-width: 1600px;
+    margin: 80px auto 120px;
+    padding: 0 4vw;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 60px;
-    max-width: 1400px;
-    margin: 100px auto;
+    gap: 80px;
     color: #fff;
-    padding: 0 5vw;
   }
 
-  .commission-intro {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.2);
+  .commissions-header {
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+    background: var(--bg-dark);
+    border: 1px solid var(--border);
     border-radius: 18px;
-    padding: 50px 60px;
+    padding: 60px 40px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.4);
     backdrop-filter: blur(12px);
-    box-shadow: 0 8px 28px rgba(0,0,0,0.3);
-    text-align: left;
-    position: relative;
-    overflow: hidden;
   }
 
-  .commission-intro::before {
-    content: "";
-    position: absolute;
-    left: 25px;
-    top: 25px;
-    bottom: 25px;
-    width: 5px;
-    border-radius: 6px;
-    background: linear-gradient(180deg,var(--accent1),var(--accent2));
-    box-shadow: 0 0 20px rgba(99,102,241,0.4), 0 0 28px rgba(168,85,247,0.3);
-  }
-
-  .commission-intro h1 {
-    font-size: 2.8rem;
-    margin-bottom: 20px;
-    background: linear-gradient(90deg,var(--accent1),var(--accent2));
+  .commissions-header h1 {
+    font-size: 3rem;
+    background: linear-gradient(90deg, var(--accent1), var(--accent2));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    margin-bottom: 24px;
   }
 
-  .commission-intro p {
-    font-size: 1.15rem;
+  .commissions-header p {
+    font-size: 1.2rem;
     line-height: 1.8;
     color: var(--muted);
   }
 
-  .commission-gallery {
+  .commissions-gallery {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
     gap: 24px;
-    width: 100%;
   }
 
-  .commission-card {
+  .gallery-item {
     position: relative;
-    border-radius: 16px;
-    overflow: hidden;
     aspect-ratio: 16/9;
-    border: 1px solid rgba(255,255,255,0.15);
+    overflow: hidden;
+    border-radius: 18px;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,0.05);
     box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-    background: rgba(255,255,255,0.04);
-    cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
   }
 
-  .commission-card img {
+  .gallery-item img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.6s ease;
+    filter: brightness(0.8) saturate(1.2);
+    transition: transform 0.6s ease, filter 0.4s ease;
   }
 
-  .commission-card:hover img {
+  .gallery-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 16px 50px rgba(0,0,0,0.5);
+  }
+
+  .gallery-item:hover img {
     transform: scale(1.08);
+    filter: brightness(1);
   }
 
-  .commission-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 40px rgba(0,0,0,0.4);
-  }
-
-  .commission-overlay {
+  .gallery-caption {
     position: absolute;
-    inset: 0;
-    background: linear-gradient(180deg,rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.8) 100%);
-    opacity: 0;
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-start;
-    padding: 24px;
-    transition: opacity 0.3s ease;
+    bottom: 0;
+    width: 100%;
+    padding: 20px 24px;
+    background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.8) 100%);
+    backdrop-filter: blur(8px);
   }
 
-  .commission-card:hover .commission-overlay {
-    opacity: 1;
-  }
-
-  .commission-overlay h3 {
+  .gallery-caption h3 {
     margin: 0;
+    font-size: 1.3rem;
     color: #fff;
-    font-size: 1.2rem;
-    letter-spacing: 0.5px;
   }
 
-  .paypal-section {
-    margin-top: 60px;
-    text-align: center;
+  .gallery-caption p {
+    margin: 6px 0 0;
+    font-size: 0.95rem;
+    color: var(--muted);
   }
 
-  @media (max-width: 900px) {
-    .commission-intro {
-      padding: 30px 30px 30px 50px;
-    }
-    .commission-gallery {
-      gap: 18px;
+  .gallery-grid-large {
+    display: grid;
+    grid-template-areas:
+      "a a b b"
+      "c c d e";
+    gap: 24px;
+  }
+
+  .gallery-grid-large .item-a { grid-area: a; }
+  .gallery-grid-large .item-b { grid-area: b; }
+  .gallery-grid-large .item-c { grid-area: c; }
+  .gallery-grid-large .item-d { grid-area: d; }
+  .gallery-grid-large .item-e { grid-area: e; }
+
+  @media (max-width: 1000px) {
+    .commissions-gallery,
+    .gallery-grid-large {
+      grid-template-columns: 1fr;
+      grid-template-areas: none;
     }
   }
 </style>
 
-<section class="commissions-wrapper">
-  <div class="commission-intro">
+<section class="commissions-container">
+  <div class="commissions-header">
     <h1>COMMISSIONS</h1>
     <p>
-      Do you suffer from too much money?  
-      And you need something for your stream no one has ever created before — or at least hasn’t published?<br><br>
-      Well, fear no more. Just hit me up with your idea and what you're offering for it —  
-      we can then make something out of it.<br><br>
-      Join my <a href="https://discord.gg/yourdiscord" target="_blank" style="color:#ffd95e;text-decoration:underline;">Discord</a> and head into the <strong>Commissions</strong> channel.<br><br>
-      <span style="font-size: 0.85rem;">
-        <strong style="color:#ffd95e;">Note:</strong> I only create platform-unrelated extensions or extensions for Twitch.  
-        No other platforms are supported.
-      </span>
+      Need something custom for your stream — a new Twitch extension, OBS overlay, or complete Streamer.bot integration?<br><br>
+      I build tailored tools that match your stream’s vibe and functionality.  
+      Whether you want something visually stunning or technically complex,  
+      we can bring your idea to life.<br><br>
+      <span style="color:#ffd95e;">Join my Discord</span> to discuss your project and get a quote.
     </p>
   </div>
 
-  <div class="commission-gallery">
-    <div class="commission-card">
-      <img src="{{ site.baseurl }}/assets/commissions/1.webp" alt="Commission Showcase 1">
-      <div class="commission-overlay"><h3>Goal Bar – Custom Animated Widget</h3></div>
+  <div class="gallery-grid-large">
+    <div class="gallery-item item-a">
+      <img src="{{ site.baseurl }}/assets/commissions/1.webp" alt="Commission 1">
+      <div class="gallery-caption">
+        <h3>Goal Bar System</h3>
+        <p>Dynamic Twitch goal tracker with modular events and smooth animations.</p>
+      </div>
     </div>
-    <div class="commission-card">
-      <img src="{{ site.baseurl }}/assets/commissions/2.webp" alt="Commission Showcase 2">
-      <div class="commission-overlay"><h3>Chat Games – Raffle System</h3></div>
+    <div class="gallery-item item-b">
+      <img src="{{ site.baseurl }}/assets/commissions/2.webp" alt="Commission 2">
+      <div class="gallery-caption">
+        <h3>OBS Alerts Pack</h3>
+        <p>Fully customizable animated alerts for Streamer.bot.</p>
+      </div>
     </div>
-    <div class="commission-card">
-      <img src="{{ site.baseurl }}/assets/commissions/3.webp" alt="Commission Showcase 3">
-      <div class="commission-overlay"><h3>OBS Utility – Auto Scene Switcher</h3></div>
+    <div class="gallery-item item-c">
+      <img src="{{ site.baseurl }}/assets/commissions/3.webp" alt="Commission 3">
+      <div class="gallery-caption">
+        <h3>Chat Games Suite</h3>
+        <p>Mini-games integrated directly into Twitch chat.</p>
+      </div>
     </div>
-    <div class="commission-card">
-      <img src="{{ site.baseurl }}/assets/commissions/4.webp" alt="Commission Showcase 4">
-      <div class="commission-overlay"><h3>Twitch Extension – Hot Words Tracker</h3></div>
+    <div class="gallery-item item-d">
+      <img src="{{ site.baseurl }}/assets/commissions/4.webp" alt="Commission 4">
+      <div class="gallery-caption">
+        <h3>Custom Overlay Widgets</h3>
+        <p>Scoreboards, timers, and interactive chat-driven overlays.</p>
+      </div>
     </div>
-    <div class="commission-card">
-      <img src="{{ site.baseurl }}/assets/commissions/5.webp" alt="Commission Showcase 5">
-      <div class="commission-overlay"><h3>Stream Overlay – Subathon Countdown</h3></div>
+    <div class="gallery-item item-e">
+      <img src="{{ site.baseurl }}/assets/commissions/5.webp" alt="Commission 5">
+      <div class="gallery-caption">
+        <h3>Subathon Tools</h3>
+        <p>Timers and progress trackers with advanced logic handling.</p>
+      </div>
     </div>
-  </div>
-
-  <div class="paypal-section">
-    <div id="paypal-container-QZ8UNX4SL53EQ"></div>
-    <script>
-      paypal.HostedButtons({
-        hostedButtonId: "QZ8UNX4SL53EQ",
-      }).render("#paypal-container-QZ8UNX4SL53EQ")
-    </script>
   </div>
 </section>
