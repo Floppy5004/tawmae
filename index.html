@@ -37,6 +37,200 @@ keywords:
   </div>
 </section>
 
+<style>
+  :root{
+    --card-bg: rgba(255,255,255,0.06);
+    --soft-bg: rgba(255,255,255,0.04);
+    --border: rgba(255,255,255,0.18);
+    --muted: rgba(255,255,255,0.7);
+    --accent: #ffd95e;
+    --accent2: #52e3e0;
+  }
+  .section-title{
+    display:flex;align-items:center;gap:10px;color:#fff;margin-bottom:18px;font-size:2rem;
+  }
+  .whats-new-v3{max-width:1200px;margin:80px auto 40px;color:#fff;}
+  .wn-rail{
+    position:relative;border:1px solid var(--border);border-radius:18px;background:linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02));
+    backdrop-filter:blur(12px);padding:28px 28px 28px 72px;box-shadow:0 8px 28px rgba(0,0,0,0.28);overflow:hidden;
+  }
+  .wn-rail::before{
+    content:"";position:absolute;left:32px;top:18px;bottom:18px;width:4px;border-radius:6px;
+    background:linear-gradient(180deg,var(--accent),var(--accent2));
+    box-shadow:0 0 14px rgba(255,217,94,0.45), 0 0 18px rgba(82,227,224,0.25);
+  }
+  .wn-items{display:flex;flex-direction:column;gap:22px;}
+  .wn-item{display:grid;grid-template-columns:18px 1fr;gap:14px;align-items:start;}
+  .wn-dot{
+    width:18px;height:18px;border-radius:50%;
+    background:radial-gradient(circle at 30% 30%, #fff 0%, var(--accent) 40%, #f0a 100%);
+    box-shadow:0 0 0 6px rgba(255,217,94,0.14), 0 0 20px rgba(255,217,94,0.55);
+    transform:translateX(-38px);
+  }
+  .wn-card{
+    border:1px solid var(--border);border-radius:14px;padding:16px 18px;background:var(--soft-bg);
+    display:flex;gap:14px;align-items:flex-start;
+  }
+  .wn-badge{
+    display:inline-flex;align-items:center;gap:8px;font-size:0.85rem;color:#111;
+    background:linear-gradient(90deg,var(--accent),#ffe9a5);padding:6px 10px;border-radius:999px;font-weight:700;
+  }
+  .wn-meta{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px;}
+  .wn-date{font-size:0.85rem;color:var(--muted);padding:4px 8px;border:1px solid var(--border);border-radius:999px;background:rgba(255,255,255,0.03);}
+  .wn-title{font-weight:700;margin:2px 0 4px 0;}
+  .wn-text{color:var(--muted);font-size:0.98rem;line-height:1.6;}
+
+  .upcoming-v3{max-width:1200px;margin:40px auto 80px;color:#fff;}
+  .up-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;}
+  .up-card{
+    position:relative;border:1px solid var(--border);border-radius:18px;background:linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0.02));
+    backdrop-filter:blur(10px);padding:22px;overflow:hidden;box-shadow:0 10px 28px rgba(0,0,0,0.28);
+  }
+  .up-card::after{
+    content:"";position:absolute;inset:auto -30% -30% auto;width:220px;height:220px;border-radius:50%;
+    background:radial-gradient(closest-side, rgba(82,227,224,0.22), transparent 70%);
+    transform:translate(20%,20%);
+  }
+  .up-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
+  .up-name{font-weight:800;letter-spacing:0.3px;}
+  .up-status{font-size:0.75rem;border:1px solid var(--border);padding:6px 9px;border-radius:999px;background:rgba(255,255,255,0.06);}
+  .up-body{font-size:0.95rem;color:var(--muted);line-height:1.6;margin-bottom:14px;}
+  .up-list{margin:0;padding-left:18px;}
+  .up-list li{margin:6px 0;}
+  .up-bar{height:8px;border-radius:6px;background:rgba(255,255,255,0.12);overflow:hidden;border:1px solid var(--border);}
+  .up-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));width:0%;}
+  .up-1 .up-fill{width:35%;}
+  .up-2 .up-fill{width:60%;}
+  .up-3 .up-fill{width:80%;}
+  .up-4 .up-fill{width:45%;}
+
+  @media (max-width:900px){
+    .whats-new-v3{margin:60px 16px;}
+    .upcoming-v3{margin:20px 16px 60px;}
+    .wn-rail{padding:22px 18px 22px 56px;}
+    .wn-rail::before{left:24px;}
+    .wn-dot{transform:translateX(-30px);}
+  }
+</style>
+
+<section class="whats-new-v3">
+  <h2 class="section-title"><span class="iconify" data-icon="mdi:star-four-points-outline"></span>What's new?</h2>
+  <div class="wn-rail">
+    <div class="wn-items">
+      <div class="wn-item">
+        <div class="wn-dot"></div>
+        <div class="wn-card">
+          <div>
+            <div class="wn-meta">
+              <span class="wn-badge"><span class="iconify" data-icon="mdi:lightning-bolt-outline"></span>Release</span>
+              <span class="wn-date">2025-08-28</span>
+            </div>
+            <div class="wn-title">Dynamic Timers overlay update</div>
+            <div class="wn-text">New timer groups, scene-bound presets, lower CPU draw.</div>
+          </div>
+        </div>
+      </div>
+      <div class="wn-item">
+        <div class="wn-dot"></div>
+        <div class="wn-card">
+          <div>
+            <div class="wn-meta">
+              <span class="wn-badge"><span class="iconify" data-icon="mdi:wrench-outline"></span>Improvement</span>
+              <span class="wn-date">2025-08-22</span>
+            </div>
+            <div class="wn-title">User Inventory trading</div>
+            <div class="wn-text">Two-step trade flow, cooldowns, audit log for moderators.</div>
+          </div>
+        </div>
+      </div>
+      <div class="wn-item">
+        <div class="wn-dot"></div>
+        <div class="wn-card">
+          <div>
+            <div class="wn-meta">
+              <span class="wn-badge"><span class="iconify" data-icon="mdi:shield-half-full"></span>Fix</span>
+              <span class="wn-date">2025-08-18</span>
+            </div>
+            <div class="wn-title">Goalbar currency rounding</div>
+            <div class="wn-text">Consistent conversions for mixed donation sources.</div>
+          </div>
+        </div>
+      </div>
+      <div class="wn-item">
+        <div class="wn-dot"></div>
+        <div class="wn-card">
+          <div>
+            <div class="wn-meta">
+              <span class="wn-badge"><span class="iconify" data-icon="mdi:rocket-launch-outline"></span>New</span>
+              <span class="wn-date">2025-08-12</span>
+            </div>
+            <div class="wn-title">Hot Potato presets</div>
+            <div class="wn-text">Speed modes, optional timeouts, scoreboard export.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="upcoming-v3">
+  <h2 class="section-title"><span class="iconify" data-icon="mdi:timer-sand"></span>Upcoming Extensions</h2>
+  <div class="up-grid">
+    <div class="up-card up-1">
+      <div class="up-head">
+        <div class="up-name">Stream Challenges</div>
+        <div class="up-status">Design</div>
+      </div>
+      <div class="up-body">Chat-driven goals with escalating rewards and visual milestones.</div>
+      <ul class="up-list">
+        <li>Tiered goals</li>
+        <li>Overlay widgets</li>
+        <li>SB actions API</li>
+      </ul>
+      <div class="up-bar"><div class="up-fill"></div></div>
+    </div>
+    <div class="up-card up-2">
+      <div class="up-head">
+        <div class="up-name">Trivia Battle</div>
+        <div class="up-status">In development</div>
+      </div>
+      <div class="up-body">Timed rounds, category filters, streak bonuses, anti-spam.</div>
+      <ul class="up-list">
+        <li>Multi-language pool</li>
+        <li>Scene alerts</li>
+        <li>Score persistence</li>
+      </ul>
+      <div class="up-bar"><div class="up-fill"></div></div>
+    </div>
+    <div class="up-card up-3">
+      <div class="up-head">
+        <div class="up-name">Crafting 2.0</div>
+        <div class="up-status">Testing</div>
+      </div>
+      <div class="up-body">Graph recipes, rarity gates, bulk craft, failure odds.</div>
+      <ul class="up-list">
+        <li>Visual editor</li>
+        <li>Loot pool sync</li>
+        <li>Webhook hooks</li>
+      </ul>
+      <div class="up-bar"><div class="up-fill"></div></div>
+    </div>
+    <div class="up-card up-4">
+      <div class="up-head">
+        <div class="up-name">Leaderboard Hub</div>
+        <div class="up-status">Queued</div>
+      </div>
+      <div class="up-body">Unified stats for points, watchtime, wins, and streaks.</div>
+      <ul class="up-list">
+        <li>Rotating boards</li>
+        <li>Theme presets</li>
+        <li>CSV export</li>
+      </ul>
+      <div class="up-bar"><div class="up-fill"></div></div>
+    </div>
+  </div>
+</section>
+
 <hr class="section-divider">
 
 <section class="all-extensions">
@@ -45,7 +239,7 @@ keywords:
     Discover Extensions
   </h2>
 
-  <div class="related-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;">
+  <div class="related-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;justify-items:center;">
     {% assign utility_pages = site.html_pages | where_exp: "p", "p.path contains 'utility/'" %}
     {% assign obs_pages = site.html_pages | where_exp: "p", "p.path contains 'obs-widgets/'" %}
     {% assign chat_pages = site.html_pages | where_exp: "p", "p.path contains 'chat-games/'" %}
