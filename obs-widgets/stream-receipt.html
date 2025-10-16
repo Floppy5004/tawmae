@@ -26,7 +26,7 @@ og_image: "/assets/page-design/page-cards/stream-receipt.webp"
 <!----    TITLE    ------------------------------------------------------------------------------------------------------------------------------>
 <div class="extension-title">
   <div class="extension-title-text-box">
-    <h1>{{ page.title }}</h1>
+   <h1>{{ page.title | replace: " – tawmae", "" | strip }}</h1>
     <p>
       You’ve probably seen those “recipes” on social platforms like Twitter or Bluesky that people love to share —  
       well, here’s one for Twitch. Stream Receipt creates a clean summary of your current stream.<br>
