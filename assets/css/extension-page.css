@@ -345,6 +345,7 @@ p {
 }
 
 
+
 .extension-table {
   width: 100%;
   border-collapse: collapse;
@@ -361,7 +362,7 @@ p {
 
 .extension-table thead {
   background: linear-gradient(90deg, var(--accent1), var(--accent2));
-  color: #111;
+  color: #fff;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
@@ -377,6 +378,7 @@ p {
   padding: 14px 18px;
   border-top: 1px solid rgba(255,255,255,0.1);
   vertical-align: top;
+  text-align: left;
 }
 
 .extension-table tr {
@@ -424,6 +426,7 @@ p {
     align-items: flex-start;
     padding: 8px 0;
     border: none;
+    text-align: left;
   }
 
   .extension-table td::before {
