@@ -45,7 +45,7 @@ og_image: "/assets/page-design/page-cards/twitch-points.webp"
 <!----    TITLE   ------------------------------------------------------------------------------------------------------------------------------>
 <div class="extension-title">
   <div class="extension-title-text-box">
-    <h1>{{ page.title }}</h1>
+   <h1>{{ page.title | replace: " – tawmae", "" | strip }}</h1>
     <p>
       The ideal Streamer.bot loyalty points integration for all non-affiliates and gamba-addicts!
       <br><br>
