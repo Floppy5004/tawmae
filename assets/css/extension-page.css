@@ -625,3 +625,27 @@ border: 1px solid var(--glass-border);
   box-shadow: 0 0 20px rgba(99, 102, 241, 0.4), 0 0 28px rgba(168, 85, 247, 0.3);
 }
 
+@media (max-width: 900px) {
+  .description-container {
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+  }
+
+  .description-container .extension-title-text-box {
+    width: 90%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding-left: 40px;
+    box-sizing: border-box;
+  }
+
+  .description-container img.extension-image {
+    max-width: 90%;
+    height: auto;
+    margin: 20px auto 0 auto;
+    display: block;
+  }
+}
+
+
