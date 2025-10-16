@@ -25,7 +25,7 @@ og_image: "/assets/page-design/page-cards/raffle.webp"
 <!----    TITLE   ------------------------------------------------------------------------------------------------------------------------------>
 <div class="extension-title">
   <div class="extension-title-text-box">
-    <h1>{{ page.title }}</h1>
+    <h1>{{ page.title | replace: " – tawmae", "" | strip }}</h1>
     <p>
       Let's face it, <span style="font-family: 'Segoe Script', sans-serif; color: #ffd95e; font-weight: bold">GIVEAWAY</span> just sounds wrong, <span style="font-family: 'Segoe Script', sans-serif; color: #ffd95e; font-weight: bold">RAFFLE</span> is a so much cooler word.
       <br><br>
