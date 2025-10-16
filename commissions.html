@@ -1,31 +1,186 @@
 ---
 layout: default
-title: "COMMISSIONS | tawmae"
+title: "COMMISSIONS – tawmae"
 description: "Want something unique for your stream and need someone to build it for you? Hit me up :)"
 ---
+
 <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/extension-page.css">
 
+<style>
+  :root {
+    --border: rgba(255,255,255,0.18);
+    --muted: rgba(255,255,255,0.7);
+    --accent1: #6366f1;
+    --accent2: #a855f7;
+  }
 
-<div class="description-container">
+  .commissions-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 60px;
+    max-width: 1400px;
+    margin: 100px auto;
+    color: #fff;
+    padding: 0 5vw;
+  }
 
-                <div class="extension-title-text-box">
-                    <h1>COMMISSIONS</h1>
-        <p>Do you suffer from too much money? And you need something for your stream no one has ever created before or at least hasn't published?<br><br></p>
-            <p>Well, fear no more. Just hit me up with your idea and what you're offering for it. We can then make something out.
-            <br><br>
-            Join my Discord and head into the Commissions channel.
-              <br><br>
-                  <span style="font-size: 0.7rem"><span style=" color: #ffd95e; font-size: 0.7rem">Note:</span> I only create platform-unrelated extensions or extensions for Twitch. No other platforms are supported.</span>
-            </p>
-                </div>
-                <img src="{{ site.baseurl }}/assets/page-design/16zha3.webp" class="extension-image">
-            </div>
+  .commission-intro {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 18px;
+    padding: 50px 60px;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 8px 28px rgba(0,0,0,0.3);
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+  }
 
-<div id="paypal-container-QZ8UNX4SL53EQ"></div>
-<script>
-  paypal.HostedButtons({
-    hostedButtonId: "QZ8UNX4SL53EQ",
-  }).render("#paypal-container-QZ8UNX4SL53EQ")
-</script>
+  .commission-intro::before {
+    content: "";
+    position: absolute;
+    left: 25px;
+    top: 25px;
+    bottom: 25px;
+    width: 5px;
+    border-radius: 6px;
+    background: linear-gradient(180deg,var(--accent1),var(--accent2));
+    box-shadow: 0 0 20px rgba(99,102,241,0.4), 0 0 28px rgba(168,85,247,0.3);
+  }
 
+  .commission-intro h1 {
+    font-size: 2.8rem;
+    margin-bottom: 20px;
+    background: linear-gradient(90deg,var(--accent1),var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 
+  .commission-intro p {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: var(--muted);
+  }
+
+  .commission-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+    width: 100%;
+  }
+
+  .commission-card {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    aspect-ratio: 16/9;
+    border: 1px solid rgba(255,255,255,0.15);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    background: rgba(255,255,255,0.04);
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .commission-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+  }
+
+  .commission-card:hover img {
+    transform: scale(1.08);
+  }
+
+  .commission-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+  }
+
+  .commission-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg,rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.8) 100%);
+    opacity: 0;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    padding: 24px;
+    transition: opacity 0.3s ease;
+  }
+
+  .commission-card:hover .commission-overlay {
+    opacity: 1;
+  }
+
+  .commission-overlay h3 {
+    margin: 0;
+    color: #fff;
+    font-size: 1.2rem;
+    letter-spacing: 0.5px;
+  }
+
+  .paypal-section {
+    margin-top: 60px;
+    text-align: center;
+  }
+
+  @media (max-width: 900px) {
+    .commission-intro {
+      padding: 30px 30px 30px 50px;
+    }
+    .commission-gallery {
+      gap: 18px;
+    }
+  }
+</style>
+
+<section class="commissions-wrapper">
+  <div class="commission-intro">
+    <h1>COMMISSIONS</h1>
+    <p>
+      Do you suffer from too much money?  
+      And you need something for your stream no one has ever created before — or at least hasn’t published?<br><br>
+      Well, fear no more. Just hit me up with your idea and what you're offering for it —  
+      we can then make something out of it.<br><br>
+      Join my <a href="https://discord.gg/yourdiscord" target="_blank" style="color:#ffd95e;text-decoration:underline;">Discord</a> and head into the <strong>Commissions</strong> channel.<br><br>
+      <span style="font-size: 0.85rem;">
+        <strong style="color:#ffd95e;">Note:</strong> I only create platform-unrelated extensions or extensions for Twitch.  
+        No other platforms are supported.
+      </span>
+    </p>
+  </div>
+
+  <div class="commission-gallery">
+    <div class="commission-card">
+      <img src="{{ site.baseurl }}/assets/commissions/1.webp" alt="Commission Showcase 1">
+      <div class="commission-overlay"><h3>Goal Bar – Custom Animated Widget</h3></div>
+    </div>
+    <div class="commission-card">
+      <img src="{{ site.baseurl }}/assets/commissions/2.webp" alt="Commission Showcase 2">
+      <div class="commission-overlay"><h3>Chat Games – Raffle System</h3></div>
+    </div>
+    <div class="commission-card">
+      <img src="{{ site.baseurl }}/assets/commissions/3.webp" alt="Commission Showcase 3">
+      <div class="commission-overlay"><h3>OBS Utility – Auto Scene Switcher</h3></div>
+    </div>
+    <div class="commission-card">
+      <img src="{{ site.baseurl }}/assets/commissions/4.webp" alt="Commission Showcase 4">
+      <div class="commission-overlay"><h3>Twitch Extension – Hot Words Tracker</h3></div>
+    </div>
+    <div class="commission-card">
+      <img src="{{ site.baseurl }}/assets/commissions/5.webp" alt="Commission Showcase 5">
+      <div class="commission-overlay"><h3>Stream Overlay – Subathon Countdown</h3></div>
+    </div>
+  </div>
+
+  <div class="paypal-section">
+    <div id="paypal-container-QZ8UNX4SL53EQ"></div>
+    <script>
+      paypal.HostedButtons({
+        hostedButtonId: "QZ8UNX4SL53EQ",
+      }).render("#paypal-container-QZ8UNX4SL53EQ")
+    </script>
+  </div>
+</section>
