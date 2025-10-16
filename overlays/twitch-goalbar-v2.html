@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>tawmae - TWITCH GOALBAR - v.1.0.2</title>
+  <title>tawmae - TWITCH GOALBAR - v.1.0.3</title>
   <link
     href="https://fonts.googleapis.com/css2?family=Poppins&family=Inter&family=Roboto&family=Open+Sans&family=Lato&family=Oswald&family=SUSE&family=Arimo&family=Ubuntu&family=Nunito&family=Merriweather&family=Playfair+Display&family=Libre+Baskerville&family=Mulish&family=Barlow&family=Inconsolata&family=Bebas+Neue&family=Figtree&family=Saira&family=Josefin+Sans&family=Fjalla+One&family=Bungee&family=Plus+Jakarta+Sans&family=Pacifico&family=Comfortaa&family=Overpass&family=Urbanist&family=Raleway&family=Montserrat&family=Source+Sans+Pro&family=Work+Sans&family=Noto+Sans&family=DM+Sans&family=Rubik&family=Kanit&family=Quicksand&family=Exo+2&family=Manrope&family=Titillium+Web&family=Anton&family=Heebo&family=Mukta&family=Prompt&family=Archivo&family=Teko&family=Barlow+Condensed&display=swap"
     rel="stylesheet">
@@ -240,7 +240,7 @@
     <div id="badge-settings" class="badge badge--warn">Please initialize the settings UI first</div>
   </div>
   <script>
-    const names = ['Follows', 'Subs', 'Bits', 'Donations', 'New Follows', 'New Subs', 'Overall Goal']
+    const names = ['Follows', 'Subs', 'Bits', 'Donations', 'New Follows', 'New Subs', 'Channel Points', 'Overall Goal']
     let events = [], idx = 0, rotationIntervalId, lastCounts = [], lastPercents = []
     const iconEl = document.querySelector('iconify-icon')
     const titleEl = document.querySelector('.goal-title')
@@ -264,7 +264,7 @@
     function rgba(r, g, b, a) { return `rgba(${r},${g},${b},${a})` }
     function computeGradient(baseHex, transparency) { const base = hexToRgb(baseHex); const alpha = clamp((Number(transparency) || 0) / 100, 0, 1); const mix = (a, b, t) => Math.round(a + (b - a) * t); const light = { r: mix(base.r, 255, 0.12), g: mix(base.g, 255, 0.12), b: mix(base.b, 255, 0.12) }; const dark = { r: mix(base.r, 0, 0.18), g: mix(base.g, 0, 0.18), b: mix(base.b, 0, 0.18) }; return `linear-gradient(180deg,${rgba(light.r, light.g, light.b, alpha)} 0%,${rgba(base.r, base.g, base.b, alpha)} 50%,${rgba(dark.r, dark.g, dark.b, alpha)} 100%)` }
     function applyBackground(bg, bgT) { goalBox.style.background = computeGradient(bg, bgT) }
-    const keyMap = { "New Follows": "NewFollows", "New Subs": "NewSubs", "Overall Goal": "OverallGoal" }
+    const keyMap = { "New Follows": "NewFollows", "New Subs": "NewSubs", "Channel Points": "channelPoints", "Overall Goal": "OverallGoal" }
     function k(n) { return keyMap[n] || n.replace(/\s+/g, '') }
     function parseIncluded(cfg) { try { if (typeof cfg.includedEvents === 'object' && cfg.includedEvents !== null) return cfg.includedEvents; if (typeof cfg.includedEvents === 'string') { const o = JSON.parse(cfg.includedEvents); if (typeof o === 'object' && o !== null) return o } } catch (e) { } const legacy = {}; names.forEach(n => legacy[n] = !!cfg['include_' + k(n)]); return legacy }
     function parseConfig(cfg) {
