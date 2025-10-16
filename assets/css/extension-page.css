@@ -636,17 +636,18 @@ border: 1px solid var(--glass-border);
   }
 
   .description-container .extension-title-text-box {
-    width: 100% !important;
-    max-width: 90% !important;
+    width: calc(100% - 40px) !important;
+    max-width: 88vw !important;
     margin: 0 auto !important;
     padding: 30px 30px 30px 60px !important;
     box-sizing: border-box !important;
   }
 
   .description-container img.extension-image {
-    width: 90% !important;
+    width: 88vw !important;
     height: auto !important;
     margin: 20px auto 0 auto !important;
     display: block !important;
   }
 }
+
