@@ -24,7 +24,7 @@ og_image: "/assets/page-design/page-cards/user-birthdays.webp"
 <!----    TITLE   ------------------------------------------------------------------------------------------------------------------------------>
 <div class="extension-title">
   <div class="extension-title-text-box">
-    <h1>{{ page.title }}</h1>
+  <h1>{{ page.title | replace: " – tawmae", "" | strip }}</h1>
     <p>
       Never ever get into the situation of forgetting someone's birthday again! Have your viewers add their
       birthday (or let your mods add them) and the bot will automatically wish happy birthday once they join the
