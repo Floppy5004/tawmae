@@ -63,11 +63,7 @@ keywords:
     text-align:left;
   }
 
-  .whats-new-v3{
-    width:100%;
-  }
-
-  .wn-rail{
+  .wn-rail, .faq-rail{
     position:relative;
     border:1px solid var(--border);
     border-radius:18px;
@@ -91,13 +87,13 @@ keywords:
     box-shadow:0 0 20px rgba(99,102,241,0.4),0 0 28px rgba(168,85,247,0.3);
   }
 
-  .wn-items{
+  .wn-items, .faq-items{
     display:flex;
     flex-direction:column;
     gap:24px;
   }
 
-  .wn-card{
+  .wn-card, .faq-card{
     border:1px solid var(--border);
     border-radius:14px;
     padding:20px 24px;
@@ -135,60 +131,14 @@ keywords:
     background:rgba(255,255,255,0.03);
   }
 
-  .wn-title{
+  .wn-title, .faq-q{
     font-weight:700;
-    margin:2px 0 4px 0;
+    margin:2px 0 6px 0;
   }
 
-  .wn-text{
+  .wn-text, .faq-a{
     color:var(--muted);
     font-size:0.98rem;
-    line-height:1.6;
-  }
-
-  .faq-wrapper{
-    display:flex;
-    flex-direction:column;
-    height:100%;
-  }
-
-  .faq-section{
-    flex:1;
-    border:1px solid var(--border);
-    border-radius:18px;
-    background:rgba(255,255,255,0.05);
-    padding:30px 24px;
-    box-shadow:0 6px 20px rgba(0,0,0,0.25);
-    display:flex;
-    flex-direction:column;
-    justify-content:flex-start;
-    text-align:left;
-  }
-
-  .faq-item{
-    margin-bottom:16px;
-    padding:14px 16px;
-    background:rgba(255,255,255,0.04);
-    border-radius:12px;
-    transition:background 0.2s ease;
-  }
-
-  .faq-item:hover{
-    background:rgba(255,255,255,0.07);
-  }
-
-  .faq-q{
-    font-weight:600;
-    color:#fff;
-    margin-bottom:6px;
-    display:flex;
-    align-items:center;
-    gap:8px;
-  }
-
-  .faq-a{
-    color:var(--muted);
-    font-size:0.95rem;
     line-height:1.6;
   }
 
@@ -196,9 +146,6 @@ keywords:
     .news-faq-wrapper{
       grid-template-columns:1fr;
       margin:60px 16px;
-    }
-    .faq-section{
-      height:auto;
     }
   }
 </style>
@@ -246,22 +193,24 @@ keywords:
 
   <div class="faq-wrapper">
     <h2 class="section-title"><span class="iconify" data-icon="mdi:comment-question-outline"></span> FAQ</h2>
-    <div class="faq-section">
-      <div class="faq-item">
-        <div class="faq-q"><span class="iconify" data-icon="mdi:help-circle-outline"></span>How do I install an extension?</div>
-        <div class="faq-a">Each extension page includes an import string for Streamer.bot. Copy and paste it into your Actions tab.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q"><span class="iconify" data-icon="mdi:help-circle-outline"></span>Can I customize overlays?</div>
-        <div class="faq-a">Yes. Most widgets include editable CSS and variable settings to match your stream layout.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q"><span class="iconify" data-icon="mdi:help-circle-outline"></span>Are these extensions free?</div>
-        <div class="faq-a">Most are free to use. Some advanced ones may require a commission for custom versions.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q"><span class="iconify" data-icon="mdi:help-circle-outline"></span>Where can I report bugs?</div>
-        <div class="faq-a">You can reach out via Discord or GitHub under the respective repository issues section.</div>
+    <div class="faq-rail">
+      <div class="faq-items">
+        <div class="faq-card">
+          <div class="faq-q"><span class="iconify" data-icon="mdi:help-circle-outline"></span>How do I install an extension?</div>
+          <div class="faq-a">Each extension page includes an import string for Streamer.bot. Copy and paste it into your Actions tab.</div>
+        </div>
+        <div class="faq-card">
+          <div class="faq-q"><span class="iconify" data-icon="mdi:help-circle-outline"></span>Can I customize overlays?</div>
+          <div class="faq-a">Yes. Most widgets include editable CSS and variable settings to match your stream layout.</div>
+        </div>
+        <div class="faq-card">
+          <div class="faq-q"><span class="iconify" data-icon="mdi:help-circle-outline"></span>Are these extensions free?</div>
+          <div class="faq-a">Most are free to use. Some advanced ones may require a commission for custom versions.</div>
+        </div>
+        <div class="faq-card">
+          <div class="faq-q"><span class="iconify" data-icon="mdi:help-circle-outline"></span>Where can I report bugs?</div>
+          <div class="faq-a">You can reach out via Discord or GitHub under the respective repository issues section.</div>
+        </div>
       </div>
     </div>
   </div>
