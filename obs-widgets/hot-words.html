@@ -26,7 +26,7 @@ og_image: "/assets/page-design/page-cards/hot-words.webp"
 <!----    TITLE    ------------------------------------------------------------------------------------------------------------------------------>
 <div class="extension-title">
   <div class="extension-title-text-box">
-    <h1>{{ page.title }}</h1>
+    <h1>{{ page.title | replace: " – tawmae", "" | strip }}</h1>
     <p>
       Too lazy to start a poll and just need a quick overview of what your chat thinks — all running locally?  
       Hot Words has you covered, showing the most used words in a ranked leaderboard.<br>
