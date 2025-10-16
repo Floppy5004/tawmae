@@ -26,7 +26,7 @@ og_image: "/assets/page-design/page-cards/vertical-chat.webp"
 <!----    TITLE    ------------------------------------------------------------------------------------------------------------------------------>
 <div class="extension-title">
   <div class="extension-title-text-box">
-    <h1>{{ page.title }}</h1>
+    <h1>{{ page.title | replace: " – tawmae", "" | strip }}</h1>
     <p>
       BRING Clap BACK Clap VERTICAL Clap CHATS!<br><br>
       A clean, customizable vertical chat overlay for OBS — simple to set up, easy to theme,  
