@@ -629,23 +629,25 @@ border: 1px solid var(--glass-border);
   .description-container {
     flex-direction: column !important;
     align-items: center !important;
-    text-align: center !important;
+    gap: 20px !important;
+    padding: 0 16px !important;
   }
 
   .description-container .extension-title-text-box {
-    width: 90%;
-    max-width: 600px;
-    margin: 0 auto;
-    padding-left: 40px;
-    box-sizing: border-box;
+    width: min(620px, 92vw) !important;
+    max-width: 92vw !important;
+    min-width: 0 !important;
+    margin: 0 auto !important;
+    box-sizing: border-box !important;
+    padding-right: 16px !important;
+    overflow-wrap: anywhere !important;
   }
 
   .description-container img.extension-image {
-    max-width: 90%;
-    height: auto;
-    margin: 20px auto 0 auto;
-    display: block;
+    width: 100% !important;
+    max-width: 92vw !important;
+    height: auto !important;
+    margin: 0 auto !important;
+    display: block !important;
   }
 }
-
-
