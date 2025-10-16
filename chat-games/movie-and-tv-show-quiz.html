@@ -33,7 +33,7 @@ og_image: "/assets/page-design/page-cards/movie-and-tv-show-quiz.webp"
 <!----    TITLE   ------------------------------------------------------------------------------------------------------------------------------>
 <div class="extension-title">
   <div class="extension-title-text-box">
-    <h1>{{ page.title }}</h1>
+   <h1>{{ page.title | replace: " – tawmae", "" | strip }}</h1>
     <p>
       A fully automated movie & TV show guessing game for your Twitch chat.  
       Play in your preferred language, filter by genre, year, or rating — and let your viewers compete as hints roll in.<br><br>
