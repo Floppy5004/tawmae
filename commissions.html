@@ -7,182 +7,211 @@ description: "Custom Streamer.bot extensions, Twitch overlays, and OBS widgets b
 <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/extension-page.css">
 
 <style>
-  :root{
-    --border: rgba(255,255,255,0.16);
+  :root {
+    --border: rgba(255,255,255,0.15);
     --glass: rgba(255,255,255,0.06);
-    --muted: rgba(255,255,255,0.78);
-    --accent1:#6366f1;
-    --accent2:#a855f7;
-    --shadow: 0 14px 50px rgba(0,0,0,0.45);
+    --muted: rgba(255,255,255,0.75);
+    --accent1: #6366f1;
+    --accent2: #a855f7;
+    --shadow: 0 16px 50px rgba(0,0,0,0.45);
   }
 
-  .commissions-wrapper{
-    width:100%;
-    max-width:1600px;
-    margin:80px auto 120px;
-    padding:0 4vw;
-    color:#fff;
+  .comm-wrap {
+    width: 100%;
+    max-width: 1600px;
+    margin: 80px auto 120px;
+    padding: 0 4vw;
+    color: #fff;
   }
 
-  .commissions-header{
-    background:var(--glass);
-    border:1px solid var(--border);
-    border-radius:18px;
-    backdrop-filter:blur(12px);
-    padding:60px 70px;
-    box-shadow:var(--shadow);
-    text-align:left;
-    margin-bottom:70px;
+  .comm-header {
+    background: var(--glass);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    backdrop-filter: blur(12px);
+    padding: 60px 70px;
+    box-shadow: var(--shadow);
+    margin-bottom: 90px;
   }
 
-  .commissions-header h1{
-    font-size:3rem;
-    line-height:1.1;
-    margin:0 0 22px;
-    background:linear-gradient(90deg,var(--accent1),var(--accent2));
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
+  .comm-header h1 {
+    font-size: 3rem;
+    margin: 0 0 20px;
+    background: linear-gradient(90deg, var(--accent1), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 
-  .commissions-header p{
-    font-size:1.15rem;
-    line-height:1.8;
-    color:var(--muted);
-    margin:0;
+  .comm-header p {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: var(--muted);
+    margin: 0;
   }
 
-  .commissions-showcase{
-    display:flex;
-    flex-direction:column;
-    gap:50px;
+  .comm-section-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 40px;
+    background: linear-gradient(90deg, var(--accent1), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 
-  .commissions-showcase h2{
-    font-size:2.2rem;
-    font-weight:700;
-    text-align:left;
-    margin-bottom:10px;
-    background:linear-gradient(90deg,var(--accent1),var(--accent2));
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
+  .comm-collage {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 26px;
   }
 
-  .commissions-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(500px,1fr));
-    gap:30px;
+  .comm-card {
+    position: relative;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    overflow: hidden;
+    background: var(--glass);
+    box-shadow: var(--shadow);
+    transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.3s ease;
   }
 
-  .commission-card{
-    background:var(--glass);
-    border:1px solid var(--border);
-    border-radius:18px;
-    box-shadow:var(--shadow);
-    overflow:hidden;
-    display:flex;
-    flex-direction:column;
-    transition:transform 0.35s ease, box-shadow 0.35s ease, border-color 0.25s ease;
+  .comm-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(255,255,255,0.25);
+    box-shadow: 0 24px 70px rgba(0,0,0,0.55);
   }
 
-  .commission-card:hover{
-    transform:translateY(-6px);
-    border-color:rgba(255,255,255,0.25);
-    box-shadow:0 24px 70px rgba(0,0,0,0.55);
+  .comm-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.92) saturate(1.05);
+    transition: filter 0.35s ease, transform 0.45s ease;
   }
 
-  .commission-image{
-    width:100%;
-    aspect-ratio:16/9;
-    object-fit:cover;
-    filter:brightness(0.92) saturate(1.05);
-    transition:filter 0.35s ease, transform 0.4s ease;
+  .comm-card:hover img {
+    filter: brightness(1);
+    transform: scale(1.04);
   }
 
-  .commission-card:hover .commission-image{
-    filter:brightness(1);
-    transform:scale(1.03);
+  .comm-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 24px 28px;
+    background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.85) 100%);
+    backdrop-filter: blur(6px);
   }
 
-  .commission-info{
-    padding:22px 28px;
+  .comm-info h3 {
+    margin: 0 0 6px;
+    font-size: 1.3rem;
+    color: #fff;
   }
 
-  .commission-info h3{
-    margin:0 0 10px;
-    font-size:1.4rem;
-    font-weight:700;
+  .comm-info p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
   }
 
-  .commission-info p{
-    margin:0;
-    color:var(--muted);
-    line-height:1.7;
+  /* asymmetric layout */
+  .comm-card:nth-child(1) {
+    grid-column: span 8;
+    aspect-ratio: 16/8;
   }
 
-  @media(max-width:800px){
-    .commissions-header{
-      padding:40px;
+  .comm-card:nth-child(2) {
+    grid-column: span 4;
+    aspect-ratio: 16/10;
+  }
+
+  .comm-card:nth-child(3) {
+    grid-column: span 5;
+    aspect-ratio: 16/9;
+  }
+
+  .comm-card:nth-child(4) {
+    grid-column: span 7;
+    aspect-ratio: 21/9;
+  }
+
+  .comm-card:nth-child(5) {
+    grid-column: span 12;
+    aspect-ratio: 16/7;
+  }
+
+  @media (max-width: 1200px) {
+    .comm-card:nth-child(1),
+    .comm-card:nth-child(2),
+    .comm-card:nth-child(3),
+    .comm-card:nth-child(4),
+    .comm-card:nth-child(5) {
+      grid-column: span 12;
+      aspect-ratio: 16/9;
     }
-    .commissions-grid{
-      grid-template-columns:1fr;
+  }
+
+  @media (max-width: 800px) {
+    .comm-header {
+      padding: 40px;
     }
   }
 </style>
 
-<section class="commissions-wrapper">
-  <div class="commissions-header">
+<section class="comm-wrap">
+  <div class="comm-header">
     <h1>COMMISSIONS</h1>
     <p>
       Custom Streamer.bot extensions, OBS widgets, and Twitch overlays built from scratch.  
-      Every project is unique — planned for your use case, integrated with your setup,  
-      and optimized for performance and stream reliability.  
+      Each project is handcrafted, tested, and visually aligned to your stream.  
+      No templates. No generic clones. Just tailored systems that actually fit your ecosystem.
       <br><br>
-      If you need something original and high-quality, you’re in the right place.
+      Here are a few examples of completed commissions:
     </p>
   </div>
 
-  <div class="commissions-showcase">
-    <h2>Check out some of the completed commissions</h2>
+  <h2 class="comm-section-title">Showcase</h2>
 
-    <div class="commissions-grid">
-      <div class="commission-card">
-        <img src="{{ site.baseurl }}/assets/commissions/1.webp" alt="Goal System" class="commission-image">
-        <div class="commission-info">
-          <h3>Interactive Goal System</h3>
-          <p>Modular Twitch goal tracker with event-based progression, animation logic, and full Streamer.bot control.</p>
-        </div>
+  <div class="comm-collage">
+    <div class="comm-card">
+      <img src="{{ site.baseurl }}/assets/commissions/1.webp" alt="Goal System">
+      <div class="comm-info">
+        <h3>Interactive Goal System</h3>
+        <p>Dynamic progress tracking across bits, donos, and channel points with smart logic and OBS syncing.</p>
       </div>
+    </div>
 
-      <div class="commission-card">
-        <img src="{{ site.baseurl }}/assets/commissions/2.webp" alt="Alerts Pack" class="commission-image">
-        <div class="commission-info">
-          <h3>Alerts Pack</h3>
-          <p>Custom animated alert package with dynamic message integration, modular layers, and reactive colors.</p>
-        </div>
+    <div class="comm-card">
+      <img src="{{ site.baseurl }}/assets/commissions/2.webp" alt="Alerts Pack">
+      <div class="comm-info">
+        <h3>Alerts Pack</h3>
+        <p>Stylized animated alerts reacting to viewer actions with color theming and layered motion graphics.</p>
       </div>
+    </div>
 
-      <div class="commission-card">
-        <img src="{{ site.baseurl }}/assets/commissions/3.webp" alt="Chat Games" class="commission-image">
-        <div class="commission-info">
-          <h3>Chat Games Suite</h3>
-          <p>Interactive mini-games with persistent scoring, leaderboard logic, and event-based Twitch chat triggers.</p>
-        </div>
+    <div class="comm-card">
+      <img src="{{ site.baseurl }}/assets/commissions/3.webp" alt="Chat Games">
+      <div class="comm-info">
+        <h3>Chat Games Suite</h3>
+        <p>Real-time Twitch chat mini-games with rewards, scores, and adaptive difficulty settings.</p>
       </div>
+    </div>
 
-      <div class="commission-card">
-        <img src="{{ site.baseurl }}/assets/commissions/4.webp" alt="Overlay Widgets" class="commission-image">
-        <div class="commission-info">
-          <h3>Overlay Widgets</h3>
-          <p>Scene-based OBS widgets such as timers, event boards, and viewer interactions — fully themeable and animated.</p>
-        </div>
+    <div class="comm-card">
+      <img src="{{ site.baseurl }}/assets/commissions/4.webp" alt="Overlay Widgets">
+      <div class="comm-info">
+        <h3>Overlay Widgets</h3>
+        <p>Leaderboard and timer widgets with modular scene integration, glassmorphism effects, and theme sync.</p>
       </div>
+    </div>
 
-      <div class="commission-card">
-        <img src="{{ site.baseurl }}/assets/commissions/5.webp" alt="Subathon Suite" class="commission-image">
-        <div class="commission-info">
-          <h3>Subathon Suite</h3>
-          <p>Advanced time management, bonus tiers, and chat-integrated control for long-form Twitch subathons.</p>
-        </div>
+    <div class="comm-card">
+      <img src="{{ site.baseurl }}/assets/commissions/5.webp" alt="Subathon Suite">
+      <div class="comm-info">
+        <h3>Subathon Suite</h3>
+        <p>Automated subathon time control with extension-based chat inputs and pause/resume persistence.</p>
       </div>
     </div>
   </div>
