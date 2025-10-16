@@ -9,7 +9,7 @@ og_image: "/assets/page-design/page-cards/hot-potato.webp"
 <!----    TITLE   ------------------------------------------------------------------------------------------------------------------------------>
 <div class="extension-title">
   <div class="extension-title-text-box">
-    <h1>{{ page.title }}</h1>
+    <h1>{{ page.title | replace: " – tawmae", "" | strip }}</h1>
     <p>
       Chat gone quiet again?<br><br>
       Light things up with a round of Hot Potato — pass it before it burns your fingers  
