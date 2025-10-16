@@ -37,34 +37,6 @@ keywords:
   </div>
 </section>
 
-<section class="whats-new" style="margin:100px auto;max-width:1100px;text-align:left;color:white;">
-  <div style="background:linear-gradient(145deg,rgba(255,255,255,0.08),rgba(255,255,255,0.02));border:1px solid rgba(255,255,255,0.15);border-radius:16px;padding:50px;backdrop-filter:blur(12px);box-shadow:0 6px 20px rgba(0,0,0,0.25);">
-    <h2 style="font-size:2rem;margin-bottom:20px;display:flex;align-items:center;gap:10px;">
-      <span class="iconify" data-icon="mdi:star-four-points-outline"></span> What's new?
-    </h2>
-    <ul style="list-style:none;padding:0;margin:0;font-size:1.1rem;line-height:1.8;">
-      <li style="margin-bottom:10px;">• Added new OBS overlay for <strong>Dynamic Timers</strong></li>
-      <li style="margin-bottom:10px;">• Updated <strong>User Inventory</strong> extension with trading system</li>
-      <li style="margin-bottom:10px;">• Improved <strong>Twitch Goalbar</strong> currency conversion accuracy</li>
-      <li style="margin-bottom:10px;">• UI performance improvements across multiple tools</li>
-    </ul>
-  </div>
-</section>
-
-<section class="upcoming-extensions" style="margin:100px auto;max-width:1100px;text-align:left;color:white;">
-  <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:50px;backdrop-filter:blur(8px);box-shadow:inset 0 0 20px rgba(255,255,255,0.05);">
-    <h2 style="font-size:2rem;margin-bottom:20px;display:flex;align-items:center;gap:10px;">
-      <span class="iconify" data-icon="mdi:timer-sand"></span> Upcoming Extensions
-    </h2>
-    <ul style="list-style:none;padding:0;margin:0;font-size:1.1rem;line-height:1.8;">
-      <li style="margin-bottom:10px;">• <strong>Stream Challenges</strong> — create goals your chat can trigger</li>
-      <li style="margin-bottom:10px;">• <strong>Trivia Battle</strong> — quiz your community live on stream</li>
-      <li style="margin-bottom:10px;">• <strong>Crafting 2.0</strong> — expanded recipe management and UI</li>
-      <li style="margin-bottom:10px;">• <strong>Leaderboard Hub</strong> — unified stats for points, watchtime & games</li>
-    </ul>
-  </div>
-</section>
-
 <hr class="section-divider">
 
 <section class="all-extensions">
@@ -73,7 +45,7 @@ keywords:
     Discover Extensions
   </h2>
 
-  <div class="related-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;justify-items:center;">
+  <div class="related-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;">
     {% assign utility_pages = site.html_pages | where_exp: "p", "p.path contains 'utility/'" %}
     {% assign obs_pages = site.html_pages | where_exp: "p", "p.path contains 'obs-widgets/'" %}
     {% assign chat_pages = site.html_pages | where_exp: "p", "p.path contains 'chat-games/'" %}
