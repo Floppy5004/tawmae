@@ -21,22 +21,6 @@ keywords:
 
 <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/extension-page.css">
 
-<section class="home-intro" style="display:flex;justify-content:center;align-items:center;gap:60px;margin:80px auto;max-width:1400px;flex-wrap:nowrap;">
-  <div class="intro-text" style="flex:1;max-width:700px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.2);border-radius:16px;padding:40px;color:white;backdrop-filter:blur(10px);box-shadow:0 4px 12px rgba(0,0,0,0.2);text-align:left;z-index:2;">
-    <h1 style="margin-bottom:20px;font-size:2.5rem;">Hello there! helloThere</h1>
-    <p style="font-size:1.1rem;line-height:1.6;">
-      This is a collection of custom-built <strong>Streamer.bot extensions</strong>.  
-      You'll find a mix of <strong>OBS overlays</strong>, useful <strong>utilities</strong>, various <strong>integrations</strong>, and interactive <strong>chat games</strong> — all designed to make your Twitch stream stand out — and compensate for a lack of streaming personality.<br><span style="font-size:2.5rem;">Kapp</span><br><br>
-      Looking for something custom that nobody else has? Or do you have a project in mind that nobody has created yet?  
-      Check out the <a href="{{ site.baseurl }}/commissions.html" style="color:#ffd95e;text-decoration:underline;">Commissions</a> page to request a tailored Streamer.bot project.
-    </p>
-  </div>
-
-  <div class="intro-image" style="flex:1;display:flex;justify-content:center;align-items:center;">
-    <img src="{{ site.baseurl }}/assets/page-design/home-meme.webp" alt="Free range meme cat" style="max-width:800px;width:100%;height:auto;object-fit:contain;border-radius:0;z-index:1;">
-  </div>
-</section>
-
 <style>
   :root{
     --border: rgba(255,255,255,0.18);
@@ -44,6 +28,39 @@ keywords:
     --accent1: #6366f1;
     --accent2: #a855f7;
   }
+
+  .section-title{
+    color:#fff;
+    margin-bottom:18px;
+    font-size:2.2rem;
+    letter-spacing:0.5px;
+    text-align:left;
+  }
+
+  .home-intro{
+    display:flex;justify-content:center;align-items:center;gap:60px;margin:80px auto;max-width:1400px;flex-wrap:nowrap;
+  }
+  .intro-col{flex:1;max-width:700px}
+  .intro-text{
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.2);
+    border-radius:16px;
+    padding:40px 40px 40px 70px;
+    color:white;
+    backdrop-filter:blur(10px);
+    box-shadow:0 4px 12px rgba(0,0,0,0.2);
+    text-align:left;
+    position:relative;
+    z-index:2;
+  }
+  .intro-text::before{
+    content:"";
+    position:absolute;left:30px;top:24px;bottom:24px;width:5px;border-radius:6px;
+    background:linear-gradient(180deg,var(--accent1),var(--accent2));
+    box-shadow:0 0 20px rgba(99,102,241,0.4),0 0 28px rgba(168,85,247,0.3);
+  }
+  .intro-image{flex:1;display:flex;justify-content:center;align-items:center;}
+  .intro-image img{max-width:800px;width:100%;height:auto;object-fit:contain;border-radius:0;z-index:1;}
 
   .news-faq-wrapper{
     display:grid;
@@ -55,15 +72,8 @@ keywords:
     color:#fff;
   }
 
-  .section-title{
-    color:#fff;
-    margin-bottom:40px;
-    font-size:2.2rem;
-    letter-spacing:0.5px;
-    text-align:left;
-  }
-
-  .wn-rail, .faq-rail{
+  .whats-new-v3{width:100%}
+  .wn-rail{
     position:relative;
     border:1px solid var(--border);
     border-radius:18px;
@@ -72,87 +82,94 @@ keywords:
     padding:40px 40px 40px 70px;
     box-shadow:0 8px 28px rgba(0,0,0,0.28);
     overflow:hidden;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
+    height:100%;
   }
-
   .wn-rail::before{
     content:"";
     position:absolute;
-    left:30px;
-    top:30px;
-    bottom:30px;
-    width:5px;
-    border-radius:6px;
+    left:30px;top:30px;bottom:30px;width:5px;border-radius:6px;
     background:linear-gradient(180deg,var(--accent1),var(--accent2));
     box-shadow:0 0 20px rgba(99,102,241,0.4),0 0 28px rgba(168,85,247,0.3);
   }
-
-  .wn-items, .faq-items{
-    display:flex;
-    flex-direction:column;
-    justify-content:space-evenly;
-    height:100%;
-  }
-
-  .wn-card, .faq-card{
+  .wn-items{display:flex;flex-direction:column;gap:24px}
+  .wn-card{
     border:1px solid var(--border);
     border-radius:14px;
     padding:20px 24px;
     background:rgba(255,255,255,0.04);
+    display:flex;
+    flex-direction:column;
     text-align:left;
   }
-
   .wn-badge{
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-    font-size:0.85rem;
-    color:#111;
+    display:inline-flex;align-items:center;gap:8px;font-size:0.85rem;color:#111;
     background:linear-gradient(90deg,var(--accent1),var(--accent2));
-    padding:6px 10px;
-    border-radius:999px;
-    font-weight:700;
+    padding:6px 10px;border-radius:999px;font-weight:700;
   }
-
-  .wn-meta{
-    display:flex;
-    gap:10px;
-    flex-wrap:wrap;
-    margin-bottom:10px;
-  }
-
+  .wn-meta{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px}
   .wn-date{
-    font-size:0.85rem;
-    color:var(--muted);
-    padding:4px 8px;
+    font-size:0.85rem;color:var(--muted);padding:4px 8px;border:1px solid var(--border);
+    border-radius:999px;background:rgba(255,255,255,0.03);
+  }
+  .wn-title{font-weight:700;margin:2px 0 4px 0}
+  .wn-text{color:var(--muted);font-size:0.98rem;line-height:1.6}
+
+  .faq-wrapper{display:flex;flex-direction:column;height:100%}
+  .faq-section{
+    position:relative;
+    flex:1;
     border:1px solid var(--border);
-    border-radius:999px;
-    background:rgba(255,255,255,0.03);
+    border-radius:18px;
+    background:linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02));
+    padding:40px 70px 40px 40px;
+    box-shadow:0 8px 28px rgba(0,0,0,0.28);
+    overflow:hidden;
+    height:100%;
+    display:flex;
   }
-
-  .wn-title, .faq-q{
-    font-weight:700;
-    margin:2px 0 6px 0;
+  .faq-section::after{
+    content:"";
+    position:absolute;
+    right:30px;top:30px;bottom:30px;width:5px;border-radius:6px;
+    background:linear-gradient(180deg,var(--accent1),var(--accent2));
+    box-shadow:0 0 20px rgba(99,102,241,0.4),0 0 28px rgba(168,85,247,0.3);
   }
-
-  .wn-text, .faq-a{
-    color:var(--muted);
-    font-size:0.98rem;
-    line-height:1.6;
+  .faq-items{
+    display:flex;flex-direction:column;justify-content:space-evenly;gap:0;width:100%;
   }
+  .faq-item{
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:18px 20px;
+    background:rgba(255,255,255,0.04);
+    text-align:left;
+  }
+  .faq-q{font-weight:700;color:#fff;margin:0 0 6px 0;display:flex;align-items:center;gap:8px}
+  .faq-a{color:var(--muted);font-size:0.95rem;line-height:1.6}
 
   @media (max-width:1000px){
-    .news-faq-wrapper{
-      grid-template-columns:1fr;
-      margin:60px 16px;
-    }
-    .wn-rail, .faq-rail{
-      padding:30px;
-    }
+    .home-intro{flex-wrap:wrap;margin:60px 16px}
+    .news-faq-wrapper{grid-template-columns:1fr;margin:60px 16px}
   }
 </style>
+
+<section class="home-intro">
+  <div class="intro-col">
+    <h2 class="section-title">Hello There</h2>
+    <div class="intro-text">
+      <p style="font-size:1.1rem;line-height:1.6;margin:0;">
+        This is a collection of custom-built <strong>Streamer.bot extensions</strong>.
+        You'll find a mix of <strong>OBS overlays</strong>, useful <strong>utilities</strong>, various <strong>integrations</strong>, and interactive <strong>chat games</strong> — all designed to make your Twitch stream stand out — and compensate for a lack of streaming personality.<br><span style="font-size:2.5rem;">Kapp</span><br><br>
+        Looking for something custom that nobody else has? Or do you have a project in mind that nobody has created yet?
+        Check out the <a href="{{ site.baseurl }}/commissions.html" style="color:#ffd95e;text-decoration:underline;">Commissions</a> page to request a tailored Streamer.bot project.
+      </p>
+    </div>
+  </div>
+
+  <div class="intro-image">
+    <img src="{{ site.baseurl }}/assets/page-design/home-meme.webp" alt="Free range meme cat">
+  </div>
+</section>
 
 <section class="news-faq-wrapper">
   <div class="whats-new-v3">
@@ -197,21 +214,21 @@ keywords:
 
   <div class="faq-wrapper">
     <h2 class="section-title"><span class="iconify" data-icon="mdi:comment-question-outline"></span> FAQ</h2>
-    <div class="faq-rail">
+    <div class="faq-section">
       <div class="faq-items">
-        <div class="faq-card">
+        <div class="faq-item">
           <div class="faq-q"><span class="iconify" data-icon="mdi:help-circle-outline"></span>How do I install an extension?</div>
           <div class="faq-a">Each extension page includes an import string for Streamer.bot. Copy and paste it into your Actions tab.</div>
         </div>
-        <div class="faq-card">
+        <div class="faq-item">
           <div class="faq-q"><span class="iconify" data-icon="mdi:help-circle-outline"></span>Can I customize overlays?</div>
           <div class="faq-a">Yes. Most widgets include editable CSS and variable settings to match your stream layout.</div>
         </div>
-        <div class="faq-card">
+        <div class="faq-item">
           <div class="faq-q"><span class="iconify" data-icon="mdi:help-circle-outline"></span>Are these extensions free?</div>
           <div class="faq-a">Most are free to use. Some advanced ones may require a commission for custom versions.</div>
         </div>
-        <div class="faq-card">
+        <div class="faq-item">
           <div class="faq-q"><span class="iconify" data-icon="mdi:help-circle-outline"></span>Where can I report bugs?</div>
           <div class="faq-a">You can reach out via Discord or GitHub under the respective repository issues section.</div>
         </div>
