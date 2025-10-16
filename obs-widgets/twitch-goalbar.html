@@ -27,7 +27,7 @@ og_image: "/assets/page-design/page-cards/twitch-goalbar.webp"
 <!----    TITLE   ------------------------------------------------------------------------------------------------------------------------------>
 <div class="extension-title">
   <div class="extension-title-text-box">
-    <h1>{{ page.title }}</h1>
+    <h1>{{ page.title | replace: " – tawmae", "" | strip }}</h1>
     <p>
       A fully customizable Twitch goal bar supporting follows, subs, bits, channel points and donations  
       (Kofi, StreamElements, Streamlabs, Fourthwall, and Tipeeestream).<br><br>
