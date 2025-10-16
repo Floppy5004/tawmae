@@ -47,13 +47,7 @@ description: "Custom Streamer.bot extensions, Twitch overlays, and OBS widgets b
     background: var(--glass);
     box-shadow: var(--shadow);
     cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-  }
-
-  .comm-card:hover {
-    transform: translateY(-4px);
-    border-color: rgba(255,255,255,0.25);
-    box-shadow: 0 18px 50px rgba(0,0,0,0.55);
+    transition: transform 0.5s ease, box-shadow 0.4s ease, border-color 0.3s ease;
   }
 
   .comm-card img {
@@ -61,12 +55,13 @@ description: "Custom Streamer.bot extensions, Twitch overlays, and OBS widgets b
     height: 100%;
     object-fit: cover;
     display: block;
-    transition: filter 0.35s ease, transform 0.4s ease;
+    filter: brightness(0.93) saturate(1.05);
+    transition: transform 0.6s ease, filter 0.4s ease;
   }
 
   .comm-card:hover img {
-    filter: brightness(1.05);
-    transform: scale(1.03);
+    transform: scale(1.2);
+    filter: brightness(1);
   }
 
   .comm-info {
@@ -74,14 +69,20 @@ description: "Custom Streamer.bot extensions, Twitch overlays, and OBS widgets b
     bottom: 0;
     left: 0;
     width: 100%;
-    padding: 14px 20px;
-    background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.7) 100%);
+    padding: 16px 20px;
+    background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.75) 100%);
     backdrop-filter: blur(4px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+
+  .comm-card:hover .comm-info {
+    opacity: 0;
+    transform: translateY(40px);
   }
 
   .comm-info h3 {
     margin: 0 0 4px;
-    font-size: 1rem;
+    font-size: 1.1rem;
     color: #fff;
   }
 
@@ -89,6 +90,7 @@ description: "Custom Streamer.bot extensions, Twitch overlays, and OBS widgets b
     margin: 0;
     color: var(--muted);
     font-size: 0.9rem;
+    line-height: 1.4;
   }
 
   .comm-card:nth-child(1) { grid-column: span 8; aspect-ratio: 16/8; }
@@ -101,27 +103,8 @@ description: "Custom Streamer.bot extensions, Twitch overlays, and OBS widgets b
     .comm-card:nth-child(n) { grid-column: span 12; aspect-ratio: 16/9; }
   }
 
-  .lightbox {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.9);
-    backdrop-filter: blur(10px);
-    z-index: 9999;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .lightbox.active {
-    display: flex !important;
-  }
-
-  .lightbox img {
-    max-width: 90vw;
-    max-height: 90vh;
-    border-radius: 12px;
-    border: 1px solid var(--border);
-    box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+  @media (max-width: 800px) {
+    .comm-info { padding: 12px 16px; }
   }
 </style>
 
@@ -140,53 +123,44 @@ description: "Custom Streamer.bot extensions, Twitch overlays, and OBS widgets b
   <h2 class="comm-section-title">Check out some of the completed commissions</h2>
 
   <div class="comm-collage">
-    <div class="comm-card" data-img="{{ site.baseurl }}/assets/commissions/1.webp">
-      <img src="{{ site.baseurl }}/assets/commissions/1.webp" alt="">
-      <div class="comm-info"><h3>Elden Ring Themed Message Highlighter</h3><p>Hidden path ahead!</p></div>
+    <div class="comm-card">
+      <img src="{{ site.baseurl }}/assets/commissions/1.webp" alt="Elden Ring Themed Message Highlighter">
+      <div class="comm-info">
+        <h3>Elden Ring Themed Message Highlighter</h3>
+        <p>Hidden path ahead!</p>
+      </div>
     </div>
-    <div class="comm-card" data-img="{{ site.baseurl }}/assets/commissions/5.webp">
-      <img src="{{ site.baseurl }}/assets/commissions/5.webp" alt="">
-      <div class="comm-info"><h3>GTA San Adreas Themed Counter</h3><p>FeelsNostalgicMan.</p></div>
+
+    <div class="comm-card">
+      <img src="{{ site.baseurl }}/assets/commissions/5.webp" alt="GTA San Adreas Themed Counter">
+      <div class="comm-info">
+        <h3>GTA San Adreas Themed Counter</h3>
+        <p>FeelsNostalgicMan.</p>
+      </div>
     </div>
-    <div class="comm-card" data-img="{{ site.baseurl }}/assets/commissions/4.webp">
-      <img src="{{ site.baseurl }}/assets/commissions/4.webp" alt="">
-      <div class="comm-info"><h3>"Fact or Fake" Chat Voting</h3><p>Fakenews!</p></div>
+
+    <div class="comm-card">
+      <img src="{{ site.baseurl }}/assets/commissions/4.webp" alt="Fact or Fake Chat Voting">
+      <div class="comm-info">
+        <h3>"Fact or Fake" Chat Voting</h3>
+        <p>Fakenews!</p>
+      </div>
     </div>
-    <div class="comm-card" data-img="{{ site.baseurl }}/assets/commissions/3.webp">
-      <img src="{{ site.baseurl }}/assets/commissions/3.webp" alt="">
-      <div class="comm-info"><h3>Super Cute Chat Highlighter</h3><p>uwu :3</p></div>
+
+    <div class="comm-card">
+      <img src="{{ site.baseurl }}/assets/commissions/3.webp" alt="Super Cute Chat Highlighter">
+      <div class="comm-info">
+        <h3>Super Cute Chat Highlighter</h3>
+        <p>uwu :3</p>
+      </div>
     </div>
-    <div class="comm-card" data-img="{{ site.baseurl }}/assets/commissions/2.webp">
-      <img src="{{ site.baseurl }}/assets/commissions/2.webp" alt="">
-      <div class="comm-info"><h3>Custom User Cards</h3><p>Custom colors, backgrounds and badges for everyone to collect</p></div>
+
+    <div class="comm-card">
+      <img src="{{ site.baseurl }}/assets/commissions/2.webp" alt="Custom User Cards">
+      <div class="comm-info">
+        <h3>Custom User Cards</h3>
+        <p>Custom colors, backgrounds and badges for everyone to collect</p>
+      </div>
     </div>
   </div>
 </section>
-
-<div class="lightbox" id="lightbox">
-  <img src="" alt="">
-</div>
-
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const cards = document.querySelectorAll(".comm-card");
-    const lightbox = document.getElementById("lightbox");
-    const lightboxImg = lightbox.querySelector("img");
-
-    cards.forEach(card => {
-      card.addEventListener("click", () => {
-        const imgSrc = card.dataset.img;
-        if (!imgSrc) return;
-        lightboxImg.src = imgSrc;
-        lightbox.classList.add("active");
-      });
-    });
-
-    lightbox.addEventListener("click", e => {
-      if (e.target === lightbox || e.target === lightboxImg) {
-        lightbox.classList.remove("active");
-        lightboxImg.src = "";
-      }
-    });
-  });
-</script>
