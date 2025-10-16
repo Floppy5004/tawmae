@@ -592,6 +592,7 @@ border: 1px solid var(--glass-border);
 .extension-title-text-box {
   position: relative;
   overflow: hidden;
+  padding-left: 70px;
 }
 
 .extension-title-text-box::before {
@@ -605,4 +606,5 @@ border: 1px solid var(--glass-border);
   background: linear-gradient(180deg, #6366f1, #a855f7);
   box-shadow: 0 0 20px rgba(99, 102, 241, 0.4), 0 0 28px rgba(168, 85, 247, 0.3);
 }
+
 
