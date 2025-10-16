@@ -629,25 +629,24 @@ border: 1px solid var(--glass-border);
   .description-container {
     flex-direction: column !important;
     align-items: center !important;
-    gap: 20px !important;
-    padding: 0 16px !important;
+    justify-content: center !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
   }
 
   .description-container .extension-title-text-box {
-    width: min(620px, 92vw) !important;
-    max-width: 92vw !important;
-    min-width: 0 !important;
+    width: 100% !important;
+    max-width: 90% !important;
     margin: 0 auto !important;
+    padding: 30px 30px 30px 60px !important;
     box-sizing: border-box !important;
-    padding-right: 16px !important;
-    overflow-wrap: anywhere !important;
   }
 
   .description-container img.extension-image {
-    width: 100% !important;
-    max-width: 92vw !important;
+    width: 90% !important;
     height: auto !important;
-    margin: 0 auto !important;
+    margin: 20px auto 0 auto !important;
     display: block !important;
   }
 }
