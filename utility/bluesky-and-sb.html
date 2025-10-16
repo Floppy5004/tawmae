@@ -22,7 +22,7 @@ og_image: "/assets/page-design/page-cards/bluesky-and-sb.webp"
 <!----    TITLE   ------------------------------------------------------------------------------------------------------------------------------>
 <div class="extension-title">
   <div class="extension-title-text-box">
-    <h1>{{ page.title }}</h1>
+    <h1>{{ page.title | replace: " – tawmae", "" | strip }}</h1>
     <p>
       Wanna let your followers know when you're going live? <br><br>
       Or change your profile picture or display name while you are live? <br><br>
