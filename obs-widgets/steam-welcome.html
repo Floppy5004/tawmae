@@ -27,7 +27,7 @@ og_image: "/assets/page-design/page-cards/steam-welcome.webp"
 <!----    TITLE    ------------------------------------------------------------------------------------------------------------------------------>
 <div class="extension-title">
   <div class="extension-title-text-box">
-    <h1>{{ page.title }}</h1>
+    <h1>{{ page.title | replace: " – tawmae", "" | strip }}</h1>
     <p>
       Steam notifications whenever your best friend xXxBigStewxXx69 launches Skyrim for the 150th time? Annoying.  
       But a Steam-style notification whenever a chatter joins your chat? HELL YEAH!<br>
