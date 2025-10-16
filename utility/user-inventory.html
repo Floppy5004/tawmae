@@ -26,7 +26,7 @@ og_image: "/assets/page-design/page-cards/user-inventory.webp"
 <!----    TITLE   ------------------------------------------------------------------------------------------------------------------------------>
 <div class="extension-title">
   <div class="extension-title-text-box">
-    <h1>{{ page.title }}</h1>
+   <h1>{{ page.title | replace: " – tawmae", "" | strip }}</h1>
     <p>
       Satisfy the desire to COLLECT and LOOT!<br><br>
       • Create custom items with custom item effects<br>
