@@ -28,7 +28,7 @@ og_image: "/assets/page-design/page-cards/ad-notification.webp"
 <!----    TITLE    ------------------------------------------------------------------------------------------------------------------------------>
 <div class="extension-title">
   <div class="extension-title-text-box">
-    <h1>{{ page.title }}</h1>
+    <h1>{{ page.title | replace: " – tawmae", "" | strip }}</h1>
     <p>
       An OBS widget for Twitch that notifies both you and your viewers about upcoming scheduled ads, when ads are actually starting and for how long they last.<br><br>
       Sucks to be a non-sub, huh?<br>
