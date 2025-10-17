@@ -272,6 +272,26 @@ p {
     0 12px 45px rgba(0,0,0,0.5);
 }
 
+.copy-box-smol {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 14px;
+  padding: 12px 16px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+  backdrop-filter: blur(16px);
+  box-shadow:
+    inset 0 0 25px rgba(255,255,255,0.06),
+    0 0 25px rgba(99,102,241,0.15),
+    0 8px 30px rgba(0,0,0,0.35);
+  justify-content: center;
+  align-self: start;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+}
+
 .copy-text {
   flex: 1;
   white-space: nowrap;
@@ -288,36 +308,73 @@ p {
 .copy-btn {
   background: linear-gradient(90deg, var(--accent1), var(--accent2));
   color: #fff;
-  padding: 10px 22px;
+  padding: 12px 26px;
   border: none;
-  border-radius: 10px;
+  border-radius: 12px;
   font-weight: 600;
   font-family: 'Poppins', sans-serif;
   font-size: 1rem;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  transition: all 0.25s ease;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-  letter-spacing: 0.4px;
+  gap: 10px;
   position: relative;
   z-index: 2;
+  transition: all 0.25s ease;
+  letter-spacing: 0.4px;
+  box-shadow:
+    0 0 20px rgba(99,102,241,0.4),
+    0 6px 20px rgba(0,0,0,0.4);
+  overflow: hidden;
+}
+
+.copy-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, rgba(255,255,255,0.25), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+.copy-btn::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  padding: 2px;
+  background: linear-gradient(90deg, var(--accent1), var(--accent2));
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  opacity: 0.8;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.copy-btn:hover::before {
+  opacity: 1;
 }
 
 .copy-btn:hover {
-  transform: translateY(-2px) scale(1.04);
-  box-shadow: 0 10px 28px rgba(99,102,241,0.5), 0 10px 28px rgba(0,0,0,0.45);
-  filter: brightness(1.15);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow:
+    0 0 30px rgba(99,102,241,0.5),
+    0 10px 30px rgba(0,0,0,0.5);
+  filter: brightness(1.1);
 }
 
 .copy-btn:active {
   transform: scale(0.97);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.4);
 }
 
 .copy-btn .iconify {
   font-size: 1.3rem;
+  z-index: 2;
 }
 
 .copied {
@@ -325,6 +382,7 @@ p {
   font-weight: bold;
   box-shadow: 0 0 25px rgba(34,197,94,0.4);
 }
+
 
 
 .description-container {
