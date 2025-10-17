@@ -232,6 +232,7 @@ p {
 }
 
 
+
 .copy-box {
   display: flex;
   align-items: center;
@@ -257,8 +258,8 @@ p {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at top left, rgba(99,102,241,0.15), transparent 60%),
-              radial-gradient(circle at bottom right, rgba(168,85,247,0.1), transparent 60%);
+  background: radial-gradient(circle at top left, rgba(168,85,247,0.2), transparent 60%),
+              radial-gradient(circle at bottom right, rgba(236,72,153,0.15), transparent 60%);
   z-index: 0;
   pointer-events: none;
 }
@@ -267,7 +268,7 @@ p {
   border-color: rgba(255,255,255,0.2);
   box-shadow:
     inset 0 0 25px rgba(255,255,255,0.08),
-    0 0 40px rgba(99,102,241,0.25),
+    0 0 40px rgba(168,85,247,0.25),
     0 12px 40px rgba(0,0,0,0.5);
 }
 
@@ -286,8 +287,8 @@ p {
 
 .copy-btn {
   position: relative;
-  background: rgba(99,102,241,0.15);
-  border: 1px solid rgba(255,255,255,0.1);
+  background: linear-gradient(135deg, #ec4899, #a855f7);
+  border: 1px solid rgba(255,255,255,0.15);
   color: #fff;
   padding: 12px 26px;
   border-radius: 12px;
@@ -302,6 +303,9 @@ p {
   transition: all 0.3s ease;
   backdrop-filter: blur(6px);
   z-index: 2;
+  box-shadow:
+    0 0 20px rgba(236,72,153,0.4),
+    0 6px 25px rgba(0,0,0,0.4);
 }
 
 .copy-btn::before {
@@ -309,7 +313,7 @@ p {
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background: linear-gradient(90deg, var(--accent1), var(--accent2));
+  background: linear-gradient(135deg, #f472b6, #c084fc, #ec4899);
   opacity: 0;
   transition: opacity 0.4s ease;
   z-index: -1;
@@ -322,7 +326,7 @@ p {
   left: -75%;
   width: 50%;
   height: 100%;
-  background: linear-gradient(120deg, rgba(255,255,255,0.3), transparent);
+  background: linear-gradient(120deg, rgba(255,255,255,0.35), transparent);
   transform: skewX(-25deg);
   opacity: 0;
   transition: opacity 0.4s ease, left 0.6s ease;
@@ -340,8 +344,9 @@ p {
 .copy-btn:hover {
   transform: translateY(-2px);
   box-shadow:
-    0 0 20px rgba(99,102,241,0.4),
-    0 10px 25px rgba(0,0,0,0.45);
+    0 0 25px rgba(236,72,153,0.6),
+    0 10px 30px rgba(0,0,0,0.5);
+  filter: brightness(1.1);
 }
 
 .copy-btn:active {
