@@ -309,7 +309,7 @@ p {
   background: linear-gradient(90deg, var(--accent1), var(--accent2));
   color: #fff;
   padding: 12px 26px;
-  border: none;
+  border: 2px solid transparent;
   border-radius: 12px;
   font-weight: 600;
   font-family: 'Poppins', sans-serif;
@@ -323,7 +323,8 @@ p {
   transition: all 0.25s ease;
   letter-spacing: 0.4px;
   box-shadow:
-    0 0 20px rgba(99,102,241,0.4),
+    0 0 12px rgba(99,102,241,0.5),
+    inset 0 0 10px rgba(255,255,255,0.15),
     0 6px 20px rgba(0,0,0,0.4);
   overflow: hidden;
 }
@@ -332,37 +333,39 @@ p {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(120deg, rgba(255,255,255,0.25), transparent 70%);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  z-index: 1;
-}
-
-.copy-btn::after {
-  content: "";
-  position: absolute;
-  inset: -2px;
   border-radius: inherit;
-  padding: 2px;
-  background: linear-gradient(90deg, var(--accent1), var(--accent2));
+  border: 2px solid transparent;
+  background: linear-gradient(120deg, var(--accent1), var(--accent2), var(--accent1)) border-box;
   -webkit-mask:
     linear-gradient(#fff 0 0) content-box,
     linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
           mask-composite: exclude;
   opacity: 0.8;
-  z-index: 0;
-  pointer-events: none;
+  z-index: 1;
+  transition: opacity 0.3s ease;
 }
 
-.copy-btn:hover::before {
+.copy-btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(circle at top left, rgba(255,255,255,0.25), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 0;
+}
+
+.copy-btn:hover::after {
   opacity: 1;
 }
 
 .copy-btn:hover {
   transform: translateY(-3px) scale(1.05);
   box-shadow:
-    0 0 30px rgba(99,102,241,0.5),
+    0 0 25px rgba(99,102,241,0.65),
+    inset 0 0 15px rgba(255,255,255,0.2),
     0 10px 30px rgba(0,0,0,0.5);
   filter: brightness(1.1);
 }
@@ -385,6 +388,7 @@ p {
 
 
 
+
 .description-container {
   display: flex;
   justify-content: center;
@@ -394,11 +398,6 @@ p {
   padding-bottom: 20px;
   flex-wrap: wrap;
 }
-
-/*.description-container a {
-  display: block;
-  margin: 0 auto;
-}*/
 
 .extension-image-2 {
   width: 800px;
