@@ -79,23 +79,20 @@ og_image: "/assets/page-design/page-cards/ad-notification.webp"
         </div>
         <div class="accordion-content" id="setup-acc">
             <!---------------------------------------------->
-            <div class="description-container">
-                <div class="extension-title-text-box">
-                    <p><span style="font-weight: bold; color: #fff;">1.</span> In <span
-                            style="font-weight: bold; color: #ffd95e;">Streamer.bot</span>, go into the <span
-                            style="font-weight: bold; color: #ffd95e;">Servers/Clients → WebSocket Server</span> tab.
-                        Check <span style="font-weight: bold; color: #ffd95e;">Auto Start WebSocket Server</span>, leave
-                        <span style="font-weight: bold; color: #ffd95e;">Address</span> at <span
-                            style="font-weight: bold; color: #ffd95e;">127.0.0.1</span> and the <span
-                            style="font-weight: bold; color: #ffd95e;">Port</span> at <span
-                            style="font-weight: bold; color: #ffd95e;">8080</span>. You can set a password if you want,
-                        just make sure to leave <span style="font-weight: bold; color: #ffd95e;">Enforce All
-                            Requests</span> unchecked. Start the server.
-                    
-                    <br><br>Here you can check in real-time if your Websocket server is up and running:<br> <iframe class="ws-iframe" src="{{ site.baseurl }}/assets/setup/websocket-connection-check.html" title="Streamer.bot Websocket Server Connection Check" scrolling="no"> </iframe></p>
-                </div>
-                 <img src="{{ site.baseurl }}/assets/setup/streamerbot-websocket-server.webp" class="extension-image">
-            </div>
+            <div class="setup-step">
+  <div class="setup-step-text">
+    <p>
+      <span style="font-weight: bold; color: #fff;">1.</span>
+      In <strong>Streamer.bot</strong>, open the <strong>Servers/Clients → WebSocket Server</strong> tab.<br>
+      Enable <strong>Auto Start WebSocket Server</strong>, keep <strong>Address</strong> as <strong>127.0.0.1</strong> and <strong>Port</strong> as <strong>8080</strong>.
+      You can set a password if desired, but ensure <strong>Enforce All Requests</strong> remains unchecked. Then start the server.
+      <br><br>
+      Check below in real-time if your WebSocket server is up and running:
+      <iframe class="ws-iframe" src="{{ site.baseurl }}/assets/setup/websocket-connection-check.html" title="Streamer.bot Websocket Server Connection Check" scrolling="no"></iframe>
+    </p>
+  </div>
+  <img src="{{ site.baseurl }}/assets/setup/streamerbot-websocket-server.webp" alt="Streamer.bot Websocket Server Screenshot">
+</div>
 
             <!---------------------------------------------->
             <div class="section-divider"></div>
