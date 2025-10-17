@@ -237,59 +237,38 @@ p {
   align-items: center;
   width: 80%;
   max-width: var(--container-width);
-  border: 1px solid rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.1);
   border-radius: 14px;
   padding: 12px 16px;
-  background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
-  backdrop-filter: blur(16px);
+  background: linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+  backdrop-filter: blur(14px);
   box-shadow:
-    inset 0 0 25px rgba(255,255,255,0.06),
-    0 0 25px rgba(99,102,241,0.15),
-    0 8px 30px rgba(0,0,0,0.35);
+    inset 0 0 25px rgba(255,255,255,0.05),
+    0 0 25px rgba(99,102,241,0.12),
+    0 8px 25px rgba(0,0,0,0.35);
   justify-content: center;
-  align-self: center;
   margin: 0 auto;
   position: relative;
   overflow: hidden;
-  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .copy-box::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at top left, rgba(99,102,241,0.2), transparent 60%),
-              radial-gradient(circle at bottom right, rgba(168,85,247,0.15), transparent 60%);
+  background: radial-gradient(circle at top left, rgba(99,102,241,0.15), transparent 60%),
+              radial-gradient(circle at bottom right, rgba(168,85,247,0.1), transparent 60%);
   z-index: 0;
   pointer-events: none;
 }
 
 .copy-box:hover {
-  border-color: rgba(255,255,255,0.25);
+  border-color: rgba(255,255,255,0.2);
   box-shadow:
     inset 0 0 25px rgba(255,255,255,0.08),
     0 0 40px rgba(99,102,241,0.25),
-    0 12px 45px rgba(0,0,0,0.5);
-}
-
-.copy-box-smol {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  border: 1px solid rgba(255,255,255,0.15);
-  border-radius: 14px;
-  padding: 12px 16px;
-  background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
-  backdrop-filter: blur(16px);
-  box-shadow:
-    inset 0 0 25px rgba(255,255,255,0.06),
-    0 0 25px rgba(99,102,241,0.15),
-    0 8px 30px rgba(0,0,0,0.35);
-  justify-content: center;
-  align-self: start;
-  margin: 0 auto;
-  position: relative;
-  overflow: hidden;
+    0 12px 40px rgba(0,0,0,0.5);
 }
 
 .copy-text {
@@ -306,10 +285,11 @@ p {
 }
 
 .copy-btn {
-  background: linear-gradient(90deg, var(--accent1), var(--accent2));
+  position: relative;
+  background: rgba(99,102,241,0.15);
+  border: 1px solid rgba(255,255,255,0.1);
   color: #fff;
   padding: 12px 26px;
-  border: 2px solid transparent;
   border-radius: 12px;
   font-weight: 600;
   font-family: 'Poppins', sans-serif;
@@ -318,15 +298,10 @@ p {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  position: relative;
-  z-index: 2;
-  transition: all 0.25s ease;
-  letter-spacing: 0.4px;
-  box-shadow:
-    0 0 12px rgba(99,102,241,0.5),
-    inset 0 0 10px rgba(255,255,255,0.15),
-    0 6px 20px rgba(0,0,0,0.4);
   overflow: hidden;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(6px);
+  z-index: 2;
 }
 
 .copy-btn::before {
@@ -334,45 +309,44 @@ p {
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  border: 2px solid transparent;
-  background: linear-gradient(120deg, var(--accent1), var(--accent2), var(--accent1)) border-box;
-  -webkit-mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-          mask-composite: exclude;
-  opacity: 0.8;
-  z-index: 1;
-  transition: opacity 0.3s ease;
+  background: linear-gradient(90deg, var(--accent1), var(--accent2));
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: -1;
 }
 
 .copy-btn::after {
   content: "";
   position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: radial-gradient(circle at top left, rgba(255,255,255,0.25), transparent 60%);
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(120deg, rgba(255,255,255,0.3), transparent);
+  transform: skewX(-25deg);
   opacity: 0;
-  transition: opacity 0.3s ease;
-  z-index: 0;
+  transition: opacity 0.4s ease, left 0.6s ease;
+}
+
+.copy-btn:hover::before {
+  opacity: 1;
 }
 
 .copy-btn:hover::after {
   opacity: 1;
+  left: 125%;
 }
 
 .copy-btn:hover {
-  transform: translateY(-3px) scale(1.05);
+  transform: translateY(-2px);
   box-shadow:
-    0 0 25px rgba(99,102,241,0.65),
-    inset 0 0 15px rgba(255,255,255,0.2),
-    0 10px 30px rgba(0,0,0,0.5);
-  filter: brightness(1.1);
+    0 0 20px rgba(99,102,241,0.4),
+    0 10px 25px rgba(0,0,0,0.45);
 }
 
 .copy-btn:active {
-  transform: scale(0.97);
-  box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+  transform: scale(0.96);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
 }
 
 .copy-btn .iconify {
@@ -385,7 +359,6 @@ p {
   font-weight: bold;
   box-shadow: 0 0 25px rgba(34,197,94,0.4);
 }
-
 
 
 
