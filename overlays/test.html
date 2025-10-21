@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Twitch Poll Widget</title>
+    <script src="https://unpkg.com/@streamerbot/client/dist/streamerbot-client.js"></script>
+    <style>
+        @font-face {
+            font-family: 'Applewood';
+            src: url('assets/fonts/Applewood Alternate Regular.otf') format('opentype');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            background: transparent;
+            color: #000;
+            font-family: 'Applewood', sans-serif;
+        }
+
+        #box {
+            position: fixed;
+            inset: 0;
+            padding: 5vh 2vw 0;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            pointer-events: none;
+        }
+
+        #message {
+            width: 100%;
+            text-align: center;
+            line-height: 1.15;
+            white-space: normal;
+            word-break: normal;
+            overflow-wrap: break-word;
+            word-break: break-word;
+            hyphens: none;
+            opacity: 0;
+            font-size: 70px;
+            transition: opacity 1s ease;
+        }
+
+        .line {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <div id="message"></div>
+    </div>
+    <script>
+        const q = new URLSearchParams(location.search);
+        const client = new StreamerbotClient({
+            host: q.get("address") || "127.0.0.1",
+            port: parseInt(q.get("port") || "8080", 10),
+            logLevel: "info"
+        });
+        const box = document.getElementById("box");
+        const el = document.getElementById("message");
+        const MAX_FS = 70, MIN_FS = 24;
+        let animating = false, pendingPayload = null;
+
+        function fits() { return el.scrollWidth <= box.clientWidth && el.scrollHeight <= box.clientHeight }
+
+        function scaleDownToFit() {
+            el.style.fontSize = MAX_FS + "px";
+            if (fits()) return;
+            let lo = MIN_FS, hi = MAX_FS, best = MIN_FS;
+            while (lo <= hi) {
+                const mid = Math.floor((lo + hi) / 2);
+                el.style.fontSize = mid + "px";
+                if (fits()) { best = mid; lo = mid + 1 } else { hi = mid - 1 }
+            }
+            el.style.fontSize = best + "px";
+        }
+
+        function fadeTo(op) {
+            return new Promise(r => {
+                let done = false;
+                const finish = () => { if (done) return; done = true; el.removeEventListener("transitionend", listener); r() };
+                const listener = e => { if (e.propertyName === "opacity") finish() };
+                el.addEventListener("transitionend", listener, { once: true });
+                el.style.opacity = op;
+                setTimeout(finish, 1100);
+            });
+        }
+
+        function renderChoices(p) {
+            const choices = Array.isArray(p.choices) ? p.choices : [];
+            const total = choices.reduce((s, c) => s + (Number(c.votes) || 0), 0);
+            const sorted = [...choices].sort((a, b) => (Number(b.votes) || 0) - (Number(a.votes) || 0));
+            el.innerHTML = "";
+            sorted.forEach((c, idx) => {
+                const v = Number(c.votes) || 0;
+                const pct = total > 0 ? Math.round((v / total) * 100) : 0;
+                const line = document.createElement("div");
+                line.className = "line";
+                line.textContent = `${idx + 1}. ${c.title} (${pct}%)`;
+                el.appendChild(line);
+            });
+        }
+
+        async function showPoll(p) {
+            pendingPayload = null;
+            animating = true;
+            renderChoices(p);
+            await document.fonts.ready.catch(() => { });
+            scaleDownToFit();
+            await fadeTo("1");
+            animating = false;
+            if (pendingPayload !== null) nextPoll(pendingPayload);
+        }
+
+        async function hidePoll() {
+            if (animating) { pendingPayload = pendingPayload ?? null; return }
+            animating = true;
+            await fadeTo("0");
+            animating = false;
+        }
+
+        async function nextPoll(p) {
+            pendingPayload = p;
+            if (getComputedStyle(el).opacity !== "0") await hidePoll();
+            if (pendingPayload !== null) {
+                const t = pendingPayload;
+                pendingPayload = null;
+                await showPoll(t);
+            }
+        }
+
+        client.on("General.Custom", ({ data }) => {
+            if (data && (Object.prototype.hasOwnProperty.call(data, "Hide_Poll_Widget") || Object.prototype.hasOwnProperty.call(data, "Hide_Highlighted_Chat_Message"))) {
+                pendingPayload = null;
+                hidePoll();
+                return;
+            }
+            const poll = data && data.Poll_Widget_Data;
+            if (!poll) return;
+            if (getComputedStyle(el).opacity === "1" || animating) {
+                nextPoll(poll);
+            } else {
+                showPoll(poll);
+            }
+        });
+
+        addEventListener("resize", () => { if (el.textContent || el.children.length) scaleDownToFit(); });
+    </script>
+</body>
+
+</html>
