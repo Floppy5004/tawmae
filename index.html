@@ -241,7 +241,12 @@ border-color:rgba(255,255,255,0.35);
     <h2 class="section-title"><span class="iconify" data-icon="mdi:star-four-points-outline"></span> What's new?</h2>
     <div class="wn-rail">
       <div class="wn-items">
-       <div class="wn-card" onclick="window.open('https://tawmae.xyz/obs-widgets/twitch-goalbar.html', '_blank')">
+
+        
+       <div class="wn-card" 
+     data-link="https://tawmae.xyz/obs-widgets/twitch-goalbar.html" 
+     style="cursor:pointer" 
+     onclick="if(this.dataset.link) window.open(this.dataset.link, '_blank')">
   <div class="wn-meta">
     <span class="wn-badge"><span class="iconify" data-icon="material-symbols:deployed-code-update"></span>Update</span>
     <span class="wn-date">October 16, 2025</span>
@@ -249,6 +254,9 @@ border-color:rgba(255,255,255,0.35);
   <div class="wn-title">TWITCH GOALBAR</div>
   <div class="wn-text">Added a bunch of new events like channel points, an overall goal and more.</div>
 </div>
+
+
+        
         <div class="wn-card">
           <div class="wn-meta">
             <span class="wn-badge"><span class="iconify" data-icon="mdi:rocket-launch-outline"></span>Upcoming</span>
@@ -257,14 +265,21 @@ border-color:rgba(255,255,255,0.35);
           <div class="wn-title">TWITCH SUBATHON</div>
           <div class="wn-text">A fully customizable subathon widget for Twitch. It's gonna be IN-SANE</div>
         </div>
-        <div class="wn-card">
-          <div class="wn-meta">
-            <span class="wn-badge"><span class="iconify" data-icon="material-symbols:deployed-code-update"></span>Update</span>
-            <span class="wn-date">October 13, 2025</span>
-          </div>
-          <div class="wn-title">AD NOTIFICATION</div>
-          <div class="wn-text">The OBS widget to notify you about running ads now also notifies you about upcoming scheduled ads.</div>
-        </div>
+
+
+        
+       <div class="wn-card" onclick="window.open('https://tawmae.xyz/obs-widgets/ad-notification.html', '_blank')" style="cursor:pointer">
+  <div class="wn-meta">
+    <span class="wn-badge"><span class="iconify" data-icon="material-symbols:deployed-code-update"></span>Update</span>
+    <span class="wn-date">October 13, 2025</span>
+  </div>
+  <div class="wn-title">AD NOTIFICATION</div>
+  <div class="wn-text">The OBS widget to notify you about running ads now also notifies you about upcoming scheduled ads.</div>
+</div>
+
+
+
+        
         <div class="wn-card">
           <div class="wn-meta">
             <span class="wn-badge"><span class="iconify" data-icon="mdi:rocket-launch-outline"></span>Upcoming</span>
