@@ -603,6 +603,41 @@ og_image: "/assets/page-design/page-cards/dynamic-timers.webp"
                 </p>
             </div>
             <!--------------------------------->
+          <!--------------------------------->
+<div class="extension-title-text-box-long">
+    <h3><span style="font-weight: bold; color: #fff">How can I make the first redeem create the timer and all additional ones add time to it?</span></h3>
+    <p>
+        In this example, we have a command called <span style="color: #ffd95e; font-weight: bold;">!mute</span>, and we want the timer to start at <span style="color: #ffd95e; font-weight: bold;">1 minute</span> and add another minute for each additional use of this command.
+        <br><br>
+        Since there’s no direct way to check if a timer is already active, we make use of custom triggers. We’ll create a total of <span style="color: #ffd95e; font-weight: bold;">3 actions</span>.
+        <br><br>
+        <span style="color: #ffd95e; font-weight: bold;">1.</span> The first action uses the <span style="color: #ffd95e; font-weight: bold;">New Timer Created</span> trigger. Because this fires for every created timer, we add a <span style="color: #ffd95e; font-weight: bold;">Core -> Logic -> If/Else</span> subaction and check if <span style="color: #ffd95e; font-weight: bold;">%timerName% Equals Muted</span> to filter only our target timer.
+        <br><br>
+        In the <span style="color: #ffd95e; font-weight: bold;">True</span> branch, add a <span style="color: #ffd95e; font-weight: bold;">Core -> Globals -> Global (Set)</span> subaction, set its value to <span style="color: #ffd95e; font-weight: bold;">True</span>, and name it <span style="color: #ffd95e; font-weight: bold;">muteTimerActive</span> (or any name you prefer). Once the timer named <span style="color: #ffd95e; font-weight: bold;">Muted</span> is created, we set the flag.
+        <br><br>
+        <img src="{{ site.baseurl }}/assets/faq/dynamic-timers/dynamic-timers-ex-1.webp" class="extension-image">
+        <br><br>
+        <span style="color: #ffd95e; font-weight: bold;">2.</span> The second action uses the <span style="color: #ffd95e; font-weight: bold;">Timer Finished</span> trigger. Here, we repeat the logic but set the same global variable to <span style="color: #ffd95e; font-weight: bold;">False</span> when the timer ends.
+        <br><br>
+        <img src="{{ site.baseurl }}/assets/faq/dynamic-timers/dynamic-timers-ex-2.webp" class="extension-image">
+        <br><br>
+        <span style="color: #ffd95e; font-weight: bold;">3.</span> The third action handles our <span style="color: #ffd95e; font-weight: bold;">!mute</span> command. At the top, define the <span style="color: #ffd95e; font-weight: bold;">timerName</span> argument, then add <span style="color: #ffd95e; font-weight: bold;">Core -> Globals -> Global (Get)</span> to retrieve the flag variable. Use <span style="color: #ffd95e; font-weight: bold;">muteTimerActive</span> for both <span style="color: #ffd95e; font-weight: bold;">Global Variable Name</span> and <span style="color: #ffd95e; font-weight: bold;">Destination Variable</span>, with a <span style="color: #ffd95e; font-weight: bold;">Default Value</span> of <span style="color: #ffd95e; font-weight: bold;">False</span>.
+        <br><br>
+        Then, add another <span style="color: #ffd95e; font-weight: bold;">If/Else</span> subaction and check whether <span style="color: #ffd95e; font-weight: bold;">%muteTimerActive% Equals True</span>.
+        <br><br>
+        If <span style="color: #ffd95e; font-weight: bold;">True</span> (active), add the <span style="color: #ffd95e; font-weight: bold;">timerValue</span> argument for the amount of time to add, followed by a <span style="color: #ffd95e; font-weight: bold;">Core -> Actions -> Run Action</span> subaction to execute the <span style="color: #ffd95e; font-weight: bold;">Add Time</span> action.
+        <br><br>
+        If <span style="color: #ffd95e; font-weight: bold;">False</span>, set the same <span style="color: #ffd95e; font-weight: bold;">timerValue</span> argument but instead run the action that creates the timer.
+        <br><br>
+        <img src="{{ site.baseurl }}/assets/faq/dynamic-timers/dynamic-timers-ex-3.webp" class="extension-image">
+        <br><br>
+        Now, when you test it by typing <span style="color: #ffd95e; font-weight: bold;">!mute</span>, the first use creates a <span style="color: #ffd95e; font-weight: bold;">60-second</span> timer, and every additional use adds another <span style="color: #ffd95e; font-weight: bold;">60 seconds</span>.
+        <br><br>
+        <img src="{{ site.baseurl }}/assets/faq/dynamic-timers/dynamic-timers-ex-4.webp" class="extension-image">
+    </p>
+</div>
+<!--------------------------------->
+
 
         </div>
     </div>
