@@ -830,4 +830,8 @@ border: 1px solid var(--glass-border);
   }
 }
 
+h2 {
+  font-size: 1rem;
+}
+
 
