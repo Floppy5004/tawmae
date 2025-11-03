@@ -1,1 +1,1 @@
-• New: Added Crafting
+• UI update (please make sure to use DLL v.1.5.2+)
