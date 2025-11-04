@@ -834,4 +834,57 @@ h2 {
   font-size: 1.5rem;
 }
 
+.warning-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  background: var(--bg-glass);
+  border: 1px solid var(--border-glass);
+  border-left: 6px solid #4a6cae;
+  border-radius: 12px;
+  color: #fff;
+  backdrop-filter: blur(10px);
+  padding: 20px 24px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  font-size: 1rem;
+  line-height: 1.5;
+  text-align: left;
+  animation: fadeInWarning 0.5s ease forwards;
+  margin: 30px auto;
+  max-width: var(--container-width);
+}
+
+.warning-banner .iconify {
+  font-size: 2rem;
+  color: #87a5f5;
+  flex-shrink: 0;
+  filter: drop-shadow(0 0 8px rgba(135,165,245,0.3));
+}
+
+.warning-banner .warning-text a {
+  color: #9dc2ff;
+  text-decoration: underline;
+  transition: color 0.3s ease;
+}
+
+.warning-banner .warning-text a:hover {
+  color: #c3d9ff;
+}
+
+@keyframes fadeInWarning {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+  .warning-banner {
+    flex-direction: column;
+    gap: 10px;
+    font-size: 0.95rem;
+    padding: 16px 18px;
+  }
+  .warning-banner .iconify {
+    font-size: 1.6rem;
+  }
+}
 
