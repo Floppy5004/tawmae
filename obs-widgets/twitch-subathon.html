@@ -429,96 +429,81 @@ og_image: "/assets/page-design/page-cards/twitch-subathon.webp"
 
     <div class="accordion-divider"></div>
 
-
-
-  <!----    CUSTOM TRIGGERS    ------------------------------------------------------------------------------------------------------------------------------>
+<!----    CUSTOM TRIGGERS    ------------------------------------------------------------------------------------------------------------------------------>
 <div class="accordion-item">
     <div class="accordion-header" id="custom-triggers" onclick="toggleAccordion('custom-triggers-acc')">
-        <span class="iconify title-icon" data-icon="line-md:bell-alert"></span><span>CUSTOM TRIGGERS</span>
+        <span class="iconify title-icon" data-icon="line-md:bell-alert"></span>
+        <h2 class="accordion-title">CUSTOM TRIGGERS</h2>
         <span class="iconify accordion-icon" data-icon="ic:baseline-keyboard-arrow-right"></span>
     </div>
     <div class="accordion-content" id="custom-triggers-acc">
 
         <div class="extension-title-text-box-long">
-            <p>
-                Under <span style="font-weight: bold; color: #ffd95e;">Custom → TWITCH SUBATHON</span> you will find triggers you can use to display overlays, run alerts, announcements, or logging actions.
-            </p>
+            <p>Under <span style="font-weight: bold; color: #ffd95e;">Custom → TWITCH SUBATHON</span> you will find triggers that fire when goals are reached, the subathon completes, or when it is ended manually.</p>
         </div>
 
-        <div class="accordion-divider"></div>
-
-        <a href="{{ site.baseurl }}/assets/custom-triggers/twitch-subathon.webp" target="_blank">
-            <div class="extension-image-2"
-                style="background-image: url('{{ site.baseurl }}/assets/custom-triggers/twitch-subathon.webp');">
-            </div>
-        </a>
-
+        <!--------------------------------->
+        <img src="{{ site.baseurl }}/assets/custom-triggers/twitch-subathon.webp" class="extension-image">
+        <!--------------------------------->
         <p><br></p>
 
-        <!---------------------------------------------->
-        <div class="customization-text-container">
-            <div class="extension-title-text-box-long">
-                <p style="font-weight: bold;">Custom → TWITCH SUBATHON → Goal Completed</p>
-                <p>Triggered when a Goal reaches its target.</p>
-            </div>
+        <!--------------------------------- GOAL COMPLETED --------------------------------->
+        <div class="extension-title-text-box-long">
+            <p style="font-weight: bold; font-size: 1.6rem; color: #ffd95e">Goal Completed</p>
+            <p>Fires when a Subathon Goal reaches its target.</p>
 
             <p style="font-weight: bold;">Available variables:</p>
             <ul style="list-style-position: inside; padding-left: 0; text-align: left;">
-                <li><span style="color:#ffd95e;font-weight:bold;">goalName</span> — name of the completed goal</li>
-                <li><span style="color:#ffd95e;font-weight:bold;">goalCount</span> — the amount reached</li>
-                <li><span style="color:#ffd95e;font-weight:bold;">goalType</span> — type/category of the goal</li>
+                <li><span style="color:#ffd95e;font-weight:bold;">goalName</span> (string) — name of the completed goal</li>
+                <li><span style="color:#ffd95e;font-weight:bold;">goalCount</span> (number) — amount reached</li>
+                <li><span style="color:#ffd95e;font-weight:bold;">goalType</span> (string) — category of the goal</li>
             </ul>
         </div>
-
         <p><br></p>
 
-        <!---------------------------------------------->
-        <div class="customization-text-container">
-            <div class="extension-title-text-box-long">
-                <p style="font-weight: bold;">Custom → TWITCH SUBATHON → Subathon Finished</p>
-                <p>Triggered once when the planned total duration is fully reached.</p>
-            </div>
+        <!--------------------------------- SUBATHON FINISHED --------------------------------->
+        <div class="extension-title-text-box-long">
+            <p style="font-weight: bold; font-size: 1.6rem; color: #ffd95e">Subathon Finished</p>
+            <p>Fires once when the planned total time runs out.</p>
 
             <p style="font-weight: bold;">Available variables:</p>
             <ul style="list-style-position: inside; padding-left: 0; text-align: left;">
-                <li><span style="color:#ffd95e;font-weight:bold;">isActive</span> — whether subathon was active at trigger</li>
-                <li><span style="color:#ffd95e;font-weight:bold;">timezone</span> — local timezone used for formatting</li>
-                <li><span style="color:#ffd95e;font-weight:bold;">startedAt_Unix</span> — unix timestamp of subathon start</li>
-                <li><span style="color:#ffd95e;font-weight:bold;">endedAt_Unix</span> — unix timestamp of end</li>
-                <li><span style="color:#ffd95e;font-weight:bold;">startedAt_local</span> — formatted localized start time</li>
-                <li><span style="color:#ffd95e;font-weight:bold;">endedAt_local</span> — formatted localized end time</li>
 
-                <li><span style="color:#ffd95e;font-weight:bold;">baseSeconds</span> — starting time in seconds</li>
-                <li><span style="color:#ffd95e;font-weight:bold;">addedSecondsTotal</span> — total time gained from contributions</li>
-                <li><span style="color:#ffd95e;font-weight:bold;">plannedTotalSeconds</span> — base + added</li>
-                <li><span style="color:#ffd95e;font-weight:bold;">elapsedSeconds</span> — elapsed time excluding pauses</li>
+                <li><span style="color:#ffd95e;font-weight:bold;">isActive</span> (bool)</li>
+                <li><span style="color:#ffd95e;font-weight:bold;">timezone</span> (string)</li>
+                <li><span style="color:#ffd95e;font-weight:bold;">startedAt_Unix</span> (number)</li>
+                <li><span style="color:#ffd95e;font-weight:bold;">endedAt_Unix</span> (number)</li>
+                <li><span style="color:#ffd95e;font-weight:bold;">startedAt_local</span> (string)</li>
+                <li><span style="color:#ffd95e;font-weight:bold;">endedAt_local</span> (string)</li>
 
-                <li><span style="color:#ffd95e;font-weight:bold;">pauseCount</span> — number of pauses</li>
-                <li><span style="color:#ffd95e;font-weight:bold;">pauseTotalSeconds</span> — total pause duration</li>
+                <li><span style="color:#ffd95e;font-weight:bold;">baseSeconds</span> (number)</li>
+                <li><span style="color:#ffd95e;font-weight:bold;">addedSecondsTotal</span> (number)</li>
+                <li><span style="color:#ffd95e;font-weight:bold;">plannedTotalSeconds</span> (number)</li>
+                <li><span style="color:#ffd95e;font-weight:bold;">elapsedSeconds</span> (number)</li>
+
+                <li><span style="color:#ffd95e;font-weight:bold;">pauseCount</span> (number)</li>
+                <li><span style="color:#ffd95e;font-weight:bold;">pauseTotalSeconds</span> (number)</li>
 
                 <li><span style="color:#ffd95e;font-weight:bold;">subs</span>, <span style="color:#ffd95e;font-weight:bold;">primesubs</span>, <span style="color:#ffd95e;font-weight:bold;">t1subs</span>, <span style="color:#ffd95e;font-weight:bold;">t2subs</span>, <span style="color:#ffd95e;font-weight:bold;">t3subs</span></li>
                 <li><span style="color:#ffd95e;font-weight:bold;">bits</span>, <span style="color:#ffd95e;font-weight:bold;">donations</span>, <span style="color:#ffd95e;font-weight:bold;">follows</span>, <span style="color:#ffd95e;font-weight:bold;">raids</span>, <span style="color:#ffd95e;font-weight:bold;">channelPoints</span>, <span style="color:#ffd95e;font-weight:bold;">loyaltyPoints</span></li>
 
-                <li><span style="color:#ffd95e;font-weight:bold;">secondsAdded_…</span> for each event category, showing total time added per source.</li>
+                <li><span style="color:#ffd95e;font-weight:bold;">secondsAdded_…</span> — total seconds contributed per event type</li>
             </ul>
         </div>
-
         <p><br></p>
 
-        <!---------------------------------------------->
-        <div class="customization-text-container">
-            <div class="extension-title-text-box-long">
-                <p style="font-weight: bold;">Custom → TWITCH SUBATHON → Subathon Ended Manually</p>
-                <p>Triggered when the broadcaster manually ends the subathon.</p>
-            </div>
+        <!--------------------------------- SUBATHON ENDED MANUALLY --------------------------------->
+        <div class="extension-title-text-box-long">
+            <p style="font-weight: bold; font-size: 1.6rem; color: #ffd95e">Subathon Ended Manually</p>
+            <p>Fires when the broadcaster ends the Subathon using <code>!subathonEnd</code>.</p>
 
             <p style="font-weight: bold;">Available variables:</p>
             <ul style="list-style-position: inside; padding-left: 0; text-align: left;">
-                <li><span style="color:#ffd95e;font-weight:bold;">user</span> — user who ended the subathon</li>
-                <li><span style="color:#ffd95e;font-weight:bold;">startedAt_local</span> — localized start time</li>
-                <li><span style="color:#ffd95e;font-weight:bold;">endedAt_local</span> — localized end time</li>
-                <li><span style="color:#ffd95e;font-weight:bold;">elapsedFormatted</span> — total run duration formatted</li>
-                <li><span style="color:#ffd95e;font-weight:bold;">addedFormatted</span> — total added time formatted</li>
+                <li><span style="color:#ffd95e;font-weight:bold;">user</span> (string) — user who ended it</li>
+                <li><span style="color:#ffd95e;font-weight:bold;">startedAt_local</span> (string)</li>
+                <li><span style="color:#ffd95e;font-weight:bold;">endedAt_local</span> (string)</li>
+                <li><span style="color:#ffd95e;font-weight:bold;">elapsedFormatted</span> (string) — total runtime</li>
+                <li><span style="color:#ffd95e;font-weight:bold;">addedFormatted</span> (string) — total time gained</li>
             </ul>
         </div>
 
@@ -527,6 +512,9 @@ og_image: "/assets/page-design/page-cards/twitch-subathon.webp"
     </div>
 </div>
 <!---------------------------------------------------------------------------------------------------------------------------------->
+
+
+  
      <div class="accordion-divider"></div>
   <!----    FAQ    ------------------------------------------------------------------------------------------------------------------------------>
     <div class="accordion-item">
@@ -536,96 +524,52 @@ og_image: "/assets/page-design/page-cards/twitch-subathon.webp"
             <span class="iconify accordion-icon" data-icon="ic:baseline-keyboard-arrow-right"></span>
         </div>
         <div class="accordion-content" id="faq-acc">
+          <!--------------------------------->
+<div class="extension-title-text-box-long">
+    <h3><span style="font-weight: bold; color: #fff">Does the time stop when the overlay is not active?</span></h3>
+    <p>
+        No, the time is handled purely by Streamer.bot. The overlay just adapts to the data that Streamer.bot provides. If you want to pause it, make sure to actually use the pause action in Streamer.bot. For automatic safety pauses, see below.
+    </p>
+</div>
            <!--------------------------------->
 <div class="extension-title-text-box-long">
     <h3><span style="font-weight: bold; color: #fff">Does the Subathon timer automatically pause when I stop streaming?</span></h3>
     <p>
-        Yes, if <span style="color: #ffd95e; font-weight: bold;">"Only Add Time When Live"</span> is enabled.  
-        When the stream ends, the timer enters a paused state. When you go live again, the timer resumes automatically.
-        You can toggle this behavior inside the <span style="color: #ffd95e; font-weight: bold;">Settings UI → Basic</span> section.
+        Yes, if <span style="color: #ffd95e; font-weight: bold;">"Only Add Time When Live"</span> is enabled (which it is by default).  
+        This famously called 'Safety Pause' pauses your Subathon for you, if you either close Streamer.bot or your stream goes offline. It will not auto-resume though, so remember to unpause :)
     </p>
 </div>
-
-<!--------------------------------->
-<div class="extension-title-text-box-long">
-    <h3><span style="font-weight: bold; color: #fff">Can I pause and continue the Subathon manually?</span></h3>
-    <p>
-        Yes. Just use:
-        <br><code>!subathonPause</code> to pause
-        <br><code>!subathonUnpause</code> to continue
-        <br><br>
-        While paused, time does not decrease. When unpaused, the timer continues exactly from where it left off.
-    </p>
-</div>
-
-<!--------------------------------->
-<div class="extension-title-text-box-long">
-    <h3><span style="font-weight: bold; color: #fff">How does time addition for Bits, Points, and Donations work?</span></h3>
-    <p>
-        Some events add time directly per count (e.g., +300 seconds per Sub).  
-        Others scale <i>proportionally</i>:
-        <br><br>
-        <span style="color: #ffd95e; font-weight: bold;">Bits:</span> Seconds added = (Bits * SecondsPer) / 100  
-        <span style="color: #ffd95e; font-weight: bold;">Loyalty Points / Channel Points:</span> Seconds added = (Points * SecondsPer) / 1000  
-        <span style="color: #ffd95e; font-weight: bold;">Donations:</span> Seconds added = (Amount * SecondsPer)  
-        <br><br>
-        All values are configurable in the <span style="color: #ffd95e; font-weight: bold;">Settings UI → Time & Contribution</span> section.
-    </p>
-</div>
-
-<!--------------------------------->
-<div class="extension-title-text-box-long">
-    <h3><span style="font-weight: bold; color: #fff">What happens when the Subathon ends?</span></h3>
-    <p>
-        When the timer reaches 0:
-        <br>- The event triggers <span style="color: #ffd95e; font-weight: bold;">Subathon Finished</span>.
-        <br>- Any overlays switch to the "Ended" display text.
-        <br>- A summary object is sent to code triggers so you can announce your final stats.
-        <br><br>
-        You can also end the Subathon manually using <code>!subathonEnd</code>.
-    </p>
-</div>
-
 <!--------------------------------->
 <div class="extension-title-text-box-long">
     <h3><span style="font-weight: bold; color: #fff">Can I restore progress if something breaks?</span></h3>
     <p>
-        Yes. Automatic backups are created regularly if <span style="color: #ffd95e; font-weight: bold;">Backups</span> are enabled.
-        <br>
+        Yes. Automatic backups are created regularly every 15 minutes while the Subathon is active and if you end the Subathon manually, <strong>if(!!)</strong> <span style="color: #ffd95e; font-weight: bold;">Backups</span> are enabled (whjich they are by default). Backups are saved locally to your Streamer.bot directory into cute little textfiles :3
+        <br><br>
         To restore:
-        <br>1. Open the <span style="color: #ffd95e; font-weight: bold;">Settings UI</span>.
-        <br>2. Select a backup file.
-        <br>3. Click <span style="color: #ffd95e; font-weight: bold;">Restore Backup</span>.
+        <br>1. Open the <span style="color: #ffd95e; font-weight: bold;">Settings UI</span> and head into the <span style="color: #ffd95e; font-weight: bold;">Advanced</span> tab.
+        <br>2. Scrolldown, select a backup file.
+        <br>3. Click the button on the left to restore from that point.
         <br><br>
-        This will fully restore timer state, event counts, pause ranges, etc.
+        This will fully restore timer state and event counts.
+    </p>
+</div>
+           <!--------------------------------->
+<div class="extension-title-text-box-long">
+    <h3><span style="font-weight: bold; color: #fff">Are goals like donations bits, channel points and loyalty points added proportionally?</span></h3>
+    <p>
+        Yes. So if 1000 loyalty points add 100 seconds and someone contributes 500, it'll add 50 seconds. Unless you have a minimum amount set.
     </p>
 </div>
 
 <!--------------------------------->
-<div class="extension-title-text-box-long">
-    <h3><span style="font-weight: bold; color: #fff">Can I manually correct event counts or time if something goes wrong?</span></h3>
+          <div class="extension-title-text-box-long">
+    <h3><span style="font-weight: bold; color: #fff">What if an Indian donates 100.000 Iranian Rial? Won't it break EVERYTHING?</span></h3>
     <p>
-        Yes — use the admin-only correction commands:
-        <br><code>!subathonAddEvent [Type] [Amount]</code>
-        <br><code>!subathonRemoveEvent [Type] [Amount]</code>
-        <br><code>!subathonAddTime [Time]</code>
-        <br><code>!subathonRemoveTime [Time]</code>
-        <br><br>
-        These commands safely update the timer and event totals.
+       CHILLLLL. Donations are automatically converted into your selected currency. So if an Iranian decides to donate 100.000 Rial, it'll add 2 dollars to your count.
     </p>
 </div>
 
 <!--------------------------------->
-<div class="extension-title-text-box-long">
-    <h3><span style="font-weight: bold; color: #fff">What if I want the Subathon to start at a specific time?</span></h3>
-    <p>
-        You can set a <span style="color: #ffd95e; font-weight: bold;">Starting Duration</span> before running <code>!subathonStart</code>.
-        <br>Example: <code>00:12:00:00</code> = 12 hours.
-        <br>
-        If the Subathon is already active, editing this value will not change the current timer.
-    </p>
-</div>
-
 
         </div>
     </div>
