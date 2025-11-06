@@ -1,1 +1,2 @@
-• Option to add time for raids based on raided viewer count
+• Fixed safety-pause when exiting Streamer.bot
+• Added Event Tracking
