@@ -142,6 +142,9 @@ document.addEventListener("DOMContentLoaded", function () {
     else if (currentPage.includes("twitch-goalbar")) {
         loadImportString("/action-imports/twitch-goalbar.txt");
     }
+    else if (currentPage.includes("twitch-subathon")) {
+        loadImportString("/action-imports/twitch-subathon.txt");
+    }
     
     
 });
