@@ -1,1 +1,1 @@
-• Beta Release
+• Option to add time for raids based on raided viewer count
