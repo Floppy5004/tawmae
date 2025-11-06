@@ -3,216 +3,322 @@ layout: default
 title: "START – tawmae"
 description: "A growing collection of Streamer.bot extensions, overlays, and tools for Twitch to elevate your stream."
 keywords:
-  - Streamer.bot
-  - Streamerbot
-  - Streamer.bot Extension
-  - Streamerbot Extension
-  - Streamer.bot Extensions
-  - Streamerbot Extensions
-  - SB Extension
-  - SB Extensions
-  - Twitch
-  - tawmae
-  - OBS
-  - OBS Overlays
-  - OBS Widgets
-  - Twitch Widgets
+- Streamer.bot
+- Streamerbot
+- Streamer.bot Extension
+- Streamerbot Extension
+- Streamer.bot Extensions
+- Streamerbot Extensions
+- SB Extension
+- SB Extensions
+- Twitch
+- tawmae
+- OBS
+- OBS Overlays
+- OBS Widgets
+- Twitch Widgets
 ---
 
 <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/extension-page.css">
 
 <style>
-:root{
---border:rgba(255,255,255,0.18);
---muted:rgba(255,255,255,0.7);
---accent1:#6366f1;
---accent2:#a855f7;
---hover-bg:rgba(255,255,255,0.08);
---hover-glow:0 0 15px rgba(99,102,241,0.3);
-}
-.section-title{
-color:#fff;
-margin-bottom:40px;
-font-size:2.2rem;
-letter-spacing:0.5px;
-text-align:left;
-}
-main>.home-intro{
-max-width:1600px!important;
-width:100%;
-margin:80px auto;
-padding:0;
-}
-.home-intro{
-display:flex;
-justify-content:center;
-align-items:center;
-gap:80px;
-flex-wrap:nowrap;
-}
-.home-intro .intro-col,
-.home-intro .intro-image{
-flex:1 1 0;
-min-width:0;
-}
-.intro-col{flex:1.2;}
-.intro-text{
-background:rgba(255,255,255,0.05);
-border:1px solid rgba(255,255,255,0.2);
-border-radius:16px;
-padding:40px 40px 40px 70px;
-color:white;
-backdrop-filter:blur(10px);
-box-shadow:0 4px 12px rgba(0,0,0,0.2);
-text-align:left;
-position:relative;
-z-index:2;
-transition:transform .4s ease, box-shadow .4s ease;
-}
-.intro-text:hover{transform:scale(1.02);box-shadow:0 8px 20px rgba(0,0,0,0.3);}
-.intro-text::before{
-content:"";
-position:absolute;
-left:30px;
-top:24px;
-bottom:24px;
-width:5px;
-border-radius:6px;
-background:linear-gradient(180deg,var(--accent1),var(--accent2));
-box-shadow:0 0 20px rgba(99,102,241,0.4),0 0 28px rgba(168,85,247,0.3);
-}
-.intro-image{
-flex:1;
-display:flex;
-justify-content:center;
-align-items:center;
-}
-.intro-image img{
-max-width:900px;
-width:100%;
-height:auto;
-object-fit:contain;
-border-radius:0;
-z-index:1;
-}
-.news-faq-wrapper{
-display:grid;
-grid-template-columns:2fr 1fr;
-gap:40px;
-align-items:stretch;
-max-width:1600px;
-width:100%;
-margin:100px auto;
-padding:0;
-color:#fff;
-}
-.whats-new-v3{width:100%}
-.wn-rail{
-position:relative;
-border:1px solid var(--border);
-border-radius:18px;
-background:linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02));
-backdrop-filter:blur(12px);
-padding:40px 40px 40px 70px;
-box-shadow:0 8px 28px rgba(0,0,0,0.28);
-overflow:hidden;
-}
-.wn-rail::before{
-content:"";
-position:absolute;
-left:30px;
-top:30px;
-bottom:30px;
-width:5px;
-border-radius:6px;
-background:linear-gradient(180deg,var(--accent1),var(--accent2));
-box-shadow:0 0 20px rgba(99,102,241,0.4),0 0 28px rgba(168,85,247,0.3);
-}
-.wn-items{display:flex;flex-direction:column;gap:24px}
-.wn-card{
-border:1px solid var(--border);
-border-radius:14px;
-padding:20px 24px;
-background:rgba(255,255,255,0.04);
-display:flex;
-flex-direction:column;
-text-align:left;
-transition:all .35s ease;
-}
-.wn-card:hover{
-background:var(--hover-bg);
-box-shadow:var(--hover-glow);
-transform:translateY(-3px) scale(1.02);
-border-color:rgba(255,255,255,0.35);
-}
-.wn-badge{
-display:inline-flex;align-items:center;gap:8px;font-size:0.85rem;color:#111;
-background:linear-gradient(90deg,var(--accent1),var(--accent2));
-padding:6px 10px;border-radius:999px;font-weight:700;
-}
-.wn-meta{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px}
-.wn-date{
-font-size:0.85rem;color:var(--muted);padding:4px 8px;border:1px solid var(--border);
-border-radius:999px;background:rgba(255,255,255,0.03);
-}
-.wn-title{font-weight:700;margin:2px 0 4px 0}
-.wn-text{color:var(--muted);font-size:0.98rem;line-height:1.6}
-.faq-wrapper{display:flex;flex-direction:column}
-.faq-section{
-position:relative;
-border:1px solid var(--border);
-border-radius:18px;
-background:linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02));
-padding:20px 70px 20px 40px;
-box-shadow:0 8px 28px rgba(0,0,0,0.28);
-overflow:hidden;
-display:flex;
-height:100%;
-}
-.faq-section::after{
-content:"";
-position:absolute;
-right:30px;
-top:30px;
-bottom:30px;
-width:5px;
-border-radius:6px;
-background:linear-gradient(180deg,var(--accent1),var(--accent2));
-box-shadow:0 0 20px rgba(99,102,241,0.4),0 0 28px rgba(168,85,247,0.3);
-}
-.faq-items{
-display:flex;
-flex-direction:column;
-justify-content:space-evenly;
-height:100%;
-gap:0;
-width:100%;
-}
-.faq-item{
-border:1px solid var(--border);
-border-radius:14px;
-padding:10px 10px;
-background:rgba(255,255,255,0.04);
-text-align:left;
-transition:all .35s ease;
-}
-.faq-item:hover{
-background:var(--hover-bg);
-box-shadow:var(--hover-glow);
-transform:translateY(-3px) scale(1.02);
-border-color:rgba(255,255,255,0.35);
-}
-.faq-q{font-weight:700;color:#fff;margin:0 0 6px 0;display:flex;align-items:center;gap:8px;transition:color .3s ease;}
-.faq-item:hover .faq-q{color:var(--accent1);}
-.faq-a{color:var(--muted);font-size:0.9rem;line-height:1.6;transition:color .3s ease;}
-.faq-item:hover .faq-a{color:#fff;}
-@media (max-width:1000px){
-.home-intro{flex-wrap:wrap;margin:60px 16px;gap:40px}
-.intro-image img{max-width:100%}
-.news-faq-wrapper{grid-template-columns:1fr;margin:60px 16px;max-width:100%}
-.faq-items{gap:24px;justify-content:flex-start;height:auto}
-.faq-item{padding:14px}
-}
+  :root {
+    --border: rgba(255, 255, 255, 0.18);
+    --muted: rgba(255, 255, 255, 0.7);
+    --accent1: #6366f1;
+    --accent2: #a855f7;
+    --hover-bg: rgba(255, 255, 255, 0.08);
+    --hover-glow: 0 0 15px rgba(99, 102, 241, 0.3);
+  }
+
+  .section-title {
+    color: #fff;
+    margin-bottom: 40px;
+    font-size: 2.2rem;
+    letter-spacing: 0.5px;
+    text-align: left;
+  }
+
+  main>.home-intro {
+    max-width: 1600px !important;
+    width: 100%;
+    margin: 80px auto;
+    padding: 0;
+  }
+
+  .home-intro {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 80px;
+    flex-wrap: nowrap;
+  }
+
+  .home-intro .intro-col,
+  .home-intro .intro-image {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  .intro-col {
+    flex: 1.2;
+  }
+
+  .intro-text {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    padding: 40px 40px 40px 70px;
+    color: white;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    text-align: left;
+    position: relative;
+    z-index: 2;
+    transition: transform .4s ease, box-shadow .4s ease;
+  }
+
+  .intro-text:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  .intro-text::before {
+    content: "";
+    position: absolute;
+    left: 30px;
+    top: 24px;
+    bottom: 24px;
+    width: 5px;
+    border-radius: 6px;
+    background: linear-gradient(180deg, var(--accent1), var(--accent2));
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.4), 0 0 28px rgba(168, 85, 247, 0.3);
+  }
+
+  .intro-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .intro-image img {
+    max-width: 900px;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    border-radius: 0;
+    z-index: 1;
+  }
+
+  .news-faq-wrapper {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 40px;
+    align-items: stretch;
+    max-width: 1600px;
+    width: 100%;
+    margin: 100px auto;
+    padding: 0;
+    color: #fff;
+  }
+
+  .whats-new-v3 {
+    width: 100%
+  }
+
+  .wn-rail {
+    position: relative;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+    backdrop-filter: blur(12px);
+    padding: 40px 40px 40px 70px;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.28);
+    overflow: hidden;
+  }
+
+  .wn-rail::before {
+    content: "";
+    position: absolute;
+    left: 30px;
+    top: 30px;
+    bottom: 30px;
+    width: 5px;
+    border-radius: 6px;
+    background: linear-gradient(180deg, var(--accent1), var(--accent2));
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.4), 0 0 28px rgba(168, 85, 247, 0.3);
+  }
+
+  .wn-items {
+    display: flex;
+    flex-direction: column;
+    gap: 24px
+  }
+
+  .wn-card {
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px 24px;
+    background: rgba(255, 255, 255, 0.04);
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    transition: all .35s ease;
+  }
+
+  .wn-card:hover {
+    background: var(--hover-bg);
+    box-shadow: var(--hover-glow);
+    transform: translateY(-3px) scale(1.02);
+    border-color: rgba(255, 255, 255, 0.35);
+  }
+
+  .wn-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: #111;
+    background: linear-gradient(90deg, var(--accent1), var(--accent2));
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-weight: 700;
+  }
+
+  .wn-meta {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 10px
+  }
+
+  .wn-date {
+    font-size: 0.85rem;
+    color: var(--muted);
+    padding: 4px 8px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  .wn-title {
+    font-weight: 700;
+    margin: 2px 0 4px 0
+  }
+
+  .wn-text {
+    color: var(--muted);
+    font-size: 0.98rem;
+    line-height: 1.6
+  }
+
+  .faq-wrapper {
+    display: flex;
+    flex-direction: column
+  }
+
+  .faq-section {
+    position: relative;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+    padding: 20px 70px 20px 40px;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.28);
+    overflow: hidden;
+    display: flex;
+    height: 100%;
+  }
+
+  .faq-section::after {
+    content: "";
+    position: absolute;
+    right: 30px;
+    top: 30px;
+    bottom: 30px;
+    width: 5px;
+    border-radius: 6px;
+    background: linear-gradient(180deg, var(--accent1), var(--accent2));
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.4), 0 0 28px rgba(168, 85, 247, 0.3);
+  }
+
+  .faq-items {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 100%;
+    gap: 0;
+    width: 100%;
+  }
+
+  .faq-item {
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 10px 10px;
+    background: rgba(255, 255, 255, 0.04);
+    text-align: left;
+    transition: all .35s ease;
+  }
+
+  .faq-item:hover {
+    background: var(--hover-bg);
+    box-shadow: var(--hover-glow);
+    transform: translateY(-3px) scale(1.02);
+    border-color: rgba(255, 255, 255, 0.35);
+  }
+
+  .faq-q {
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 6px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: color .3s ease;
+  }
+
+  .faq-item:hover .faq-q {
+    color: var(--accent1);
+  }
+
+  .faq-a {
+    color: var(--muted);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    transition: color .3s ease;
+  }
+
+  .faq-item:hover .faq-a {
+    color: #fff;
+  }
+
+  @media (max-width:1000px) {
+    .home-intro {
+      flex-wrap: wrap;
+      margin: 60px 16px;
+      gap: 40px
+    }
+
+    .intro-image img {
+      max-width: 100%
+    }
+
+    .news-faq-wrapper {
+      grid-template-columns: 1fr;
+      margin: 60px 16px;
+      max-width: 100%
+    }
+
+    .faq-items {
+      gap: 24px;
+      justify-content: flex-start;
+      height: auto
+    }
+
+    .faq-item {
+      padding: 14px
+    }
+  }
 </style>
 
 
@@ -222,9 +328,14 @@ border-color:rgba(255,255,255,0.35);
     <div class="intro-text">
       <p style="font-size:1.1rem;line-height:1.6;margin:0;">
         This is a collection of custom-built <strong>Streamer.bot extensions</strong>.
-        You'll find a mix of <strong>OBS overlays</strong>, useful <strong>utilities</strong>, various <strong>integrations</strong>, and interactive <strong>chat games</strong> — all designed to make your Twitch stream stand out — and compensate for a lack of streaming personality.<br><span style="font-size:2.5rem;">Kapp</span><br><br>
+        You'll find a mix of <strong>OBS overlays</strong>, useful <strong>utilities</strong>, various
+        <strong>integrations</strong>, and interactive <strong>chat games</strong> — all designed to make your Twitch
+        stream stand out — and compensate for a lack of streaming personality.<br><span
+          style="font-size:2.5rem;">Kapp</span><br><br>
         Looking for something custom that nobody else has? Or do you have a project in mind that nobody has created yet?
-        Check out the <a href="{{ site.baseurl }}/commissions.html" style="color:#ffd95e;text-decoration:underline;">Commissions</a> page to request a tailored Streamer.bot project.
+        Check out the <a href="{{ site.baseurl }}/commissions.html"
+          style="color:#ffd95e;text-decoration:underline;">Commissions</a> page to request a tailored Streamer.bot
+        project.
       </p>
     </div>
   </div>
@@ -242,51 +353,52 @@ border-color:rgba(255,255,255,0.35);
     <div class="wn-rail">
       <div class="wn-items">
 
-        
-       <div class="wn-card" 
-     data-link="https://tawmae.xyz/obs-widgets/twitch-goalbar.html" 
-     style="cursor:pointer" 
-     onclick="if(this.dataset.link) window.open(this.dataset.link, '_blank')">
-  <div class="wn-meta">
-    <span class="wn-badge"><span class="iconify" data-icon="material-symbols:deployed-code-update"></span>Update</span>
-    <span class="wn-date">October 16, 2025</span>
-  </div>
-  <div class="wn-title">TWITCH GOALBAR</div>
-  <div class="wn-text">Added a bunch of new events like channel points, an overall goal and more.</div>
-</div>
 
-
-        
         <div class="wn-card">
           <div class="wn-meta">
-            <span class="wn-badge"><span class="iconify" data-icon="mdi:rocket-launch-outline"></span>Upcoming</span>
+            <span class="wn-badge"><span class="iconify" data-icon="mdi:rocket-launch-outline"></span>HOT HOT HOT</span>
             <span class="wn-date">Soon™</span>
           </div>
           <div class="wn-title">TWITCH SUBATHON</div>
-          <div class="wn-text">A fully customizable subathon widget for Twitch. It's gonna be IN-SANE</div>
+          <div class="wn-text">Out for beta testing now! Grab the tester role in my Discord to grab early access.</div>
+        </div>
+
+        
+        <div class="wn-card" data-link="https://tawmae.xyz/obs-widgets/twitch-goalbar.html" style="cursor:pointer"
+          onclick="if(this.dataset.link) window.open(this.dataset.link, '_blank')">
+          <div class="wn-meta">
+            <span class="wn-badge"><span class="iconify"
+                data-icon="material-symbols:deployed-code-update"></span>Update</span>
+            <span class="wn-date">October 16, 2025</span>
+          </div>
+          <div class="wn-title">TWITCH GOALBAR</div>
+          <div class="wn-text">Added a bunch of new events like channel points, an overall goal and more.</div>
         </div>
 
 
-        
-       <div class="wn-card" onclick="window.open('https://tawmae.xyz/obs-widgets/ad-notification.html', '_blank')" style="cursor:pointer">
-  <div class="wn-meta">
-    <span class="wn-badge"><span class="iconify" data-icon="material-symbols:deployed-code-update"></span>Update</span>
-    <span class="wn-date">October 13, 2025</span>
-  </div>
-  <div class="wn-title">AD NOTIFICATION</div>
-  <div class="wn-text">The OBS widget to notify you about running ads now also notifies you about upcoming scheduled ads.</div>
-</div>
+        <div class="wn-card" onclick="window.open('https://tawmae.xyz/obs-widgets/ad-notification.html', '_blank')"
+          style="cursor:pointer">
+          <div class="wn-meta">
+            <span class="wn-badge"><span class="iconify"
+                data-icon="material-symbols:deployed-code-update"></span>Update</span>
+            <span class="wn-date">October 13, 2025</span>
+          </div>
+          <div class="wn-title">AD NOTIFICATION</div>
+          <div class="wn-text">The OBS widget to notify you about running ads now also notifies you about upcoming
+            scheduled ads.</div>
+        </div>
 
 
 
-        
+
         <div class="wn-card">
           <div class="wn-meta">
             <span class="wn-badge"><span class="iconify" data-icon="mdi:rocket-launch-outline"></span>Upcoming</span>
             <span class="wn-date">Soon™</span>
           </div>
           <div class="wn-title">EMOTE WALL</div>
-          <div class="wn-text">A classic emote wall overlay for OBS. Probably with a bunch of customization options. Stay tuuuuuned Poggers</div>
+          <div class="wn-text">A classic emote wall overlay for OBS. Probably with a bunch of customization options.
+            Stay tuuuuuned Poggers</div>
         </div>
       </div>
     </div>
@@ -297,20 +409,27 @@ border-color:rgba(255,255,255,0.35);
     <div class="faq-section">
       <div class="faq-items">
         <div class="faq-item">
-          <div class="faq-q"><span class="iconify" data-icon="mdi:help-circle-outline"></span>How do I update extensions?</div>
-          <div class="faq-a">You update by just re-importing all the actions. All your settings from the Settings UI will persist. You only have to re-enable the commands.</div>
+          <div class="faq-q"><span class="iconify" data-icon="mdi:help-circle-outline"></span>How do I update
+            extensions?</div>
+          <div class="faq-a">You update by just re-importing all the actions. All your settings from the Settings UI
+            will persist. You only have to re-enable the commands.</div>
         </div>
         <div class="faq-item">
-          <div class="faq-q"><span class="iconify" data-icon="mdi:help-circle-outline"></span>Can I change address or port for overlays?</div>
-          <div class="faq-a">Yes, every overlay allows to add the parameters <code>?address</code>, <code>?port</code> and <code>?password</code>.</div>
+          <div class="faq-q"><span class="iconify" data-icon="mdi:help-circle-outline"></span>Can I change address or
+            port for overlays?</div>
+          <div class="faq-a">Yes, every overlay allows to add the parameters <code>?address</code>, <code>?port</code>
+            and <code>?password</code>.</div>
         </div>
         <div class="faq-item">
-          <div class="faq-q"><span class="iconify" data-icon="mdi:help-circle-outline"></span>Can I use overlays on a different PC?</div>
-          <div class="faq-a">Yes, but you either have to use the HTML locally by downloading it or you bypass security settings for browser sources in OBS.</div>
+          <div class="faq-q"><span class="iconify" data-icon="mdi:help-circle-outline"></span>Can I use overlays on a
+            different PC?</div>
+          <div class="faq-a">Yes, but you either have to use the HTML locally by downloading it or you bypass security
+            settings for browser sources in OBS.</div>
         </div>
         <div class="faq-item">
           <div class="faq-q"><span class="iconify" data-icon="mdi:help-circle-outline"></span>Where can I help?</div>
-          <div class="faq-a">I don't know, try a therapist?? But if it's extension-related, join my discord! You can find the invite at the top of this website</div>
+          <div class="faq-a">I don't know, try a therapist?? But if it's extension-related, join my discord! You can
+            find the invite at the top of this website</div>
         </div>
       </div>
     </div>
@@ -325,20 +444,22 @@ border-color:rgba(255,255,255,0.35);
     Discover Extensions
   </h2>
 
-  <div class="related-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;justify-items:center;">
+  <div class="related-grid"
+    style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;justify-items:center;">
     {% assign utility_pages = site.html_pages | where_exp: "p", "p.path contains 'utility/'" %}
     {% assign obs_pages = site.html_pages | where_exp: "p", "p.path contains 'obs-widgets/'" %}
     {% assign chat_pages = site.html_pages | where_exp: "p", "p.path contains 'chat-games/'" %}
     {% assign all_extensions = utility_pages | concat: obs_pages | concat: chat_pages | shuffle | slice: 0, 9 %}
 
     {% for ext in all_extensions %}
-      <a href="{{ ext.url | relative_url }}" class="related-card" target="_blank" rel="noopener noreferrer">
-        <img src="{{ ext.og_image | default: '/assets/page-design/website-card.webp' | relative_url }}" alt="{{ ext.title }} Streamer.bot Extension">
-        <div class="related-card-text">
-          <h3>{{ ext.title | replace: " – tawmae", "" | strip }}</h3>
-          <p>{{ ext.description | truncate: 160 }}</p>
-        </div>
-      </a>
+    <a href="{{ ext.url | relative_url }}" class="related-card" target="_blank" rel="noopener noreferrer">
+      <img src="{{ ext.og_image | default: '/assets/page-design/website-card.webp' | relative_url }}"
+        alt="{{ ext.title }} Streamer.bot Extension">
+      <div class="related-card-text">
+        <h3>{{ ext.title | replace: " – tawmae", "" | strip }}</h3>
+        <p>{{ ext.description | truncate: 160 }}</p>
+      </div>
+    </a>
     {% endfor %}
   </div>
 </section>
