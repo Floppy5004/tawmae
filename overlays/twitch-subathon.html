@@ -28,6 +28,7 @@
       padding: 0;
       font-family: "Poppins", sans-serif;
       color: var(--font-color);
+      background: black;
     }
 
     .wrapper {
@@ -305,6 +306,24 @@
     .status-footer iconify-icon {
       vertical-align: -0.15em;
     }
+
+    .goal {
+      position: relative
+    }
+
+    .goal .strike {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 50%;
+      height: 2px;
+      transform: translateY(-50%) scaleX(0);
+      transform-origin: left center;
+      background: linear-gradient(90deg, #fff, rgba(255, 255, 255, .2));
+      border-radius: 2px;
+      opacity: .9;
+      pointer-events: none
+    }
   </style>
 </head>
 
@@ -373,8 +392,10 @@
     let manualEnded = false;
     let manualEndedAt = null;
     let manualRemainAt = null;
+    let animatedGoals = new Set(); let goalAnimQueue = []; let goalAnimBusy = false;
     const timerStuff = { format: "hh:mm:ss", eta: new Date(), started: null };
     const counts = { subs: 0, bits: 0, donations: 0, charitydonations: 0, follows: 0, raids: 0, channelPoints: 0, loyaltyPoints: 0 };
+    const displayCounts = {};
     // ====================================================
     const els = {
       timerBox: document.getElementById("timerBox"),
@@ -531,6 +552,52 @@
           hour12: false
         })
         .replace(",", "");
+    }
+    // ====================================================
+    function ensureStrike(row) { let s = row.querySelector(".strike"); if (!s) { s = document.createElement("div"); s.className = "strike"; row.appendChild(s) } return s }
+    // ====================================================
+    function snapshotPositions() { const m = new Map(); Array.from(els.goalsInner.children).forEach(el => m.set(el, el.getBoundingClientRect())); return m }
+    // ====================================================
+    function reorderGoals() { const items = Array.from(els.goalsInner.querySelectorAll(".goal")); const pending = items.filter(g => !g.classList.contains("done")).sort((a, b) => Number(a.dataset.index) - Number(b.dataset.index)); const done = items.filter(g => g.classList.contains("done")).sort((a, b) => Number(a.dataset.index) - Number(b.dataset.index));[...pending, ...done].forEach(g => els.goalsInner.appendChild(g)) }
+    // ====================================================
+    function flipToNewOrder(before) { const after = Array.from(els.goalsInner.children); after.forEach(el => { const f = before.get(el); const l = el.getBoundingClientRect(); const dy = f ? f.top - l.top : 0; gsap.fromTo(el, { y: dy }, { y: 0, duration: .45, ease: "power2.inOut" }) }) }
+    // ====================================================
+    function runNextGoalAnim() { if (!goalAnimQueue.length) { goalAnimBusy = false; if (goalsTl) goalsTl.resume(); updateGoalsViewportAuto(goalViewportCount); return } goalAnimBusy = true; const row = goalAnimQueue.shift(); const strike = ensureStrike(row); if (goalsTl) goalsTl.pause(); const before = snapshotPositions(); gsap.set(strike, { scaleX: 0 }); gsap.timeline().to(strike, { scaleX: 1, duration: .35, ease: "power2.out" }).add(() => { reorderGoals(); flipToNewOrder(before) }).add(() => runNextGoalAnim(), "+=0.02") }
+    // ====================================================
+    function queueGoalAnimation(row) { if (animatedGoals.has(row.dataset.key)) return; animatedGoals.add(row.dataset.key); goalAnimQueue.push(row); if (!goalAnimBusy) runNextGoalAnim() }
+    // ====================================================
+    function setSpansForKey(key, val) {
+      const spans = document.querySelectorAll(`[data-count-key="${key}"]`);
+      const txt = needsCurrencyKey(key) ? formatCurrency(val) : String(Math.round(val));
+      spans.forEach(s => s.textContent = txt);
+    }
+    // ====================================================
+    function popSpansForKey(key) {
+      const spans = document.querySelectorAll(`[data-count-key="${key}"]`);
+      spans.forEach(s => {
+        gsap.fromTo(s, { scale: 1 }, { scale: 1.12, yoyo: true, repeat: 1, duration: 0.12, ease: "power1.out" });
+      });
+    }
+    // ====================================================
+    function animateCountKey(key, newVal) {
+      const to = Number(newVal || 0);
+      const from = Number(displayCounts[key] ?? to);
+      if (to <= from) {
+        displayCounts[key] = to;
+        setSpansForKey(key, to);
+        return;
+      }
+      const obj = { v: from };
+      const spanDelta = Math.abs(to - from);
+      const dur = Math.min(1.0, 0.35 + Math.log10(1 + spanDelta) * 0.25);
+      gsap.to(obj, {
+        v: to,
+        duration: dur,
+        ease: "power2.out",
+        onUpdate: () => setSpansForKey(key, obj.v),
+        onComplete: () => { displayCounts[key] = to; }
+      });
+      popSpansForKey(key);
     }
     // ====================================================
     function pickRotatorIcon(category, cfg) {
@@ -717,32 +784,31 @@
     // ====================================================
     function updateGoalsDoneAndSort() {
       const items = Array.from(els.goalsInner.querySelectorAll(".goal"));
+      let anyNew = false;
       items.forEach(g => {
-        const kind = g.dataset.kind;
-        if (kind === "noicon") return;
+        const kind = g.dataset.kind; if (kind === "noicon") return;
         const target = parseFloat(g.dataset.target || "0") || 0;
         const cv = Number(counts[kind] || 0);
         const wasDone = g.classList.contains("done");
         const nowDone = cv >= target && target > 0;
-        if (nowDone) g.classList.add("done");
-        else g.classList.remove("done");
+        if (nowDone) g.classList.add("done"); else g.classList.remove("done");
         if (goalTriggersArmed && !wasDone && nowDone) {
           const key = g.dataset.key || "";
           if (key && !firedGoals.has(key)) {
             firedGoals.add(key);
             fireGoalTrigger(g.dataset.name || "", cv, g.dataset.kind || "");
+            queueGoalAnimation(g);
+            anyNew = true;
           }
         }
       });
-
-      const pending = items
-        .filter(g => !g.classList.contains("done"))
-        .sort((a, b) => Number(a.dataset.index) - Number(b.dataset.index));
-      const done = items
-        .filter(g => g.classList.contains("done"))
-        .sort((a, b) => Number(a.dataset.index) - Number(b.dataset.index));
-      [...pending, ...done].forEach(g => els.goalsInner.appendChild(g));
+      if (!anyNew) {
+        const before = snapshotPositions();
+        reorderGoals();
+        flipToNewOrder(before);
+      }
     }
+
     // ====================================================
     gsap.registerPlugin(ScrollToPlugin);
     // ====================================================
@@ -847,11 +913,7 @@
     }
     // ====================================================
     function updateCountSpans() {
-      const spans = document.querySelectorAll("[data-count-key]");
-      spans.forEach(s => {
-        const k = s.dataset.countKey;
-        s.textContent = formatCountForKey(k, counts[k]);
-      });
+      Object.keys(counts).forEach(k => animateCountKey(k, counts[k]));
     }
     // ====================================================
     function applySettings(cfgRaw) {
@@ -1041,7 +1103,7 @@
       flashBusy = true;
       const { eventKey, icon, countDelta, secDelta } = flashQueue.shift();
       const countText = "+" + (needsCurrencyKey(eventKey) ? formatCurrency(countDelta) : String(countDelta));
-      
+
       if (isIconUrl(icon)) {
         const img = document.createElement("img");
         img.src = icon;
@@ -1119,6 +1181,18 @@
       return out;
     }
     // ====================================================
+    function eventKeyToCountKey(k) {
+      if (k === "primesubs" || k === "t1subs" || k === "t2subs" || k === "t3subs") return "subs";
+      if (k === "bits") return "bits";
+      if (k === "donations") return "donations";
+      if (k === "charitydonations") return "charitydonations";
+      if (k === "follows") return "follows";
+      if (k === "channelpointrewards") return "channelPoints";
+      if (k === "raids") return "raids";
+      if (k === "loyaltypoints") return "loyaltyPoints";
+      return "";
+    }
+    // ====================================================
     function applyData(newDataRaw) {
       const parsed = typeof newDataRaw === "string" ? parseJsonOrEmpty(newDataRaw) : newDataRaw || makeDefaultData();
       const d = parsed || makeDefaultData();
@@ -1126,6 +1200,11 @@
       timerStuff.started = startedUnix > 0 ? new Date(startedUnix * 1000) : null;
 
       const changes = getEventChanges(prevData, d);
+      changes.forEach(ch => {
+        const key = eventKeyToCountKey(ch.key);
+        if (!key) return;
+        animateCountKey(key, counts[key]);
+      });
       prevData = d;
       dataCache = d;
 
@@ -1194,7 +1273,7 @@
     // ====================================================
     setInterval(tickTimer, 1000);
     // ====================================================
-   function buildFinishedArgs() {
+    function buildFinishedArgs() {
       const d = dataCache || makeDefaultData();
       const tz = getUserTimeZone();
       const e = d.events || {};
