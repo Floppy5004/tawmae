@@ -72,6 +72,11 @@ body {
   margin: 4px 0;
 }
 
+.extension-title-text-box ul,
+.extension-title-text-box li {
+  color: #ccc;
+}
+
 
 .extension-image {
   width: 800px;
