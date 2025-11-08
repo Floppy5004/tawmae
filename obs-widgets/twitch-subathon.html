@@ -433,13 +433,13 @@ og_image: "/assets/page-design/page-cards/twitch-subathon.webp"
 <div class="accordion-item">
     <div class="accordion-header" id="custom-triggers" onclick="toggleAccordion('custom-triggers-acc')">
         <span class="iconify title-icon" data-icon="line-md:bell-alert"></span>
-        <h2 class="accordion-title">CUSTOM TRIGGERS</h2>
+        <span>CUSTOM TRIGGERS</span>
         <span class="iconify accordion-icon" data-icon="ic:baseline-keyboard-arrow-right"></span>
     </div>
-    <div class="accordion-content" id="custom-triggers-acc">
 
+    <div class="accordion-content" id="custom-triggers-acc">
         <div class="extension-title-text-box-long">
-            <p>Under <span style="font-weight: bold; color: #ffd95e;">Custom → TWITCH SUBATHON</span> you will find triggers that fire when goals are reached, the subathon completes, or when it is ended manually.</p>
+            <p>Under <span style="font-weight: bold; color: #ffd95e;">Custom → TWITCH SUBATHON</span> you will find triggers whenever Subathon States change, Goals get completed, or the Subathon ends.</p>
         </div>
 
         <!--------------------------------->
@@ -454,11 +454,24 @@ og_image: "/assets/page-design/page-cards/twitch-subathon.webp"
 
             <p style="font-weight: bold;">Available variables:</p>
             <ul style="list-style-position: inside; padding-left: 0; text-align: left;">
-                <li><span style="color:#ffd95e;font-weight:bold;">goalName</span> (string) — name of the completed goal</li>
-                <li><span style="color:#ffd95e;font-weight:bold;">goalCount</span> (number) — amount reached</li>
-                <li><span style="color:#ffd95e;font-weight:bold;">goalType</span> (string) — category of the goal</li>
+                <li>
+                    <span style="font-weight: bold; color: #ffd95e;">goalName</span>
+                    <span style="background-color:#fff;color:#000;opacity:.45;padding:0 5px;">(string)</span>
+                    - the name of the completed goal
+                </li>
+                <li>
+                    <span style="font-weight: bold; color: #ffd95e;">goalCount</span>
+                    <span style="background-color:#fff;color:#000;opacity:.45;padding:0 5px;">(number)</span>
+                    - the reached amount
+                </li>
+                <li>
+                    <span style="font-weight: bold; color: #ffd95e;">goalType</span>
+                    <span style="background-color:#fff;color:#000;opacity:.45;padding:0 5px;">(string)</span>
+                    - category of the contribution (subs / bits / etc.)
+                </li>
             </ul>
         </div>
+
         <p><br></p>
 
         <!--------------------------------- SUBATHON FINISHED --------------------------------->
@@ -468,28 +481,26 @@ og_image: "/assets/page-design/page-cards/twitch-subathon.webp"
 
             <p style="font-weight: bold;">Available variables:</p>
             <ul style="list-style-position: inside; padding-left: 0; text-align: left;">
+                <li><span style="font-weight: bold; color: #ffd95e;">isActive</span> (bool)</li>
+                <li><span style="font-weight: bold; color: #ffd95e;">timezone</span> (string)</li>
+                <li><span style="font-weight: bold; color: #ffd95e;">startedAt_Unix</span> (number)</li>
+                <li><span style="font-weight: bold; color: #ffd95e;">endedAt_Unix</span> (number)</li>
+                <li><span style="font-weight: bold; color: #ffd95e;">startedAt_local</span> (string)</li>
+                <li><span style="font-weight: bold; color: #ffd95e;">endedAt_local</span> (string)</li>
 
-                <li><span style="color:#ffd95e;font-weight:bold;">isActive</span> (bool)</li>
-                <li><span style="color:#ffd95e;font-weight:bold;">timezone</span> (string)</li>
-                <li><span style="color:#ffd95e;font-weight:bold;">startedAt_Unix</span> (number)</li>
-                <li><span style="color:#ffd95e;font-weight:bold;">endedAt_Unix</span> (number)</li>
-                <li><span style="color:#ffd95e;font-weight:bold;">startedAt_local</span> (string)</li>
-                <li><span style="color:#ffd95e;font-weight:bold;">endedAt_local</span> (string)</li>
+                <li><span style="font-weight: bold; color: #ffd95e;">baseSeconds</span> (number)</li>
+                <li><span style="font-weight: bold; color: #ffd95e;">addedSecondsTotal</span> (number)</li>
+                <li><span style="font-weight: bold; color: #ffd95e;">plannedTotalSeconds</span> (number)</li>
+                <li><span style="font-weight: bold; color: #ffd95e;">elapsedSeconds</span> (number)</li>
 
-                <li><span style="color:#ffd95e;font-weight:bold;">baseSeconds</span> (number)</li>
-                <li><span style="color:#ffd95e;font-weight:bold;">addedSecondsTotal</span> (number)</li>
-                <li><span style="color:#ffd95e;font-weight:bold;">plannedTotalSeconds</span> (number)</li>
-                <li><span style="color:#ffd95e;font-weight:bold;">elapsedSeconds</span> (number)</li>
+                <li><span style="font-weight: bold; color: #ffd95e;">pauseCount</span> (number)</li>
+                <li><span style="font-weight: bold; color: #ffd95e;">pauseTotalSeconds</span> (number)</li>
 
-                <li><span style="color:#ffd95e;font-weight:bold;">pauseCount</span> (number)</li>
-                <li><span style="color:#ffd95e;font-weight:bold;">pauseTotalSeconds</span> (number)</li>
-
-                <li><span style="color:#ffd95e;font-weight:bold;">subs</span>, <span style="color:#ffd95e;font-weight:bold;">primesubs</span>, <span style="color:#ffd95e;font-weight:bold;">t1subs</span>, <span style="color:#ffd95e;font-weight:bold;">t2subs</span>, <span style="color:#ffd95e;font-weight:bold;">t3subs</span></li>
-                <li><span style="color:#ffd95e;font-weight:bold;">bits</span>, <span style="color:#ffd95e;font-weight:bold;">donations</span>, <span style="color:#ffd95e;font-weight:bold;">follows</span>, <span style="color:#ffd95e;font-weight:bold;">raids</span>, <span style="color:#ffd95e;font-weight:bold;">channelPoints</span>, <span style="color:#ffd95e;font-weight:bold;">loyaltyPoints</span></li>
-
-                <li><span style="color:#ffd95e;font-weight:bold;">secondsAdded_…</span> — total seconds contributed per event type</li>
+                <li><span style="font-weight: bold; color: #ffd95e;">primesubs / t1subs / t2subs / t3subs</span> (counts & totals)</li>
+                <li><span style="font-weight: bold; color: #ffd95e;">bits / donations / charitydonations / follows / raids / channelpointrewards / loyaltypoints</span> (counts & totals)</li>
             </ul>
         </div>
+
         <p><br></p>
 
         <!--------------------------------- SUBATHON ENDED MANUALLY --------------------------------->
@@ -499,83 +510,19 @@ og_image: "/assets/page-design/page-cards/twitch-subathon.webp"
 
             <p style="font-weight: bold;">Available variables:</p>
             <ul style="list-style-position: inside; padding-left: 0; text-align: left;">
-                <li><span style="color:#ffd95e;font-weight:bold;">user</span> (string) — user who ended it</li>
-                <li><span style="color:#ffd95e;font-weight:bold;">startedAt_local</span> (string)</li>
-                <li><span style="color:#ffd95e;font-weight:bold;">endedAt_local</span> (string)</li>
-                <li><span style="color:#ffd95e;font-weight:bold;">elapsedFormatted</span> (string) — total runtime</li>
-                <li><span style="color:#ffd95e;font-weight:bold;">addedFormatted</span> (string) — total time gained</li>
+                <li><span style="font-weight: bold; color: #ffd95e;">user</span> (string)</li>
+                <li><span style="font-weight: bold; color: #ffd95e;">startedAt_local</span> (string)</li>
+                <li><span style="font-weight: bold; color: #ffd95e;">endedAt_local</span> (string)</li>
+                <li><span style="font-weight: bold; color: #ffd95e;">elapsedFormatted</span> (string)</li>
+                <li><span style="font-weight: bold; color: #ffd95e;">addedFormatted</span> (string)</li>
             </ul>
         </div>
 
         <p><br><br></p>
-
     </div>
 </div>
 <!---------------------------------------------------------------------------------------------------------------------------------->
 
-
-  
-     <div class="accordion-divider"></div>
-  <!----    FAQ    ------------------------------------------------------------------------------------------------------------------------------>
-    <div class="accordion-item">
-        <div class="accordion-header" id="faq" onclick="toggleAccordion('faq-acc')">
-            <span class="iconify title-icon" data-icon="line-md:question-square"></span>
-            <h2 class="accordion-title">FAQ & EXAMPLES</h2>
-            <span class="iconify accordion-icon" data-icon="ic:baseline-keyboard-arrow-right"></span>
-        </div>
-        <div class="accordion-content" id="faq-acc">
-          <!--------------------------------->
-<div class="extension-title-text-box-long">
-    <h3><span style="font-weight: bold; color: #fff">Does the time stop when the overlay is not active?</span></h3>
-    <p>
-        No, the time is handled purely by Streamer.bot. The overlay just adapts to the data that Streamer.bot provides. If you want to pause it, make sure to actually use the pause action in Streamer.bot. For automatic safety pauses, see below.
-    </p>
-</div>
-           <!--------------------------------->
-<div class="extension-title-text-box-long">
-    <h3><span style="font-weight: bold; color: #fff">Does the Subathon timer automatically pause when I stop streaming?</span></h3>
-    <p>
-        Yes, if <span style="color: #ffd95e; font-weight: bold;">"Only Add Time When Live"</span> is enabled (which it is by default).  
-        This famously called 'Safety Pause' pauses your Subathon for you, if you either close Streamer.bot or your stream goes offline. It will not auto-resume though, so remember to unpause :)
-    </p>
-</div>
-<!--------------------------------->
-<div class="extension-title-text-box-long">
-    <h3><span style="font-weight: bold; color: #fff">Can I restore progress if something breaks?</span></h3>
-    <p>
-        Yes. Automatic backups are created regularly every 15 minutes while the Subathon is active and if you end the Subathon manually, <strong>if(!!)</strong> <span style="color: #ffd95e; font-weight: bold;">Backups</span> are enabled (whjich they are by default). Backups are saved locally to your Streamer.bot directory into cute little textfiles :3
-        <br><br>
-        To restore:
-        <br>1. Open the <span style="color: #ffd95e; font-weight: bold;">Settings UI</span> and head into the <span style="color: #ffd95e; font-weight: bold;">Advanced</span> tab.
-        <br>2. Scrolldown, select a backup file.
-        <br>3. Click the button on the left to restore from that point.
-        <br><br>
-        This will fully restore timer state and event counts.
-      <br><br>
-      Also all events are tracked for each day, regardless of whether you enabled them for the subathon or not. So there is always a backup of the backup to see how many subs, follows, donations etc you got in for the day. So you are always able to re-add them back to the timer, in case anything goes wrong.
-    </p>
-</div>
-           <!--------------------------------->
-<div class="extension-title-text-box-long">
-    <h3><span style="font-weight: bold; color: #fff">Are goals like donations bits, channel points and loyalty points added proportionally?</span></h3>
-    <p>
-        Yes. So if 1000 loyalty points add 100 seconds and someone contributes 500, it'll add 50 seconds. Unless you have a minimum amount set.
-    </p>
-</div>
-
-<!--------------------------------->
-          <div class="extension-title-text-box-long">
-    <h3><span style="font-weight: bold; color: #fff">What if an Iranian guy donates 100.000 Iranian Rial? Won't it break EVERYTHING?</span></h3>
-    <p>
-       CHILLLLL. Donations are automatically converted into your selected currency. So if an Iranian decides to donate 100.000 Rial, it'll add 2 dollars to your count.
-    </p>
-</div>
-
-<!--------------------------------->
-
-        </div>
-    </div>
-    <!---------------------------------------------------------------------------------------------------------------------------------->
 
     <div class="accordion-divider"></div>
     <!----    CHANGELOG    ------------------------------------------------------------------------------------------------------------------------------>
