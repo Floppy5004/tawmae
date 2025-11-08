@@ -58,6 +58,21 @@ body {
   margin-bottom: 20px;
 }
 
+.extension-title-text-box ul {
+  list-style-position: outside;
+  margin-left: 1.4rem;
+  padding-left: 0;
+}
+
+.extension-title-text-box ul ul {
+  margin-left: 1.4rem;
+}
+
+.extension-title-text-box li {
+  margin: 4px 0;
+}
+
+
 .extension-image {
   width: 800px;
   height: auto;
