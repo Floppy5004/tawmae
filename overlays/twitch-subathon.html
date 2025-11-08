@@ -26,7 +26,6 @@
     body {
       margin: 0;
       padding: 0;
-      background: #000;
       font-family: "Poppins", sans-serif;
       color: var(--font-color);
     }
@@ -580,8 +579,8 @@
           wrap.className = "group";
           wrap.appendChild(makeIconElement(item.icon, 28));
           const span = document.createElement("span");
-          span.textContent = String(Number(counts[item.key] || 0));
           span.dataset.countKey = item.key;
+          span.textContent = formatCountForKey(item.key, counts[item.key]);
           wrap.appendChild(span);
           triple.appendChild(wrap);
         });
@@ -695,9 +694,10 @@
         row.appendChild(iconEl);
 
         const span = document.createElement("span");
-        span.textContent = `${g.amount || 0} - ${g.text || ""}`;
+        const targetVal = Number(g.amount || 0);
+        const displayAmt = needsCurrencyKey(kindKey) ? formatCurrency(targetVal) : String(targetVal);
+        span.textContent = `${displayAmt} - ${g.text || ""}`;
         row.appendChild(span);
-
         els.goalsInner.appendChild(row);
       });
 
@@ -850,7 +850,7 @@
       const spans = document.querySelectorAll("[data-count-key]");
       spans.forEach(s => {
         const k = s.dataset.countKey;
-        s.textContent = String(Number(counts[k] || 0));
+        s.textContent = formatCountForKey(k, counts[k]);
       });
     }
     // ====================================================
@@ -990,6 +990,23 @@
     }
     // ====================================================
 
+    function needsCurrencyKey(k) { return k === "donations" || k === "charitydonations"; }
+    // ====================================================
+    function currencySuffix() { return " " + (cfgCache.currencySuffix || cfgCache.currencySymbol || "€"); }
+    // ====================================================
+    function formatCurrency(n) {
+      const dec = Number.isInteger(cfgCache.currencyDecimals) ? cfgCache.currencyDecimals : 2;
+      const loc = cfgCache.locale || "de-DE";
+      const num = Number(n || 0);
+      return num.toLocaleString(loc, { minimumFractionDigits: dec, maximumFractionDigits: dec }) + currencySuffix();
+    }
+    // ====================================================
+    function formatCountForKey(k, v) {
+      const n = Number(v || 0);
+      return needsCurrencyKey(k) ? formatCurrency(n) : String(n);
+    }
+
+    // ====================================================
     let flashBusy = false;
     let flashQueue = [];
     // ====================================================
@@ -1011,8 +1028,8 @@
       return iconVal;
     }
     // ====================================================
-    function queueFlash(icon, countDelta, secDelta) {
-      flashQueue.push({ icon, countDelta, secDelta });
+    function queueFlash(eventKey, icon, countDelta, secDelta) {
+      flashQueue.push({ eventKey, icon, countDelta, secDelta });
       if (!flashBusy) runNextFlash();
     }
     // ====================================================
@@ -1022,7 +1039,9 @@
         return;
       }
       flashBusy = true;
-      const { icon, countDelta, secDelta } = flashQueue.shift();
+      const { eventKey, icon, countDelta, secDelta } = flashQueue.shift();
+      const countText = "+" + (needsCurrencyKey(eventKey) ? formatCurrency(countDelta) : String(countDelta));
+      
       if (isIconUrl(icon)) {
         const img = document.createElement("img");
         img.src = icon;
@@ -1042,7 +1061,7 @@
           els.flashIconBtm.setAttribute("icon", icon || "mdi:information-outline");
         }
       }
-      els.flashCountBtm.textContent = `+${countDelta}`;
+      els.flashCountBtm.textContent = countText;
       els.flashTimeBtm.textContent = `+${formatSeconds(Math.max(0, Math.floor(secDelta || 0)), timerStuff.format)}`;
       els.eventFlashBtm.classList.remove("hidden");
       gsap.killTweensOf(els.eventFlashBtm);
@@ -1105,34 +1124,41 @@
       const d = parsed || makeDefaultData();
       const startedUnix = Number(d?.general?.startedAt_Unix || 0);
       timerStuff.started = startedUnix > 0 ? new Date(startedUnix * 1000) : null;
+
       const changes = getEventChanges(prevData, d);
       prevData = d;
       dataCache = d;
+
       if (changes.length) {
-        changes.forEach(ch => {
+        const e = d.events || {};
+        for (const ch of changes) {
           const icon = pickIconForEvent(ch.key, cfgCache);
-          queueFlash(icon, ch.dCount, Math.max(0, Math.floor(ch.dSecs || 0)));
-          // ====================================================
+          queueFlash(ch.key, icon, ch.dCount, Math.max(0, Math.floor(ch.dSecs || 0)));
+
           if (ch.dSecs > 0) {
-            const nowUnix = Math.floor(Date.now() / 1000);
             const addedFormatted = formatSeconds(ch.dSecs, timerStuff.format);
             const currentSeconds = Math.max(0, calcTimeLeft().remain);
-            const args = {
+            const totalCount = Number(e[ch.key]?.count || 0);
+
+            sb.executeCodeTrigger("subathon_time_added", {
               eventKey: ch.key,
               addedSeconds: Number(ch.dSecs || 0),
               addedFormatted,
               addedCount: Number(ch.dCount || 0),
-              totalCount: Number(e[ch.key]?.count || 0),
-              currentTimestamp: formatSeconds(calcTimeLeft().remain, timerStuff.format),
+              totalCount,
+              currentTimestamp: formatSeconds(currentSeconds, timerStuff.format),
               currentSeconds
-            };
-            sb.executeCodeTrigger("subathon_time_added", args).catch(() => { });
+            }).catch(() => { });
           }
-        });
+        }
       }
+
       updateCountsFromData(d);
+      updateCountSpans();
+      if (splide && splide.refresh) splide.refresh();
       setStatusFromState();
     }
+
     // ====================================================
 
     function tickTimer() {
