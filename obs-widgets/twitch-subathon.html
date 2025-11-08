@@ -521,7 +521,7 @@ og_image: "/assets/page-design/page-cards/twitch-subathon.webp"
 
       <!--------------------------------- SUBATHON FINISHED --------------------------------->
       <div class="extension-title-text-box-long">
-        <p style="font-weight: bold; font-size: 1.6rem; color: #ffd95e">Finished</p>
+        <p style="font-weight: bold; font-size: 1.6rem; color: #ffd95e">Finished / Ended Manually</p>
         <p>Fires when the countdown reaches 00:00:00.</p>
         <p style="font-weight: bold;">Available variables:</p>
 
@@ -604,29 +604,95 @@ og_image: "/assets/page-design/page-cards/twitch-subathon.webp"
           </li>
 
           <li><span style="font-weight: bold; color: #ffd95e;">secondsAdded_primesubs</span><span
-              style="background:#fff;color:#000;padding:0 5px;opacity:.45;">(int)</span></li>
+              style="background:#fff;color:#000;padding:0 5px;opacity:.45;">(int)</span> Seconds added from Prime subs.
+          </li>
           <li><span style="font-weight: bold; color: #ffd95e;">secondsAdded_t1subs</span><span
-              style="background:#fff;color:#000;padding:0 5px;opacity:.45;">(int)</span></li>
+              style="background:#fff;color:#000;padding:0 5px;opacity:.45;">(int)</span> Seconds added from Tier 1 subs.
+          </li>
           <li><span style="font-weight: bold; color: #ffd95e;">secondsAdded_t2subs</span><span
-              style="background:#fff;color:#000;padding:0 5px;opacity:.45;">(int)</span></li>
+              style="background:#fff;color:#000;padding:0 5px;opacity:.45;">(int)</span> Seconds added from Tier 2 subs.
+          </li>
           <li><span style="font-weight: bold; color: #ffd95e;">secondsAdded_t3subs</span><span
-              style="background:#fff;color:#000;padding:0 5px;opacity:.45;">(int)</span></li>
+              style="background:#fff;color:#000;padding:0 5px;opacity:.45;">(int)</span> Seconds added from Tier 3 subs.
+          </li>
 
           <li><span style="font-weight: bold; color: #ffd95e;">secondsAdded_bits</span><span
-              style="background:#fff;color:#000;padding:0 5px;opacity:.45;">(int)</span></li>
+              style="background:#fff;color:#000;padding:0 5px;opacity:.45;">(int)</span> Seconds added from Bits.</li>
           <li><span style="font-weight: bold; color: #ffd95e;">secondsAdded_donations</span><span
-              style="background:#fff;color:#000;padding:0 5px;opacity:.45;">(int)</span></li>
+              style="background:#fff;color:#000;padding:0 5px;opacity:.45;">(int)</span> Seconds added from Donations.
+          </li>
           <li><span style="font-weight: bold; color: #ffd95e;">secondsAdded_follows</span><span
-              style="background:#fff;color:#000;padding:0 5px;opacity:.45;">(int)</span></li>
+              style="background:#fff;color:#000;padding:0 5px;opacity:.45;">(int)</span> Seconds added from Follows.
+          </li>
           <li><span style="font-weight: bold; color: #ffd95e;">secondsAdded_channelPoints</span><span
-              style="background:#fff;color:#000;padding:0 5px;opacity:.45;">(int)</span></li>
+              style="background:#fff;color:#000;padding:0 5px;opacity:.45;">(int)</span> Seconds added from Channel
+            Point redeems.</li>
           <li><span style="font-weight: bold; color: #ffd95e;">secondsAdded_loyaltyPoints</span><span
-              style="background:#fff;color:#000;padding:0 5px;opacity:.45;">(int)</span></li>
+              style="background:#fff;color:#000;padding:0 5px;opacity:.45;">(int)</span> Seconds added from Loyalty
+            points.</li>
+
+
+        </ul>
+      </div>
+      <!--------------------------------- TIME ADDED --------------------------------->
+      <div class="extension-title-text-box-long">
+        <p style="font-weight: bold; font-size: 1.6rem; color: #ffd95e">Time Added</p>
+        <p>Fires whenever an event adds time.</p>
+        <p style="font-weight: bold;">Available variables:</p>
+
+        <ul style="list-style-position: inside; padding-left: 0; text-align: left;">
+
+          <li><span style="font-weight: bold; color: #ffd95e;">eventKey</span><span
+              style="background:#fff;color:#000;padding:0 5px;opacity:.45;">(string)</span> The source type of the event
+            (e.g. subs, bits, donations, etc.).</li>
+
+          <li><span style="font-weight: bold; color: #ffd95e;">addedSeconds</span><span
+              style="background:#fff;color:#000;padding:0 5px;opacity:.45;">(int)</span> Seconds added from this
+            specific event.</li>
+          <li><span style="font-weight: bold; color: #ffd95e;">addedFormatted</span><span
+              style="background:#fff;color:#000;padding:0 5px;opacity:.45;">(string)</span> Added time formatted
+            (hh:mm:ss).</li>
+
+          <li><span style="font-weight: bold; color: #ffd95e;">addedCount</span><span
+              style="background:#fff;color:#000;padding:0 5px;opacity:.45;">(int)</span> The number of units in this
+            event (e.g. 42 donations, 3 subs, 500 bits).</li>
+          <li><span style="font-weight: bold; color: #ffd95e;">totalCount</span><span
+              style="background:#fff;color:#000;padding:0 5px;opacity:.45;">(int)</span> Total accumulated count for
+            this event type.</li>
+
+          <li><span style="font-weight: bold; color: #ffd95e;">currentTimestamp</span><span
+              style="background:#fff;color:#000;padding:0 5px;opacity:.45;">(string)</span> Current formatted time on
+            the timer at the moment of addition (hh:mm:ss).</li>
+          <li><span style="font-weight: bold; color: #ffd95e;">currentSeconds</span><span
+              style="background:#fff;color:#000;padding:0 5px;opacity:.45;">(int)</span> Current remaining seconds on
+            the timer at the moment of addition.</li>
+
+        </ul>
+      </div>
+      <!--------------------------------- GOAL COMPLETED --------------------------------->
+      <div class="extension-title-text-box-long">
+        <p style="font-weight: bold; font-size: 1.6rem; color: #ffd95e">Goal Completed</p>
+        <p>Fires when a goal reaches its required count.</p>
+        <p style="font-weight: bold;">Available variables:</p>
+
+        <ul style="list-style-position: inside; padding-left: 0; text-align: left;">
+
+          <li><span style="font-weight: bold; color: #ffd95e;">goalName</span><span
+              style="background:#fff;color:#000;padding:0 5px;opacity:.45;">(string)</span> The display name of the
+            completed goal.</li>
+          <li><span style="font-weight: bold; color: #ffd95e;">goalCount</span><span
+              style="background:#fff;color:#000;padding:0 5px;opacity:.45;">(int)</span> The final total count that
+            triggered the completion.</li>
+          <li><span style="font-weight: bold; color: #ffd95e;">goalType</span><span
+              style="background:#fff;color:#000;padding:0 5px;opacity:.45;">(string)</span> The contribution category of
+            the goal (e.g. subs, bits, donations, etc.).</li>
 
         </ul>
       </div>
 
-      <!--------------------------------->
+
+
+
     </div>
   </div>
   <!---------------------------------------------------------------------------------------------------------------------------------->
