@@ -1,2 +1,1 @@
-• Fixed safety-pause when exiting Streamer.bot
-• Added Event Tracking
+• Release
