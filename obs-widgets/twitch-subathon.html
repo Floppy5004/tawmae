@@ -27,55 +27,55 @@ og_image: "/assets/page-design/page-cards/twitch-subathon.webp"
 
 <!----    TITLE   ------------------------------------------------------------------------------------------------------------------------------>
 <div class="extension-title">
-    <div class="extension-title-text-box">
-        <h1>{{ page.title | replace: " – tawmae", "" | strip }}</h1>
-        <p>A fully customizable and fully featured Subathon for Twitch.</p>
+  <div class="extension-title-text-box">
+    <h1>{{ page.title | replace: " – tawmae", "" | strip }}</h1>
+    <p>A fully customizable and fully featured Subathon for Twitch.</p>
 
+    <ul>
+      <li>Customize time additions for every event</li>
+      <li>Set your own goals</li>
+      <li>Reliable and precise tracking with automatic backups</li>
+      <li>Supported Events:
         <ul>
-            <li>Customize time additions for every event</li>
-            <li>Set your own goals</li>
-            <li>Reliable and precise tracking with automatic backups</li>
-            <li>Supported Events:
-                <ul>
-                    <li>Subs
-                        <ul>
-                            <li>Prime</li>
-                            <li>Tier 1</li>
-                            <li>Tier 2</li>
-                            <li>Tier 3</li>
-                        </ul>
-                    </li>
-                    <li>Bits</li>
-                    <li>Donations
-                      <ul>
-                            <li>Kofi</li>
-                            <li>Streamlabs</li>
-                            <li>StreamElements</li>
-                            <li>Fourthwall</li>
-                            <li>Tipeeestream</li>
-                        </ul>
-                    </li>
-                    <li>Charity Donations</li>
-                    <li>Follows</li>
-                    <li>Raids</li>
-                    <li>Channel Points</li>
-                    <li>Loyalty Points</li>
-                </ul>
-            </li>
+          <li>Subs
+            <ul>
+              <li>Prime</li>
+              <li>Tier 1</li>
+              <li>Tier 2</li>
+              <li>Tier 3</li>
+            </ul>
+          </li>
+          <li>Bits</li>
+          <li>Donations
+            <ul>
+              <li>Kofi</li>
+              <li>Streamlabs</li>
+              <li>StreamElements</li>
+              <li>Fourthwall</li>
+              <li>Tipeeestream</li>
+            </ul>
+          </li>
+          <li>Charity Donations</li>
+          <li>Follows</li>
+          <li>Raids</li>
+          <li>Channel Points</li>
+          <li>Loyalty Points</li>
         </ul>
+      </li>
+    </ul>
 
-    </div>
+  </div>
 
-    {% if page.og_image %}
-    <div class="extension-cover-wrapper">
-        <img src="{{ page.og_image | relative_url }}" alt="{{ page.title }} Cover Image" class="extension-cover-image">
-    </div>
-    {% else %}
-    <div class="extension-cover-wrapper">
-        <img src="{{ '/assets/page-design/website-card.webp' | relative_url }}" alt="{{ page.title }} Cover Image"
-            class="extension-cover-image">
-    </div>
-    {% endif %}
+  {% if page.og_image %}
+  <div class="extension-cover-wrapper">
+    <img src="{{ page.og_image | relative_url }}" alt="{{ page.title }} Cover Image" class="extension-cover-image">
+  </div>
+  {% else %}
+  <div class="extension-cover-wrapper">
+    <img src="{{ '/assets/page-design/website-card.webp' | relative_url }}" alt="{{ page.title }} Cover Image"
+      class="extension-cover-image">
+  </div>
+  {% endif %}
 </div>
 
 
@@ -83,602 +83,693 @@ og_image: "/assets/page-design/page-cards/twitch-subathon.webp"
 
 <div class="accordion">
 
-    <div class="accordion-divider"></div>
+  <div class="accordion-divider"></div>
 
-    <!---- --------------------------------------------------------->
-    <div class="warning-banner">
-        <span class="iconify" data-icon="mdi:alert-circle-outline"></span>
-        <div class="warning-text">
-            This extension requires a <strong>.dll file (TawmaeUI.dll)</strong> to run.
-            You will be asked to have it automatically downloaded from my
-            <a href="https://github.com/tawmae/tawmae/tree/main/dll">GitHub Repository</a>
-            to your Streamer.bot directory when you open the Settings UI, but you can also
-            manually download it <a href="https://tawmae.xyz/dll">here</a>.
-            You can use tools like <a href="https://www.jetbrains.com/decompiler/">JetBrains dotPeek</a>
-            to inspect the file’s content.
-        </div>
+  <!---- --------------------------------------------------------->
+  <div class="warning-banner">
+    <span class="iconify" data-icon="mdi:alert-circle-outline"></span>
+    <div class="warning-text">
+      This extension requires a <strong>.dll file (TawmaeUI.dll)</strong> to run.
+      You will be asked to have it automatically downloaded from my
+      <a href="https://github.com/tawmae/tawmae/tree/main/dll">GitHub Repository</a>
+      to your Streamer.bot directory when you open the Settings UI, but you can also
+      manually download it <a href="https://tawmae.xyz/dll">here</a>.
+      You can use tools like <a href="https://www.jetbrains.com/decompiler/">JetBrains dotPeek</a>
+      to inspect the file’s content.
     </div>
-    <!---- --------------------------------------------------------->
+  </div>
+  <!---- --------------------------------------------------------->
 
 
 
-    <div class="accordion-divider"></div>
-    <!----    BROWSER SOURCE URL    ------------------------------------------------------------------------------------------------------------------------------>
-    <div class="accordion-item">
-        <div class="accordion-header" id="browser-source-url" onclick="toggleAccordion('browser-source-url-acc')">
-            <span class="iconify title-icon" data-icon="line-md:link"></span> <span>BROWSER SOURCE URL</span>
-            <span class="iconify accordion-icon" data-icon="ic:baseline-keyboard-arrow-right"></span>
+  <div class="accordion-divider"></div>
+  <!----    BROWSER SOURCE URL    ------------------------------------------------------------------------------------------------------------------------------>
+  <div class="accordion-item">
+    <div class="accordion-header" id="browser-source-url" onclick="toggleAccordion('browser-source-url-acc')">
+      <span class="iconify title-icon" data-icon="line-md:link"></span> <span>BROWSER SOURCE URL</span>
+      <span class="iconify accordion-icon" data-icon="ic:baseline-keyboard-arrow-right"></span>
+    </div>
+    <div class="accordion-content" id="browser-source-url-acc">
+      <div class="copy-box">
+        <span class="copy-text" id="base64-string" data-copy-text="https://tawmae.xyz/overlays/twitch-subathon-v2">
+          https://tawmae.xyz/overlays/twitch-subathon
+        </span>
+        <button class="copy-btn" onclick="copyURLToClipboard('https://tawmae.xyz/overlays/twitch-subathon')">
+          <span class="iconify" data-icon="material-symbols:content-copy-outline-sharp"></span> Copy
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!---------------------------------------------->
+
+  <div class="accordion-divider"></div>
+  <!----    ACTION IMPORT    ------------------------------------------------------------------------------------------------------------------------------>
+  <div class="accordion-item">
+    <div class="accordion-header" id="action-import" onclick="toggleAccordion('action-import-acc')">
+      <span class="iconify title-icon" data-icon="line-md:download"></span> <span>ACTION IMPORT</span>
+      <span class="iconify accordion-icon" data-icon="ic:baseline-keyboard-arrow-right"></span>
+    </div>
+    <div class="accordion-content" id="action-import-acc">
+      <div class="copy-box">
+        <span class="copy-text" id="import-string" data-copy-text="">Loading...</span>
+        <button class="copy-btn" onclick="copyToClipboard('import-string')">
+          <span class="iconify" data-icon="material-symbols:content-copy-outline-sharp"></span> Copy
+        </button>
+      </div>
+      <div style="margin-top: 10px; font-size: 0.8em; color: #aaa;">
+        <span class="iconify nav-icon-regular" data-icon="rivet-icons:exclamation-mark-circle-solid"></span>
+        Never import actions from untrusted sources.
+        Want to know what you are importing?
+        Paste the import code in <a href="https://tawmae.xyz/Streamerbot%20ByteCode%20Decoder_v5_by_TakeJoshyy.html"
+          target="_blank" style="color: #6fa8dc; text-decoration: underline;">here</a> (Decoder made by TakeJoshyy).
+      </div>
+    </div>
+  </div>
+  <!---------------------------------------------->
+
+  <div class="accordion-divider"></div>
+
+
+
+  <!----    SETUP    ------------------------------------------------------------------------------------------------------------------------------>
+  <div class="accordion-item">
+    <div class="accordion-header" id="setup" onclick="toggleAccordion('setup-acc')">
+      <span class="iconify title-icon" data-icon="line-md:cog-filled"></span> <span>SETUP</span>
+      <span class="iconify accordion-icon" data-icon="ic:baseline-keyboard-arrow-right"></span>
+    </div>
+    <div class="accordion-content" id="setup-acc">
+      <!---------------------------------------------->
+      <div class="description-container">
+        <img src="{{ site.baseurl }}/assets/setup/copy-string.webp" class="extension-image">
+        <div class="extension-title-text-box">
+          <p><span style="font-weight: bold; color: #fff;">1.</span> Copy the <span
+              style="font-weight: bold; color: #ffd95e;">Action Import</span> text from above into your
+            clipboard.</p>
         </div>
-        <div class="accordion-content" id="browser-source-url-acc">
-            <div class="copy-box">
-                <span class="copy-text" id="base64-string"
-                    data-copy-text="https://tawmae.xyz/overlays/twitch-subathon-v2">
-                    https://tawmae.xyz/overlays/twitch-subathon
-                </span>
-                <button class="copy-btn" onclick="copyURLToClipboard('https://tawmae.xyz/overlays/twitch-subathon')">
-                    <span class="iconify" data-icon="material-symbols:content-copy-outline-sharp"></span> Copy
-                </button>
-            </div>
+      </div>
+      <!---------------------------------------------->
+      <div class="section-divider"></div>
+      <!--------------------------------------------->
+      <div class="description-container">
+        <div class="extension-title-text-box">
+          <p><span style="font-weight: bold; color: #fff;">2.</span> In <span
+              style="font-weight: bold; color: #ffd95e;">Streamer.bot</span>, click the <span
+              style="font-weight: bold; color: #ffd95e;">Import</span> button at the top of the window.
+            Paste the text into the <span style="font-weight: bold; color: #ffd95e;">Import String</span>
+            section and press <span style="font-weight: bold; color: #ffd95e;">Import</span> at the bottom.
+          </p>
         </div>
+        <img src="{{ site.baseurl }}/assets/setup/import-actions-1.0.0.png" class="extension-image">
+      </div>
+      <!---------------------------------------------->
+      <div class="section-divider"></div>
+      <!--------------------------------------------->
+      <div class="description-container">
+        <img src="{{ site.baseurl }}/assets/setup/enable-commands-1.0.0.png" class="extension-image">
+        <div class="extension-title-text-box">
+          <p><span style="font-weight: bold; color: #fff;">3.</span> Now head to the <span
+              style="font-weight: bold; color: #ffd95e;">Commands</span> tab and look for the imported
+            commands. Then <span style="font-weight: bold; color: #ffd95e;">rightclick</span> the group and
+            select <span style="font-weight: bold; color: #ffd95e;">Group -> Enable All</span>.
+        </div>
+      </div>
+
+      <!---------------------------------------------->
+      <div class="description-container">
+
+        <div class="extension-title-text-box">
+          <p><span style="font-weight: bold; color: #fff;">4.</span>
+            In the <span style="font-weight: bold; color: #ffd95e;">[TWITCH SUBATHON] #0 - Settings</span>
+            action, rightclick the <span style="font-weight: bold; color: #ffd95e;">Test</span> trigger and
+            hit <span style="font-weight: bold; color: #ffd95e;">Test Trigger</span> to open the Settings UI
+            once. This makes sure that the .dll file has been downloaded and is up to date.
+            <br><br>If you <strong>don't</strong> have my .dll in your Streamer.bot directory already, it
+            will ask you to <strong>automatically download</strong> it. If you wish to manually place it
+            there, you can to that <a href="https://tawmae.xyz/dll"
+              style="text-decoration: underline; color: inherit;">here</a>.
+
+          </p>
+        </div>
+        <img src="{{ site.baseurl }}/assets/setup/run-settings-ui.webp" class="extension-image">
+
+      </div>
+
+      <!---------------------------------------------->
+      <div class="section-divider"></div>
+      <!--------------------------------------------->
+      <div class="description-container">
+        <img src="{{ site.baseurl }}/assets/setup/streamerbot-websocket-server.webp" class="extension-image">
+        <div class="extension-title-text-box">
+          <p><span style="font-weight: bold; color: #fff;">5.</span> Go into the <span
+              style="font-weight: bold; color: #ffd95e;">Servers/Clients -> WebSocket Server</span> tab.
+            Check <span style="font-weight: bold; color: #ffd95e;">Auto Start WebSocket Server</span>, leave
+            <span style="font-weight: bold; color: #ffd95e;">Address</span> at <span
+              style="font-weight: bold; color: #ffd95e;">127.0.0.1</span> and the <span
+              style="font-weight: bold; color: #ffd95e;">Port</span> at <span
+              style="font-weight: bold; color: #ffd95e;">8080</span>. You can set a password if you want,
+            just make sure to leave <span style="font-weight: bold; color: #ffd95e;">Enforce All
+              Requests</span> unchecked. Start the server. <br><br>Here you can check in real-time if your
+            Websocket server is up and running:<br> <iframe class="ws-iframe"
+              src="{{ site.baseurl }}/assets/setup/websocket-connection-check.html"
+              title="Streamer.bot Websocket Server Connection Check" scrolling="no"> </iframe>
+          </p>
+        </div>
+
+      </div>
+      <!---------------------------------------------->
+      <div class="section-divider"></div>
+      <!--------------------------------------------->
+      <div class="description-container">
+
+        <div class="extension-title-text-box">
+          <p><span style="font-weight: bold; color: #fff;">6.</span> Copy the <span
+              style="font-weight: bold; color: #ffd95e;">Browser Source URL</span> from above into your
+            clipboard.</p>
+        </div>
+        <img src="{{ site.baseurl }}/assets/setup/copy-string.webp" class="extension-image">
+      </div>
+
+
+      <!---------------------------------------------->
+      <div class="section-divider"></div>
+      <!--------------------------------------------->
+      <div class="description-container">
+        <img src="{{ site.baseurl }}/assets/setup/obs-browser-source.webp" class="extension-image">
+        <div class="extension-title-text-box">
+          <p><span style="font-weight: bold; color: #fff;">7.</span> In <span
+              style="font-weight: bold; color: #ffd95e;">OBS</span>, create a new <span
+              style="font-weight: bold; color: #ffd95e;">Browser Source</span>, name it whatever you want.
+            Then paste the copied URL into <span style="font-weight: bold; color: #ffd95e;">URL</span> and
+            preferably set the <span style="font-weight: bold; color: #ffd95e;">Width</span> and <span
+              style="font-weight: bold; color: #ffd95e;">Height</span> to your OBS canvas size. You can
+            make the widget bigger in the Settings UI instead of scaling it and making it blurry.<br><br>
+            And then you're done! And since it came up a lot: for donations to contribute, you need to
+            connect the donation platform of your choice with Streamer.bot (Kofi, Streamelements, Fourthwall
+            etc). Once it's connected to Streamer.bot, the Subathon widget will pick donations up
+            automatically.<br> <span style="font-size: 1.8rem">Pog Clap</span> <br> <span style="font-size: 0.9rem;">
+              <span style="font-weight: bold; color: red;">Important
+                Note:</span> If you want to have the
+              browser source in multiple scenes, <span style="font-weight: bold; color: #ffd95e;">don’t</span>
+              create a second browser source. This can and will cause errors. Instead, use <span
+                style="font-weight: bold; color: #ffd95e;">nested scenes</span> or <span
+                style="font-weight: bold; color: #ffd95e;">source clones</span>.</span>
+          </p>
+        </div>
+
+      </div>
+      <!---------------------------------------------->
+    </div>
+  </div>
+
+  <!---------------------------------------------------------------------------------------------------------------------------------->
+
+
+  <div class="accordion-divider"></div>
+
+  <!----    COMMANDS    ------------------------------------------------------------------------------------------------------------------------------>
+  <div class="accordion-item">
+    <div class="accordion-header" id="commands" onclick="toggleAccordion('commands-acc')">
+      <span class="iconify title-icon" data-icon="line-md:alert-circle"></span>
+      <span>COMMANDS</span>
+      <span class="iconify accordion-icon" data-icon="ic:baseline-keyboard-arrow-right"></span>
+    </div>
+    <div class="accordion-content" id="commands-acc">
+
+      <div class="customization-text-container">
+        <div class="extension-title-text-box">
+          <p><span style="font-weight: bold; color: #fff;">!subathonStart</span></p>
+        </div>
+        <div class="extension-title-text-box">
+          <p>Start the subathon.</p>
+        </div>
+      </div>
+
+      <div class="customization-text-container">
+        <div class="extension-title-text-box">
+          <p><span style="font-weight: bold; color: #fff;">!subathonPause</span></p>
+        </div>
+        <div class="extension-title-text-box">
+          <p>Pause the subathon timer.</p>
+        </div>
+      </div>
+
+      <div class="customization-text-container">
+        <div class="extension-title-text-box">
+          <p><span style="font-weight: bold; color: #fff;">!subathonUnpause</span></p>
+        </div>
+        <div class="extension-title-text-box">
+          <p>Resume the subathon timer.</p>
+        </div>
+      </div>
+
+      <div class="customization-text-container">
+        <div class="extension-title-text-box">
+          <p><span style="font-weight: bold; color: #fff;">!subathonAddTime <span
+                style="color: #ffd95e;">[Duration]</span></span></p>
+        </div>
+        <div class="extension-title-text-box">
+          <p>Manually add time (e.g., <code>30</code>, <code>5m</code>, <code>1h</code>).</p>
+        </div>
+      </div>
+
+      <div class="customization-text-container">
+        <div class="extension-title-text-box">
+          <p><span style="font-weight: bold; color: #fff;">!subathonRemoveTime <span
+                style="color: #ffd95e;">[Duration]</span></span></p>
+        </div>
+        <div class="extension-title-text-box">
+          <p>Manually remove time from the timer.</p>
+        </div>
+      </div>
+
+      <div class="customization-text-container">
+        <div class="extension-title-text-box">
+          <p><span style="font-weight: bold; color: #fff;">!subathonAddEvent <span style="color: #ffd95e;">[Event]
+                [Amount]</span></span></p>
+        </div>
+        <div class="extension-title-text-box">
+          <p>Manually increase event counts (subs, bits, etc.).<br><br>
+            <span style="font-weight: bold; color: #ffd95e;">Examples:</span><br>
+            <code>!subathonAddEvent prime 1</code> → +1 Prime Sub<br>
+            <code>!subathonAddEvent sub 3</code> → +3 Tier 1 Subs<br>
+            <code>!subathonAddEvent t2 1</code> → +1 Tier 2 Sub<br>
+            <code>!subathonAddEvent t3 2</code> → +2 Tier 3 Subs<br>
+            <code>!subathonAddEvent bits 500</code> → +500 Bits<br>
+            <code>!subathonAddEvent donations 5</code> → +$5.00 donation equivalent<br>
+            <code>!subathonAddEvent follow 1</code> → +1 Follow<br>
+            <code>!subathonAddEvent cpr 1</code> → +1 Channel Point Redeem (whitelisted reward)<br>
+            <code>!subathonAddEvent raid 35</code> → Raid counted with 35 viewers<br>
+            <code>!subathonAddEvent lp 1000</code> → +1000 Loyalty Points contributed
+          </p>
+        </div>
+      </div>
+
+      <div class="customization-text-container">
+        <div class="extension-title-text-box">
+          <p><span style="font-weight: bold; color: #fff;">!subathonRemoveEvent <span style="color: #ffd95e;">[Event]
+                [Amount]</span></span></p>
+        </div>
+        <div class="extension-title-text-box">
+          <p>Manually decrease event counts when correcting mistakes.<br><br>
+            <span style="font-weight: bold; color: #ffd95e;">Examples:</span><br>
+            <code>!subathonRemoveEvent prime 1</code> → -1 Prime Sub<br>
+            <code>!subathonRemoveEvent sub 2</code> → -2 Tier 1 Subs<br>
+            <code>!subathonRemoveEvent t2 1</code> → -1 Tier 2 Sub<br>
+            <code>!subathonRemoveEvent t3 1</code> → -1 Tier 3 Sub<br>
+            <code>!subathonRemoveEvent bits 500</code> → Remove 500 Bits worth of time<br>
+            <code>!subathonRemoveEvent donations 3</code> → Remove $3.00 donation equivalent<br>
+            <code>!subathonRemoveEvent follow 1</code> → Remove 1 Follow contribution<br>
+            <code>!subathonRemoveEvent cpr 1</code> → Remove 1 Channel Point Redeem contribution<br>
+            <code>!subathonRemoveEvent raid 20</code> → Remove raid counted as 20 viewers<br>
+            <code>!subathonRemoveEvent lp 1000</code> → Remove 1000 Loyalty Points contribution
+          </p>
+        </div>
+      </div>
+
+
+
+      <div class="customization-text-container">
+        <div class="extension-title-text-box">
+          <p><span style="font-weight: bold; color: #fff;">!subathonContributePoints <span
+                style="color: #ffd95e;">[Amount]</span></span></p>
+        </div>
+        <div class="extension-title-text-box">
+          <p>Spend Loyalty Points to add time.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <!---------------------------------------------------------------------------------------------------------------------------------->
+
+
+
+  <div class="accordion-divider"></div>
+  <!----    SETTINGS UI    ------------------------------------------------------------------------------------------------------------------------------>
+  <div class="accordion-item">
+    <div class="accordion-header" id="settings" onclick="toggleAccordion('settings-acc')">
+      <span class="iconify title-icon" data-icon="line-md:check-list-3"></span> <span>SETTINGS UI</span>
+      <span class="iconify accordion-icon" data-icon="ic:baseline-keyboard-arrow-right"></span>
+    </div>
+    <div class="accordion-content" id="settings-acc">
+      <div class="extension-title-text-box">
+        <p>The <span style="font-weight: bold; color: #ffd95e;">Settings UI</span> allows for some (HUGE)
+          customization.
+        </p>
+      </div>
+      <p><br><br></p>
+      <!---------------------------------------------->
+      <div class="settings-ui-container">
+        <div class="extension-title-text-box">
+          <p>The General Settings allow to set the starting time, the visible time format as well as your
+            currency for donations.
+          </p>
+        </div>
+        <img src="{{ site.baseurl }}/assets/settings/twitch-subathon/twitch-subathon-1.webp" class="settings-ui-image">
+      </div>
+      <!---------------------------------------------->
+      <div class="settings-ui-container">
+        <div class="extension-title-text-box">
+          <p>The 'Added Time' tab lets you define which Twitch events are included to contributing time and
+            how many seconds they add.
+          </p>
+        </div>
+        <img src="{{ site.baseurl }}/assets/settings/twitch-subathon/twitch-subathon-2.webp" class="settings-ui-image">
+      </div>
+      <!---------------------------------------------->
+      <div class="settings-ui-container">
+        <div class="extension-title-text-box">
+          <p>'Appearance' allows to change.. well.. the appearance. Crazy, right? Font, color, shape, icons
+            and images. Have fun!
+          </p>
+        </div>
+        <img src="{{ site.baseurl }}/assets/settings/twitch-subathon/twitch-subathon-3.webp" class="settings-ui-image">
+      </div>
+      <!---------------------------------------------->
+      <div class="settings-ui-container">
+        <div class="extension-title-text-box">
+          <p>The 'Rotator' tab allows you to define the rotator box (the one between countdown and goals). It
+            displays the current event counts and allows you to add some neat custom texts to rotate
+            through!
+          </p>
+        </div>
+        <img src="{{ site.baseurl }}/assets/settings/twitch-subathon/twitch-subathon-4.webp" class="settings-ui-image">
+      </div>
+      <!---------------------------------------------->
+      <div class="settings-ui-container">
+        <div class="extension-title-text-box">
+          <p>In 'Goals' you can define your goals (if you want any). Goals are tied to their events (all sub
+            tiers combine to just 'subs'). If you want a general goal, you can choose 'No Icon'. All
+            event-tied ones auto complete once the goal is reached.
+          </p>
+        </div>
+        <img src="{{ site.baseurl }}/assets/settings/twitch-subathon/twitch-subathon-5.webp" class="settings-ui-image">
+      </div>
+      <!---------------------------------------------->
+      <div class="settings-ui-container">
+        <div class="extension-title-text-box">
+          <p>Here you can edit some (or most) of the texts that are on the overlay :)
+          </p>
+        </div>
+        <img src="{{ site.baseurl }}/assets/settings/twitch-subathon/twitch-subathon-6.webp" class="settings-ui-image">
+      </div>
+      <!---------------------------------------------->
+      <div class="settings-ui-container">
+        <div class="extension-title-text-box">
+          <p>Chat Responses, as usual. Mostly error responses, but feel free to edit all of these too! And
+            also as always: a single hyphen to skip the message entirely.
+          </p>
+        </div>
+        <img src="{{ site.baseurl }}/assets/settings/twitch-subathon/twitch-subathon-7.webp" class="settings-ui-image">
+      </div>
+      <!---------------------------------------------->
+      <div class="settings-ui-container">
+        <div class="extension-title-text-box">
+          <p>The Advanced tab has some serious gourmet shit in there. But I'd suggest to leave the toggle
+            switches as they are. The most important part here are the backups, in case you ever want to go
+            back because you messed up (definitely not me!)
+          </p>
+        </div>
+        <img src="{{ site.baseurl }}/assets/settings/twitch-subathon/twitch-subathon-8.webp" class="settings-ui-image">
+      </div>
+      <!---------------------------------------------->
+    </div>
+  </div>
+
+  <div class="accordion-divider"></div>
+
+  <!----    CUSTOM TRIGGERS    ------------------------------------------------------------------------------------------------------------------------------>
+  <div class="accordion-item">
+    <div class="accordion-header" id="custom-triggers" onclick="toggleAccordion('custom-triggers-acc')">
+      <span class="iconify title-icon" data-icon="line-md:bell-alert"></span>
+      <span>CUSTOM TRIGGERS</span>
+      <span class="iconify accordion-icon" data-icon="ic:baseline-keyboard-arrow-right"></span>
     </div>
 
-    <!---------------------------------------------->
+    <div class="accordion-content" id="custom-triggers-acc">
+      <div class="extension-title-text-box-long">
+        <p>Under <span style="font-weight: bold; color: #ffd95e;">Custom → TWITCH SUBATHON</span> you will find
+          triggers that fire on certain occastions and provide some juicy variables.</p>
+      </div>
 
-    <div class="accordion-divider"></div>
-    <!----    ACTION IMPORT    ------------------------------------------------------------------------------------------------------------------------------>
-    <div class="accordion-item">
-        <div class="accordion-header" id="action-import" onclick="toggleAccordion('action-import-acc')">
-            <span class="iconify title-icon" data-icon="line-md:download"></span> <span>ACTION IMPORT</span>
-            <span class="iconify accordion-icon" data-icon="ic:baseline-keyboard-arrow-right"></span>
-        </div>
-        <div class="accordion-content" id="action-import-acc">
-            <div class="copy-box">
-                <span class="copy-text" id="import-string" data-copy-text="">Loading...</span>
-                <button class="copy-btn" onclick="copyToClipboard('import-string')">
-                    <span class="iconify" data-icon="material-symbols:content-copy-outline-sharp"></span> Copy
-                </button>
-            </div>
-            <div style="margin-top: 10px; font-size: 0.8em; color: #aaa;">
-                <span class="iconify nav-icon-regular" data-icon="rivet-icons:exclamation-mark-circle-solid"></span>
-                Never import actions from untrusted sources.
-                Want to know what you are importing?
-                Paste the import code in <a
-                    href="https://tawmae.xyz/Streamerbot%20ByteCode%20Decoder_v5_by_TakeJoshyy.html" target="_blank"
-                    style="color: #6fa8dc; text-decoration: underline;">here</a> (Decoder made by TakeJoshyy).
-            </div>
-        </div>
+      <!--------------------------------->
+      <img src="{{ site.baseurl }}/assets/custom-triggers/twitch-subathon.webp" class="extension-image">
+      <!--------------------------------->
+      <p><br></p>
+
+
+      <!--------------------------------- SUBATHON FINISHED --------------------------------->
+      <div class="extension-title-text-box-long">
+        <p style="font-weight: bold; font-size: 1.6rem; color: #ffd95e">Finished</p>
+        <p>Fires when the countdown reaches 00:00:00.</p>
+        <p style="font-weight: bold;">Available variables:</p>
+
+        <ul style="list-style-position: inside; padding-left: 0; text-align: left;">
+
+          <li><span style="font-weight: bold; color: #ffd95e;">startedAt_Unix</span><span
+              style="background:#fff;color:#000;padding:0 5px;opacity:.45;">(long)</span> Unix timestamp when the
+            subathon started.</li>
+          <li><span style="font-weight: bold; color: #ffd95e;">endedAt_Unix</span><span
+              style="background:#fff;color:#000;padding:0 5px;opacity:.45;">(long)</span> Unix timestamp when the
+            subathon ended.</li>
+
+          <li><span style="font-weight: bold; color: #ffd95e;">startedAt_local</span><span
+              style="background:#fff;color:#000;padding:0 5px;opacity:.45;">(string)</span> Local timestamp when the
+            subathon started.</li>
+          <li><span style="font-weight: bold; color: #ffd95e;">endedAt_local</span><span
+              style="background:#fff;color:#000;padding:0 5px;opacity:.45;">(string)</span> Local timestamp when the
+            subathon ended.</li>
+
+          <li><span style="font-weight: bold; color: #ffd95e;">baseSeconds</span><span
+              style="background:#fff;color:#000;padding:0 5px;opacity:.45;">(int)</span> Base duration at the start.
+          </li>
+          <li><span style="font-weight: bold; color: #ffd95e;">addedSecondsTotal</span><span
+              style="background:#fff;color:#000;padding:0 5px;opacity:.45;">(int)</span> Total seconds added during
+            runtime.</li>
+          <li><span style="font-weight: bold; color: #ffd95e;">plannedTotalSeconds</span><span
+              style="background:#fff;color:#000;padding:0 5px;opacity:.45;">(int)</span> Final total seconds planned.
+          </li>
+          <li><span style="font-weight: bold; color: #ffd95e;">elapsedSeconds</span><span
+              style="background:#fff;color:#000;padding:0 5px;opacity:.45;">(int)</span> Total seconds elapsed.</li>
+          <li><span style="font-weight: bold; color: #ffd95e;">remainingSecondsAtFinish</span><span
+              style="background:#fff;color:#000;padding:0 5px;opacity:.45;">(int)</span> Remaining seconds when finished
+            (usually 0).</li>
+
+          <li><span style="font-weight: bold; color: #ffd95e;">baseFormatted</span><span
+              style="background:#fff;color:#000;padding:0 5px;opacity:.45;">(string)</span> Base time formatted
+            (hh:mm:ss).</li>
+          <li><span style="font-weight: bold; color: #ffd95e;">addedFormatted</span><span
+              style="background:#fff;color:#000;padding:0 5px;opacity:.45;">(string)</span> Added time formatted.</li>
+          <li><span style="font-weight: bold; color: #ffd95e;">elapsedFormatted</span><span
+              style="background:#fff;color:#000;padding:0 5px;opacity:.45;">(string)</span> Total elapsed time
+            formatted.</li>
+          <li><span style="font-weight: bold; color: #ffd95e;">plannedTotalFormatted</span><span
+              style="background:#fff;color:#000;padding:0 5px;opacity:.45;">(string)</span> Planned total formatted.
+          </li>
+
+          <li><span style="font-weight: bold; color: #ffd95e;">pauseCount</span><span
+              style="background:#fff;color:#000;padding:0 5px;opacity:.45;">(int)</span> Number of pauses.</li>
+          <li><span style="font-weight: bold; color: #ffd95e;">pauseTotalSeconds</span><span
+              style="background:#fff;color:#000;padding:0 5px;opacity:.45;">(int)</span> Total paused duration in
+            seconds.</li>
+          <li><span style="font-weight: bold; color: #ffd95e;">pauseTotalFormatted</span><span
+              style="background:#fff;color:#000;padding:0 5px;opacity:.45;">(string)</span> Total paused duration
+            formatted.</li>
+
+          <li><span style="font-weight: bold; color: #ffd95e;">subs</span><span
+              style="background:#fff;color:#000;padding:0 5px;opacity:.45;">(int)</span> Total subs.</li>
+          <li><span style="font-weight: bold; color: #ffd95e;">primesubs</span><span
+              style="background:#fff;color:#000;padding:0 5px;opacity:.45;">(int)</span> Total Prime subs.</li>
+          <li><span style="font-weight: bold; color: #ffd95e;">t1subs</span><span
+              style="background:#fff;color:#000;padding:0 5px;opacity:.45;">(int)</span> Tier 1 subs.</li>
+          <li><span style="font-weight: bold; color: #ffd95e;">t2subs</span><span
+              style="background:#fff;color:#000;padding:0 5px;opacity:.45;">(int)</span> Tier 2 subs.</li>
+          <li><span style="font-weight: bold; color: #ffd95e;">t3subs</span><span
+              style="background:#fff;color:#000;padding:0 5px;opacity:.45;">(int)</span> Tier 3 subs.</li>
+
+          <li><span style="font-weight: bold; color: #ffd95e;">bits</span><span
+              style="background:#fff;color:#000;padding:0 5px;opacity:.45;">(int)</span> Total bits counted.</li>
+          <li><span style="font-weight: bold; color: #ffd95e;">donations</span><span
+              style="background:#fff;color:#000;padding:0 5px;opacity:.45;">(int)</span> Total donations counted.</li>
+          <li><span style="font-weight: bold; color: #ffd95e;">follows</span><span
+              style="background:#fff;color:#000;padding:0 5px;opacity:.45;">(int)</span> Total follows.</li>
+          <li><span style="font-weight: bold; color: #ffd95e;">raids</span><span
+              style="background:#fff;color:#000;padding:0 5px;opacity:.45;">(int)</span> Total raids.</li>
+          <li><span style="font-weight: bold; color: #ffd95e;">channelPoints</span><span
+              style="background:#fff;color:#000;padding:0 5px;opacity:.45;">(int)</span> Total channel point redeems
+            counted.</li>
+          <li><span style="font-weight: bold; color: #ffd95e;">loyaltyPoints</span><span
+              style="background:#fff;color:#000;padding:0 5px;opacity:.45;">(int)</span> Total loyalty points counted.
+          </li>
+
+          <li><span style="font-weight: bold; color: #ffd95e;">secondsAdded_primesubs</span><span
+              style="background:#fff;color:#000;padding:0 5px;opacity:.45;">(int)</span></li>
+          <li><span style="font-weight: bold; color: #ffd95e;">secondsAdded_t1subs</span><span
+              style="background:#fff;color:#000;padding:0 5px;opacity:.45;">(int)</span></li>
+          <li><span style="font-weight: bold; color: #ffd95e;">secondsAdded_t2subs</span><span
+              style="background:#fff;color:#000;padding:0 5px;opacity:.45;">(int)</span></li>
+          <li><span style="font-weight: bold; color: #ffd95e;">secondsAdded_t3subs</span><span
+              style="background:#fff;color:#000;padding:0 5px;opacity:.45;">(int)</span></li>
+
+          <li><span style="font-weight: bold; color: #ffd95e;">secondsAdded_bits</span><span
+              style="background:#fff;color:#000;padding:0 5px;opacity:.45;">(int)</span></li>
+          <li><span style="font-weight: bold; color: #ffd95e;">secondsAdded_donations</span><span
+              style="background:#fff;color:#000;padding:0 5px;opacity:.45;">(int)</span></li>
+          <li><span style="font-weight: bold; color: #ffd95e;">secondsAdded_follows</span><span
+              style="background:#fff;color:#000;padding:0 5px;opacity:.45;">(int)</span></li>
+          <li><span style="font-weight: bold; color: #ffd95e;">secondsAdded_channelPoints</span><span
+              style="background:#fff;color:#000;padding:0 5px;opacity:.45;">(int)</span></li>
+          <li><span style="font-weight: bold; color: #ffd95e;">secondsAdded_loyaltyPoints</span><span
+              style="background:#fff;color:#000;padding:0 5px;opacity:.45;">(int)</span></li>
+
+        </ul>
+      </div>
+
+      <!--------------------------------->
     </div>
-    <!---------------------------------------------->
-
-    <div class="accordion-divider"></div>
-
+  </div>
+  <!---------------------------------------------------------------------------------------------------------------------------------->
 
 
-    <!----    SETUP    ------------------------------------------------------------------------------------------------------------------------------>
-    <div class="accordion-item">
-        <div class="accordion-header" id="setup" onclick="toggleAccordion('setup-acc')">
-            <span class="iconify title-icon" data-icon="line-md:cog-filled"></span> <span>SETUP</span>
-            <span class="iconify accordion-icon" data-icon="ic:baseline-keyboard-arrow-right"></span>
-        </div>
-        <div class="accordion-content" id="setup-acc">
-            <!---------------------------------------------->
-            <div class="description-container">
-                <img src="{{ site.baseurl }}/assets/setup/copy-string.webp" class="extension-image">
-                <div class="extension-title-text-box">
-                    <p><span style="font-weight: bold; color: #fff;">1.</span> Copy the <span
-                            style="font-weight: bold; color: #ffd95e;">Action Import</span> text from above into your
-                        clipboard.</p>
-                </div>
-            </div>
-            <!---------------------------------------------->
-            <div class="section-divider"></div>
-            <!--------------------------------------------->
-            <div class="description-container">
-                <div class="extension-title-text-box">
-                    <p><span style="font-weight: bold; color: #fff;">2.</span> In <span
-                            style="font-weight: bold; color: #ffd95e;">Streamer.bot</span>, click the <span
-                            style="font-weight: bold; color: #ffd95e;">Import</span> button at the top of the window.
-                        Paste the text into the <span style="font-weight: bold; color: #ffd95e;">Import String</span>
-                        section and press <span style="font-weight: bold; color: #ffd95e;">Import</span> at the bottom.
-                    </p>
-                </div>
-                <img src="{{ site.baseurl }}/assets/setup/import-actions-1.0.0.png" class="extension-image">
-            </div>
-            <!---------------------------------------------->
-            <div class="section-divider"></div>
-            <!--------------------------------------------->
-            <div class="description-container">
-                <img src="{{ site.baseurl }}/assets/setup/enable-commands-1.0.0.png" class="extension-image">
-                <div class="extension-title-text-box">
-                    <p><span style="font-weight: bold; color: #fff;">3.</span> Now head to the <span
-                            style="font-weight: bold; color: #ffd95e;">Commands</span> tab and look for the imported
-                        commands. Then <span style="font-weight: bold; color: #ffd95e;">rightclick</span> the group and
-                        select <span style="font-weight: bold; color: #ffd95e;">Group -> Enable All</span>.
-                </div>
-            </div>
+  <div class="accordion-divider"></div>
 
-            <!---------------------------------------------->
-            <div class="description-container">
-
-                <div class="extension-title-text-box">
-                    <p><span style="font-weight: bold; color: #fff;">4.</span>
-                        In the <span style="font-weight: bold; color: #ffd95e;">[TWITCH SUBATHON] #0 - Settings</span>
-                        action, rightclick the <span style="font-weight: bold; color: #ffd95e;">Test</span> trigger and
-                        hit <span style="font-weight: bold; color: #ffd95e;">Test Trigger</span> to open the Settings UI
-                        once. This makes sure that the .dll file has been downloaded and is up to date.
-                        <br><br>If you <strong>don't</strong> have my .dll in your Streamer.bot directory already, it
-                        will ask you to <strong>automatically download</strong> it. If you wish to manually place it
-                        there, you can to that <a href="https://tawmae.xyz/dll"
-                            style="text-decoration: underline; color: inherit;">here</a>.
-
-                    </p>
-                </div>
-                <img src="{{ site.baseurl }}/assets/setup/run-settings-ui.webp" class="extension-image">
-
-            </div>
-
-            <!---------------------------------------------->
-            <div class="section-divider"></div>
-            <!--------------------------------------------->
-            <div class="description-container">
-                <img src="{{ site.baseurl }}/assets/setup/streamerbot-websocket-server.webp" class="extension-image">
-                <div class="extension-title-text-box">
-                    <p><span style="font-weight: bold; color: #fff;">5.</span> Go into the <span
-                            style="font-weight: bold; color: #ffd95e;">Servers/Clients -> WebSocket Server</span> tab.
-                        Check <span style="font-weight: bold; color: #ffd95e;">Auto Start WebSocket Server</span>, leave
-                        <span style="font-weight: bold; color: #ffd95e;">Address</span> at <span
-                            style="font-weight: bold; color: #ffd95e;">127.0.0.1</span> and the <span
-                            style="font-weight: bold; color: #ffd95e;">Port</span> at <span
-                            style="font-weight: bold; color: #ffd95e;">8080</span>. You can set a password if you want,
-                        just make sure to leave <span style="font-weight: bold; color: #ffd95e;">Enforce All
-                            Requests</span> unchecked. Start the server. <br><br>Here you can check in real-time if your
-                        Websocket server is up and running:<br> <iframe class="ws-iframe"
-                            src="{{ site.baseurl }}/assets/setup/websocket-connection-check.html"
-                            title="Streamer.bot Websocket Server Connection Check" scrolling="no"> </iframe>
-                    </p>
-                </div>
-
-            </div>
-            <!---------------------------------------------->
-            <div class="section-divider"></div>
-            <!--------------------------------------------->
-            <div class="description-container">
-
-                <div class="extension-title-text-box">
-                    <p><span style="font-weight: bold; color: #fff;">6.</span> Copy the <span
-                            style="font-weight: bold; color: #ffd95e;">Browser Source URL</span> from above into your
-                        clipboard.</p>
-                </div>
-                <img src="{{ site.baseurl }}/assets/setup/copy-string.webp" class="extension-image">
-            </div>
-
-
-            <!---------------------------------------------->
-            <div class="section-divider"></div>
-            <!--------------------------------------------->
-            <div class="description-container">
-                <img src="{{ site.baseurl }}/assets/setup/obs-browser-source.webp" class="extension-image">
-                <div class="extension-title-text-box">
-                    <p><span style="font-weight: bold; color: #fff;">7.</span> In <span
-                            style="font-weight: bold; color: #ffd95e;">OBS</span>, create a new <span
-                            style="font-weight: bold; color: #ffd95e;">Browser Source</span>, name it whatever you want.
-                        Then paste the copied URL into <span style="font-weight: bold; color: #ffd95e;">URL</span> and
-                        preferably set the <span style="font-weight: bold; color: #ffd95e;">Width</span> and <span
-                            style="font-weight: bold; color: #ffd95e;">Height</span> to your OBS canvas size. You can
-                        make the widget bigger in the Settings UI instead of scaling it and making it blurry.<br><br>
-                        And then you're done! And since it came up a lot: for donations to contribute, you need to
-                        connect the donation platform of your choice with Streamer.bot (Kofi, Streamelements, Fourthwall
-                        etc). Once it's connected to Streamer.bot, the Subathon widget will pick donations up
-                        automatically.<br> <span style="font-size: 1.8rem">Pog Clap</span> <br> <span
-                            style="font-size: 0.9rem;"> <span style="font-weight: bold; color: red;">Important
-                                Note:</span> If you want to have the
-                            browser source in multiple scenes, <span
-                                style="font-weight: bold; color: #ffd95e;">don’t</span>
-                            create a second browser source. This can and will cause errors. Instead, use <span
-                                style="font-weight: bold; color: #ffd95e;">nested scenes</span> or <span
-                                style="font-weight: bold; color: #ffd95e;">source clones</span>.</span>
-                    </p>
-                </div>
-
-            </div>
-            <!---------------------------------------------->
-        </div>
+  <!----    FAQ    ------------------------------------------------------------------------------------------------------------------------------>
+  <div class="accordion-item">
+    <div class="accordion-header" id="faq" onclick="toggleAccordion('faq-acc')">
+      <span class="iconify title-icon" data-icon="line-md:question-square"></span>
+      <h2 class="accordion-title">FAQ & EXAMPLES</h2>
+      <span class="iconify accordion-icon" data-icon="ic:baseline-keyboard-arrow-right"></span>
     </div>
+    <div class="accordion-content" id="faq-acc">
+      <!--------------------------------->
+      <div class="extension-title-text-box-long">
+        <h3><span style="font-weight: bold; color: #fff">Does the time stop when the overlay is not active?</span></h3>
+        <p>
+          No, the time is handled purely by Streamer.bot. The overlay just adapts to the data that Streamer.bot
+          provides. If you want to pause it, make sure to actually use the pause action in Streamer.bot. For automatic
+          safety pauses, see below.
+        </p>
+      </div>
+      <!--------------------------------->
+      <div class="extension-title-text-box-long">
+        <h3><span style="font-weight: bold; color: #fff">Does the Subathon timer automatically pause when I stop
+            streaming?</span></h3>
+        <p>
+          Yes, if <span style="color: #ffd95e; font-weight: bold;">"Only Add Time When Live"</span> is enabled (which it
+          is by default).
+          This famously called 'Safety Pause' pauses your Subathon for you, if you either close Streamer.bot or your
+          stream goes offline. It will not auto-resume though, so remember to unpause :)
+        </p>
+      </div>
+      <!--------------------------------->
+      <div class="extension-title-text-box-long">
+        <h3><span style="font-weight: bold; color: #fff">Can I restore progress if something breaks?</span></h3>
+        <p>
+          Yes. Automatic backups are created regularly every 15 minutes while the Subathon is active and if you end the
+          Subathon manually, <strong>if(!!)</strong> <span style="color: #ffd95e; font-weight: bold;">Backups</span> are
+          enabled (whjich they are by default). Backups are saved locally to your Streamer.bot directory into cute
+          little textfiles :3
+          <br><br>
+          To restore:
+          <br>1. Open the <span style="color: #ffd95e; font-weight: bold;">Settings UI</span> and head into the <span
+            style="color: #ffd95e; font-weight: bold;">Advanced</span> tab.
+          <br>2. Scrolldown, select a backup file.
+          <br>3. Click the button on the left to restore from that point.
+          <br><br>
+          This will fully restore timer state and event counts.
+          <br><br>
+          <img src="{{ site.baseurl }}/assets/faq/twitch-subathon/twitch-subathon-backup-popup.webp"
+            class="extension-image-smol" style="border-radius: 5px">
+          <br><br>
+          Also all events are tracked for each day, regardless of whether you enabled them for the subathon or not. So
+          there is always a backup of the backup to see how many subs, follows, donations etc you got in for the day. So
+          you are always able to re-add them back to the timer, in case anything goes wrong.
+        </p>
+      </div>
+      <!--------------------------------->
+      <div class="extension-title-text-box-long">
+        <h3><span style="font-weight: bold; color: #fff">Are goals like donations bits, channel points and loyalty
+            points added proportionally?</span></h3>
+        <p>
+          Yes. So if 1000 loyalty points add 100 seconds and someone contributes 500, it'll add 50 seconds. Unless you
+          have a minimum amount set.
+        </p>
+      </div>
 
-    <!---------------------------------------------------------------------------------------------------------------------------------->
+      <!--------------------------------->
+      <div class="extension-title-text-box-long">
+        <h3><span style="font-weight: bold; color: #fff">What if an Iranian guy donates 100.000 Iranian Rial? Won't it
+            break EVERYTHING?</span></h3>
+        <p>
+          CHILLLLL. Donations are automatically converted into your selected currency. So if an Iranian decides to
+          donate 100.000 Rial, it'll add 2 dollars to your count.
+        </p>
+      </div>
 
+      <!--------------------------------->
 
-    <div class="accordion-divider"></div>
-
-    <!----    COMMANDS    ------------------------------------------------------------------------------------------------------------------------------>
-    <div class="accordion-item">
-        <div class="accordion-header" id="commands" onclick="toggleAccordion('commands-acc')">
-            <span class="iconify title-icon" data-icon="line-md:alert-circle"></span>
-            <span>COMMANDS</span>
-            <span class="iconify accordion-icon" data-icon="ic:baseline-keyboard-arrow-right"></span>
-        </div>
-        <div class="accordion-content" id="commands-acc">
-
-            <div class="customization-text-container">
-                <div class="extension-title-text-box">
-                    <p><span style="font-weight: bold; color: #fff;">!subathonStart</span></p>
-                </div>
-                <div class="extension-title-text-box">
-                    <p>Start the subathon.</p>
-                </div>
-            </div>
-
-            <div class="customization-text-container">
-                <div class="extension-title-text-box">
-                    <p><span style="font-weight: bold; color: #fff;">!subathonPause</span></p>
-                </div>
-                <div class="extension-title-text-box">
-                    <p>Pause the subathon timer.</p>
-                </div>
-            </div>
-
-            <div class="customization-text-container">
-                <div class="extension-title-text-box">
-                    <p><span style="font-weight: bold; color: #fff;">!subathonUnpause</span></p>
-                </div>
-                <div class="extension-title-text-box">
-                    <p>Resume the subathon timer.</p>
-                </div>
-            </div>
-
-            <div class="customization-text-container">
-                <div class="extension-title-text-box">
-                    <p><span style="font-weight: bold; color: #fff;">!subathonAddTime <span
-                                style="color: #ffd95e;">[Duration]</span></span></p>
-                </div>
-                <div class="extension-title-text-box">
-                    <p>Manually add time (e.g., <code>30</code>, <code>5m</code>, <code>1h</code>).</p>
-                </div>
-            </div>
-
-            <div class="customization-text-container">
-                <div class="extension-title-text-box">
-                    <p><span style="font-weight: bold; color: #fff;">!subathonRemoveTime <span
-                                style="color: #ffd95e;">[Duration]</span></span></p>
-                </div>
-                <div class="extension-title-text-box">
-                    <p>Manually remove time from the timer.</p>
-                </div>
-            </div>
-
-            <div class="customization-text-container">
-                <div class="extension-title-text-box">
-                    <p><span style="font-weight: bold; color: #fff;">!subathonAddEvent <span
-                                style="color: #ffd95e;">[Event] [Amount]</span></span></p>
-                </div>
-                <div class="extension-title-text-box">
-                    <p>Manually increase event counts (subs, bits, etc.).<br><br>
-                        <span style="font-weight: bold; color: #ffd95e;">Examples:</span><br>
-                        <code>!subathonAddEvent prime 1</code> → +1 Prime Sub<br>
-                        <code>!subathonAddEvent sub 3</code> → +3 Tier 1 Subs<br>
-                        <code>!subathonAddEvent t2 1</code> → +1 Tier 2 Sub<br>
-                        <code>!subathonAddEvent t3 2</code> → +2 Tier 3 Subs<br>
-                        <code>!subathonAddEvent bits 500</code> → +500 Bits<br>
-                        <code>!subathonAddEvent donations 5</code> → +$5.00 donation equivalent<br>
-                        <code>!subathonAddEvent follow 1</code> → +1 Follow<br>
-                        <code>!subathonAddEvent cpr 1</code> → +1 Channel Point Redeem (whitelisted reward)<br>
-                        <code>!subathonAddEvent raid 35</code> → Raid counted with 35 viewers<br>
-                        <code>!subathonAddEvent lp 1000</code> → +1000 Loyalty Points contributed
-                    </p>
-                </div>
-            </div>
-
-            <div class="customization-text-container">
-                <div class="extension-title-text-box">
-                    <p><span style="font-weight: bold; color: #fff;">!subathonRemoveEvent <span
-                                style="color: #ffd95e;">[Event] [Amount]</span></span></p>
-                </div>
-                <div class="extension-title-text-box">
-                    <p>Manually decrease event counts when correcting mistakes.<br><br>
-                        <span style="font-weight: bold; color: #ffd95e;">Examples:</span><br>
-                        <code>!subathonRemoveEvent prime 1</code> → -1 Prime Sub<br>
-                        <code>!subathonRemoveEvent sub 2</code> → -2 Tier 1 Subs<br>
-                        <code>!subathonRemoveEvent t2 1</code> → -1 Tier 2 Sub<br>
-                        <code>!subathonRemoveEvent t3 1</code> → -1 Tier 3 Sub<br>
-                        <code>!subathonRemoveEvent bits 500</code> → Remove 500 Bits worth of time<br>
-                        <code>!subathonRemoveEvent donations 3</code> → Remove $3.00 donation equivalent<br>
-                        <code>!subathonRemoveEvent follow 1</code> → Remove 1 Follow contribution<br>
-                        <code>!subathonRemoveEvent cpr 1</code> → Remove 1 Channel Point Redeem contribution<br>
-                        <code>!subathonRemoveEvent raid 20</code> → Remove raid counted as 20 viewers<br>
-                        <code>!subathonRemoveEvent lp 1000</code> → Remove 1000 Loyalty Points contribution
-                    </p>
-                </div>
-            </div>
-
-
-
-            <div class="customization-text-container">
-                <div class="extension-title-text-box">
-                    <p><span style="font-weight: bold; color: #fff;">!subathonContributePoints <span
-                                style="color: #ffd95e;">[Amount]</span></span></p>
-                </div>
-                <div class="extension-title-text-box">
-                    <p>Spend Loyalty Points to add time.</p>
-                </div>
-            </div>
-
-        </div>
     </div>
-    <!---------------------------------------------------------------------------------------------------------------------------------->
+  </div>
+  <!---------------------------------------------------------------------------------------------------------------------------------->
 
-
-
-    <div class="accordion-divider"></div>
-    <!----    SETTINGS UI    ------------------------------------------------------------------------------------------------------------------------------>
-    <div class="accordion-item">
-        <div class="accordion-header" id="settings" onclick="toggleAccordion('settings-acc')">
-            <span class="iconify title-icon" data-icon="line-md:check-list-3"></span> <span>SETTINGS UI</span>
-            <span class="iconify accordion-icon" data-icon="ic:baseline-keyboard-arrow-right"></span>
-        </div>
-        <div class="accordion-content" id="settings-acc">
-            <div class="extension-title-text-box">
-                <p>The <span style="font-weight: bold; color: #ffd95e;">Settings UI</span> allows for some (HUGE)
-                    customization.
-                </p>
-            </div>
-            <p><br><br></p>
-            <!---------------------------------------------->
-            <div class="settings-ui-container">
-                <div class="extension-title-text-box">
-                    <p>The General Settings allow to set the starting time, the visible time format as well as your
-                        currency for donations.
-                    </p>
-                </div>
-                <img src="{{ site.baseurl }}/assets/settings/twitch-subathon/twitch-subathon-1.webp"
-                    class="settings-ui-image">
-            </div>
-            <!---------------------------------------------->
-            <div class="settings-ui-container">
-                <div class="extension-title-text-box">
-                    <p>The 'Added Time' tab lets you define which Twitch events are included to contributing time and
-                        how many seconds they add.
-                    </p>
-                </div>
-                <img src="{{ site.baseurl }}/assets/settings/twitch-subathon/twitch-subathon-2.webp"
-                    class="settings-ui-image">
-            </div>
-            <!---------------------------------------------->
-            <div class="settings-ui-container">
-                <div class="extension-title-text-box">
-                    <p>'Appearance' allows to change.. well.. the appearance. Crazy, right? Font, color, shape, icons
-                        and images. Have fun!
-                    </p>
-                </div>
-                <img src="{{ site.baseurl }}/assets/settings/twitch-subathon/twitch-subathon-3.webp"
-                    class="settings-ui-image">
-            </div>
-            <!---------------------------------------------->
-            <div class="settings-ui-container">
-                <div class="extension-title-text-box">
-                    <p>The 'Rotator' tab allows you to define the rotator box (the one between countdown and goals). It
-                        displays the current event counts and allows you to add some neat custom texts to rotate
-                        through!
-                    </p>
-                </div>
-                <img src="{{ site.baseurl }}/assets/settings/twitch-subathon/twitch-subathon-4.webp"
-                    class="settings-ui-image">
-            </div>
-            <!---------------------------------------------->
-            <div class="settings-ui-container">
-                <div class="extension-title-text-box">
-                    <p>In 'Goals' you can define your goals (if you want any). Goals are tied to their events (all sub
-                        tiers combine to just 'subs'). If you want a general goal, you can choose 'No Icon'. All
-                        event-tied ones auto complete once the goal is reached.
-                    </p>
-                </div>
-                <img src="{{ site.baseurl }}/assets/settings/twitch-subathon/twitch-subathon-5.webp"
-                    class="settings-ui-image">
-            </div>
-            <!---------------------------------------------->
-            <div class="settings-ui-container">
-                <div class="extension-title-text-box">
-                    <p>Here you can edit some (or most) of the texts that are on the overlay :)
-                    </p>
-                </div>
-                <img src="{{ site.baseurl }}/assets/settings/twitch-subathon/twitch-subathon-6.webp"
-                    class="settings-ui-image">
-            </div>
-            <!---------------------------------------------->
-            <div class="settings-ui-container">
-                <div class="extension-title-text-box">
-                    <p>Chat Responses, as usual. Mostly error responses, but feel free to edit all of these too! And
-                        also as always: a single hyphen to skip the message entirely.
-                    </p>
-                </div>
-                <img src="{{ site.baseurl }}/assets/settings/twitch-subathon/twitch-subathon-7.webp"
-                    class="settings-ui-image">
-            </div>
-            <!---------------------------------------------->
-            <div class="settings-ui-container">
-                <div class="extension-title-text-box">
-                    <p>The Advanced tab has some serious gourmet shit in there. But I'd suggest to leave the toggle
-                        switches as they are. The most important part here are the backups, in case you ever want to go
-                        back because you messed up (definitely not me!)
-                    </p>
-                </div>
-                <img src="{{ site.baseurl }}/assets/settings/twitch-subathon/twitch-subathon-8.webp"
-                    class="settings-ui-image">
-            </div>
-            <!---------------------------------------------->
-        </div>
+  <div class="accordion-divider"></div>
+  <!----    CHANGELOG    ------------------------------------------------------------------------------------------------------------------------------>
+  <div class="accordion-item">
+    <div class="accordion-header" id="changelog" onclick="toggleAccordion('changelog-acc')">
+      <span class="iconify title-icon" data-icon="line-md:rotate-270"></span>
+      <span>CHANGELOG</span>
+      <span class="iconify accordion-icon" data-icon="ic:baseline-keyboard-arrow-right"></span>
     </div>
-
-    <div class="accordion-divider"></div>
-
-    <!----    CUSTOM TRIGGERS    ------------------------------------------------------------------------------------------------------------------------------>
-    <div class="accordion-item">
-        <div class="accordion-header" id="custom-triggers" onclick="toggleAccordion('custom-triggers-acc')">
-            <span class="iconify title-icon" data-icon="line-md:bell-alert"></span>
-            <span>CUSTOM TRIGGERS</span>
-            <span class="iconify accordion-icon" data-icon="ic:baseline-keyboard-arrow-right"></span>
-        </div>
-
-        <div class="accordion-content" id="custom-triggers-acc">
-            <div class="extension-title-text-box-long">
-                <p>Under <span style="font-weight: bold; color: #ffd95e;">Custom → TWITCH SUBATHON</span> you will find
-                    triggers whenever Subathon States change, Goals get completed, or the Subathon ends.</p>
-            </div>
-
-            <!--------------------------------->
-            <img src="{{ site.baseurl }}/assets/custom-triggers/twitch-subathon.webp" class="extension-image">
-            <!--------------------------------->
-            <p><br></p>
-
-            <!--------------------------------- GOAL COMPLETED --------------------------------->
-            <div class="extension-title-text-box-long">
-                <p style="font-weight: bold; font-size: 1.6rem; color: #ffd95e">Goal Completed</p>
-                <p>Fires when a Subathon Goal reaches its target.</p>
-
-                <p style="font-weight: bold;">Available variables:</p>
-                <ul style="list-style-position: inside; padding-left: 0; text-align: left;">
-                    <li>
-                        <span style="font-weight: bold; color: #ffd95e;">goalName</span>
-                        <span style="background-color:#fff;color:#000;opacity:.45;padding:0 5px;">(string)</span>
-                        - the name of the completed goal
-                    </li>
-                    <li>
-                        <span style="font-weight: bold; color: #ffd95e;">goalCount</span>
-                        <span style="background-color:#fff;color:#000;opacity:.45;padding:0 5px;">(number)</span>
-                        - the reached amount
-                    </li>
-                    <li>
-                        <span style="font-weight: bold; color: #ffd95e;">goalType</span>
-                        <span style="background-color:#fff;color:#000;opacity:.45;padding:0 5px;">(string)</span>
-                        - category of the contribution (subs / bits / etc.)
-                    </li>
-                </ul>
-            </div>
-
-            <p><br></p>
-
-            <!--------------------------------- SUBATHON FINISHED --------------------------------->
-            <div class="extension-title-text-box-long">
-                <p style="font-weight: bold; font-size: 1.6rem; color: #ffd95e">Subathon Finished</p>
-                <p>Fires once when the planned total time runs out.</p>
-
-                <p style="font-weight: bold;">Available variables:</p>
-                <ul style="list-style-position: inside; padding-left: 0; text-align: left;">
-                    <li><span style="font-weight: bold; color: #ffd95e;">isActive</span> (bool)</li>
-                    <li><span style="font-weight: bold; color: #ffd95e;">timezone</span> (string)</li>
-                    <li><span style="font-weight: bold; color: #ffd95e;">startedAt_Unix</span> (number)</li>
-                    <li><span style="font-weight: bold; color: #ffd95e;">endedAt_Unix</span> (number)</li>
-                    <li><span style="font-weight: bold; color: #ffd95e;">startedAt_local</span> (string)</li>
-                    <li><span style="font-weight: bold; color: #ffd95e;">endedAt_local</span> (string)</li>
-
-                    <li><span style="font-weight: bold; color: #ffd95e;">baseSeconds</span> (number)</li>
-                    <li><span style="font-weight: bold; color: #ffd95e;">addedSecondsTotal</span> (number)</li>
-                    <li><span style="font-weight: bold; color: #ffd95e;">plannedTotalSeconds</span> (number)</li>
-                    <li><span style="font-weight: bold; color: #ffd95e;">elapsedSeconds</span> (number)</li>
-
-                    <li><span style="font-weight: bold; color: #ffd95e;">pauseCount</span> (number)</li>
-                    <li><span style="font-weight: bold; color: #ffd95e;">pauseTotalSeconds</span> (number)</li>
-
-                    <li><span style="font-weight: bold; color: #ffd95e;">primesubs / t1subs / t2subs / t3subs</span>
-                        (counts & totals)</li>
-                    <li><span style="font-weight: bold; color: #ffd95e;">bits / donations / charitydonations / follows /
-                            raids / channelpointrewards / loyaltypoints</span> (counts & totals)</li>
-                </ul>
-            </div>
-
-            <p><br></p>
-
-            <!--------------------------------- SUBATHON ENDED MANUALLY --------------------------------->
-            <div class="extension-title-text-box-long">
-                <p style="font-weight: bold; font-size: 1.6rem; color: #ffd95e">Subathon Ended Manually</p>
-                <p>Fires when the broadcaster ends the Subathon using <code>!subathonEnd</code>.</p>
-
-                <p style="font-weight: bold;">Available variables:</p>
-                <ul style="list-style-position: inside; padding-left: 0; text-align: left;">
-                    <li><span style="font-weight: bold; color: #ffd95e;">user</span> (string)</li>
-                    <li><span style="font-weight: bold; color: #ffd95e;">startedAt_local</span> (string)</li>
-                    <li><span style="font-weight: bold; color: #ffd95e;">endedAt_local</span> (string)</li>
-                    <li><span style="font-weight: bold; color: #ffd95e;">elapsedFormatted</span> (string)</li>
-                    <li><span style="font-weight: bold; color: #ffd95e;">addedFormatted</span> (string)</li>
-                </ul>
-            </div>
-
-            <p><br><br></p>
-        </div>
+    <div class="accordion-content" id="changelog-acc">
+      <table class="extension-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Changes</th>
+            <th>Version</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!---------------------------------------------->
+          <tr>
+            <td>November 08, 2025</td>
+            <td>Release</td>
+            <td>1.0.0</td>
+          </tr>
+          <!---------------------------------------------->
+        </tbody>
+      </table>
     </div>
-    <!---------------------------------------------------------------------------------------------------------------------------------->
+  </div>
+  <!---------------------------------------------------------------------------------------------------------------------------------->
+  <div class="accordion-divider"></div>
+  <!---------------------------------------------->
+  <section class="related-extensions">
+    <h2 class="related-title">
+      <span class="iconify" data-icon="material-symbols:thumbs-up-double"></span>
+      Other extensions you may like
+    </h2>
 
+    <div class="related-grid">
+      {% assign utility_pages = site.html_pages | where_exp: "p", "p.path contains 'utility/'" %}
+      {% assign obs_pages = site.html_pages | where_exp: "p", "p.path contains 'obs-widgets/'" %}
+      {% assign chat_pages = site.html_pages | where_exp: "p", "p.path contains 'chat-games/'" %}
+      {% assign all_extensions = utility_pages | concat: obs_pages | concat: chat_pages %}
+      {% assign filtered = all_extensions | where_exp: "p", "p.url != page.url" %}
 
-    <div class="accordion-divider"></div>
-    <!----    CHANGELOG    ------------------------------------------------------------------------------------------------------------------------------>
-    <div class="accordion-item">
-        <div class="accordion-header" id="changelog" onclick="toggleAccordion('changelog-acc')">
-            <span class="iconify title-icon" data-icon="line-md:rotate-270"></span>
-            <span>CHANGELOG</span>
-            <span class="iconify accordion-icon" data-icon="ic:baseline-keyboard-arrow-right"></span>
+      {% for ext in filtered %}
+      <a href="{{ ext.url | relative_url }}" class="related-card" style="display:none;">
+        <img src="{{ ext.og_image | default: '/assets/page-design/website-card.webp' | relative_url }}"
+          alt="{{ ext.title }} Streamer.bot Extension">
+        <div class="related-card-text">
+          <h3>{{ ext.title | replace: " – tawmae", "" | strip }}</h3>
+          <p>{{ ext.description | truncate: 160 }}</p>
         </div>
-        <div class="accordion-content" id="changelog-acc">
-            <table class="extension-table">
-                <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>Changes</th>
-                        <th>Version</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!---------------------------------------------->
-                    <tr>
-                        <td>November 06, 2025</td>
-                        <td>Fixed safety-pause when exiting Streamer.bot; added event tracking to at least have a list
-                            to check for the amount of events one received, so you'd be able to add manually if all goes
-                            wrong</td>
-                        <td>0.0.3</td>
-                    </tr>
-                    <!---------------------------------------------->
-                    <tr>
-                        <td>November 06, 2025</td>
-                        <td>Beta: Added option to add time for raids based on the raided viewercount</td>
-                        <td>0.0.2</td>
-                    </tr>
-                    <!---------------------------------------------->
-                    <tr>
-                        <td>November 06, 2025</td>
-                        <td>Beta</td>
-                        <td>0.0.1</td>
-                    </tr>
-                    <!---------------------------------------------->
-                </tbody>
-            </table>
-        </div>
+      </a>
+      {% endfor %}
     </div>
-    <!---------------------------------------------------------------------------------------------------------------------------------->
-    <div class="accordion-divider"></div>
-    <!---------------------------------------------->
-    <section class="related-extensions">
-        <h2 class="related-title">
-            <span class="iconify" data-icon="material-symbols:thumbs-up-double"></span>
-            Other extensions you may like
-        </h2>
+  </section>
 
-        <div class="related-grid">
-            {% assign utility_pages = site.html_pages | where_exp: "p", "p.path contains 'utility/'" %}
-            {% assign obs_pages = site.html_pages | where_exp: "p", "p.path contains 'obs-widgets/'" %}
-            {% assign chat_pages = site.html_pages | where_exp: "p", "p.path contains 'chat-games/'" %}
-            {% assign all_extensions = utility_pages | concat: obs_pages | concat: chat_pages %}
-            {% assign filtered = all_extensions | where_exp: "p", "p.url != page.url" %}
-
-            {% for ext in filtered %}
-            <a href="{{ ext.url | relative_url }}" class="related-card" style="display:none;">
-                <img src="{{ ext.og_image | default: '/assets/page-design/website-card.webp' | relative_url }}"
-                    alt="{{ ext.title }} Streamer.bot Extension">
-                <div class="related-card-text">
-                    <h3>{{ ext.title | replace: " – tawmae", "" | strip }}</h3>
-                    <p>{{ ext.description | truncate: 160 }}</p>
-                </div>
-            </a>
-            {% endfor %}
-        </div>
-    </section>
-
-    <!---------------------------------------------->
+  <!---------------------------------------------->
 </div>
