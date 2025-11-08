@@ -1194,8 +1194,9 @@
     // ====================================================
     setInterval(tickTimer, 1000);
     // ====================================================
-    function buildFinishedArgs() {
+   function buildFinishedArgs() {
       const d = dataCache || makeDefaultData();
+      const tz = getUserTimeZone();
       const e = d.events || {};
       const base = parseTimeToSeconds(cfgCache?.startingTime || "00:00:00:00");
       const add = Number(d?.general?.addedSecondsTotal || 0);
@@ -1230,17 +1231,20 @@
       const sAdded_loyaltyPoints = Number(e?.loyaltypoints?.totalSecondsAdded || 0);
       return {
         isActive: !!d?.general?.isActive,
+        timezone: tz,
         startedAt_Unix: startedAt || null,
         endedAt_Unix: endedAt || null,
         startedAt_local: startedAt ? formatDateInTZ(startedAt, tz) : null,
         endedAt_local: endedAt ? formatDateInTZ(endedAt, tz) : null,
         baseSeconds: base,
         addedSecondsTotal: add,
+        plannedTotalSeconds: base + add,
         elapsedSeconds: elapsed,
         remainingSecondsAtFinish: 0,
         baseFormatted: formatSeconds(base, "hh:mm:ss"),
         addedFormatted: formatSeconds(add, "hh:mm:ss"),
         elapsedFormatted: formatSeconds(elapsed, "hh:mm:ss"),
+        plannedTotalFormatted: formatSeconds(base + add, "hh:mm:ss"),
         pauseCount: pauseCount,
         pauseTotalSeconds: pauseTotal,
         pauseTotalFormatted: formatSeconds(pauseTotal, "hh:mm:ss"),
