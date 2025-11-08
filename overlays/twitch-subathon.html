@@ -319,8 +319,31 @@
       height: 2px;
       transform: translateY(-50%) scaleX(0);
       transform-origin: left center;
-      background: linear-gradient(90deg, #fff, rgba(255, 255, 255, .2));
+      background: rgba(255, 255, 255, .2);
       border-radius: 2px;
+      opacity: .9;
+      pointer-events: none
+    }
+
+    .goal.done>span {
+      opacity: .6;
+      text-decoration: none
+    }
+
+    .goal>span {
+      position: relative;
+      display: inline-block
+    }
+
+    .goal .strike {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 50%;
+      height: 1px;
+      transform: translateY(-50%) scaleX(0);
+      transform-origin: left center;
+      background: currentColor;
       opacity: .9;
       pointer-events: none
     }
@@ -556,13 +579,29 @@
     // ====================================================
     function ensureStrike(row) { let s = row.querySelector(".strike"); if (!s) { s = document.createElement("div"); s.className = "strike"; row.appendChild(s) } return s }
     // ====================================================
+    function ensureStrikeSpan(span) { let s = span.querySelector(".strike"); if (!s) { s = document.createElement("i"); s.className = "strike"; span.appendChild(s) } return s }
+    // ====================================================
     function snapshotPositions() { const m = new Map(); Array.from(els.goalsInner.children).forEach(el => m.set(el, el.getBoundingClientRect())); return m }
     // ====================================================
     function reorderGoals() { const items = Array.from(els.goalsInner.querySelectorAll(".goal")); const pending = items.filter(g => !g.classList.contains("done")).sort((a, b) => Number(a.dataset.index) - Number(b.dataset.index)); const done = items.filter(g => g.classList.contains("done")).sort((a, b) => Number(a.dataset.index) - Number(b.dataset.index));[...pending, ...done].forEach(g => els.goalsInner.appendChild(g)) }
     // ====================================================
     function flipToNewOrder(before) { const after = Array.from(els.goalsInner.children); after.forEach(el => { const f = before.get(el); const l = el.getBoundingClientRect(); const dy = f ? f.top - l.top : 0; gsap.fromTo(el, { y: dy }, { y: 0, duration: .45, ease: "power2.inOut" }) }) }
     // ====================================================
-    function runNextGoalAnim() { if (!goalAnimQueue.length) { goalAnimBusy = false; if (goalsTl) goalsTl.resume(); updateGoalsViewportAuto(goalViewportCount); return } goalAnimBusy = true; const row = goalAnimQueue.shift(); const strike = ensureStrike(row); if (goalsTl) goalsTl.pause(); const before = snapshotPositions(); gsap.set(strike, { scaleX: 0 }); gsap.timeline().to(strike, { scaleX: 1, duration: .35, ease: "power2.out" }).add(() => { reorderGoals(); flipToNewOrder(before) }).add(() => runNextGoalAnim(), "+=0.02") }
+    function runNextGoalAnim() {
+      if (!goalAnimQueue.length) { goalAnimBusy = false; if (goalsTl) goalsTl.resume(); updateGoalsViewportAuto(goalViewportCount); return }
+      goalAnimBusy = true;
+      const row = goalAnimQueue.shift();
+      const span = row.querySelector("span");
+      const strike = ensureStrikeSpan(span);
+      if (goalsTl) goalsTl.pause();
+      const before = snapshotPositions();
+      gsap.set(strike, { scaleX: 0 });
+      gsap.timeline()
+        .to(strike, { scaleX: 1, duration: .35, ease: "power2.out" })
+        .add(() => { reorderGoals(); flipToNewOrder(before) })
+        .add(() => runNextGoalAnim(), "+=0.02");
+    }
+
     // ====================================================
     function queueGoalAnimation(row) { if (animatedGoals.has(row.dataset.key)) return; animatedGoals.add(row.dataset.key); goalAnimQueue.push(row); if (!goalAnimBusy) runNextGoalAnim() }
     // ====================================================
@@ -792,6 +831,7 @@
         const wasDone = g.classList.contains("done");
         const nowDone = cv >= target && target > 0;
         if (nowDone) g.classList.add("done"); else g.classList.remove("done");
+
         if (goalTriggersArmed && !wasDone && nowDone) {
           const key = g.dataset.key || "";
           if (key && !firedGoals.has(key)) {
@@ -800,14 +840,16 @@
             queueGoalAnimation(g);
             anyNew = true;
           }
+        } else {
+          const span = g.querySelector("span");
+          const s = ensureStrikeSpan(span);
+          gsap.killTweensOf(s);
+          gsap.set(s, { scaleX: nowDone ? 1 : 0 });
         }
       });
-      if (!anyNew) {
-        const before = snapshotPositions();
-        reorderGoals();
-        flipToNewOrder(before);
-      }
+      if (!anyNew) { const before = snapshotPositions(); reorderGoals(); flipToNewOrder(before) }
     }
+
 
     // ====================================================
     gsap.registerPlugin(ScrollToPlugin);
