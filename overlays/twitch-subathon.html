@@ -962,9 +962,9 @@
         return;
       }
 
-      if (manualEnded) { 
+      if (manualEnded) {
         showFooter(cfgCache.endedText || "Subathon ended", "ended");
-        return; 
+        return;
       }
 
       if (!hasData) {
@@ -1112,6 +1112,22 @@
         changes.forEach(ch => {
           const icon = pickIconForEvent(ch.key, cfgCache);
           queueFlash(icon, ch.dCount, Math.max(0, Math.floor(ch.dSecs || 0)));
+          // ====================================================
+          if (ch.dSecs > 0) {
+            const nowUnix = Math.floor(Date.now() / 1000);
+            const addedFormatted = formatSeconds(ch.dSecs, timerStuff.format);
+            const currentSeconds = Math.max(0, calcTimeLeft().remain);
+            const args = {
+              eventKey: ch.key,
+              addedSeconds: Number(ch.dSecs || 0),
+              addedFormatted,
+              addedCount: Number(ch.dCount || 0),
+              totalCount: Number(e[ch.key]?.count || 0),
+              currentTimestamp: formatSeconds(calcTimeLeft().remain, timerStuff.format),
+              currentSeconds
+            };
+            sb.executeCodeTrigger("subathon_time_added", args).catch(() => { });
+          }
         });
       }
       updateCountsFromData(d);
@@ -1154,7 +1170,6 @@
     // ====================================================
     function buildFinishedArgs() {
       const d = dataCache || makeDefaultData();
-      const tz = getUserTimeZone();
       const e = d.events || {};
       const base = parseTimeToSeconds(cfgCache?.startingTime || "00:00:00:00");
       const add = Number(d?.general?.addedSecondsTotal || 0);
@@ -1189,20 +1204,17 @@
       const sAdded_loyaltyPoints = Number(e?.loyaltypoints?.totalSecondsAdded || 0);
       return {
         isActive: !!d?.general?.isActive,
-        timezone: tz,
         startedAt_Unix: startedAt || null,
         endedAt_Unix: endedAt || null,
         startedAt_local: startedAt ? formatDateInTZ(startedAt, tz) : null,
         endedAt_local: endedAt ? formatDateInTZ(endedAt, tz) : null,
         baseSeconds: base,
         addedSecondsTotal: add,
-        plannedTotalSeconds: base + add,
         elapsedSeconds: elapsed,
         remainingSecondsAtFinish: 0,
         baseFormatted: formatSeconds(base, "hh:mm:ss"),
         addedFormatted: formatSeconds(add, "hh:mm:ss"),
         elapsedFormatted: formatSeconds(elapsed, "hh:mm:ss"),
-        plannedTotalFormatted: formatSeconds(base + add, "hh:mm:ss"),
         pauseCount: pauseCount,
         pauseTotalSeconds: pauseTotal,
         pauseTotalFormatted: formatSeconds(pauseTotal, "hh:mm:ss"),
