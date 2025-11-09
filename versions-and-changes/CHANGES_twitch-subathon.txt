@@ -1,1 +1,1 @@
-• Release
+• Added scroll speed and pause duration to Goals
