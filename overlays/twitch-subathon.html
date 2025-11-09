@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8" />
-  <title>tawmae.xyz - TWITCH SUBATHON - v.1.0.0</title>
+  <title>tawmae.xyz - TWITCH SUBATHON - v.1.0.1</title>
   <script src="https://cdn.jsdelivr.net/npm/@streamerbot/client/dist/streamerbot-client.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1/dist/iconify-icon.min.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide/dist/css/splide.min.css" />
@@ -28,6 +28,7 @@
       padding: 0;
       font-family: "Poppins", sans-serif;
       color: var(--font-color);
+      background: black;
     }
 
     .wrapper {
@@ -310,25 +311,6 @@
       position: relative
     }
 
-    .goal .strike {
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 50%;
-      height: 2px;
-      transform: translateY(-50%) scaleX(0);
-      transform-origin: left center;
-      background: rgba(255, 255, 255, .2);
-      border-radius: 2px;
-      opacity: .9;
-      pointer-events: none
-    }
-
-    .goal.done>span {
-      opacity: .6;
-      text-decoration: none
-    }
-
     .goal>span {
       position: relative;
       display: inline-block
@@ -563,20 +545,10 @@
     // ====================================================
     function formatDateInTZ(input, tz) {
       const d = input instanceof Date ? input : new Date((Number(input) || 0) * 1000);
-      return d
-        .toLocaleString("en-CA", {
-          timeZone: tz,
-          year: "numeric",
-          month: "2-digit",
-          day: "2-digit",
-          hour: "2-digit",
-          minute: "2-digit",
-          hour12: false
-        })
-        .replace(",", "");
+      const p = new Intl.DateTimeFormat("en-CA", { timeZone: tz, year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", hour12: false }).formatToParts(d);
+      const v = Object.fromEntries(p.map(x => [x.type, x.value]));
+      return `${v.year}-${v.month}-${v.day} ${v.hour}:${v.minute}`;
     }
-    // ====================================================
-    function ensureStrike(row) { let s = row.querySelector(".strike"); if (!s) { s = document.createElement("div"); s.className = "strike"; row.appendChild(s) } return s }
     // ====================================================
     function ensureStrikeSpan(span) { let s = span.querySelector(".strike"); if (!s) { s = document.createElement("i"); s.className = "strike"; span.appendChild(s) } return s }
     // ====================================================
@@ -743,7 +715,6 @@
         pauseOnFocus: false
       });
       splide.mount();
-      updateCountSpans();
     }
     // ====================================================
     function selectorToKey(sel) {
@@ -775,6 +746,9 @@
     }
     // ====================================================
     function makeGoals(cfg) {
+      animatedGoals.clear();
+      goalAnimQueue.length = 0;
+      if (goalsTl) goalsTl.kill();
       const list = parseArrayOrEmpty(cfg.goalsList);
       clearEl(els.goalsInner);
 
@@ -825,12 +799,12 @@
       let anyNew = false;
       items.forEach(g => {
         const kind = g.dataset.kind; if (kind === "noicon") return;
-        const target = parseFloat(g.dataset.target || "0") || 0;
-        const cv = Number(counts[kind] || 0);
+        const targetRaw = parseFloat(g.dataset.target || "0") || 0;
+        const target = isMoneyKey(kind) ? roundMoney(targetRaw) : targetRaw;
+        const cv = isMoneyKey(kind) ? roundMoney(counts[kind]) : Number(counts[kind] || 0);
         const wasDone = g.classList.contains("done");
         const nowDone = cv >= target && target > 0;
         if (nowDone) g.classList.add("done"); else g.classList.remove("done");
-
         if (goalTriggersArmed && !wasDone && nowDone) {
           const key = g.dataset.key || "";
           if (key && !firedGoals.has(key)) {
@@ -846,10 +820,8 @@
           gsap.set(s, { scaleX: nowDone ? 1 : 0 });
         }
       });
-      if (!anyNew) { const before = snapshotPositions(); reorderGoals(); flipToNewOrder(before) }
+      if (!anyNew) { const before = snapshotPositions(); reorderGoals(); flipToNewOrder(before); }
     }
-
-
     // ====================================================
     gsap.registerPlugin(ScrollToPlugin);
     // ====================================================
@@ -880,9 +852,9 @@
         els.goalsScroll.scrollTop = 0;
         return;
       }
-      const pause = 10;
-      const speed = 40;
-      const dur = max / speed;
+      const pause = Number.isFinite(+cfgCache.goals_Autoscroll_Pause) ? Math.max(0, +cfgCache.goals_Autoscroll_Pause) : 10;
+      const speed = Number.isFinite(+cfgCache.goals_Autoscroll_Speed) ? Math.max(1, +cfgCache.goals_Autoscroll_Speed) : 40;
+      const dur = Math.max(0.1, max / speed);
       els.goalsScroll.scrollTop = 0;
       goalsTl = gsap.timeline({ repeat: -1, defaults: { ease: "none" } });
       goalsTl.to({}, { duration: pause });
@@ -943,8 +915,8 @@
         (Number(e?.t3subs?.count) || 0);
       counts.subs = subs;
       counts.bits = Number(e?.bits?.count) || 0;
-      counts.donations = Number(e?.donations?.count) || 0;
-      counts.charitydonations = Number(e?.charitydonations?.count) || 0;
+      counts.donations = roundMoney(e?.donations?.count);
+      counts.charitydonations = roundMoney(e?.charitydonations?.count);
       counts.follows = Number(e?.follows?.count) || 0;
       counts.raids = Number(e?.raids?.count) || 0;
       counts.channelPoints = Number(e?.channelpointrewards?.count) || 0;
@@ -967,7 +939,6 @@
       makeRotator(cfg);
       makeGoals(cfg);
       updateCountsFromData(dataCache || makeDefaultData());
-      updateCountSpans();
       updateGoalsDoneAndSort();
       setStatusFromState();
       updateGoalsViewportAuto(goalViewportCount);
@@ -1131,7 +1102,22 @@
       const n = Number(v || 0);
       return needsCurrencyKey(k) ? formatCurrency(n) : String(n);
     }
-
+    // ====================================================
+    function moneyDec() {
+      const code = String(cfgCache.currency || "EUR").toUpperCase();
+      if (Number.isInteger(cfgCache.currencyDecimals)) return cfgCache.currencyDecimals;
+      return (code === "JPY" || code === "KRW") ? 0 : 2;
+    }
+    // ====================================================
+    function roundMoney(n) {
+      const d = moneyDec();
+      const x = Number(n || 0);
+      return Number(x.toFixed(d));
+    }
+    // ====================================================
+    function isMoneyKey(k) { return k === "donations" || k === "charitydonations"; }
+    // ====================================================
+    function almostZero(n) { return Math.abs(Number(n || 0)) < Math.pow(10, -moneyDec()) / 2; }
     // ====================================================
     let flashBusy = false;
     let flashQueue = [];
@@ -1155,7 +1141,8 @@
     }
     // ====================================================
     function queueFlash(eventKey, icon, countDelta, secDelta) {
-      flashQueue.push({ eventKey, icon, countDelta, secDelta });
+      const cd = isMoneyKey(eventKey) ? roundMoney(countDelta) : countDelta;
+      flashQueue.push({ eventKey, icon, countDelta: cd, secDelta });
       if (!flashBusy) runNextFlash();
     }
     // ====================================================
@@ -1218,23 +1205,19 @@
     ];
     // ====================================================
     function getEventChanges(prev, cur) {
-      const out = [];
-      if (!prev) return out;
-      const pe = prev.events || {};
-      const ce = cur.events || {};
+      const out = []; if (!prev) return out;
+      const pe = prev.events || {}; const ce = cur.events || {};
       eventKeys.forEach(k => {
-        const p = pe[k] || {};
-        const c = ce[k] || {};
-        const dCount = Math.max(0, (Number(c.count) || 0) - (Number(p.count) || 0));
+        const p = pe[k] || {}; const c = ce[k] || {};
+        let dCount = Number(c.count || 0) - Number(p.count || 0);
+        dCount = isMoneyKey(k) ? roundMoney(dCount) : Math.max(0, dCount);
+        if (isMoneyKey(k) && almostZero(dCount)) dCount = 0;
         const tdiff = Math.max(0, (Number(c.totalSecondsAdded) || 0) - (Number(p.totalSecondsAdded) || 0));
         let dSecs = 0;
         if (tdiff > 0) dSecs = tdiff;
         else if (dCount > 0) {
           const per = Number(c.addedSecondsPer) || 0;
-          if (per > 0) {
-            if (k === "bits") dSecs = Math.floor(per * (dCount / 100));
-            else dSecs = per * dCount;
-          }
+          if (per > 0) { dSecs = k === "bits" ? Math.floor(per * (dCount / 100)) : per * dCount; }
         }
         if (dCount > 0 || dSecs > 0) out.push({ key: k, dCount, dSecs });
       });
@@ -1264,11 +1247,6 @@
       timerStuff.started = startedUnix > 0 ? new Date(startedUnix * 1000) : null;
 
       const changes = getEventChanges(prevData, d);
-      changes.forEach(ch => {
-        const key = eventKeyToCountKey(ch.key);
-        if (!key) return;
-        animateCountKey(key, counts[key]);
-      });
       prevData = d;
       dataCache = d;
 
@@ -1349,7 +1327,8 @@
       const pauseRanges = Array.isArray(d?.pauses?.ranges) ? d.pauses.ranges : [];
       let pauseTotal = pauseRanges.reduce((a, b) => a + (Number(b) || 0), 0);
       if (d?.pauses?.isPaused && d?.pauses?.pausedSinceUnix) pauseTotal += Math.max(0, nowUnix - Number(d.pauses.pausedSinceUnix));
-      const pauseCount = pauseRanges.length + (d?.pauses?.isPaused ? 1 : 0) - 1;
+      const pauseCountRaw = pauseRanges.length + (d?.pauses?.isPaused ? 1 : 0) - 1;
+      const pauseCount = Math.max(0, pauseCountRaw);
       const elapsed = startedAt > 0 ? Math.max(0, endedAt - startedAt - pauseTotal) : 0;
       const primesubs = Number(e?.primesubs?.count || 0);
       const t1subs = Number(e?.t1subs?.count || 0);
@@ -1357,7 +1336,8 @@
       const t3subs = Number(e?.t3subs?.count || 0);
       const subs = primesubs + t1subs + t2subs + t3subs;
       const bits = Number(e?.bits?.count || 0);
-      const donations = Number(e?.donations?.count || 0);
+      const donations = roundMoney(e?.donations?.count || 0);
+      const charityDonations = roundMoney(e?.charitydonations?.count || 0);
       const follows = Number(e?.follows?.count || 0);
       const raids = Number(e?.raids?.count || 0);
       const channelPoints = Number(e?.channelpointrewards?.count || 0);
@@ -1368,6 +1348,7 @@
       const sAdded_t3subs = Number(e?.t3subs?.totalSecondsAdded || 0);
       const sAdded_bits = Number(e?.bits?.totalSecondsAdded || 0);
       const sAdded_donations = Number(e?.donations?.totalSecondsAdded || 0);
+      const sAdded_charitydonations = Number(e?.charitydonations?.totalSecondsAdded || 0);
       const sAdded_follows = Number(e?.follows?.totalSecondsAdded || 0);
       const sAdded_channelPoints = Number(e?.channelpointrewards?.totalSecondsAdded || 0);
       const sAdded_raids = Number(e?.raids?.totalSecondsAdded || 0);
@@ -1398,6 +1379,7 @@
         t3subs,
         bits,
         donations,
+        charitydonations,
         follows,
         raids,
         channelPoints,
@@ -1408,6 +1390,7 @@
         secondsAdded_t3subs: sAdded_t3subs,
         secondsAdded_bits: sAdded_bits,
         secondsAdded_donations: sAdded_donations,
+        secondsAdded_charitydonations: sAdded_charitydonations,
         secondsAdded_follows: sAdded_follows,
         secondsAdded_channelPoints: sAdded_channelPoints,
         secondsAdded_raids: sAdded_raids,
