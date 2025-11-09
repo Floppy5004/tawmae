@@ -612,10 +612,44 @@
       }
     }
     // ====================================================
+    let _fmtCache = {};
+    // ====================================================
+    function getFixedFormatter(loc, dec) {
+      const k = loc + "|" + dec;
+      if (_fmtCache[k]) return _fmtCache[k];
+      _fmtCache[k] = new Intl.NumberFormat(loc, { minimumFractionDigits: dec, maximumFractionDigits: dec });
+      return _fmtCache[k];
+    }
+    // ====================================================
+    function formatCurrencyFast(n) {
+      const code = getCurrencyCode();
+      const dec = Number.isInteger(cfgCache.currencyDecimals) ? cfgCache.currencyDecimals : (ZERO_DEC_CURRENCIES.has(code) ? 0 : 2);
+      const loc = cfgCache.locale || ({
+        USD: "en-US", EUR: "de-DE", GBP: "en-GB", JPY: "ja-JP", CNY: "zh-CN", AUD: "en-AU", CAD: "en-CA", CHF: "de-CH",
+        SEK: "sv-SE", NZD: "en-NZ", BRL: "pt-BR", INR: "en-IN", MXN: "es-MX", RUB: "ru-RU", KRW: "ko-KR", SGD: "en-SG",
+        HKD: "zh-HK", NOK: "nb-NO", DKK: "da-DK", ZAR: "en-ZA"
+      })[code] || "en-US";
+      return getFixedFormatter(loc, dec).format(Number(n || 0)) + currencySuffix();
+    }
+    // ====================================================
+    const _lastCountUpdateAt = {};
+    // ====================================================
+    function maybeUpdateCountKey(key, val) {
+      const now = performance.now();
+      if (now - (_lastCountUpdateAt[key] || 0) < 50) return;
+      _lastCountUpdateAt[key] = now;
+      setSpansForKey(key, val);
+    }
+
+    // ====================================================
     function setSpansForKey(key, val) {
       const spans = document.querySelectorAll(`[data-count-key="${key}"]`);
-      const txt = needsCurrencyKey(key) ? formatCurrency(val) : String(Math.round(val));
-      spans.forEach(s => s.textContent = txt);
+      const txt = needsCurrencyKey(key) ? formatCurrencyFast(val) : String(Math.round(val));
+      spans.forEach(s => {
+        if (s._lastTxt === txt) return;
+        s.textContent = txt;
+        s._lastTxt = txt;
+      });
     }
     // ====================================================
     function popSpansForKey(key) {
@@ -633,16 +667,35 @@
         setSpansForKey(key, to);
         return;
       }
+
+      if (needsCurrencyKey(key)) {
+        displayCounts[key] = to;
+        setSpansForKey(key, to);
+        popSpansForKey(key);
+        return;
+      }
+
       const obj = { v: from };
       const spanDelta = Math.abs(to - from);
       const dur = Math.min(1.0, 0.35 + Math.log10(1 + spanDelta) * 0.25);
+
       gsap.to(obj, {
         v: to,
         duration: dur,
         ease: "power2.out",
-        onUpdate: () => setSpansForKey(key, obj.v),
-        onComplete: () => { displayCounts[key] = to; }
+        onUpdate: () => {
+          const stepped = Math.round(obj.v);
+          if (stepped !== displayCounts[key]) {
+            displayCounts[key] = stepped;
+            maybeUpdateCountKey(key, stepped);
+          }
+        },
+        onComplete: () => {
+          displayCounts[key] = to;
+          setSpansForKey(key, to);
+        }
       });
+
       popSpansForKey(key);
     }
     // ====================================================
