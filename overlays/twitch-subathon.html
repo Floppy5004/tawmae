@@ -1092,14 +1092,37 @@
       showFooter("", null);
     }
     // ====================================================
-
     function needsCurrencyKey(k) { return k === "donations" || k === "charitydonations"; }
     // ====================================================
-    function currencySuffix() { return " " + (cfgCache.currencySuffix || cfgCache.currencySymbol || "€"); }
+    const CURRENCY_SYMBOLS = {
+      USD: "$", EUR: "€", GBP: "£", JPY: "¥", CNY: "¥", AUD: "A$", CAD: "C$", CHF: "CHF",
+      SEK: "kr", NZD: "NZ$", BRL: "R$", INR: "₹", MXN: "MX$", RUB: "₽", KRW: "₩",
+      SGD: "S$", HKD: "HK$", NOK: "kr", DKK: "kr", ZAR: "R"
+    };
+    // ====================================================
+    const ZERO_DEC_CURRENCIES = new Set(["JPY", "KRW"]);
+    // ====================================================
+    function getCurrencyCode() {
+      const allowed = new Set(["USD", "EUR", "GBP", "JPY", "CNY", "AUD", "CAD", "CHF", "SEK", "NZD", "BRL", "INR", "MXN", "RUB", "KRW", "SGD", "HKD", "NOK", "DKK", "ZAR"]);
+      let code = String(cfgCache.currency || "").toUpperCase();
+      if (!allowed.has(code)) code = "EUR";
+      return code;
+    }
+    // ====================================================
+    function currencySuffix() {
+      const code = getCurrencyCode();
+      const override = String(cfgCache.currencySymbol || "").trim();
+      return " " + (override || CURRENCY_SYMBOLS[code] || code);
+    }
     // ====================================================
     function formatCurrency(n) {
-      const dec = Number.isInteger(cfgCache.currencyDecimals) ? cfgCache.currencyDecimals : 2;
-      const loc = cfgCache.locale || "de-DE";
+      const code = getCurrencyCode();
+      const dec = Number.isInteger(cfgCache.currencyDecimals) ? cfgCache.currencyDecimals : (ZERO_DEC_CURRENCIES.has(code) ? 0 : 2);
+      const loc = cfgCache.locale || ({
+        USD: "en-US", EUR: "de-DE", GBP: "en-GB", JPY: "ja-JP", CNY: "zh-CN", AUD: "en-AU", CAD: "en-CA", CHF: "de-CH",
+        SEK: "sv-SE", NZD: "en-NZ", BRL: "pt-BR", INR: "en-IN", MXN: "es-MX", RUB: "ru-RU", KRW: "ko-KR", SGD: "en-SG",
+        HKD: "zh-HK", NOK: "nb-NO", DKK: "da-DK", ZAR: "en-ZA"
+      })[code] || "en-US";
       const num = Number(n || 0);
       return num.toLocaleString(loc, { minimumFractionDigits: dec, maximumFractionDigits: dec }) + currencySuffix();
     }
