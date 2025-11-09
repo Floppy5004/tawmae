@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8" />
-  <title>tawmae.xyz - TWITCH SUBATHON - v.1.0.1</title>
+  <title>tawmae.xyz - TWITCH SUBATHON - v.1.0.0</title>
   <script src="https://cdn.jsdelivr.net/npm/@streamerbot/client/dist/streamerbot-client.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1/dist/iconify-icon.min.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide/dist/css/splide.min.css" />
@@ -898,6 +898,7 @@
           t3subs: { count: 0, addedSecondsPer: 0, totalSecondsAdded: 0 },
           bits: { count: 0, addedSecondsPer: 0, totalSecondsAdded: 0 },
           donations: { count: 0, addedSecondsPer: 0, totalSecondsAdded: 0 },
+          charitydonations: { count: 0, addedSecondsPer: 0, totalSecondsAdded: 0 },
           follows: { count: 0, addedSecondsPer: 0, totalSecondsAdded: 0 },
           channelpointrewards: { count: 0, addedSecondsPer: 0, totalSecondsAdded: 0 },
           raids: { count: 0, addedSecondsPer: 0, totalSecondsAdded: 0 },
@@ -1025,7 +1026,8 @@
       showFooter._last = { html, cls: targetClass, visible: true };
     }
     // ====================================================
-
+    function escapeHtml(s) { return String(s).replace(/[&<>"']/g, m => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[m])); }
+    // ====================================================
     function setStatusFromState() {
       if (!isConnected) {
         showFooter("Disconnected", "error");
@@ -1055,10 +1057,10 @@
       const hadStart = startedAt > 0;
       const finished = snap.remain === 0 && totalPlanned > 0 && hadStart;
 
-      if (!hadStart) { showFooter(cfgCache.notStartedYetText || "Subathon has not started yet.", "soft-warn"); return; }
-      if (finished) { showFooter(`${cfgCache.completedText || "Subathon completed!"} <iconify-icon icon="gis:flag-finish"></iconify-icon>`, "finished"); return; }
-      if (endedAt > 0) { showFooter(cfgCache.endedText || "Subathon ended", "ended"); return; }
-      if (paused) { showFooter(`${cfgCache.pausedText || "Subathon paused"} <iconify-icon icon="mdi:pause-circle"></iconify-icon>`, "paused"); return; }
+      if (!hadStart) { showFooter(escapeHtml(cfgCache.notStartedYetText || "Subathon has not started yet."), "soft-warn"); return; }
+      if (finished) { showFooter(`${escapeHtml(cfgCache.completedText || "Subathon completed!")} <iconify-icon icon="gis:flag-finish"></iconify-icon>`, "finished"); return; }
+      if (endedAt > 0) { showFooter(escapeHtml(cfgCache.endedText || "Subathon ended"), "ended"); return; }
+      if (paused) { showFooter(`${escapeHtml(cfgCache.pausedText || "Subathon paused")} <iconify-icon icon="mdi:pause-circle"></iconify-icon>`, "paused"); return; }
 
       showFooter("", null);
     }
@@ -1275,7 +1277,6 @@
       }
 
       updateCountsFromData(d);
-      updateCountSpans();
       if (splide && splide.refresh) splide.refresh();
       setStatusFromState();
     }
