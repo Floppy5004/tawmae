@@ -627,7 +627,8 @@
       const loc = cfgCache.locale || ({
         USD: "en-US", EUR: "de-DE", GBP: "en-GB", JPY: "ja-JP", CNY: "zh-CN", AUD: "en-AU", CAD: "en-CA", CHF: "de-CH",
         SEK: "sv-SE", NZD: "en-NZ", BRL: "pt-BR", INR: "en-IN", MXN: "es-MX", RUB: "ru-RU", KRW: "ko-KR", SGD: "en-SG",
-        HKD: "zh-HK", NOK: "nb-NO", DKK: "da-DK", ZAR: "en-ZA"
+        HKD: "zh-HK", NOK: "nb-NO", DKK: "da-DK", ZAR: "en-ZA",
+        TRY: "tr-TR", PLN: "pl-PL"
       })[code] || "en-US";
       return getFixedFormatter(loc, dec).format(Number(n || 0)) + currencySuffix();
     }
@@ -1161,13 +1162,18 @@
     const CURRENCY_SYMBOLS = {
       USD: "$", EUR: "€", GBP: "£", JPY: "¥", CNY: "¥", AUD: "A$", CAD: "C$", CHF: "CHF",
       SEK: "kr", NZD: "NZ$", BRL: "R$", INR: "₹", MXN: "MX$", RUB: "₽", KRW: "₩",
-      SGD: "S$", HKD: "HK$", NOK: "kr", DKK: "kr", ZAR: "R"
+      SGD: "S$", HKD: "HK$", NOK: "kr", DKK: "kr", ZAR: "R",
+      TRY: "₺", PLN: "zł"
     };
     // ====================================================
     const ZERO_DEC_CURRENCIES = new Set(["JPY", "KRW"]);
     // ====================================================
     function getCurrencyCode() {
-      const allowed = new Set(["USD", "EUR", "GBP", "JPY", "CNY", "AUD", "CAD", "CHF", "SEK", "NZD", "BRL", "INR", "MXN", "RUB", "KRW", "SGD", "HKD", "NOK", "DKK", "ZAR"]);
+      const allowed = new Set([
+        "USD", "EUR", "GBP", "JPY", "CNY", "AUD", "CAD", "CHF", "SEK", "NZD",
+        "BRL", "INR", "MXN", "RUB", "KRW", "SGD", "HKD", "NOK", "DKK", "ZAR",
+        "TRY", "PLN"
+      ]);
       let code = String(cfgCache.currency || "").toUpperCase();
       if (!allowed.has(code)) code = "EUR";
       return code;
@@ -1185,7 +1191,8 @@
       const loc = cfgCache.locale || ({
         USD: "en-US", EUR: "de-DE", GBP: "en-GB", JPY: "ja-JP", CNY: "zh-CN", AUD: "en-AU", CAD: "en-CA", CHF: "de-CH",
         SEK: "sv-SE", NZD: "en-NZ", BRL: "pt-BR", INR: "en-IN", MXN: "es-MX", RUB: "ru-RU", KRW: "ko-KR", SGD: "en-SG",
-        HKD: "zh-HK", NOK: "nb-NO", DKK: "da-DK", ZAR: "en-ZA"
+        HKD: "zh-HK", NOK: "nb-NO", DKK: "da-DK", ZAR: "en-ZA",
+        TRY: "tr-TR", PLN: "pl-PL"
       })[code] || "en-US";
       const num = Number(n || 0);
       return num.toLocaleString(loc, { minimumFractionDigits: dec, maximumFractionDigits: dec }) + currencySuffix();
