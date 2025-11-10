@@ -240,21 +240,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // ====================================================================================================================
 
-var sc=document.querySelector('.social-cluster');
-if(sc){
-  var btn=sc.querySelector('.social-toggle');
-  var panel=sc.querySelector('.social-panel');
-  var closeTimer=null;
-  function open(){ sc.classList.add('open'); if(btn) btn.setAttribute('aria-expanded','true'); }
-  function scheduleClose(){ clearTimeout(closeTimer); closeTimer=setTimeout(function(){ sc.classList.remove('open'); if(btn) btn.setAttribute('aria-expanded','false'); },180); }
-  function cancelClose(){ clearTimeout(closeTimer); }
-  btn.addEventListener('mouseenter',open);
-  btn.addEventListener('focus',open);
-  sc.addEventListener('mouseenter',cancelClose);
-  sc.addEventListener('mouseleave',scheduleClose);
-  panel.addEventListener('focusin',cancelClose);
-  panel.addEventListener('focusout',function(e){ if(!sc.contains(document.activeElement)) scheduleClose(); });
-  btn.addEventListener('click',function(e){ e.preventDefault(); if(sc.classList.contains('open')){ scheduleClose(); } else { open(); } });
-  document.addEventListener('keydown',function(e){ if(e.key==='Escape'){ sc.classList.remove('open'); if(btn) btn.setAttribute('aria-expanded','false'); btn.blur(); } });
-}
+
 
