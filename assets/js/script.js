@@ -165,6 +165,13 @@ document.addEventListener("DOMContentLoaded", function() {
         theme: 'light-border',
         delay: [100, 50], 
     });
+    tippy('.spotify-link', {
+        content: 'Spotify',
+        placement: 'bottom',
+        animation: 'scale-subtle',
+        theme: 'light-border',
+        delay: [100, 50], 
+    });
 
     
 });
