@@ -4,10 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HOT WORDS - v.1.0.1 - tawmae.xyz</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap"
-        rel="stylesheet">
+    <title>HOT WORDS - v.1.0.2 - tawmae.xyz</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/@streamerbot/client/dist/streamerbot-client.js"></script>
+
     <style>
         :root {
             --fontSize: 24px;
@@ -16,7 +16,7 @@
 
         h1 {
             position: relative;
-            z-index: 69;
+            z-index: 10;
             font-weight: 600;
             margin-bottom: -23px;
             margin-left: -587px;
@@ -36,77 +36,39 @@
             flex-direction: column;
             align-items: center;
             font-size: var(--fontSize);
-            
         }
 
+        
+        .connection-indicator {
+            position: fixed;
+            top: 12px;
+            right: 12px;
+            width: 10px;
+            height: 10px;
+            background: #ff3b3b;
+            border-radius: 50%;
+            opacity: 0.6;
+            transition: background 0.3s ease, opacity 0.3s ease;
+            z-index: 999;
+        }
+
+        .connection-indicator.connected {
+            background: #22ff22;
+            opacity: 0.6;
+        }
+
+       
         .leaderboard {
             position: relative;
             width: 900px;
             border-radius: 8px;
             background: #1f1f1f;
             padding: 40px;
-            box-sizing: border-box;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
             display: flex;
             flex-direction: column;
             gap: 10px;
             opacity: 0.98;
-        }
-
-        .connection-status {
-            position: absolute;
-            top: 5px;
-            right: 10px;
-            display: flex;
-            align-items: center;
-            gap: 3px;
-            background: rgba(0, 0, 0, 0.6);
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-weight: bold;
-            font-size: 0.5em;
-            z-index: 100;
-        }
-
-        .disconnected {
-            color: #ff4d4d;
-        }
-
-        .disconnected .dot {
-            width: 8px;
-            height: 8px;
-            background-color: #ff4d4d;
-            border-radius: 50%;
-            display: inline-block;
-            animation: blink 1s infinite;
-        }
-
-        .connected {
-            color: #00ff00;
-            display: none;
-        }
-
-        .connected .dot {
-            width: 8px;
-            height: 8px;
-            background-color: #00ff00;
-            border-radius: 50%;
-            display: inline-block;
-            animation: blink 1s infinite;
-        }
-
-        @keyframes blink {
-
-            0%,
-            50%,
-            100% {
-                opacity: 1;
-            }
-
-            25%,
-            75% {
-                opacity: 0.5;
-            }
         }
 
         .word-entry {
@@ -125,7 +87,6 @@
             width: 220px;
             font-weight: 800;
             color: #f5f5f5;
-            text-overflow: ellipsis;
             overflow: hidden;
             white-space: nowrap;
             display: flex;
@@ -135,7 +96,6 @@
         .progress-bar-container {
             flex: 1;
             background: #2a2a2a;
-            position: relative;
             height: 30px;
             border-radius: 4px;
             overflow: hidden;
@@ -154,8 +114,8 @@
             flex-shrink: 0;
             font-weight: 600;
             color: #d0d0d0;
-            text-align: right;
             width: 60px;
+            text-align: right;
         }
 
         .top1 .progress-bar {
@@ -163,11 +123,9 @@
         }
 
         .image-icon {
-            display: inline-block;
             width: 20px;
             height: 20px;
             margin-left: 10px;
-            vertical-align: middle;
             object-fit: contain;
             opacity: 0;
             transition: opacity 0.3s ease;
@@ -180,162 +138,168 @@
 </head>
 
 <body>
+
+    <div class="connection-indicator" id="connDot"></div>
+
     <h1>HOT WORDS</h1>
-    <div class="leaderboard" id="leaderboard">
-        <div class="connection-status disconnected" id="connectionStatus">
-            <span class="dot"></span>Disconnected
-        </div>
-        <div class="connection-status connected" id="connectedStatus">
-            <span class="dot"></span>Connected
-        </div>
-    </div>
+
+    <div class="leaderboard" id="leaderboard"></div>
+
     <script>
         const urlParams = new URLSearchParams(window.location.search);
         const params = {};
-        for (const [key, value] of urlParams.entries()) {
-            params[key.toLowerCase()] = value;
-        }
+        for (const [key, value] of urlParams.entries()) params[key.toLowerCase()] = value;
+
         const excludeAccountsParam = (params["excludedaccounts"] || "").toLowerCase();
         const excludedUsersParam = (params["excludedusers"] || "").toLowerCase();
         const singleUserVote = (params["singleuservote"] || "false") === "true";
-        const chosenFont = (params["font"] || "Poppins").toLowerCase();
+        const chosenFont = (params["font"] || "Poppins");
         const chosenFontSize = parseInt(params["fontsize"]) || 24;
         const topCount = parseInt(params["top"]) || 5;
-        const wsHost = params["address"] || "localhost";
+        const wsHost = params["address"] || "127.0.0.1";
         const wsPort = params["port"] || "8080";
+
         const excludedUsersSet = new Set(
             [...excludeAccountsParam.split(/[,+\s]+/), ...excludedUsersParam.split(/[,+\s]+/)]
                 .map(a => a.trim())
-                .filter(a => a !== "")
+                .filter(Boolean)
         );
+
+        document.documentElement.style.setProperty("--fontFamily", chosenFont);
+        document.documentElement.style.setProperty("--fontSize", chosenFontSize + "px");
+
         const wordCounts = new Map();
-        const leaderboardEl = document.getElementById("leaderboard");
-        const connectionStatusEl = document.getElementById("connectionStatus");
-        const connectedStatusEl = document.getElementById("connectedStatus");
-        const usersVoted = singleUserVote ? new Set() : null;
         const emoteLookup = {};
+        const leaderboardEl = document.getElementById("leaderboard");
+        const connDot = document.getElementById("connDot");
+        const usersVoted = singleUserVote ? new Set() : null;
 
         for (let i = 1; i <= topCount; i++) {
-            const entryEl = document.createElement('div');
-            entryEl.className = 'word-entry';
-            entryEl.dataset.rank = i.toString();
-            const labelEl = document.createElement('div');
-            labelEl.className = 'word-label';
-            labelEl.textContent = '-';
-            const imgEl = document.createElement('img');
-            imgEl.className = 'image-icon';
-            imgEl.src = 'https://github.com/tawmae/tawmae.github.io/blob/main/overlays/LogosFirebase.png?raw=true';
-            imgEl.decoding = 'async';
-            imgEl.loading = 'lazy';
-            labelEl.appendChild(imgEl);
-            entryEl.appendChild(labelEl);
-            const barContainer = document.createElement('div');
-            barContainer.className = 'progress-bar-container';
-            const barEl = document.createElement('div');
-            barEl.className = 'progress-bar';
-            barContainer.appendChild(barEl);
-            entryEl.appendChild(barContainer);
-            const countEl = document.createElement('div');
-            countEl.className = 'count-percentage';
-            countEl.textContent = '0x';
-            entryEl.appendChild(countEl);
-            leaderboardEl.appendChild(entryEl);
+            const entry = document.createElement("div");
+            entry.className = "word-entry";
+
+            const label = document.createElement("div");
+            label.className = "word-label";
+            label.textContent = "-";
+
+            const emoteImg = document.createElement("img");
+            emoteImg.className = "image-icon";
+            label.appendChild(emoteImg);
+
+            const barWrap = document.createElement("div");
+            barWrap.className = "progress-bar-container";
+
+            const bar = document.createElement("div");
+            bar.className = "progress-bar";
+            barWrap.appendChild(bar);
+
+            const count = document.createElement("div");
+            count.className = "count-percentage";
+            count.textContent = "0x";
+
+            entry.appendChild(label);
+            entry.appendChild(barWrap);
+            entry.appendChild(count);
+            leaderboardEl.appendChild(entry);
         }
+
         function updateLeaderboard() {
-            const sorted = Array.from(wordCounts.entries()).sort((a, b) => b[1] - a[1]);
-            const topWords = sorted.slice(0, topCount);
-            renderLeaderboard(topWords);
-        }
-        function renderLeaderboard(topWords) {
-            const total = topWords.reduce((sum, [_, count]) => sum + count, 0);
-            const entries = Array.from(leaderboardEl.querySelectorAll('.word-entry')).slice(0, topCount);
-            let allEqual = false;
-            if (topWords.length > 1 && topWords[0]) {
-                const firstCount = topWords[0][1];
-                allEqual = topWords.every(([_, c]) => c === firstCount);
-            }
-            let tieForFirst = false;
-            if (topWords.length > 1 && topWords[0] && topWords[1] && topWords[0][1] === topWords[1][1]) {
-                tieForFirst = true;
-            }
+            const sorted = [...wordCounts.entries()].sort((a, b) => b[1] - a[1]);
+            const top = sorted.slice(0, topCount);
+            const total = top.reduce((s, [, c]) => s + c, 0);
+            const entries = [...leaderboardEl.querySelectorAll(".word-entry")];
+
+            const firstCount = top[0]?.[1] || 0;
+            const isTie = top.filter(x => x[1] === firstCount).length > 1;
+
             for (let i = 0; i < topCount; i++) {
-                const entryEl = entries[i];
-                const wordData = topWords[i];
-                const labelEl = entryEl.querySelector('.word-label');
-                const barEl = entryEl.querySelector('.progress-bar');
-                const countEl = entryEl.querySelector('.count-percentage');
-                let word = '-';
-                let count = 0;
-                let percentage = 0;
-                if (wordData) {
-                    word = wordData[0];
-                    count = wordData[1];
-                    percentage = total > 0 ? Math.round((count / total) * 100) : 0;
+                const entry = entries[i];
+                const data = top[i];
+                const label = entry.querySelector(".word-label");
+                const emote = entry.querySelector(".image-icon");
+                const bar = entry.querySelector(".progress-bar");
+                const count = entry.querySelector(".count-percentage");
+
+                if (!data) {
+                    label.textContent = "-";
+                    emote.style.opacity = 0;
+                    bar.style.width = "0%";
+                    count.textContent = "0x";
+                    entry.classList.remove("top1");
+                    continue;
                 }
+
+                const word = data[0];
+                const amount = data[1];
+                const pc = total > 0 ? Math.round((amount / total) * 100) : 0;
+
                 if (emoteLookup[word.toLowerCase()]) {
-                    labelEl.innerHTML = "<img src='" + emoteLookup[word.toLowerCase()] + "' alt='" + word + "' style='max-height: 40px;'>";
+                    label.innerHTML = `<img src="${emoteLookup[word.toLowerCase()]}" style="max-height:40px;">`;
                 } else {
-                    labelEl.textContent = word.toUpperCase();
+                    label.textContent = word.toUpperCase();
                 }
-                countEl.textContent = `${count}x`;
-                barEl.style.width = percentage + '%';
-                entryEl.classList.remove('top1');
-                if (i === 0 && wordData && !allEqual && !tieForFirst) {
-                    entryEl.classList.add('top1');
-                }
+
+                count.textContent = `${amount}x`;
+                bar.style.width = pc + "%";
+
+                entry.classList.toggle("top1", i === 0 && !isTie);
             }
-            const totalHeight = 80 + (topCount * 50) + ((topCount - 1) * 10);
-            leaderboardEl.style.height = totalHeight + 'px';
         }
-        function handleChatMessage(messageData) {
-            if (messageData.emotes && messageData.emotes.length) {
-                messageData.emotes.forEach(e => {
+
+        function handleChat(msg) {
+            const username = msg.username.toLowerCase();
+            if (excludedUsersSet.has(username)) return;
+
+            if (singleUserVote) {
+                if (usersVoted.has(username)) return;
+                usersVoted.add(username);
+            }
+
+            if (msg.emotes?.length) {
+                msg.emotes.forEach(e => {
                     if (e.imageUrl) emoteLookup[e.name.toLowerCase()] = e.imageUrl;
                 });
             }
-            const userName = messageData.username.toLowerCase();
-            if (excludedUsersSet.has(userName)) return;
-            if (singleUserVote && usersVoted.has(userName)) return;
-            if (singleUserVote) usersVoted.add(userName);
-            const text = messageData.message || "";
-            const words = text.toLowerCase().replace(/[^\p{L}0-9]/gu, ' ').split(/\s+/).filter(w => w.length > 0);
-            const uniqueWords = new Set(words);
-            for (const w of uniqueWords) {
-                wordCounts.set(w, (wordCounts.get(w) || 0) + 1);
-            }
+
+            const words = (msg.message || "")
+                .toLowerCase()
+                .replace(/[^\p{L}0-9]/gu, " ")
+                .split(/\s+/)
+                .filter(Boolean);
+
+            const unique = new Set(words);
+
+            unique.forEach(w => wordCounts.set(w, (wordCounts.get(w) || 0) + 1));
+
             updateLeaderboard();
         }
+
         const client = new StreamerbotClient({
             host: wsHost,
-            port: parseInt(wsPort, 10),
+            port: parseInt(wsPort),
             subscribe: { Twitch: ["ChatMessage"] },
-            onConnect: function (data) {
-                connectionStatusEl.style.display = 'none';
-                connectedStatusEl.style.display = 'flex';
-                setTimeout(() => { connectedStatusEl.style.display = 'none'; }, 1000);
-                client.getEmotes('twitch').then(function (response) {
-                    if (response.status === "ok") {
-                        response.emotes.userEmotes.forEach(e => emoteLookup[e.name.toLowerCase()] = e.imageUrl);
-                        response.emotes.bttvEmotes.forEach(e => emoteLookup[e.name.toLowerCase()] = e.imageUrl);
-                        response.emotes.ffzEmotes.forEach(e => emoteLookup[e.name.toLowerCase()] = e.imageUrl);
-                        response.emotes.sevenTvEmotes.forEach(e => emoteLookup[e.name.toLowerCase()] = e.imageUrl);
-                        if (response.emotes.twitchEmotes) {
-                            response.emotes.twitchEmotes.forEach(e => emoteLookup[e.name.toLowerCase()] = e.imageUrl);
-                        }
-                    }
-                });
 
+            onConnect() {
+                connDot.classList.add("connected");
+
+                client.getEmotes("twitch").then(res => {
+                    if (res.status !== "ok") return;
+                    const e = res.emotes;
+                    [...e.userEmotes, ...e.bttvEmotes, ...e.ffzEmotes, ...e.sevenTvEmotes, ...(e.twitchEmotes || [])]
+                        .forEach(x => emoteLookup[x.name.toLowerCase()] = x.imageUrl);
+                });
             },
-            onDisconnect: function () {
-                connectionStatusEl.style.display = 'block';
+
+            onDisconnect() {
+                connDot.classList.remove("connected");
             }
         });
-        client.on("Twitch.ChatMessage", function (data) {
-            if (data.data && data.data.message) {
-                handleChatMessage(data.data.message);
-            }
+
+        client.on("Twitch.ChatMessage", evt => {
+            if (evt?.data?.message) handleChat(evt.data.message);
         });
     </script>
+
 </body>
 
 </html>
