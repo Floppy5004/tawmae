@@ -125,7 +125,7 @@
 
   <script>
     const params = new URLSearchParams(window.location.search);
-
+    const port = parseInt(params.get('port') || '8080', 10);
     const font = params.get('font') || 'Poppins';
     const soundEnabled = params.get('sound') === 'true';
     const boxColor = params.get('color');
@@ -158,7 +158,7 @@
     sound.volume = 0.1;
     if (soundEnabled) sound.load();
 
-    const ws = new WebSocket('ws://localhost:8080/');
+    const ws = new WebSocket(`ws://127.0.0.1:${port}/`)
     const queue = [];
     let isAnimating = false;
 
