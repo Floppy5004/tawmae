@@ -37,24 +37,6 @@
             font-size: 1.3em;
         }
 
-        .connection-indicator {
-            position: fixed;
-            top: 12px;
-            right: 12px;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: #ff3b3b;
-            opacity: 0.6;
-            transition: background 0.3s ease, opacity 0.3s ease;
-            z-index: 999;
-        }
-
-        .connection-indicator.connected {
-            background: #22ff22;
-            opacity: 0.6;
-        }
-
         .leaderboard {
             position: relative;
             width: 900px;
@@ -67,6 +49,24 @@
             flex-direction: column;
             gap: 10px;
             opacity: 0.98;
+        }
+
+        .connection-indicator {
+            position: absolute;
+            top: 8px;
+            right: 10px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #ff3b3b;
+            opacity: 0.6;
+            transition: background 0.3s ease, opacity 0.3s ease;
+            z-index: 20;
+        }
+
+        .connection-indicator.connected {
+            background: #22ff22;
+            opacity: 0.6;
         }
 
         .word-entry {
@@ -140,10 +140,10 @@
 </head>
 
 <body>
-    <div class="connection-indicator" id="connDot"></div>
-
     <h1>HOT WORDS</h1>
-    <div class="leaderboard" id="leaderboard"></div>
+    <div class="leaderboard" id="leaderboard">
+        <div class="connection-indicator" id="connDot"></div>
+    </div>
 
     <script>
         const urlParams = new URLSearchParams(window.location.search);
