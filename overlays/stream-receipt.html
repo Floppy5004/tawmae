@@ -4,10 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>STREAM RECEIPT - v.1.0.0 - tawmae.xyz</title>
+    <title>STREAM RECEIPT - v.2.0.0 - tawmae.xyz</title>
+    <script src="https://unpkg.com/@streamerbot/client/dist/streamerbot-client.js"></script>
     <style>
         body {
-            font-family: var(--font-family, 'Courier New'), Courier, monospace;
+            font-family: var(--font-family, "Courier New"), Courier, monospace;
             background-color: #f5f5f5;
             display: flex;
             justify-content: center;
@@ -22,8 +23,8 @@
             top: -150%;
             width: 90%;
             max-width: 350px;
-            background: white;
-            border: 1px solid #ddd;
+            background: #ffffff;
+            border: 1px solid #dddddd;
             box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
             padding: 20px;
             text-align: left;
@@ -121,9 +122,9 @@
         <div class="data-row"><span>SUBSCRIPTIONS:</span> <span id="subCount">0</span></div>
         <div class="data-row"><span>BITS CHEERED:</span> <span id="bits">0</span></div>
         <div style="height: 5px;"></div>
-		<div class="data-row"><span>RAIDS:</span> <span id="raidCount">0</span></div>
+        <div class="data-row"><span>RAIDS:</span> <span id="raidCount">0</span></div>
         <div class="sub-row"><span>RAIDED VIEWERS:</span> <span id="raidViewers">0</span></div>
-		<div style="height: 5px;"></div>
+        <div style="height: 5px;"></div>
         <div class="data-row"><span>HYPE TRAINS:</span> <span id="hypetrainCount">0</span></div>
         <div class="sub-row"><span>CONTRIBUTORS:</span> <span id="hypetrainContributors">0</span></div>
         <div style="height: 5px;"></div>
@@ -152,8 +153,7 @@
         <div class="data-row"><span>BANNED USERS:</span> <span id="bannedUsers">0</span></div>
         <hr>
         <p class="muted center">Served by: <span>tawmae</span></p>
-        <p class="muted center"><a class="no-link" href="https://tawmae.github.io" target="_blank">tawmae.github.io</a>
-        </p>
+        <p class="muted center"><a class="no-link" href="https://tawmae.github.io" target="_blank">tawmae.github.io</a></p>
         <p class="muted center" id="current-time"></p>
         <hr>
         <p class="center">CARD #: **** **** **** 6969</p>
@@ -164,88 +164,139 @@
 
     <script>
         const params = new URLSearchParams(window.location.search);
-        const address = params.get("address") || "localhost";
-        const port = params.get("port") || "8080";
-	const font = params.get("font");
+        const address = params.get("address") || "127.0.0.1";
+        const port = parseInt(params.get("port") || "8080", 10);
+        const font = params.get("font");
+
         if (font) {
             document.documentElement.style.setProperty("--font-family", font);
-	}
-        
+        }
 
-        const ws = new WebSocket(`ws://${address}:${port}/`);
+        const receiptEl = document.getElementById("receipt");
 
-
-        ws.onopen = function () {
-            ws.send(JSON.stringify({
-                request: "Subscribe",
-                events: { general: ["Custom"] },
-                id: "Poggers"
-            }));
-        };
-
-        ws.onmessage = (event) => {
-            const message = JSON.parse(event.data);
-            if (message.data?.eventName === "PrintTwitchReceipt" && message.data.payload) {
-                generateReceipt(
-                    message.data.payload,
-                    message.data.broadcaster,
-                    message.data.broadcasterLogin,
-                    message.data.topChatter,
-                    message.data.topChatterCount
-                );
+        function fitReceiptToViewport() {
+            receiptEl.style.transform = "scale(1)";
+            receiptEl.style.transformOrigin = "top center";
+            const rect = receiptEl.getBoundingClientRect();
+            const availableHeight = window.innerHeight - 40;
+            if (rect.height > availableHeight) {
+                const scale = availableHeight / rect.height;
+                receiptEl.style.transform = "scale(" + scale + ")";
             }
-        };
+        }
 
         function generateReceipt(data, broadcaster, broadcasterLogin, topChatter, topChatterCount) {
-            const receipt = document.getElementById("receipt");
-            receipt.style.visibility = "visible";
-            receipt.classList.add("show");
-
             const now = new Date();
-            document.getElementById("current-date").innerText = now.toDateString();
-            document.getElementById("order-number").innerText = `ORDER #${Math.floor(Math.random() * 100000)}`;
-            document.getElementById("customer-name").innerText = broadcaster || "unknown";
-            document.getElementById("customer-link").innerText = `www.twitch.tv/${broadcasterLogin || "unknown"}`;
-            document.getElementById("customer-link").href = `https://www.twitch.tv/${broadcasterLogin || "unknown"}`;
 
-            const streamStart = new Date(data.streamStartedAt || now);
-            const uptime = new Date(now - streamStart).toISOString().substr(11, 8);
+            receiptEl.style.visibility = "visible";
+            receiptEl.classList.remove("show");
+            void receiptEl.offsetWidth;
+            receiptEl.classList.add("show");
+
+            document.getElementById("current-date").innerText = now.toDateString();
+            document.getElementById("order-number").innerText = "ORDER #" + Math.floor(Math.random() * 100000);
+            document.getElementById("customer-name").innerText = broadcaster || "unknown";
+
+            const login = broadcasterLogin || "unknown";
+            const linkText = "www.twitch.tv/" + login;
+            const linkHref = "https://www.twitch.tv/" + login;
+            const customerLink = document.getElementById("customer-link");
+            customerLink.innerText = linkText;
+            customerLink.href = linkHref;
+
+            const streamStart = data.streamStartedAt ? new Date(data.streamStartedAt) : now;
+            const uptimeMs = Math.max(0, now - streamStart);
+            const uptime = new Date(uptimeMs).toISOString().substr(11, 8);
             document.getElementById("uptime").innerText = uptime;
 
             document.getElementById("follows").innerText = data.follows || 0;
             document.getElementById("subCount").innerText = data.subCount || 0;
             document.getElementById("bits").innerText = data.bits || 0;
-			      document.getElementById("raidCount").innerText = data.raids?.raidCount || 0;
-            document.getElementById("raidViewers").innerText = data.raids?.raidViewers || 0;
-            document.getElementById("hypetrainCount").innerText = data.hypetrains?.hypetrainCount || 0;
-            document.getElementById("hypetrainContributors").innerText = data.hypetrains?.hypetrainContributors || 0;
+
+            document.getElementById("raidCount").innerText = (data.raids && data.raids.raidCount) || 0;
+            document.getElementById("raidViewers").innerText = (data.raids && data.raids.raidViewers) || 0;
+
+            document.getElementById("hypetrainCount").innerText = (data.hypetrains && data.hypetrains.hypetrainCount) || 0;
+            document.getElementById("hypetrainContributors").innerText = (data.hypetrains && data.hypetrains.hypetrainContributors) || 0;
+
             const adDurationSeconds = data.adDuration || 0;
             const adDuration = new Date(adDurationSeconds * 1000).toISOString().substr(11, 8);
             document.getElementById("adDuration").innerText = adDuration;
+
             document.getElementById("predictionWonPoints").innerText = data.predictionWonPoints || 0;
 
             document.getElementById("messageCount").innerText = data.messageCount || 0;
 
-            const mostUsedEmote = Object.entries(data.emotes || {}).reduce((a, b) => b[1].count > a[1].count ? b : a, [null, { count: 0 }]);
-            document.getElementById("emote-name").innerText = mostUsedEmote[0] || "N/A";
-            document.getElementById("emote-count").innerText = mostUsedEmote[1].count || 0;
-            document.getElementById("emote-image").src = mostUsedEmote[1].imageUrl || "";
+            const emotesData = data.emotes || {};
+            const emoteEntries = Object.entries(emotesData);
+            let mostUsedEmote = [null, { count: 0, imageUrl: "" }];
+            if (emoteEntries.length > 0) {
+                mostUsedEmote = emoteEntries.reduce((a, b) => {
+                    return b[1].count > a[1].count ? b : a;
+                }, mostUsedEmote);
+            }
+
+            const emoteName = mostUsedEmote[0] || "N/A";
+            const emoteInfo = mostUsedEmote[1] || { count: 0, imageUrl: "" };
+
+            document.getElementById("emote-name").innerText = emoteName;
+            document.getElementById("emote-count").innerText = emoteInfo.count || 0;
+
+            const emoteImg = document.getElementById("emote-image");
+            if (emoteInfo.imageUrl) {
+                emoteImg.src = emoteInfo.imageUrl;
+                emoteImg.style.visibility = "visible";
+            } else {
+                emoteImg.src = "";
+                emoteImg.style.visibility = "hidden";
+            }
 
             document.getElementById("topChatter").innerText = topChatter || "N/A";
             document.getElementById("topChatterCount").innerText = topChatterCount || 0;
 
             document.getElementById("deletedMessages").innerText = data.deletedMessages || 0;
-            document.getElementById("timedoutCount").innerText = data.timedoutUsers?.timedoutCount || 0;
-            const timedoutDurationSeconds = data.timedoutUsers?.timedoutDuration || 0;
+            const timedoutCount = (data.timedoutUsers && data.timedoutUsers.timedoutCount) || 0;
+            const timedoutDurationSeconds = (data.timedoutUsers && data.timedoutUsers.timedoutDuration) || 0;
             const timedoutDuration = new Date(timedoutDurationSeconds * 1000).toISOString().substr(11, 8);
+            document.getElementById("timedoutCount").innerText = timedoutCount;
             document.getElementById("timedoutDuration").innerText = timedoutDuration;
 
             document.getElementById("bannedUsers").innerText = data.bannedUsers || 0;
+
             document.getElementById("current-time").innerText = now.toLocaleTimeString();
             document.getElementById("auth-code").innerText = Math.floor(10000 + Math.random() * 90000);
             document.getElementById("cardholder-name").innerText = broadcaster || "unknown";
+
+            requestAnimationFrame(fitReceiptToViewport);
         }
 
+        const client = new StreamerbotClient({
+            host: address,
+            port: port,
+            subscribe: {
+                General: ["Custom"]
+            }
+        });
+
+        client.on("General.Custom", evt => {
+            const d = evt && evt.data;
+            if (!d) return;
+            if (d.eventName === "PrintTwitchReceipt" && d.payload) {
+                generateReceipt(
+                    d.payload,
+                    d.broadcaster,
+                    d.broadcasterLogin,
+                    d.topChatter,
+                    d.topChatterCount
+                );
+            }
+        });
+
+        window.addEventListener("resize", () => {
+            if (receiptEl.classList.contains("show")) {
+                fitReceiptToViewport();
+            }
+        });
     </script>
 </body>
 
