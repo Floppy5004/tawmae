@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HOT WORDS - v.1.0.2 - tawmae.xyz</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap"
+        rel="stylesheet">
     <script src="https://unpkg.com/@streamerbot/client/dist/streamerbot-client.js"></script>
     <style>
         :root {
@@ -123,15 +124,15 @@
         }
 
         .image-icon {
-    display: inline-block;
-    max-height: 40px;
-    max-width: 40px;
-    margin-left: 10px;
-    vertical-align: middle;
-    object-fit: contain;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
+            display: inline-block;
+            max-height: 40px;
+            max-width: 40px;
+            margin-left: 10px;
+            vertical-align: middle;
+            object-fit: contain;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
 
 
         .top1 .image-icon {
@@ -182,19 +183,15 @@
             entryEl.className = "word-entry";
 
             const labelEl = document.createElement("div");
-labelEl.className = "word-label";
+            labelEl.className = "word-label";
 
-const textEl = document.createElement("span");
-textEl.className = "text";
-textEl.textContent = "-";
+            const textEl = document.createElement("span");
+            textEl.className = "text";
+            textEl.textContent = "-";
 
-const imgEl = document.createElement("img");
-imgEl.className = "image-icon";
-imgEl.decoding = "async";
-imgEl.loading = "lazy";
 
-labelEl.appendChild(textEl);
-labelEl.appendChild(imgEl);
+            labelEl.appendChild(textEl);
+
 
 
             const barContainer = document.createElement("div");
@@ -227,14 +224,12 @@ labelEl.appendChild(imgEl);
                 const entryEl = entries[i];
                 const wordData = topWords[i];
                 const labelEl = entryEl.querySelector(".word-label");
-                const imgEl = entryEl.querySelector(".image-icon");
                 const barEl = entryEl.querySelector(".progress-bar");
                 const countEl = entryEl.querySelector(".count-percentage");
 
                 if (!wordData) {
-                   const textEl = entryEl.querySelector(".text");
-textEl.textContent = "-";
-imgEl.style.opacity = 0;
+                    const textEl = entryEl.querySelector(".text");
+                    textEl.textContent = "-";
                     barEl.style.width = "0%";
                     countEl.textContent = "0x";
                     entryEl.classList.remove("top1");
@@ -246,20 +241,13 @@ imgEl.style.opacity = 0;
                 const percentage = total > 0 ? Math.round((count / total) * 100) : 0;
 
                 const emoteUrl = emoteLookup[word.toLowerCase()];
-                if (emoteUrl) {
-                    const textEl = entryEl.querySelector(".text");
-textEl.textContent = "";
-imgEl.src = emoteUrl;
-                    imgEl.style.maxHeight = "40px";
-
-imgEl.style.opacity = 1;
-
+                if (emoteLookup[word.toLowerCase()]) {
+                    labelEl.innerHTML =
+                        "<img src='" + emoteLookup[word.toLowerCase()] + "' alt='" + word + "' style='max-height: 40px;'>";
                 } else {
-                    const textEl = entryEl.querySelector(".text");
-imgEl.style.opacity = 0;
-textEl.textContent = word.toUpperCase();
-
+                    labelEl.textContent = word.toUpperCase();
                 }
+
 
                 countEl.textContent = `${count}x`;
                 barEl.style.width = percentage + "%";
