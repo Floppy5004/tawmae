@@ -123,15 +123,16 @@
         }
 
         .image-icon {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            margin-left: 10px;
-            vertical-align: middle;
-            object-fit: contain;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
+    display: inline-block;
+    max-height: 40px;
+    max-width: 40px;
+    margin-left: 10px;
+    vertical-align: middle;
+    object-fit: contain;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
 
         .top1 .image-icon {
             opacity: 1;
@@ -249,6 +250,8 @@ imgEl.style.opacity = 0;
                     const textEl = entryEl.querySelector(".text");
 textEl.textContent = "";
 imgEl.src = emoteUrl;
+                    imgEl.style.maxHeight = "40px";
+
 imgEl.style.opacity = 1;
 
                 } else {
