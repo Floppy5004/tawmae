@@ -113,7 +113,7 @@
             color: #5fa8ff;
             margin: 0 0 2px;
             letter-spacing: 0.02em;
-            text-shadow: 0 0 12px rgba(95, 168, 255, 0.7);
+            text-shadow: 0 0 6px rgba(1, 1, 1, 1);
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -394,7 +394,7 @@
                     username = payload.data.message.displayName;
                     avatarUrl = await fetchAvatar(payload.data.message.username);
                     eventInfo = `CHEER (${payload.data.bits})`;
-                    sublineText = 'dropped some bits';
+                    sublineText = 'cheered some bits';
                     break;
                 }
                 case 'Sub': {
