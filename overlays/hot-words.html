@@ -181,14 +181,20 @@
             entryEl.className = "word-entry";
 
             const labelEl = document.createElement("div");
-            labelEl.className = "word-label";
-            labelEl.textContent = "-";
+labelEl.className = "word-label";
 
-            const imgEl = document.createElement("img");
-            imgEl.className = "image-icon";
-            imgEl.decoding = "async";
-            imgEl.loading = "lazy";
-            labelEl.appendChild(imgEl);
+const textEl = document.createElement("span");
+textEl.className = "text";
+textEl.textContent = "-";
+
+const imgEl = document.createElement("img");
+imgEl.className = "image-icon";
+imgEl.decoding = "async";
+imgEl.loading = "lazy";
+
+labelEl.appendChild(textEl);
+labelEl.appendChild(imgEl);
+
 
             const barContainer = document.createElement("div");
             barContainer.className = "progress-bar-container";
@@ -225,8 +231,9 @@
                 const countEl = entryEl.querySelector(".count-percentage");
 
                 if (!wordData) {
-                    labelEl.textContent = "-";
-                    imgEl.style.opacity = 0;
+                   const textEl = entryEl.querySelector(".text");
+textEl.textContent = "-";
+imgEl.style.opacity = 0;
                     barEl.style.width = "0%";
                     countEl.textContent = "0x";
                     entryEl.classList.remove("top1");
@@ -239,12 +246,16 @@
 
                 const emoteUrl = emoteLookup[word.toLowerCase()];
                 if (emoteUrl) {
-                    labelEl.textContent = "";
-                    imgEl.src = emoteUrl;
-                    imgEl.style.opacity = 1;
+                    const textEl = entryEl.querySelector(".text");
+textEl.textContent = "";
+imgEl.src = emoteUrl;
+imgEl.style.opacity = 1;
+
                 } else {
-                    imgEl.style.opacity = 0;
-                    labelEl.textContent = word.toUpperCase();
+                    const textEl = entryEl.querySelector(".text");
+imgEl.style.opacity = 0;
+textEl.textContent = word.toUpperCase();
+
                 }
 
                 countEl.textContent = `${count}x`;
