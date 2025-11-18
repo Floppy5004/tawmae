@@ -1,2 +1,1 @@
-Streamer.bot 1.0.0 required!
-• Fixed an issue where copying the handle from Bluesky would insert invisible characters
+• This update requires a dll update: tawmae.xyz/dll
