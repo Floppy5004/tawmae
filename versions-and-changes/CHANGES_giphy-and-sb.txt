@@ -1,1 +1,1 @@
-• Applied a workaround to fix the static, non-animating GIFs
+• Updated to the latest state of the dll (this update will require a dll update to >= v1.5.6)
