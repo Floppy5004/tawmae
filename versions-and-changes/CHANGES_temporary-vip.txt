@@ -1,2 +1,1 @@
-STREAMER.BOT 1.0.0 ONLY:
-• Overhaul for Streamer.bot 1.0.0
+• Updated for new DLL standard, requires DLL v.1.5.5+
