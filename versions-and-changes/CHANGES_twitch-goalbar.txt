@@ -1,1 +1,2 @@
-• Added Power Up support
+• Added new style (compact)
+• Icons can be URLs now
