@@ -1,2 +1,1 @@
-• UI update
-(please update dll to 1.5.0)
+• Updated internal stuff only, DLL v.1.5.6+ required
