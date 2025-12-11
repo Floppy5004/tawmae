@@ -1,1 +1,1 @@
-• Fixed an isseu with best-matching not considering aliases
+• Fixed giving suggested commands to users without permission
