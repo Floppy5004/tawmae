@@ -1,1 +1,2 @@
-• Fixed a potential issue with file locks for User Chat Logs
+• Updated to DLL v.1.5.6
+- Fixed toggle 'Auto Shoutout' for raids
